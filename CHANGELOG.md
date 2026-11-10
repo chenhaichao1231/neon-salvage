@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 0.3.1 — 2026-11-10
+- 远程敌人和守卫增加 0.65 秒瞄准锁定预警，提供更明确的躲避时机。
+- Ranged enemies and guardians telegraph and lock aim 0.65 seconds before firing, creating a clearer dodge window.
+- 增加横屏紧凑 HUD 与减少动态效果样式。
+- Added compact landscape HUD and reduced-motion styling.
+- 新增中英文本和发布一致性检查，修复随机升级影响撤离回血测试的误报。
+- Added translation and release consistency checks; fixed a flaky extraction-healing assertion affected by random upgrades.
+
 ## 0.3.0 — 2026-11-10
 - 新增三项航行委托，暂停、撤离和结算可查看进度，每项结算额外 +20 合金。
 - Added three flight contracts with progress on pause, extraction and results screens; each pays +20 alloy at settlement.
