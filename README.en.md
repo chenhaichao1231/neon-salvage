@@ -2,7 +2,7 @@
 
 [Portrait hotel game](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [How to play](HOTEL.en.md) · [中文](README.md)
 
-**v0.5.1 pre-release candidate: online verification is pending.** The next step takes priority; the full case objective moves into an expandable section you can revisit. This reduces repeated text without changing the case rules or chapter count.
+**v0.5.1 is live and has passed this round of online browser checks.** The next step takes priority; the full case objective moves into an expandable section you can revisit. This reduces repeated text without changing the case rules or chapter count.
 
 ## v0.5: Know what you are investigating
 
@@ -15,9 +15,7 @@ Establish the order of the warning and floodgate opening seven years ago, assess
 
 Existing saves need no restart to use the interface. Evidence, deductions and endings remain intact; completed stories do not regain night actions. The same three nights, three actions per night, free reading and comparisons, promises, key strategies and ending requirements remain.
 
-**v0.5 verified online:** in a real browser at a 360px portrait viewport, an existing v0.4 ending loaded, then the tester restarted their own QA save and completed the first guided sequence: discover, read and use records. Both an incorrect and a correct comparison were checked, as was switching to English. At the measured content boundary, width and scrollWidth were both 345px, with no horizontal overflow. This was not a physical-phone test or a full three-night replay. Local coverage included 44 engine tests, 5 object-view tests and additional UI regressions.
-
-**v0.5.1 pending:** screenshots of v0.5 showed excessive repetition of the overall objective. The candidate prioritizes the immediate next step and keeps the objective available under an expandable section. Online validation of this patch is still pending; the v0.5 checks do not establish that the patch is verified.
+**Online verification:** v0.5.1 restored an existing Night Two planning save at 360×640, displayed the correct version footer, and kept the short English next-step prompt and primary button within the viewport. The full objective expanded correctly and remained open when switching languages. The power-setup link opened the controls without changing power automatically. Both html/body width and scrollWidth measured 345px, with no horizontal overflow. This patch changes layout and short text only; the earlier v0.5 first-guide playthrough, incorrect/correct comparisons and v0.4 ending restoration checks remain applicable. Local coverage includes 44 engine tests, 5 object-view tests and additional UI regressions. These are browser checks, not physical-phone tests or a new full three-night playthrough.
 
 Earlier test and online playthrough records are retained in the [full guide and verification limits](HOTEL.en.md).
 
