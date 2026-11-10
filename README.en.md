@@ -1,14 +1,27 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.13.1**.
-- Next: develop the Dock Seven continuation so Chapter One choices affect later events and solutions; expand practical station projects and active equipment without raising old level caps. Keep both languages and old-save compatibility aligned.
-- Estimated update: **November 10, 2026, 18:30–19:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 17:03 Beijing time.
+- Current version: **0.14.0**.
+- Next: deepen the station investigation and add repeatable encounters and projects with different practical uses. Continue checking branch facilities, salvage handling, both languages and old-save compatibility without raising old level caps.
+- Estimated update: **November 10, 2026, 19:30–20:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
+- Plan last updated: November 10, 2026, 17:15 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
 An offline-first space-survival roguelite. No installation, registration, payment, or external assets required. [中文说明](README.md)
+
+## v0.14.0: Dock Seven, save the ship or recover the record?
+
+**Returning players: finish Chapter One’s power-line choice, then open Silent Station → Explore Dock Seven.** No reset or repeat shipyard grind is required. Follow the target marker to the freighter and press **G** within 100 metres, or use the touch contact button:
+
+- **Fuel the ship:** consume one ordinary wreck towed alongside it with at least 12 remaining alloy value. The freighter physically travels toward the origin while enemies pursue it and damage it through contact and projectiles. This is not a countdown. Escort it or clear its return route.
+- **Detach the black box:** remove the one original object from the hold while the crew leaves by escape pod. Grab it with E and bring both pilot and box inside the **origin** recycler for 1.5 seconds. Outposts cannot substitute for the origin, and the box earns no ordinary cargo alloy.
+- Chapter One changes the assistance: habitat support provides one emergency recovery to 40 hull; workshop support provides one repair of up to 30 hull and faster return engines.
+- Completing the escort permanently unlocks a **transfer point**. On each later salvage run it automatically banks one ordinary held cargo item brought inside its radius, at remaining value. Delivering the black box unlocks a **listening post**, continuously marking the most valuable free ordinary cargo in the field. It creates no cargo and adds no value.
+
+The route cannot be switched after choosing it during a run, and a completed facility outcome cannot be chosen again. Failed attempts can restart from the station, preserving previous chapters, projects and alloy. Chapter One and this playable continuation are not a complete long-form campaign.
+
+Three new embedded original assets depict the freighter, transfer station and listening array, bringing the total to 12. Offline play still requires no external asset requests.
 
 ## v0.13.1: salvage handling patch
 
@@ -24,7 +37,7 @@ Choose **Silent Station · Free new chapter** from the main menu. Keep your exis
 - Use **X Repulsor** immediately to push enemies and loose cargo away. After delivery, choose the habitat or workshop power line. Station lights and dialogue change.
 - Habitat unlocks the **Repair press**, which consumes held salvage to repair your ship. A shelter beacon repairs cargo on later salvage runs, with a finite repair budget.
 - Workshop unlocks the **Reflector**, briefly returning enemy bullets without preventing collision damage. Story sorties gain salvage-powered turrets.
-- Select one unlocked active rig at the station before each run. The branch choice is currently irreversible. The next chapter is not available yet; the closing clue is not a finished campaign.
+- Select one unlocked active rig at the station before each run. The branch choice is currently irreversible. Dock Seven becomes available after completion; a longer campaign is still unfinished.
 
 ### What can alloy buy now?
 
@@ -37,7 +50,7 @@ These are implemented uses, not a claim of endless progression. Story, projects 
 
 ### Save compatibility
 
-Old alloy, shipyard levels, best score and run count remain. Story/projects are stored separately, and full backups now include them. Importing a legacy format 1 backup restores old progress while retaining your current story; format 2 restores story and projects too. Export through Shipyard→Backup & restore before updating. Different directories or browsers may use different local storage, so keep a backup.
+Old alloy, shipyard levels, best score and run count remain. Story, projects and Dock progress are saved independently; current format 3 full backups include all of them. Importing legacy format 1 restores old progress while retaining current story and Dock progress. Format 2 restores story and projects while retaining current Dock progress. Export through Shipyard→Backup & restore before updating. Different directories or browsers may use different local storage, so keep a backup.
 
 ## Play online
 
@@ -61,7 +74,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.13.1
+## Current version: 0.14.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 

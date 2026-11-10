@@ -1,3 +1,16 @@
+## 0.14.0 — 2026-11-10
+
+- 第七码头续章：首章供电选择完成后从失联站进入，G 联系真实货运艇；选择消耗货值≥12普通残骸启动返航，或拆下原黑匣子亲自拖回原点。
+- 返航艇受敌人碰撞和子弹攻击，首章分支分别提供应急救援或修补提速；失败可重试，不清除已有进度。
+- 成功路线永久解锁每局一次转运点或高价值货物监听台，结果互斥；没有新增旧等级上限。
+- format 3 整包备份纳入码头；format 1/2 导入保留当前码头。延续友弹穿货规则。
+- 新增货运艇、转运站、监听阵列 3 套素材，总计 12 套；当前内容仍是有限章节原型。
+- Dock Seven opens after Chapter One. Contact a physical freighter with G, then fuel its return using one ordinary wreck worth at least 12 or detach and tow its original black box to the origin.
+- Enemies attack the returning ship; the earlier branch supplies emergency recovery or repair and faster engines. Failures are retryable without resetting prior progress.
+- Successful routes unlock mutually exclusive one-transfer-per-run or high-value scanning facilities. No old level-cap increase.
+- Format 3 full backups include Dock progress; format 1/2 imports retain current Dock progress. Friendly projectiles still pass safely through cargo.
+- Three new original assets bring the total to 12. This is a playable continuation, not a finished long-form campaign.
+
 ## 0.13.1 — 2026-11-10
 
 - 根据游玩反馈，友方主炮、炮台和反射子弹不再碰撞或损伤货物，可穿货继续命中敌人；敌弹掩体伤害和投掷保持不变。

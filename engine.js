@@ -12,8 +12,25 @@ function decodeBackup(text){if(typeof text!=='string'||text.length>10000)throw E
 function safeSave(raw){try{const p=JSON.parse(raw);return{credits:clamp(Number(p.credits)||0,0,1e7),hull:clamp(Math.floor(Number(p.hull)||0),0,5),power:clamp(Math.floor(Number(p.power)||0),0,5),best:clamp(Number(p.best)||0,0,1e9),runs:clamp(Number(p.runs)||0,0,1e6)};}catch{return{credits:0,hull:0,power:0,best:0,runs:0};}}
 function safeHistory(raw){try{if(typeof raw!=='string'||raw.length>50000)return [];const entries=JSON.parse(raw);if(!Array.isArray(entries))return [];return entries.slice(0,20).filter(e=>e&&['scout','tank','glass'].includes(e.ship)&&Number.isInteger(e.seed)&&e.seed>=0&&e.seed<=4294967295&&typeof e.daily==='boolean'&&typeof e.escaped==='boolean'&&Number.isFinite(e.time)&&e.time>=0&&Number.isFinite(e.score)&&e.score>=0&&Number.isFinite(e.kills)&&e.kills>=0&&typeof e.version==='string'&&e.version.length<=32&&/^\d+\.\d+\.\d+$/.test(e.version)&&Number.isInteger(e.hull)&&e.hull>=0&&e.hull<=5&&Number.isInteger(e.power)&&e.power>=0&&e.power<=5).map(e=>({ship:e.ship,seed:e.seed,daily:e.daily,escaped:e.escaped,time:Math.floor(Math.min(e.time,1e7)),score:Math.floor(Math.min(e.score,1e9)),kills:Math.floor(Math.min(e.kills,1e7)),version:e.version,hull:e.hull,power:e.power}));}catch{return [];}}
 
-function encodeBundle(data,campaign,validateStory){if(typeof validateStory!=='function')throw Error('story validator missing');const story=validateStory(campaign);return JSON.stringify({app:'NeonSalvage',format:2,data:safeSave(JSON.stringify(data)),campaign:story},null,2);}
-function decodeBundle(text,validateStory){if(typeof text!=='string'||text.length>10000)throw Error('size');const obj=JSON.parse(text);if(obj?.format===1)return {data:decodeBackup(text),campaign:null};if(obj?.app!=='NeonSalvage'||obj.format!==2||typeof validateStory!=='function')throw Error('format');const data=decodeBackup(JSON.stringify({app:'NeonSalvage',format:1,data:obj.data}));return {data,campaign:validateStory(obj.campaign)};}
+function encodeBundle(data,campaign,validateStory,dock,validateDock){
+ if(typeof validateStory!=='function')throw Error('story validator missing');
+ const story=validateStory(campaign),payload={app:'NeonSalvage',format:2,data:safeSave(JSON.stringify(data)),campaign:story};
+ if(arguments.length>3){if(typeof validateDock!=='function')throw Error('dock validator missing');payload.dock=validateDock(dock);payload.format=3;}
+ return JSON.stringify(payload,null,2);
+}
+function decodeBundle(text,validateStory,validateDock){
+ if(typeof text!=='string'||text.length>10000)throw Error('size');
+ const obj=JSON.parse(text);let result;
+ if(obj?.format===1)result={data:decodeBackup(text),campaign:null};
+ else{
+  if(obj?.app!=='NeonSalvage'||![2,3].includes(obj.format)||typeof validateStory!=='function')throw Error('format');
+  if(obj.format===3&&typeof validateDock!=='function')throw Error('dock validator missing');
+  const data=decodeBackup(JSON.stringify({app:'NeonSalvage',format:1,data:obj.data}));
+  result={data,campaign:validateStory(obj.campaign)};
+ }
+ if(typeof validateDock==='function')result.dock=obj.format===3?validateDock(obj.dock):null;
+ return result;
+}
 
 const api={encodeBundle,decodeBundle,safeHistory,clamp,distance,seeded,normalize,reward,safeSave,edgeIndicator,contractBonus,encodeBackup,decodeBackup};root.Salvage=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

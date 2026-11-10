@@ -4,7 +4,7 @@
 
 ## 一块残骸，互相排斥的用途
 
-- 拖回原点回收站：你和货物都留在站内 1.5 秒后计入收益。重物更值钱，也让拖船更慢。
+- 拖回原点回收站或已建前哨：你和货物都留在同一站内 1.5 秒后计入收益。重物更值钱，也让拖船更慢。
 - 留作掩体：只挡住敌方子弹；敌弹会损坏货物、降低出售价值。友方主炮、炮台和反射子弹直接穿过，不会损伤货物。
 - 投掷攻击：按当前移动方向掷出，质量决定伤害。命中后消耗，未命中也会碎裂，不能再卖。
 - 给炮台供能：靠近炮台主动交付，将货物换成有限弹药，不再获得出售收入。炮台射弹会穿过货物，不会损坏货物掩体。
@@ -23,7 +23,7 @@ This is an evolving shared-resource system, not another sequence of survival obj
 
 ## One wreck, mutually exclusive uses
 
-- Tow it to the origin recycler: both pilot and cargo must remain inside for 1.5 seconds. Heavy cargo is worth more but slows towing.
+- Tow it to the origin recycler or a purchased outpost: both pilot and cargo must remain inside the same site for 1.5 seconds. Heavy cargo is worth more but slows towing.
 - Keep it as cover: it blocks hostile projectiles, whose damage lowers sale value. Friendly main-gun, turret and reflected shots pass through without damaging cargo.
 - Throw it as a weapon: throw along your movement heading; mass determines impact damage. It is consumed on impact or eventually shatters after a miss, so it cannot also be sold.
 - Power a turret: deliberately deliver cargo near a turret to exchange it for finite ammunition instead of sale income. Turret projectiles pass through cargo without damaging it.
@@ -35,3 +35,32 @@ Q toggles the automatic main gun, but you do not need to cease fire to protect c
 A rival scavenger pursues the same cargo and tows it toward its own exit. Damage makes it drop the original item, never a duplicate. Letting it escape permanently removes that item, but chasing it costs time, firepower and a safe route.
 
 This is a new-mode prototype, not a claim that these strategies are balanced or proven more enjoyable than the previous mode. Enemy variety, resource uses and run progression still need expansion. There is no online multiplayer.
+
+
+## 第七码头：一次选择，两种物理任务
+
+首章供电选择完成后，在失联站进入第七码头。货运艇固定出现，100 米内按 G 联系。两条路线本局不可切换，完成结果永久保存；失败后可以重试。
+
+- **供能 / 护航**：你和拖载货物都须靠近艇，且普通货物剩余价值至少 12。系统消耗这同一件货物，不能同时出售、投掷或给炮台供能。艇随后向原点移动，掠夺者追击；敌弹与接触会扣除其实际船体。艇到达原点才完成，不按等待时间直接发奖。
+- **拆卸 / 拖运**：艇内唯一黑匣子被放进场上，物品身份不变。E 抓取后将飞船和匣子一起拖进原点，停留 1.5 秒才交付；前哨、转运点不能代交，普通货物结算不会把它卖掉。匣子仍可能被损坏、抢走或因错误使用而丢失；失败可重试。
+- **首章影响**：居住区为返航艇提供一次濒毁恢复至 40 船体的援助；工坊提供一次最多 30 船体修补及更快返航。不是无限修复，也不免疫攻击。
+
+成功护航后的转运点，每局最多自动交付一件带到设施内的普通手持货物，按剩余价值计入本局银行，立即消费原物。它不是第二个无限回收站。成功回收黑匣子后的监听台，持续在全场自由普通货物中按剩余价值选最高者，价值相同时选离玩家更近者；排除拖载、竞争者持有、已投掷和剧情物品。扫描只提示位置，不增加价值或复制资源。
+
+新设施从下次拾荒出航生效，适用于剧情与自由拾荒。两项永久结果不能同时取得，也不能完成后重新选择。第七码头本身不额外赠送章节合金，回报是后续设施用途。
+
+码头进度独立保存。format 3 备份包含码头；旧 format 1/2 导入保留当前码头结果。当前内容只是可玩章节增量，不代表后续空间站调查或完整战役已经实现。
+
+## Dock Seven: one choice, two physical objectives
+
+After choosing Chapter One’s power line, enter Dock Seven from the station. The freighter appears at a fixed location; press G within 100 metres. Routes cannot be switched during an attempt. Successful outcomes persist, while failed attempts can be retried.
+
+- **Fuel / escort:** both pilot and held cargo must be near the ship, and the ordinary cargo must retain at least 12 value. Fuel consumes that exact object; it cannot also be sold, thrown or fed to a turret. The ship then travels toward the origin while raiders pursue it. Hostile shots and contact reduce its actual hull. Arrival completes the objective, not elapsed time alone.
+- **Detach / tow:** the hold’s unique black box enters the field with its identity intact. Grab it with E and bring both pilot and box inside the origin for 1.5 seconds. An outpost or transfer point cannot deliver it, and normal cargo banking cannot sell it. The box can still be damaged, stolen or lost through misuse; failure permits another attempt.
+- **Chapter One consequences:** habitat support grants one near-destruction recovery to 40 hull; workshop support grants one repair of up to 30 hull and faster travel. Neither is unlimited repair or immunity.
+
+After a successful escort, the transfer point automatically banks at most one ordinary held cargo item brought within its radius per run, consuming the original and crediting remaining value. It is not an unlimited second recycler. After black-box recovery, the listening post continuously chooses the highest remaining-value free ordinary cargo across the field, breaking ties by proximity to the player. Held, rival-owned, thrown and story objects are excluded. Scanning only reveals a location: it adds no value and duplicates nothing.
+
+The resulting facility appears on later story and free salvage runs. The two permanent outcomes are mutually exclusive and cannot be reselected after completion. Dock Seven awards no extra chapter-alloy payout; its reward is the facility’s future function.
+
+Dock progress is saved separately. Format 3 backups include it; legacy format 1/2 imports retain the current Dock outcome. This is a playable chapter increment, not a claim that the later station investigation or a complete campaign already exists.
