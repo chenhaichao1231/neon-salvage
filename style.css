@@ -2,3 +2,5 @@
 
 @media(max-height:500px) and (orientation:landscape){#hud{padding:10px}.hud-top strong{font-size:13px}.hud-top small{display:none}.bars{width:140px;margin-top:8px}.bars label{margin-bottom:5px}#hint{bottom:12px;left:12px;max-width:65%}#dash{right:12px;bottom:12px;padding:10px 16px}#toast{top:16%;font-size:14px;max-width:70%;width:max-content}#overlay{align-items:flex-start}.panel{margin:16px 0}.cards{margin:12px 0}.intro{font-size:13px}h1{font-size:40px;margin:8px 0}.footer{margin-top:12px}}
 @media(prefers-reduced-motion:reduce){button{transition:none}button:hover{transform:none}.bars i{transition:none}}
+
+#save-json{display:block;width:100%;resize:vertical;min-height:140px;margin:10px 0 16px;background:#0b1525;color:#d9e7f5;border:1px solid #34465b;border-radius:8px;padding:12px;font:13px monospace}.file-label{font-size:13px;padding:10px;border:1px solid #34465b;border-radius:8px}.file-label input{max-width:230px;margin-left:8px}#save-preview{overflow-wrap:anywhere}

@@ -1,10 +1,10 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.3.1**.
-- Next: add local save backup and restore so downloading a new version can preserve shipyard progress, and expand regression checks. Keep both UI languages and guides synchronized.
-- Estimated update: **November 10, 2026, 16:00–16:20 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 15:30 Beijing time.
+- Current version: **0.4.0**.
+- Next: add sector route choices (swarm or hunters), tune difficulty using simulations with real damage, and expand regression checks. Keep both UI languages and guides synchronized.
+- Estimated update: **November 10, 2026, 15:55–16:15 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
+- Plan last updated: November 10, 2026, 15:31 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
@@ -26,7 +26,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.3.1
+## Current version: 0.4.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 
@@ -47,3 +47,6 @@ Each run has three bonus goals: destroy 60 enemies, collect 3 caches, and defeat
 ## Combat warnings and testing
 Ranged enemies and guardians show aim lines about 0.65 seconds before firing, then fire along the locked direction. Move sideways after the warning to dodge. Short landscape windows use a compact HUD.
 Checks: `node test.js`, `node smoke-test.js`, `node i18n-test.js`, `node validate-release.js`. Logic and text checks pass; full browser visual validation is not yet complete.
+
+## Local save backup and restore
+Open Shipyard → Save backup and restore to download a JSON backup. Read it in a new version or another browser, or paste its text. Click Check backup, inspect the values, then Confirm replacement of progress. Restore replaces alloy, upgrades, best score and run count; back up existing progress first. Active flights are not restored. Files are processed only on your device, never uploaded. If downloads fail, copy the text manually. If persistent saving is blocked, the UI warns you.

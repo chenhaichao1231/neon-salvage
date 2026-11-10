@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 0.4.0 — 2026-11-10
+- 新增本地 JSON 备份下载、读取/粘贴、预览与明确确认恢复，不上传任何存档。
+- Added local JSON backup download, file/paste loading, preview and explicit restore confirmation; no save uploads.
+- 无效和过大文件不改变进度；处理下载失败、存储受限和异步文件读取竞态。
+- Invalid/oversized files leave progress unchanged; handle failed downloads, blocked storage and async file-read races.
+- 扩展序列化、恢复回调、竞态与中英文本回归测试。
+- Expanded serialization, restore-handler, race-condition and bilingual text regression tests.
+
 ## 0.3.1 — 2026-11-10
 - 远程敌人和守卫增加 0.65 秒瞄准锁定预警，提供更明确的躲避时机。
 - Ranged enemies and guardians telegraph and lock aim 0.65 seconds before firing, creating a clearer dodge window.

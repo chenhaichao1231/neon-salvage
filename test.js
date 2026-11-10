@@ -3,3 +3,5 @@ const {edgeIndicator,contractBonus}=require('./engine');
 assert.equal(contractBonus(59,2,0),0);assert.equal(contractBonus(60,3,1),60);assert.equal(contractBonus(10000,99,10),60);
 for(const [w,h] of [[1440,900],[390,844],[844,390],[200,200]])for(const [dx,dy] of [[1000,1000],[-1000,1000],[0,-1000],[0,0]]){const q=edgeIndicator(dx,dy,w,h);assert.ok(q.x>=0&&q.x<=w&&q.y>=0&&q.y<=h);assert.ok(Number.isFinite(q.angle));}
 console.log('Contract thresholds and directional indicator bounds passed.');
+const {encodeBackup,decodeBackup}=require('./engine');const original={credits:120,hull:2,power:3,best:500,runs:7};assert.deepEqual(decodeBackup(encodeBackup(original)),original);
+for(const bad of ['', '{}', '{bad','a'.repeat(10001),JSON.stringify({app:'OtherGame',format:1,data:original}),JSON.stringify({app:'NeonSalvage',format:2,data:original}),JSON.stringify({app:'NeonSalvage',format:1,data:{...original,hull:6}}),JSON.stringify({app:'NeonSalvage',format:1,data:{...original,credits:'120'}})])assert.throws(()=>decodeBackup(bad));console.log('Backup validation passed: roundtrip, malformed/oversized/wrong-format/wrong-type rejection.');
