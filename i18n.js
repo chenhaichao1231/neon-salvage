@@ -1,6 +1,12 @@
 /* Presentation translation. Language changes are offered in the main menu only. */
 (()=>{'use strict';let en=false;try{en=localStorage.getItem('neon_lang')==='en';}catch{}if(location.hash==='#lang=en')en=true;if(location.hash==='#lang=zh')en=false;globalThis.neonEnglish=en;if(!en)return;document.documentElement.lang='en';document.title='Neon Salvage';document.querySelector('#game').setAttribute('aria-label','Neon Salvage game canvas');
 const phrases={
+'边缘空域':'Outer fringe','蜂群航道':'Swarm route','猎手航道':'Hunter route','下一程，如何冒险？':'Choose your next risk',
+'两条路线都修复 25% 船体。新出现的敌人受路线影响，已在场的敌人保留原属性。':'Both routes repair 25% hull. Route modifiers affect newly spawned enemies; existing enemies keep their original stats.',
+'敌人出现更频繁，但船体较弱。更适合散射、穿透与无人机。':'More frequent but fragile enemies. Favors spread shots, piercing and drones.',
+'高危路线：敌人较少，远程单位更多、弹速更快。新普通敌人提供双倍经验和击破分。':'High risk: fewer enemies, more ranged units and faster bullets. New regular enemies grant double XP and kill score.',
+'返回撤离选择':'Back to extraction choice','星域深入':'Deeper sector',
+
 '备份与恢复存档':'Save backup and restore','备份仅包含合金、船坞等级、最高分和航行次数，不包含正在进行的航行。文件只在你的设备处理，不会上传。恢复会替换当前进度，请先备份。':'Backups contain alloy, shipyard upgrades, best score and run count, not an active flight. Files stay on your device and are not uploaded. Restore replaces current progress; make a backup first.',
 '下载当前备份':'Download current backup','读取备份文件':'Read backup file','也可在此粘贴备份文本':'Or paste backup text here','检查备份':'Check backup','确认替换当前进度':'Confirm replacement of progress','备份有效':'Valid backup','船体等级':'Hull level','炮管等级':'Barrel level','最高分':'Best score','航行次数':'Run count',
 '备份无效，请使用本游戏导出的 JSON 文件。':'Invalid backup. Use a JSON file exported by this game.','文本已改变，请重新检查。':'Text changed. Please check it again.','已请求下载备份，请确认浏览器已保存文件。':'Backup download requested. Check that your browser saved the file.','自动下载不可用，请复制文本并自行保存。':'Automatic download unavailable. Copy the text and save it yourself.','备份文件过大，请选择本游戏导出的 JSON 文件。':'Backup too large. Choose a JSON file exported by this game.','读取失败，当前存档未改变。':'Read failed. Current progress was not changed.','存档已恢复。':'Save restored.','已在本次页面恢复，但浏览器无法持久保存，请保留备份文件。':'Restored for this page session, but persistent saving is unavailable. Keep your backup file.',

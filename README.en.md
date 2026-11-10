@@ -1,10 +1,10 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.4.0**.
-- Next: add sector route choices (swarm or hunters), tune difficulty using simulations with real damage, and expand regression checks. Keep both UI languages and guides synchronized.
-- Estimated update: **November 10, 2026, 15:55–16:15 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 15:31 Beijing time.
+- Current version: **0.5.0**.
+- Next: improve distinct ship silhouettes, hit feedback and first-play guidance, while continuing regression and balance checks. Keep both UI languages and guides synchronized.
+- Estimated update: **November 10, 2026, 16:10–16:35 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
+- Plan last updated: November 10, 2026, 15:39 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
@@ -26,7 +26,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.4.0
+## Current version: 0.5.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 
@@ -50,3 +50,9 @@ Checks: `node test.js`, `node smoke-test.js`, `node i18n-test.js`, `node validat
 
 ## Local save backup and restore
 Open Shipyard → Save backup and restore to download a JSON backup. Read it in a new version or another browser, or paste its text. Click Check backup, inspect the values, then Confirm replacement of progress. Restore replaces alloy, upgrades, best score and run count; back up existing progress first. Active flights are not restored. Files are processed only on your device, never uploaded. If downloads fail, copy the text manually. If persistent saving is blocked, the UI warns you.
+
+## Route choices and convenient launch
+At extraction, continue into Swarm or Hunter. Swarm has more fragile regular enemies. Hunter is high risk: more ranged enemies and faster bullets, but new regular enemies grant double XP and kill score. Both repair 25% hull once on entry. Existing enemies keep their stats and guardian stats are unchanged. Hunter does not double alloy.
+After collecting a cache, the next beacon waits 30 seconds, making three caches possible before first extraction.
+On Windows, double-click `launch.bat`. It only opens the adjacent `index.html` in the default browser, with no installation, downloads or settings changes. Extract the entire ZIP first. Other systems can open `index.html` directly. The script has received static safety review, not a Windows execution test.
+Daily seeds do not guarantee cross-device competitive parity: viewport, input and upgrade choices still affect outcomes.

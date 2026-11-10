@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+## 0.5.0 — 2026-11-10
+- 新增深入星域的蜂群/猎手路线选择；猎手普通敌人给予双倍经验与击破分，已生成敌人和守卫不追溯改变。
+- Added Swarm/Hunter route choices. New regular Hunter enemies grant double XP and kill score; existing enemies and guardians keep their stats.
+- 成功回收后的信标间隔改为 30 秒，首轮撤离前有机会完成三补给委托。
+- Successful cache recovery now schedules the next beacon after 30 seconds, allowing three caches before first extraction.
+- 新增安全的本地 Windows 启动脚本；静态检查通过，未实机执行。
+- Added a local-only Windows launcher; static review passed, Windows execution untested.
+- 路线回退、重复点击、敌人属性保留、弹速与奖励回归通过。机器人比较仅提供机制证据，不替代真人体验或视觉验证。
+- Route cancellation, duplicate clicks, preserved stats, projectile speed and reward checks pass. Bot comparisons provide mechanical evidence, not human enjoyment or visual validation.
+
 ## 0.4.0 — 2026-11-10
 - 新增本地 JSON 备份下载、读取/粘贴、预览与明确确认恢复，不上传任何存档。
 - Added local JSON backup download, file/paste loading, preview and explicit restore confirmation; no save uploads.
