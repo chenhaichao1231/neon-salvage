@@ -1,50 +1,21 @@
-# 怪奇实验室 / Strange Worlds — v0.5.0
+# 塔防游戏 / Tower Defense
 
-## [▶ 点击在线试玩 / Play online now](https://chenhaichao1231.github.io/neon-salvage/)
+[项目在线页面 / Project website](https://chenhaichao1231.github.io/neon-salvage/) · 建设中，尚不可玩 / In development, not playable yet
 
-无需下载，打开即可选择三款游戏。No download needed: open the link and choose a game.
+此前游戏已从当前项目文件中移除，不再作为游戏入口或附带内容保留。Git 版本历史未改写。
 
-三款中英双语网页游戏的持续开发版本，已授权发布。新内容自动化检查通过；已实际浏览器通关书签第7关与身体第8关箱子路线，核验河豚第7关操作和暂停重试。
+Previous games have been removed from the current project files. They are no longer retained as playable entries or bundled content. Git history has not been rewritten.
 
-Three evolving bilingual browser games. Automated checks passed. Live browser play cleared World level 7 and the crate route in Bodies level 8, and checked Cargo level-7 controls, pause and retry.
+当前阶段：先完成十轮顺序设计反思，再开始塔防开发。初始塔使用简单易上手的规则，随后持续添加新塔供玩家自由搭配；设计与数值可根据测试调整；具体规则以完成的设计稿为准。
 
-## 开始 / Start
+Current stage: complete ten sequential design reviews before implementation. Initial towers will have simple, beginner-friendly rules. Further towers will expand player-made combinations; designs and balance may change with testing. Rules will follow the reviewed design.
 
-打开 index.html，选一种玩法。无需安装，无外部素材或网络依赖。手机能否直接打开下载的HTML取决于浏览器和文件管理器，未保证全部兼容。
+本次开始同步线上清理并替换为建设中页面。旧游戏文件将从当前分支移除，Git历史不改写。
 
-Open index.html and choose a game. No installation, external assets or network dependency. Opening downloaded HTML on a phone depends on its browser and file manager; universal compatibility is not claimed.
+This update begins the online cleanup and replaces the homepage with an under-construction page. Previous game files will be removed from the current branch without rewriting Git history.
 
-## 这次回来玩什么 / What to return for
+## 下一版 / Next version
 
-- 世界坏掉了：七关。第7关“空间书签”允许记录站定位置，带着能量返回一次。原第5/6关另有逆序/返航挑战。
-- 不正常的快递：七趟。第7趟河豚包裹要瘦身穿窄道、鼓起抵抗风带。第1趟另可选择搬灯护送植物。支持暂停，切到后台后需主动继续。
-- 借来的身体：八关。第7关使用交换台接送身体；第8关可选择用箱子固定门再步行，或不搬箱子、通过身体交换运送队友。
+十轮设计反思已完成，下一步开发首个可玩塔防闭环：简单初始单位、来敌预告、布置防线、自动战斗、失败重试与逐步增加的新单位。拟物化主题正在选择。预计本地首轮检查为北京时间2026年11月11日00:00–01:00，不是上线承诺。约定开发窗口至11月11日22:57。
 
-- World Out of Order: seven levels. Level 7's spatial bookmark stores a resting position for one return trip with collected energy. Levels 5–6 retain optional reverse/return variants.
-- Odd Cargo: seven deliveries. Level 7's puffer parcel becomes slim for gaps and inflated for wind resistance. Level 1 also offers the movable-lamp variant. Pause is supported; returning from a hidden tab requires explicit resume.
-- Borrowed Bodies: eight levels. Level 7 introduces body-exchange pads. Level 8 supports a crate-held walking route or a no-crate exchange route.
-
-全部关卡自由选择，无需重刷解锁。普通关和变体完成记录分开，不用最优步数强制通关。完成记录仅保存在当前浏览器；下载版与在线版可能不同源，不自动同步。旧游戏文件和存档不删除；仓库保留旧游戏入口：space.html、hotel.html、demolition.html。
-
-Every level is freely selectable. Normal and variant completion are separate; optimal move counts are not required. Progress is stored only in this browser. Downloaded and online versions may have separate storage and do not sync. Old game files and saves are not deleted; the repository retains space.html, hotel.html and demolition.html.
-
-## 验证范围 / Verification
-
-新增内容已通过自动化解法、反例和UI处理器测试；这不等同实际浏览器试玩，更不证明玩家会觉得有趣。新内容的真实浏览器布局与游玩尚待验证。线上v0.3的已完成检查见QA历史记录。
-
-New content has automated solution, counterexample and UI-handler checks. These are not actual browser playtests and do not prove human enjoyment. Desktop layouts and the interactions above were inspected. Not all 22 levels were cleared in a browser, and phones have not been tested on-device. See THREE-WORLDS-QA.md for the precise scope.
-
-## 下一版 / Next iteration
-
-下一轮暂不加关：强化改写世界、货物性格与身体协作的可见因果及短场景反馈，让操作本身更有吸引力；不为凑关卡延长走路，不用刷资源或加数值替代新体验。本次上传已获授权，完成部署后进行在线实际操作核验。后续发布遵循用户授权。
-
-Next, pause level expansion and strengthen visible reactions to world changes, parcel personalities and body cooperation, with brief scene feedback that makes interaction itself more engaging. Avoid longer walks merely to increase level counts, resource grinding or stat inflation. This upload is authorized; live browser acceptance follows deployment. Later releases follow the user’s publication authorization.
-
-预计下一次本地检查：北京时间2026年11月10日23:00–11月11日00:00。这是检查节点估计，不是上线承诺。24小时本轮迭代暂以请求接收时间起算至北京时间2026年11月11日21:46；用户停止指令优先。
-
-Estimated next local review: 2026-11-10 23:00 to 2026-11-11 00:00 Beijing (UTC+8), a review checkpoint rather than a launch promise. This 24-hour iteration is provisionally measured from request receipt until 2026-11-11 21:46 Beijing; a user stop instruction takes priority.
-
-
-## 旧版 / Archive
-
-原有游戏保留，历史开发说明移至 [ARCHIVE.md](ARCHIVE.md)。Old games remain available; historical development notes are preserved in [ARCHIVE.md](ARCHIVE.md).
+Ten sequential design reviews are complete. Next: build the first playable loop with simple initial units, wave previews, placement, automatic combat, retries and gradual unit additions. The themed units are being chosen. Estimated first local review: November 11, 2026, 00:00–01:00 Beijing, not a launch promise. The agreed development window ends November 11 at22:57 Beijing.
