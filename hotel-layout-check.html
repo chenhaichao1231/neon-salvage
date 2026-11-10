@@ -18,7 +18,11 @@
 <label for="size">竖屏视口：</label>
 <select id="size"><option value="390x844">390 × 844</option><option value="360x640">360 × 640</option></select>
 <button id="inspect" type="button">检查当前可见画面</button>
+<button id="reload-game" type="button">重新加载最新游戏</button>
 </div>
+<p id="loaded-page" class="note" style="overflow-wrap:anywhere">当前加载 URL：等待加载。</p>
+<p id="loaded-version" class="note">页面页脚版本：等待加载。</p>
+<p class="note">重新加载会正常打开带时间戳的同源游戏页面，并由游戏恢复已保存进度；未保存进度可能丢失。尺寸切换不会重新加载。时间戳用于避开旧入口缓存，是否最新仍请核对页脚版本。</p>
 <p id="status" role="status">等待同源游戏页面加载。</p>
 <p class="note">若外层窗口小于视口宽度，外层检查台允许横向滚动，不缩放游戏。请区分检查台滚动与下方报告的游戏内部横向溢出。推荐用同源 HTTP(S) 打开；部分浏览器会限制 file:// iframe 检查。</p>
 </header>
@@ -47,6 +51,11 @@ function inspect(){
   const doc=frame.contentDocument,win=frame.contentWindow;
   if(!doc||!doc.documentElement||!doc.body)throw Error('页面尚未就绪，或浏览器不允许同源读取。');
   const root=doc.documentElement,body=doc.body,W=root.clientWidth,H=win.innerHeight;
+  document.getElementById('loaded-page').textContent='当前加载 URL：'+win.location.href;
+  const footer=doc.querySelector('footer');
+  const footerText=footer?.innerText?.trim()||'';
+  const version=footerText.match(/\bv\d+\.\d+(?:\.\d+)?(?:[-+][a-zA-Z0-9.-]+)?\b/);
+  document.getElementById('loaded-version').textContent='页面页脚版本：'+(version?version[0]:'未检测到已呈现的版本文字')+'（读取页面页脚，不读取游戏状态）';
   function visible(el){const r=el.getBoundingClientRect();if(!r.width||!r.height||r.bottom<=0||r.top>=H||r.right<=0||r.left>=W)return false;for(let p=el;p&&p.nodeType===1;p=p.parentElement){const s=win.getComputedStyle(p);if(s.display==='none'||s.visibility==='hidden'||s.visibility==='collapse'||Number(s.opacity)===0)return false;}return true;}
   const width=Math.max(root.scrollWidth,body.scrollWidth);
   document.getElementById('summary').textContent=`时间：${new Date().toLocaleTimeString()}\n设定视口：${size.value.replace('x',' × ')} CSS px\niframe 元素 clientWidth/clientHeight：${frame.clientWidth} / ${frame.clientHeight}\n游戏 window.innerWidth/innerHeight：${win.innerWidth} / ${win.innerHeight}\nhtml clientWidth/scrollWidth：${root.clientWidth} / ${root.scrollWidth}\nbody clientWidth/scrollWidth：${body.clientWidth} / ${body.scrollWidth}\n游戏内部横向溢出：${width>W+1?'有，超出 '+round(width-W)+' px':'未检测到'}\n纵向内容高度：${Math.max(root.scrollHeight,body.scrollHeight)} px；当前滚动位置：${round(win.scrollY)} px`;
@@ -60,6 +69,12 @@ function inspect(){
 }
 size.addEventListener('change',()=>{const [w,h]=size.value.split('x').map(Number);frame.style.width=w+'px';frame.style.height=h+'px';frame.width=w;frame.height=h;frame.title=`第七夜旅馆：${w} × ${h} 竖屏测试视口`;requestAnimationFrame(inspect);});
 document.getElementById('inspect').addEventListener('click',inspect);
+document.getElementById('reload-game').addEventListener('click',()=>{
+ status.textContent='正在重新加载游戏；将由游戏恢复已保存进度。';
+ document.getElementById('loaded-page').textContent='当前加载 URL：正在导航，等待加载完成。';
+ document.getElementById('loaded-version').textContent='页面页脚版本：等待重新加载。';
+ frame.src='hotel.html?qa='+Date.now();
+});
 frame.addEventListener('load',inspect);
 </script>
 </body>

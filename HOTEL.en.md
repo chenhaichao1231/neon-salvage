@@ -2,7 +2,7 @@
 
 [中文说明](HOTEL.md)
 
-**v0.1.1 candidate: 17 automated tests, UI flow tests and checks of 100 random legal paths have passed. Live portrait-screen verification remains pending.** The candidate has been uploaded and its Pages deployment is queued; this does not yet establish a verified online experience. This guide omits the central solution and ending walkthroughs.
+**v0.2.0 is being prepared for release; the new version is not yet confirmed live.** This update improves evidence reasoning and character responses without adding a chapter. The instructions below describe the v0.2.0 candidate; earlier v0.1.1 online checks do not establish verification of this update.
 
 ## Four guests, three snowy nights
 
@@ -12,7 +12,7 @@ The story is structured as a **complete short narrative across three nights, fou
 
 ## Getting started
 
-The independent entry is `hotel.html`, not the original game’s `index.html`. For local play, open `hotel.html` with its accompanying scripts, styles and artwork kept together rather than copying the HTML alone. Once deployed, the online candidate also uses the `/hotel.html` entry; live verification remains pending. The original game and its entry remain available and are not overwritten by The Seventh Night Hotel.
+The independent entry is `hotel.html`, not the original game’s `index.html`. For local play, open `hotel.html` with its accompanying scripts, styles and artwork kept together rather than copying the HTML alone. Use the [direct hotel entry](https://chenhaichao1231.github.io/neon-salvage/hotel.html) online; its v0.1.1 loading check has passed. The original game and its entry remain available and are not overwritten by The Seventh Night Hotel.
 
 Choose **Open the hotel door** to begin. A readable local save lets you continue your existing story. Use the top-right language control to switch between Chinese and English.
 
@@ -39,9 +39,11 @@ The third slot leads automatically to the next night’s planning. After Night T
 
 The ledger records discovered facts, guest accounts and earlier events. Consider whether independent records support one another. Distinguish evidence that someone did something from proof of a broader conclusion. Cooperation and the safe preservation of records may matter as well.
 
-Select two acquired records on the evidence board, choose a claim and press **Test with these two clues**. Testing costs no night action. If the materials do not support the claim, reread them and try another selection. Collecting records is not the same as establishing a deduction: some follow-up questions and final conditions require you to complete the test.
+Questions appear as you discover relevant evidence rather than being listed in full at the start. Each offers three explanations. Select two acquired records, then actively choose an explanation to test. No answer is preselected or assumed correct. You can keep investigating before any question has appeared.
 
-This interaction is included in the current UI flow tests; live portrait-screen verification remains pending. This guide deliberately omits the correct action order, decisive evidence combinations and central solution.
+Testing costs no night action, including when an explanation is wrong. Feedback distinguishes insufficient evidence from an interpretation that goes beyond what the records support. Reread and try again. Collecting records is not the same as establishing a deduction; some follow-up questions and final conditions still require a completed test. Testing is unavailable after an ending, so start a new story to experience the revised flow.
+
+Later dialogue and current evidence descriptions better reflect admissions, cooperation and the custody of important records. Historical journal entries retain what was known when the event happened rather than being rewritten with later knowledge. This guide does not reveal the correct explanations, evidence combinations or central solution.
 
 ## Endings depend on more than the last button
 
@@ -51,18 +53,25 @@ The story has a definite conclusion, but not every run will uncover every fact. 
 
 ## Saves and the original game
 
+- Existing v0.1 saves can continue in the update, retaining established deductions and completed endings. Players who have finished must choose **New story** to experience the revised reasoning flow. No chapter is added, and running new saves in an older executable is not promised.
 - The hotel has an independent local save. It does not read or overwrite Neon Salvage’s alloy, levels, story or projects. The original game remains available; this is not a renamed replacement.
 - Normal actions attempt to save automatically. Check the save status at the bottom of the page. If browser storage is unavailable, reloading may lose progress.
 - Progress belongs to the current browser and origin. It does not automatically sync across devices. Do not assume a hosted page, local file and different browser share one save.
 - **New story** asks for confirmation and clears only the current hotel story, not the original space game.
 - The current hotel UI offers no save export/import or cloud sync. A Neon Salvage backup is not a hotel backup.
 
-## Initial scope and pending checks
+## Initial scope and verification limits
 
 The initial scope is three nights, four guests, four rooms, up to two of three power circuits, three actions per night and conditional endings. It is not a large management simulation, open world or finished long-term content service.
 
-**Passed so far:** 17 automated tests, UI flow tests and checks of 100 random legal paths.
+**Passed for v0.1.1:** 17 automated tests, UI flow tests and checks of 100 random legal paths.
 
-**Still awaiting hands-on verification:** the deployed online entry and artwork loading, plus portrait-phone tapping, scrolling and full playthrough experience. Passing automated tests does not mean every device and narrative path has been manually verified. This guide does not claim completed live verification or promise a next-update feature set or schedule.
+**Earlier v0.1.1 live browser checks:** the v0.1.1 direct entry loads correctly. Fixed 390×844 and 360×640 portrait iframe viewports in a real browser showed no horizontal overflow. Normal UI clicks completed the three-night hearing route in Chinese, and switching the ending to English worked. Checks also passed for 44px buttons, retention of all four responses from the latest action, ending restoration after reload, and both confirming and cancelling a restart.
+
+**Verification limits:** these were not physical-phone tests, and not every ending has been manually played. They do not establish long-term replay value. Integration and live verification of v0.2.0 still await release confirmation; earlier results are not counted as passing tests for the update.
+
+## Next steps
+
+The next focus is deeper character clues that support reasoning and more meaningful branch consequences, not a claim that long-term replay value is solved. The estimated next update window is November 10, 2026, 19:00–20:00 Beijing time (UTC+8). This is an estimate, not a guarantee; blockers will take priority and may change the plan.
 
 The story concerns a past disaster, bereavement, responsibility and concealment, primarily through text. You may stop whenever you need to; reading itself carries no time pressure.

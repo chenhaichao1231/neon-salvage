@@ -2,12 +2,16 @@
 
 [Portrait hotel game](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [How to play](HOTEL.en.md) · [中文](README.md)
 
-**Hotel v0.1.1  :** a complete three-night, four-guest mystery. Room assignments and two powered circuits affect encounters. Spend three actions each night, select two records to test a hypothesis, then confront guests with a deduction. Original painted characters and snowbound inn art, portrait-first, no combat grind. All 17 engine checks and the UI flow test pass. A real browser at 390/360px portrait widths was checked, with a full three-night hearing route completed by normal clicks. Chinese and English showed no horizontal overflow. This is not physical-phone testing or evidence of lasting enjoyment. v0.1.1 keeps every response from the last action visible and enlarges the language button to 44px.
+**v0.2.0 is being prepared for release; the new version is not yet confirmed live.** This update improves evidence reasoning and character responses without adding a chapter. The instructions below describe the v0.2.0 candidate; earlier v0.1.1 online checks do not establish verification of this update.
+
+The three-night, four-guest short story keeps its three actions per night. Reasoning questions emerge with evidence. Each offers three explanations: choose two records and actively select an explanation, with no default answer. Wrong-interpretation feedback costs no time. Dialogue better reflects admissions, cooperation and record custody, while historical entries retain what was known at the time.
+
+Existing v0.1 saves continue with established deductions and endings intact. Players who have finished must start a new story to experience the revised reasoning flow. No chapter is added, and deeper replay value is not claimed. [Full guide and verification limits](HOTEL.en.md). Earlier v0.1.1 automated and live-browser portrait-viewport checks were not physical-phone testing and do not establish online verification of v0.2.0.
 
 ## Next update plan and estimate
-- Next: improve character interaction and clue feedback based on actual reading and decisions, including responses that reflect known facts and clearer phase outcomes rather than levels or resource grinding.
-- Estimated next update: **November 10, 2026, 19:00–20:00 Beijing time (UTC+8)**. This is not guaranteed; blockers take priority and the plan will be revised.
-- Plan updated November 10, 2026, 18:10 Beijing time. Development window ends November 11 at 15:01 Beijing time, unless stopped earlier.
+- Deepen character clues that support reasoning and branch consequences rather than adding levels or resource grinding.
+- Estimated next update: **November 10, 2026, 19:00–20:00 Beijing time (UTC+8)**. This is not guaranteed; blockers take priority and may change the plan.
+- Plan updated November 10, 2026, 18:17 Beijing time. Development window ends November 11 at 15:01 Beijing time, unless stopped earlier.
 - Existing Neon Salvage v0.15.1 and saves remain: [original game](https://chenhaichao1231.github.io/neon-salvage/). The hotel uses an independent save and requires no space-game progress or currency.
 
 ## Original Neon Salvage documentation
