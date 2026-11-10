@@ -1,10 +1,23 @@
 /* Runtime art renderer. Read-only: visual frames never advance the simulation. */
 (function(root){'use strict';
-const assets={},assetStates={},files={campus:'td-campus-background.png',ai:'td-ai-sprites.png',suppliers:'td-suppliers.png',enemies:'td-enemies.png',dsActions:'td-ds-actions.png',dsIdle:'td-ds-idle.png',dsAttack:'td-ds-attack.png'};
+const assets={},assetStates={},files={campus:'td-campus-background.png',ai:'td-ai-sprites.png',suppliers:'td-suppliers.png',enemies:'td-enemies.png',dsActions:'td-ds-actions.png',dsIdle:'td-ds-idle.png',dsAttack:'td-ds-attack.png',gptAttack:'td-gpt-attack.png'};
 if(typeof Image!=='undefined')for(const [k,src]of Object.entries(files)){const im=new Image();assetStates[k]='loading';im.onload=()=>{assetStates[k]='ready';};im.onerror=()=>{assetStates[k]='failed';};assets[k]=im;im.src=src;}
 function ready(im){return !!im&&im.width>0&&im.height>0&&im.complete!==false;}
 function assetState(key){const im=assets[key];if(ready(im))return 'ready';if(assetStates[key]==='failed'||im?.complete===true)return 'failed';return 'loading';}
 function dsFrame(u,s,visualTime,reduced){if(u.status==='rice')return{sheet:'dsActions',cols:3,rows:2,index:reduced?4:3+Math.floor(Math.max(0,2-u.statusRemaining)*5)%3};const target=s.enemies.some(e=>e.hp>0&&e.row===u.row&&e.x>=u.x-.1);if(u.fired>0){const since=1.1-u.cooldown;if(since<.55)return{sheet:'dsAttack',cols:3,rows:2,index:reduced?2:since<.12?2:since<.24?3:since<.42?4:5};if(target&&u.cooldown<.22)return{sheet:'dsAttack',cols:3,rows:2,index:1};}const cycle=(visualTime+u.row*.47+u.col*.23)%3.8;return{sheet:'dsIdle',cols:3,rows:1,index:reduced?0:cycle<2.8?0:cycle<3.02?1:2};}
+// Frames derive only from the real cooldown; wall-clock redraws cannot advance a paused cast.
+function gptFrame(u,s,visualTime,reduced,interval=1.4){
+ const frame=index=>({sheet:'gptAttack',cols:3,rows:2,index});
+ const since=Math.max(0,interval-u.cooldown);
+ if(u.fired>0&&since<.56){
+  if(reduced)return since<.24?frame(3):frame(0);
+  return frame(since<.10?2:since<.24?3:since<.44?4:5);
+ }
+ const target=s.enemies.some(e=>e.hp>0&&e.row===u.row&&e.x>=u.x-.1);
+ if(!reduced&&u.fired>0&&target&&u.cooldown>0&&u.cooldown<.24)return frame(1);
+ // Keep one model/scale through weak windows; dimming plus the explicit status label distinguish them.
+ return frame(0);
+}
 function drawEffects(ctx,effects,time,reduced){for(const e of effects||[]){const age=Math.max(0,time-e.born),p=Math.min(1,age/e.life);if(p>=1)continue;const x=140+e.x*120,y=211+e.row*82,isLoss=e.type==='unit-lost'||e.type==='leak',c=isLoss?'#ffb9b0':e.unitType==='gpt'?'#e2caff':'#9cf3ff';ctx.save();ctx.globalAlpha=(1-p)*.85;ctx.strokeStyle=c;ctx.fillStyle=c;ctx.lineWidth=2;const spread=reduced?12:5+p*(e.type==='kill'?35:18);if(e.type==='shot'){ctx.beginPath();ctx.ellipse(x,y,4+spread*.5,8+spread*.35,0,0,Math.PI*2);ctx.stroke();}else{ctx.beginPath();ctx.arc(x,y,spread,0,Math.PI*2);ctx.stroke();const n=e.type==='kill'||isLoss?8:4;for(let i=0;i<n;i++){const a=i*Math.PI*2/n+(e.variant||0)*.4,dist=spread*(i%2?1:.7),px=x+Math.cos(a)*dist,py=y+Math.sin(a)*dist+(reduced?0:p*p*10);ctx.save();ctx.translate(px,py);ctx.rotate(a+p);ctx.fillRect(-2,-2,e.type==='kill'?6:3,e.type==='kill'?5:3);ctx.restore();}}ctx.restore();}}
 function draw(ctx,{state:s,definitions:D,layout:L},o){const scale=Math.min(o.width/1120,o.height/650);ctx.save();ctx.fillStyle='#18223d';ctx.fillRect(0,0,o.width,o.height);ctx.translate((o.width-1120*scale)/2,(o.height-650*scale)/2);ctx.scale(scale,scale);
 const text=(v,x,y,size=14,color='#fff')=>{ctx.font='600 '+size+'px system-ui';ctx.textAlign='center';ctx.fillStyle=color;ctx.fillText(v,x,y);};
@@ -19,9 +32,9 @@ if(ready(assets.suppliers)){const im=assets.suppliers;for(let i=0;i<4;i++){const
 pill(o.lang==='zh'?'补给 '+s.gpuCount+'/'+s.gpuQuota+' · 显卡每6秒投放':'SUPPLY '+s.gpuCount+'/'+s.gpuQuota+' · GPU every 6s',560,159,330);
 for(let row=0;row<5;row++)pill(String(row+1),125,216+row*82,24);
 for(const u of s.units){const x=140+u.x*120,y=211+u.row*82,bob=o.reducedMotion||s.paused?0:Math.sin(s.time*2.4+u.row+u.col)*1.5;ctx.fillStyle='#14315266';ctx.beginPath();ctx.ellipse(x,y+28,33,8,0,0,Math.PI*2);ctx.fill();
-const frame=u.type==='deepseek'?dsFrame(u,s,o.visualTime??s.time,o.reducedMotion):null;if(frame&&ready(assets[frame.sheet])){const im=assets[frame.sheet],w=im.width/frame.cols,h=im.height/frame.rows;ctx.drawImage(im,(frame.index%frame.cols)*w,Math.floor(frame.index/frame.cols)*h,w,h,x-48,y-65,96,96);}else if(ready(assets.ai)){const im=assets.ai,cellW=im.width/2,cellH=im.height/2,alt=u.status==='rice'||u.status==='weak',sx=alt?cellW:0,sy=u.type==='gpt'?cellH:0;ctx.drawImage(im,sx+cellW*.15,sy,cellW*.51,cellH,x-48,y-65+bob,96,96);}else fallbackUnit(u,x,y+bob);
+const frame=u.type==='deepseek'?dsFrame(u,s,o.visualTime??s.time,o.reducedMotion):u.type==='gpt'?gptFrame(u,s,o.visualTime??s.time,o.reducedMotion,D.units.gpt.interval):null;if(frame&&ready(assets[frame.sheet])){const im=assets[frame.sheet],w=im.width/frame.cols,h=im.height/frame.rows;ctx.save();if(u.type==='gpt'&&u.status==='weak')ctx.globalAlpha=.7;ctx.drawImage(im,(frame.index%frame.cols)*w,Math.floor(frame.index/frame.cols)*h,w,h,x-48,y-65,96,96);ctx.restore();}else if(ready(assets.ai)){const im=assets.ai,cellW=im.width/2,cellH=im.height/2,alt=u.status==='rice'||u.status==='weak',sx=alt?cellW:0,sy=u.type==='gpt'?cellH:0;ctx.drawImage(im,sx+cellW*.15,sy,cellW*.51,cellH,x-48,y-65+bob,96,96);}else fallbackUnit(u,x,y+bob);
 ctx.fillStyle='#142340';ctx.fillRect(x-26,y+34,52,4);ctx.fillStyle='#9df2d0';ctx.fillRect(x-26,y+34,52*Math.max(0,u.hp/D.units[u.type].hp),4);
-const status=root.TDLanesUI?.unitStatus(u,o.lang);if(status)pill(status,x,y-61,122,u.warning?'#ffe0a0':'#fff');}
+const status=root.TDLanesUI?.unitStatus(u,o.lang)||(u.status==='weak'?(o.lang==='zh'?'思路卡住':'Brain fog')+' '+Math.ceil(u.statusRemaining)+'s':'');if(status)pill(status,x,y-61,122,u.warning?'#ffe0a0':'#fff');}
 for(const e of s.enemies){const x=140+e.x*120,y=211+e.row*82,idx={data:0,swarm:1,armor:2,charge:3}[e.type]??0,size=e.type==='armor'?78:e.type==='swarm'?49:65,bob=o.reducedMotion||s.paused?0:Math.sin(s.time*5+e.row+e.x)*2;ctx.fillStyle='#24143b55';ctx.beginPath();ctx.ellipse(x,y+27,size*.35,7,0,0,7);ctx.fill();if(ready(assets.enemies)){const im=assets.enemies,w=im.width/2,h=im.height/2;ctx.drawImage(im,(idx%2)*w,Math.floor(idx/2)*h,w,h,x-size/2,y-size+30+bob,size,size);}else fallbackEnemy(e,x,y+bob,size);
 ctx.fillStyle='#20192d';ctx.fillRect(x-22,y+34,44,4);ctx.fillStyle='#f0a0ce';ctx.fillRect(x-22,y+34,44*Math.max(0,e.hp/D.enemies[e.type].hp),4);}
 // Count genuinely close independent enemies so dense groups are not mistaken for one.
@@ -30,7 +43,7 @@ drawEffects(ctx,o.effects,o.visualTime||0,o.reducedMotion);
 for(const sh of s.shots){const x=140+sh.x*120,y=211+sh.row*82,c=sh.type==='gpt'?'#e5c9ff':'#8ceeff';ctx.save();ctx.shadowBlur=15;ctx.shadowColor=c;ctx.strokeStyle=c;ctx.lineWidth=sh.type==='gpt'?6:4;ctx.beginPath();ctx.moveTo(x-(sh.type==='gpt'?34:17),y);ctx.lineTo(x,y);ctx.stroke();if(sh.type==='gpt'){ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x-30,y-5);ctx.lineTo(x-5,y-5);ctx.moveTo(x-30,y+5);ctx.lineTo(x-5,y+5);ctx.stroke();}ctx.fillStyle='#fff';ctx.beginPath();for(let i=0;i<8;i++){const r=i%2?3:8,ang=i*Math.PI/4;const px=x+Math.cos(ang)*r,py=y+Math.sin(ang)*r;i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.closePath();ctx.fill();ctx.restore();}
 pill((o.lang==='zh'?'核心 ':'CORE ')+s.core+'/5',66,605,110,'#b3f9ff');text(o.lang==='zh'?'点击格子部署 · 左侧核心不能失守':'Deploy in cells · Defend the left core',590,619,16,'#d9ecff');
 if(s.paused||s.phase==='won'||s.phase==='lost'){ctx.fillStyle='#0e1a32ed';ctx.beginPath();ctx.roundRect(375,285,370,78,18);ctx.fill();ctx.strokeStyle='#c7ddff';ctx.stroke();text(s.paused?(o.lang==='zh'?'已暂停':'PAUSED'):s.phase==='won'?(o.lang==='zh'?'防线守住了！':'LINE HELD!'):(o.lang==='zh'?'核心失守':'CORE LOST'),560,335,26);}
-const failed=Object.keys(files).filter(k=>assetState(k)==='failed');if(failed.length){const labels={campus:['背景','background'],ai:['守卫','guards'],suppliers:['供给者','suppliers'],enemies:['敌人','enemies'],dsActions:['DS动作','DS actions'],dsIdle:['DS待机','DS idle'],dsAttack:['DS攻击','DS attack']};pill((o.lang==='zh'?'资源加载失败：':'Art failed: ')+failed.map(k=>labels[k][o.lang==='zh'?0:1]).join(' / ')+(o.lang==='zh'?' · 已使用备用显示，可继续游玩':' · backup display active; play continues'),560,644,1040,'#ffe0a0');}
+const failed=Object.keys(files).filter(k=>assetState(k)==='failed');if(failed.length){const labels={campus:['背景','background'],ai:['守卫','guards'],suppliers:['供给者','suppliers'],enemies:['敌人','enemies'],dsActions:['DS动作','DS actions'],dsIdle:['DS待机','DS idle'],dsAttack:['DS攻击','DS attack'],gptAttack:['GPT攻击','GPT attack']};pill((o.lang==='zh'?'资源加载失败：':'Art failed: ')+failed.map(k=>labels[k][o.lang==='zh'?0:1]).join(' / ')+(o.lang==='zh'?' · 已使用备用显示，可继续游玩':' · backup display active; play continues'),560,644,1040,'#ffe0a0');}
 ctx.restore();}
-const api={draw,drawEffects,dsFrame,assets,files,assetStates,assetState};root.TDLanesRenderer=api;if(typeof module==='object'&&module.exports)module.exports=api;
+const api={draw,drawEffects,dsFrame,gptFrame,assets,files,assetStates,assetState};root.TDLanesRenderer=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
