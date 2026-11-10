@@ -23,7 +23,7 @@ function mount(E,doc,win){const $=id=>doc.getElementById(id),c=controller(E),can
 const t=(zh,en)=>c.lang==='zh'?zh:en,n=x=>x?.[c.lang]||'';
 function button(parent,text,cls,fn){const el=doc.createElement('button');el.textContent=text;el.className=cls;el.onclick=fn;parent.appendChild(el);return el;}
 for(let row=0;row<5;row++)for(let col=0;col<7;col++){const el=button($('grid'),'','cell',()=>{c.cell(row,col);render();});cells.push({row,col,el});}
-for(const [id,d]of Object.entries(E.definitions.units).filter(([id])=>['deepseek','gpt'].includes(id))){const el=button($('cards'),'','unit-card',()=>{c.select(id);render();});const icon=doc.createElement('span');icon.className='portrait';icon.textContent=icons[id];icon.style.color=colors[id];const title=doc.createElement('strong'),cost=doc.createElement('small');el.append(icon,title,cost);cardNodes[id]={el,title,cost};}
+for(const [id,d]of Object.entries(E.definitions.units).filter(([id])=>['deepseek','gpt'].includes(id))){const el=button($('cards'),'','unit-card',()=>{c.select(id);render();});const icon=doc.createElement('span');icon.className='portrait portrait-'+id;icon.textContent='';icon.style.color=colors[id];const title=doc.createElement('strong'),cost=doc.createElement('small');el.append(icon,title,cost);cardNodes[id]={el,title,cost};}
 for(let row=0;row<5;row++){const el=doc.createElement('span');el.className='row-label';$('row-preview').appendChild(el);rowNodes.push(el);}
 $('start').onclick=()=>{c.start();last=null;render();};$('pause').onclick=()=>{c.pause();last=null;render();};$('retry').onclick=()=>{c.retry();last=null;render();};$('speed').onclick=()=>{c.toggleSpeed();render();};$('language').onclick=()=>{c.language();render();};
 $('refund').onclick=()=>{c.refund();render();};
@@ -43,10 +43,10 @@ $('arena').setAttribute('aria-label',t('五行校园防线；窄屏可横向滚�
 for(const {row,col,el}of cells){const u=s.units.find(u=>u.row===row&&u.col===col);el.setAttribute('aria-label',t('第'+(row+1)+'行，第'+(col+1)+'格','Lane '+(row+1)+', cell '+(col+1))+(u?' · '+n(E.definitions.units[u.type].name)+' '+unitStatus(u,c.lang):t('，部署',', deploy')));el.setAttribute('aria-pressed',String(!!u&&u.id===c.selectedUnit));el.disabled=['won','lost'].includes(s.phase);}
 for(const g of s.gpus)if(!g.collected&&!tokenNodes.has(g.id)){const el=button($('tokens'),'','drop',()=>{c.collect(g.id);render();});tokenNodes.set(g.id,el);}
 for(const [id,el]of tokenNodes){const g=s.gpus.find(x=>x.id===id);if(!g||g.collected){el.remove();tokenNodes.delete(id);}else{el.textContent='GPU +'+g.value;el.disabled=s.paused;el.setAttribute('aria-label',t('领取','Collect')+' '+g.value+' GPU');}}
-const pending=E.preview(s.level).slice(s.nextSpawn);for(let row=0;row<5;row++){const p=pending.find(p=>p.row===row);rowNodes[row].textContent=p?(c.lang==='zh'?'来袭 ':'Next ')+Math.max(0,Math.ceil(p.time-s.time))+'s':'';}
+const pending=E.preview(s.level).slice(s.nextSpawn);for(let row=0;row<5;row++){const p=pending.find(p=>p.row===row);rowNodes[row].textContent=p?n(E.definitions.enemies[p.type].name)+'\n'+Math.max(0,Math.ceil(p.time-s.time))+'s':'';}
 $('forecast-title').textContent=t('来袭时间表与玩法说明','Schedule and game notes');$('fiction-note').textContent=t('角色行为是虚构游戏设定，不是现实AI产品评测。','Character behavior is fictional gameplay, not an assessment of real AI products.');
 const key=c.lang+'|'+s.level;if(key!==lastKey){lastKey=key;$('forecast-content').replaceChildren();for(const p of E.preview(s.level)){const line=doc.createElement('div');line.textContent=p.time+'s · '+t('第'+(p.row+1)+'行','Lane '+(p.row+1))+' · '+n(E.definitions.enemies[p.type].name);$('forecast-content').appendChild(line);}}
-$('art-note').textContent=t('开发原型 · 临时角色轮廓 · 本页进度不保存','Prototype · placeholder silhouettes · progress is not saved');
+$('art-note').textContent=t('美术迭代版 · 角色为虚构演绎 · 本页进度不保存','Art preview · fictional characters · progress is not saved');
 position();draw();}
 function draw(){const r=canvas.getBoundingClientRect(),dpr=Math.min(win.devicePixelRatio||1,2);if(canvas.width!==Math.round(r.width*dpr)||canvas.height!==Math.round(r.height*dpr)){canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);}ctx.setTransform(dpr,0,0,dpr,0,0);
 if(root.TDLanesRenderer?.draw){root.TDLanesRenderer.draw(ctx,{state:c.state,definitions:E.definitions,layout},{width:r.width,height:r.height,lang:c.lang,reducedMotion:reduced});return;}
