@@ -1,6 +1,18 @@
 /* Presentation translation. Language changes are offered in the main menu only. */
 (()=>{'use strict';let en=false;try{en=localStorage.getItem('neon_lang')==='en';}catch{}if(location.hash==='#lang=en')en=true;if(location.hash==='#lang=zh')en=false;globalThis.neonEnglish=en;if(!en)return;document.documentElement.lang='en';document.title='Neon Salvage';document.querySelector('#game').setAttribute('aria-label','Neon Salvage game canvas');
 const phrases={
+'保留构筑 · 修复 25':'Keep build · Repair 25',
+'破限反应堆':'Limitbreaker Reactor','引力王冠':'Gravity Crown','蜂后协议':'Brood Protocol','相位残响':'Phase Echo','星矛核心':'Starlance Core','不灭余烬':'Undying Ember',
+'主炮及无人机伤害 +50%，最大船体减少 20%。':'Main and drone damage +50%; maximum hull reduced by 20%.',
+'回收范围翻倍、经验倍率 +30%，移动速度减少 10%。':'Double pickup range, XP multiplier +30%; movement speed reduced by 10%.',
+'获得 2 台无人机（最多 5 台），主炮及无人机伤害减少 15%。':'Gain 2 drones (maximum 5); main and drone damage reduced by 15%.',
+'跃迁冷却减少 40%，移动速度 +10%。':'Dash cooldown reduced by 40%; move speed +10%.',
+'穿透次数 +3，主炮及无人机伤害 +20%，射击间隔增加 15%。':'Pierces +3 and main and drone damage +20%; shot interval increased by 15%.',
+'最大船体 +50，立即修复 50，每秒修复 +1.5。':'Max hull +50, repair 50 now, hull regen +1.5 per second.',
+'从守卫残骸中，选择力量':'Claim power from the guardian',
+'遗物每局只可获得一次。强力效果可能伴随代价，选择你的战斗风格。':'Each relic is unique per run. Powerful effects may come at a cost: choose your combat style.',
+'遗物已收集 · 修复 40':'All available relics collected · Repair 40','守卫暴走 · 寻找弹幕缺口':'Guardian enraged · Find the gap','遗物':'Relics',
+
 '航行记录':'Flight log','成功撤离':'Extracted','航行结束':'Flight ended','同种子再挑战':'Retry same seed','还没有航行记录，出发完成第一局吧。':'No flights yet. Complete your first run to start the log.',
 '最近 20 局，仅保存在本地。同种子重试使用原机型及起始船坞等级，但操作、窗口尺寸与游戏版本会改变结果。这不是录像回放。':'The last 20 runs stay local. Same-seed retries use the original ship and starting shipyard levels, but your actions, window size and game version change the result. This is not a recording.',
 '进度备份只包含合金与船坞数据，不包含航行记录。恢复进度不会清除记录。':'Progress backups include alloy and shipyard data, not flight history. Restoring progress does not erase the log.',

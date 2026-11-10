@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 0.9.0 — 2026-11-10
+- 新增守卫半血暴走阶段，15 发弹幕留三格缺口，预警与攻击方向锁定一致。
+- Added half-health guardian enrage with 15 shots and a three-slot gap; warning and attack directions remain locked together.
+- 新增六种独特遗物及收益/代价选择，可跳过换修复；暂停与结算展示遗物。
+- Added six unique relics with benefits/tradeoffs and a repair alternative; relics appear on pause and results.
+- 遗物选择只结算一次，死亡优先于守卫修复，伤害描述覆盖无人机。
+- Relic choices apply once, lethal damage takes precedence over guardian healing, and damage descriptions include drones.
+
 ## 0.8.0 — 2026-11-10
 - 新增最近 20 局本地记录及原种子、机型、起始船坞等级重试。
 - Added a local last-20 flight log and retries with original seed, ship and starting shipyard levels.

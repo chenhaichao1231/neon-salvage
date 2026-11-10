@@ -1,10 +1,10 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.8.0**.
-- Next: add guardian phase changes and combat-event cues, verify that warnings match attacks, and continue balance and performance checks. Keep both UI languages and guides synchronized.
-- Estimated update: **November 10, 2026, 16:45–17:15 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 16:02 Beijing time.
+- Current version: **0.9.0**.
+- Next: add optional risk-and-reward sector events to create more route and build variety, retaining necessary regression checks and both languages. Keep both UI languages and guides synchronized.
+- Estimated update: **November 10, 2026, 17:00–17:30 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
+- Plan last updated: November 10, 2026, 16:08 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
@@ -26,7 +26,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.8.0
+## Current version: 0.9.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 
@@ -68,3 +68,7 @@ Performance spot-check: in a fixed-seed, stationary 600-second stress scenario w
 
 ## Local flight log
 The main-menu flight log retains the last 20 runs and lets you retry the original seed, ship and starting shipyard levels. Daily retries always omit shipyard boosts. Actions, viewport size, route and version change results: this is not a recording or a reproducibility guarantee. Logs never leave the device; blocked storage keeps them only until the page closes. Progress JSON backups remain compatible, exclude flight history, and do not erase existing history when restored.
+
+## Guardians and relics
+Below half health, a guardian enters an enraged phase at its next aim lock: faster bullets leave a gap toward the aim position. Warnings and actual shots share locked directions; reposition or dash toward safety.
+Defeat a guardian to choose from up to three randomly offered relics, each of six unique relics available once per run. Limitbreaker trades hull for damage; Gravity Crown trades speed for collection and XP; Brood expands drones; Phase Echo boosts dash; Starlance boosts piercing; Undying Ember improves sustain. You may instead keep your build and repair 25. Once available relics are exhausted, guardian rewards repair an extra 40. Relics last for this run, not permanently in the shipyard.
