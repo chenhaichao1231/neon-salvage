@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 0.10.0 — 2026-11-10
+- 新增可主动接近的紫色宝库：选择增援风险换经验/赏金、安全修复或离开。
+- Added optional violet vaults: risk reinforcements for XP/bounty, safely repair, or leave.
+- 首名守卫更易击破，让遗物构筑更早进入航行；后续守卫强度保留。
+- Reduced first guardian hull to bring relic builds into play earlier; later guardian strength remains.
+- 赏金结算与撤离预览一致，完成前死亡/撤离不发奖，重复点击不重复奖励。
+- Bounty settlement matches extraction previews; no early death/extraction payout or duplicate-click reward.
+
 ## 0.9.0 — 2026-11-10
 - 新增守卫半血暴走阶段，15 发弹幕留三格缺口，预警与攻击方向锁定一致。
 - Added half-health guardian enrage with 15 shots and a three-slot gap; warning and attack directions remain locked together.

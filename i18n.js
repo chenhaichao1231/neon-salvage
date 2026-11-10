@@ -1,6 +1,12 @@
 /* Presentation translation. Language changes are offered in the main menu only. */
 (()=>{'use strict';let en=false;try{en=localStorage.getItem('neon_lang')==='en';}catch{}if(location.hash==='#lang=en')en=true;if(location.hash==='#lang=zh')en=false;globalThis.neonEnglish=en;if(!en)return;document.documentElement.lang='en';document.title='Neon Salvage';document.querySelector('#game').setAttribute('aria-label','Neon Salvage game canvas');
 const phrases={
+'紫色信号提供可选风险事件：冒险开启宝库，或安全修复后离开。':'Violet signals offer optional risks: crack a vault under pressure, or repair safely and leave.',
+'紫色信号：密封战利品':'Violet signal: sealed spoils','你可以强行开启宝库，或安全拆解外壳。选择只影响本次航行。':'Crack the vault or safely salvage its casing. This choice affects only this run.',
+'强行开启':'Crack the vault','未来 20 秒普通敌人生成更密集。存活后获得 25 经验和 40 赏金合金，死亡或提前撤离则没有奖励。':'Regular enemies spawn more frequently for 20 seconds. Survive for 25 XP and 40 bonus alloy. Death or early extraction grants no reward.',
+'拆解外壳':'Salvage casing','立即修复 20 点船体，不触发增援。':'Repair 20 hull now without triggering reinforcements.','保持航线':'Stay on course','不拿奖励，也不承担风险。':'No reward, no additional risk.',
+'宝库警报 · 撑过 20 秒':'Vault alarm · Survive 20 seconds','发现紫色信号 · 靠近选择风险与奖励':'Violet signal detected · Approach to choose risk and reward','宝库已开启 · 经验 +25 / 赏金 +40':'Vault opened · XP +25 / Bonus +40','风险赏金':'Risk bonus','宝库警报':'Vault alarm','紫色信号':'Violet signal',
+
 '保留构筑 · 修复 25':'Keep build · Repair 25',
 '破限反应堆':'Limitbreaker Reactor','引力王冠':'Gravity Crown','蜂后协议':'Brood Protocol','相位残响':'Phase Echo','星矛核心':'Starlance Core','不灭余烬':'Undying Ember',
 '主炮及无人机伤害 +50%，最大船体减少 20%。':'Main and drone damage +50%; maximum hull reduced by 20%.',
