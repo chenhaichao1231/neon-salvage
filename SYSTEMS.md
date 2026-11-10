@@ -49,7 +49,7 @@ This is a new-mode prototype, not a claim that these strategies are balanced or 
 
 新设施从下次拾荒出航生效，适用于剧情与自由拾荒。两项永久结果不能同时取得，也不能完成后重新选择。第七码头本身不额外赠送章节合金，回报是后续设施用途。
 
-码头进度独立保存。format 3 备份包含码头；旧 format 1/2 导入保留当前码头结果。当前内容只是可玩章节增量，不代表后续空间站调查或完整战役已经实现。
+码头进度独立保存。format 3/4 备份包含码头；旧 format 1/2 导入保留当前码头结果。当前内容只是可玩章节增量，不代表后续空间站调查或完整战役已经实现。
 
 ## Dock Seven: one choice, two physical objectives
 
@@ -63,4 +63,33 @@ After a successful escort, the transfer point automatically banks at most one or
 
 The resulting facility appears on later story and free salvage runs. The two permanent outcomes are mutually exclusive and cannot be reselected after completion. Dock Seven awards no extra chapter-alloy payout; its reward is the facility’s future function.
 
-Dock progress is saved separately. Format 3 backups include it; legacy format 1/2 imports retain the current Dock outcome. This is a playable chapter increment, not a claim that the later station investigation or a complete campaign already exists.
+Dock progress is saved separately. Format 3/4 backups include it; legacy format 1/2 imports retain the current Dock outcome. This is a playable chapter increment, not a claim that the later station investigation or a complete campaign already exists.
+
+
+## 误导广播：改动争夺场地，而非复制资源
+
+所有拾荒模式每局有三台独立中继，初始无电、默认聚拢。玩家在 90 米内按 H 控制；供能时玩家及拖载货物都须在该台 90 米内。只接受仍有价值的普通货物，不接受剧情物品、竞争者持有物或已投掷物。
+
+供能立即移除原物并清空拖载，不能同时拿去入账、投掷、压机或炮台。充能秒数为「剩余货值 × 1.5」，单台上限 60 秒，超额浪费；面板在消耗前显示增加和浪费的秒数。三台各自耗电，没电便不提供效果。有电时免费改频，每次成功切换锁定 5 秒；切到相同频道不算一次操作。暂停/面板时间不推进场上供能计时。
+
+- **聚拢范围 250 米**：加速拉动自由普通残骸，保留原物身份；不动玩家拖货、竞争者货物、投掷物或剧情物品。多个聚拢台覆盖同一物体时选择最近有效台，不复制货物。
+- **引敌范围 380 米**：普通敌人可改追聚拢台；首领和竞争者不参与这一引诱，距玩家不足 90 米的敌人仍优先追玩家。敌人到台附近后恢复追击，并有 8 秒不再受引诱的间隔，不能用中继永久关住敌人。第七码头护航中，普通敌人的中继引诱也可能改变其返航路线上的威胁。
+- **屏蔽范围 250 米**：使自由普通货物不再成为竞争者的可选目标；不清除现有敌人，不提供护盾，不移动货物，也不能从竞争者手上夺回原物。剧情货物不受这项保护。
+
+成功供能或改频至少一次，并在船体仍存活时主动撤离，首次解锁免费布局工程。玩家可回失联站在中央、西侧、东侧中选择一台中继的下局位置，另两台保持不变。没有解锁费用、合金奖励或伤害加成；后续可免费重新选择。每局中继供能重置，永久保留的是工程解锁和布局，而非本局资源。
+
+可以完全忽略广播继续玩原有拾荒，不需要逐台激活或完成三连任务。format 4 整包备份保存广播解锁和布局；导入 format 1/2/3 不覆盖当前广播状态。当前仅增加场地交互与调查线索，广播背后的后续调查、可重复动态遭遇与长期内容仍在开发。
+
+## Misleading Broadcast: change the contested field, never duplicate resources
+
+Every salvage run has three independent relays, initially unpowered and set to Gather. Press H within 90 metres; feeding requires both player and held cargo within that distance. Relays accept valuable ordinary cargo, not story items, rival-owned objects or thrown cargo.
+
+Feeding immediately removes the original and releases the tow. That item cannot also be banked, thrown, pressed into hull repair or supplied to a turret. Charge is remaining value × 1.5 seconds, capped at 60 per relay with overflow wasted. The panel previews added and wasted seconds before consumption. Each relay drains independently and stops working when empty. Switching a powered relay is free, with a five-second lock after each successful change; selecting its existing channel is not another action. Pausing or opening the controls does not advance field charge time.
+
+- **Gather, 250-metre field:** accelerates free ordinary wrecks toward the relay while preserving object identity. Held, rival-owned, thrown and story objects are excluded. Overlapping fields choose the nearest effective relay rather than duplicating cargo.
+- **Lure, 380-metre range:** ordinary enemies can pursue a Gather relay. Bosses and rivals ignore this lure; enemies within 90 metres of the player still prioritize the player. Enemies reaching the relay resume pursuit and cannot be lured again for eight seconds. A relay cannot permanently trap them. During a Dock Seven escort, the lure can also change ordinary threats along the return route.
+- **Jam, 250-metre field:** makes free ordinary cargo ineligible for the rival’s targeting. It clears no enemies, provides no shield, moves no cargo and cannot take an object from the rival’s tow. Story cargo receives no such protection.
+
+Successfully feed or retune at least once and extract while alive to unlock free relay engineering. Back at Silent Station, choose Central, West or East for one relay’s position next run; the other two remain unchanged. There is no purchase fee, alloy award or damage bonus, and the layout can be changed freely on later visits. Relay charge resets each run: only the engineering unlock and layout persist, not spent resources.
+
+Ignoring the broadcast does not block ordinary salvage or extraction. There is no required three-relay activation chain. Format 4 full backups preserve the broadcast unlock and layout; importing formats 1/2/3 leaves current broadcast state unchanged. This currently adds field interactions and investigation clues; the later investigation, repeatable dynamic encounters and long-term content remain under development.

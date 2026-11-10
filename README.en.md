@@ -1,14 +1,28 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.14.0**.
-- Next: deepen the station investigation and add repeatable encounters and projects with different practical uses. Continue checking branch facilities, salvage handling, both languages and old-save compatibility without raising old level caps.
+- Current version: **0.15.0**.
+- Next: expand the station investigation behind the misleading broadcast and add dynamic encounters. Refine practical engineering choices and relay tradeoffs, checking both languages, control feedback and old-save compatibility rather than treating higher old level caps as the main content.
 - Estimated update: **November 10, 2026, 19:30–20:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 17:15 Beijing time.
+- Plan last updated: November 10, 2026, 17:28 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
 An offline-first space-survival roguelite. No installation, registration, payment, or external assets required. [中文说明](README.md)
+
+## v0.15.0: Misleading Broadcast, the same wreckage
+
+**Existing players can enter Salvage Skirmish directly, or choose Enter salvage field at Silent Station.** Three relays also appear in Dock Seven’s salvage field. Neither Chapter One nor Dock Seven completion is required. Original Free Flight is unchanged, and existing alloy, chapters and projects remain.
+
+Within **90 metres of a relay, press H**, or tap Relay controls. The three stations are independent, not a checklist that must be completed in order:
+
+- **Power:** tow an ordinary wreck alongside the relay and consume the entire object. Each remaining alloy-value point provides 1.5 seconds of power, up to 60 stored seconds per relay. Overflow is lost. Story cores cannot be used, and damaged cargo provides less charge.
+- **Gather:** powered relays initially pull free ordinary wrecks within 250 metres toward them. These are the original objects, not newly created cargo. Nearby ordinary enemies are also lured; after approaching the relay they resume pursuit. Bosses are unaffected. Concentrating salvage can concentrate danger too.
+- **Jam:** switch a powered relay to prevent free ordinary cargo within 250 metres from being selected by the rival. This cannot recover cargo it already holds, clear existing enemies or block bullets. Retuning costs no additional cargo, but locks further switching for five seconds.
+
+**Successfully use at least one relay and extract alive** to unlock free Central / West / East placement at the station. This moves only one relay on later runs; the other two stay put. It grants no damage boost. Death or ending the run from the pause menu does not unlock it. Charge, spent resources and cargo do not carry into the next run.
+
+All relays are optional: ignoring every one still allows normal salvage and extraction. The broadcast adds field tradeoffs and an investigation clue, not a claim that long-term replayability or a complete campaign is solved.
 
 ## v0.14.0: Dock Seven, save the ship or recover the record?
 
@@ -50,7 +64,7 @@ These are implemented uses, not a claim of endless progression. Story, projects 
 
 ### Save compatibility
 
-Old alloy, shipyard levels, best score and run count remain. Story, projects and Dock progress are saved independently; current format 3 full backups include all of them. Importing legacy format 1 restores old progress while retaining current story and Dock progress. Format 2 restores story and projects while retaining current Dock progress. Export through Shipyard→Backup & restore before updating. Different directories or browsers may use different local storage, so keep a backup.
+Old alloy, shipyard levels, best score and run count remain. Story, projects, Dock progress and broadcast layout are saved independently; current format 4 full backups include all of them. Legacy format 1 restores old progress while retaining story, Dock and broadcast state. Format 2 restores story and projects while retaining Dock and broadcast state. Format 3 restores story, projects and Dock progress while retaining the current broadcast layout. Export through Shipyard→Backup & restore before updating. Different directories or browsers may use different local storage, so keep a backup.
 
 ## Play online
 
@@ -59,6 +73,10 @@ Old alloy, shipyard levels, best score and run count remain. Story, projects and
 The hosted game and local offline files use separate browser-storage origins. Progress does not sync automatically. Export a full backup through Shipyard → Backup & restore in your current version, then import it in the destination version. Keep your old save. Switching browsers also requires backup migration.
 
 ## Download and play
+
+[Get the published v0.14.0 player package](https://github.com/chenhaichao1231/neon-salvage/releases/tag/v0.14.0). Choose the **Neon-Salvage-Play.zip** release attachment, extract it, and open **index.html**. This is the fixed, lightweight **0.14.0** runtime package. Even after the repository or web game advances to 0.15, this attachment remains 0.14.0 and does not update automatically.
+
+The release page’s **Source code** downloads contain that version’s complete source archive, not the lightweight player package. **Code → Download ZIP**, described below, instead downloads the repository’s current source, which may be newer than the fixed attachment.
 
 Choose **Code → Download ZIP**, extract the archive, and open **index.html** in a modern Chrome, Edge, Firefox, or Safari browser. Alternatively, run `python3 -m http.server 8000` in the folder and open `http://localhost:8000`.
 
@@ -74,7 +92,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.14.0
+## Current version: 0.15.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 

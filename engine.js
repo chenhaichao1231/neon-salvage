@@ -12,23 +12,26 @@ function decodeBackup(text){if(typeof text!=='string'||text.length>10000)throw E
 function safeSave(raw){try{const p=JSON.parse(raw);return{credits:clamp(Number(p.credits)||0,0,1e7),hull:clamp(Math.floor(Number(p.hull)||0),0,5),power:clamp(Math.floor(Number(p.power)||0),0,5),best:clamp(Number(p.best)||0,0,1e9),runs:clamp(Number(p.runs)||0,0,1e6)};}catch{return{credits:0,hull:0,power:0,best:0,runs:0};}}
 function safeHistory(raw){try{if(typeof raw!=='string'||raw.length>50000)return [];const entries=JSON.parse(raw);if(!Array.isArray(entries))return [];return entries.slice(0,20).filter(e=>e&&['scout','tank','glass'].includes(e.ship)&&Number.isInteger(e.seed)&&e.seed>=0&&e.seed<=4294967295&&typeof e.daily==='boolean'&&typeof e.escaped==='boolean'&&Number.isFinite(e.time)&&e.time>=0&&Number.isFinite(e.score)&&e.score>=0&&Number.isFinite(e.kills)&&e.kills>=0&&typeof e.version==='string'&&e.version.length<=32&&/^\d+\.\d+\.\d+$/.test(e.version)&&Number.isInteger(e.hull)&&e.hull>=0&&e.hull<=5&&Number.isInteger(e.power)&&e.power>=0&&e.power<=5).map(e=>({ship:e.ship,seed:e.seed,daily:e.daily,escaped:e.escaped,time:Math.floor(Math.min(e.time,1e7)),score:Math.floor(Math.min(e.score,1e9)),kills:Math.floor(Math.min(e.kills,1e7)),version:e.version,hull:e.hull,power:e.power}));}catch{return [];}}
 
-function encodeBundle(data,campaign,validateStory,dock,validateDock){
+function encodeBundle(data,campaign,validateStory,dock,validateDock,signal,validateSignal){
  if(typeof validateStory!=='function')throw Error('story validator missing');
  const story=validateStory(campaign),payload={app:'NeonSalvage',format:2,data:safeSave(JSON.stringify(data)),campaign:story};
  if(arguments.length>3){if(typeof validateDock!=='function')throw Error('dock validator missing');payload.dock=validateDock(dock);payload.format=3;}
+ if(arguments.length>5){if(typeof validateSignal!=='function')throw Error('signal validator missing');payload.signal=validateSignal(signal);payload.format=4;}
  return JSON.stringify(payload,null,2);
 }
-function decodeBundle(text,validateStory,validateDock){
+function decodeBundle(text,validateStory,validateDock,validateSignal){
  if(typeof text!=='string'||text.length>10000)throw Error('size');
  const obj=JSON.parse(text);let result;
  if(obj?.format===1)result={data:decodeBackup(text),campaign:null};
  else{
-  if(obj?.app!=='NeonSalvage'||![2,3].includes(obj.format)||typeof validateStory!=='function')throw Error('format');
-  if(obj.format===3&&typeof validateDock!=='function')throw Error('dock validator missing');
+  if(obj?.app!=='NeonSalvage'||![2,3,4].includes(obj.format)||typeof validateStory!=='function')throw Error('format');
+  if(obj.format>=3&&typeof validateDock!=='function')throw Error('dock validator missing');
+  if(obj.format===4&&typeof validateSignal!=='function')throw Error('signal validator missing');
   const data=decodeBackup(JSON.stringify({app:'NeonSalvage',format:1,data:obj.data}));
   result={data,campaign:validateStory(obj.campaign)};
  }
- if(typeof validateDock==='function')result.dock=obj.format===3?validateDock(obj.dock):null;
+ if(typeof validateDock==='function')result.dock=obj.format>=3?validateDock(obj.dock):null;
+ if(typeof validateSignal==='function')result.signal=obj.format===4?validateSignal(obj.signal):null;
  return result;
 }
 

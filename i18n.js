@@ -1,6 +1,8 @@
 /* Presentation translation. Language changes are offered in the main menu only. */
 (()=>{'use strict';let en=false;try{en=localStorage.getItem('neon_lang')==='en';}catch{}if(location.hash==='#lang=en')en=true;if(location.hash==='#lang=zh')en=false;globalThis.neonEnglish=en;if(!en)return;document.documentElement.lang='en';document.title='Neon Salvage';document.querySelector('#game').setAttribute('aria-label','Neon Salvage game canvas');
 const phrases={
+"中继控制":"Relay controls",
+
 "旧版备份，保留当前码头进度":"Legacy backup: keep current Dock progress",
 "先恢复站内供电":"Restore station power first",
 "可前往":"Available to explore",

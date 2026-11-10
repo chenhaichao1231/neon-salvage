@@ -1,3 +1,15 @@
+## 0.15.0 — 2026-11-10
+
+- 新增误导广播：三台独立中继，以同一件普通残骸供能。H/触屏可选择聚拢自由货物并引来普通敌人，或屏蔽竞争者的自由货物选择。
+- 整件消耗、剩余货值决定供能、单台60秒上限及超额浪费；改频免费但锁定5秒。没有强制清单，不创造货物，不抢走已经持有的货物。
+- 成功使用中继并存活撤离，免费解锁中央/西侧/东侧的一台中继布局，下局生效；无伤害升级。失败或直接结束不解锁。
+- format 4 备份加入广播进度；format 1–3 导入保留当前广播布局。旧章节、工程、友弹穿货规则保留。
+- Added Misleading Broadcast: three independent relays consume original ordinary cargo. H/touch controls gather free salvage while luring ordinary enemies, or jam the rival’s selection of free cargo.
+- Remaining cargo value determines charge, capped at 60 seconds per relay with overflow wasted. Retuning is free with a five-second lock. No mandatory checklist, generated cargo or theft of already-held cargo.
+- Use a relay and extract alive to unlock free Central/West/East placement for one relay on future runs, without damage upgrades. Death or quitting does not unlock it.
+- Format 4 backups include broadcast progress; formats 1–3 retain the current broadcast layout. Existing chapters, projects and friendly-projectile cargo safety remain.
+- This adds tactical choices and an investigation clue; it does not claim to solve long-term replayability.
+
 ## 0.14.0 — 2026-11-10
 
 - 第七码头续章：首章供电选择完成后从失联站进入，G 联系真实货运艇；选择消耗货值≥12普通残骸启动返航，或拆下原黑匣子亲自拖回原点。

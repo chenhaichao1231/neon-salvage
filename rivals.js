@@ -15,8 +15,8 @@
   }
   function token(state) { return 'rival:' + state.rival.id; }
   function find(cargo, id) { return cargo.items.find(item => item.id === id); }
-  function available(cargo,item) {
-    return !!item && item.hp > 0 && !item.thrown && !item.owner && item.id !== cargo.heldId;
+  function available(cargo,item,eligible) {
+    return !!item && item.hp > 0 && !item.thrown && !item.owner && item.id !== cargo.heldId && (!eligible || eligible(item));
   }
   function drop(state,cargo,events,reason) {
     const item = find(cargo,state.heldId);
@@ -59,7 +59,7 @@
     rival.x += Math.cos(rival.angle)*step;
     rival.y += Math.sin(rival.angle)*step;
   }
-  function update(state,cargo,dt) {
+  function update(state,cargo,dt,eligible) {
     const events = [];
     if (state.status === 'dead' || state.status === 'escaped') return events;
     dt = Math.max(0,Math.min(.25,finite(dt,0)));
@@ -90,12 +90,12 @@
     }
     state.status = 'seeking';
     let target = find(cargo,state.targetId);
-    if (!available(cargo,target)) state.targetId = null;
+    if (!available(cargo,target,eligible)) state.targetId = null;
     if (state.cooldown > 0 || dt === 0) return events;
     if (state.targetId === null) {
       let best = Infinity;
       for (const candidate of cargo.items) {
-        if (!available(cargo,candidate)) continue;
+        if (!available(cargo,candidate,eligible)) continue;
         const score = distance(state.rival,candidate) / Math.max(1,candidate.mass);
         if (score < best) { target = candidate; best = score; }
       }
@@ -103,7 +103,7 @@
       state.targetId = target.id;
     }
     move(state.rival,target,105,dt,state.rival.radius+target.radius);
-    if (available(cargo,target) && distance(state.rival,target) <= state.rival.radius+target.radius+.001) {
+    if (available(cargo,target,eligible) && distance(state.rival,target) <= state.rival.radius+target.radius+.001) {
       target.owner = token(state);
       target.bankTime = 0;
       state.heldId = target.id;
