@@ -1,5 +1,8 @@
 # Demolition Expert · Browser demo
 
+**v0.1.1 layout candidate:** a fixed desktop worksite, contextual editing controls, keyboard placement and bilingual accessibility labels. Twelve UI and ten engine test groups pass; browser validation of this patch is pending. Next iteration remains estimated for November 10, 21:00–22:00 Beijing time, focused on playtest feedback, controls and result clarity, without a multi-level promise.
+
+
 [Open the demo](https://chenhaichao1231.github.io/neon-salvage/demolition.html) · [Controls and limits](DEMOLITION.en.md) · [中文](README.md)
 
 **The demo is live and has passed this round of browser checks.** Place three targeted cutting charges to bring the frame below the marked height and let every surviving piece settle. Keep the workshop untouched by both structural pieces and debris. Plan, detonate, inspect the failure and retry. Non-rotating pieces, breakable links and local fractures form a simplified model, not engineering-realistic demolition.
