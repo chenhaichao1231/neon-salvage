@@ -5,3 +5,8 @@ for(const [w,h] of [[1440,900],[390,844],[844,390],[200,200]])for(const [dx,dy] 
 console.log('Contract thresholds and directional indicator bounds passed.');
 const {encodeBackup,decodeBackup}=require('./engine');const original={credits:120,hull:2,power:3,best:500,runs:7};assert.deepEqual(decodeBackup(encodeBackup(original)),original);
 for(const bad of ['', '{}', '{bad','a'.repeat(10001),JSON.stringify({app:'OtherGame',format:1,data:original}),JSON.stringify({app:'NeonSalvage',format:2,data:original}),JSON.stringify({app:'NeonSalvage',format:1,data:{...original,hull:6}}),JSON.stringify({app:'NeonSalvage',format:1,data:{...original,credits:'120'}})])assert.throws(()=>decodeBackup(bad));console.log('Backup validation passed: roundtrip, malformed/oversized/wrong-format/wrong-type rejection.');
+const {safeHistory}=require('./engine');
+const entry={ship:'scout',seed:123,daily:false,escaped:true,time:90.8,score:456.7,kills:12,version:'0.8.0',hull:2,power:3};
+assert.deepEqual(safeHistory(JSON.stringify([entry]))[0],{...entry,time:90,score:456});
+for(const raw of [null,'{}','invalid','x'.repeat(50001),JSON.stringify([{...entry,ship:'<img>'}]),JSON.stringify([{...entry,seed:-1}]),JSON.stringify([{...entry,power:6}]),JSON.stringify([{...entry,version:'<script>'}])])assert.deepEqual(safeHistory(raw),[]);
+assert.equal(safeHistory(JSON.stringify(Array(30).fill(entry))).length,20);assert.equal(safeHistory(JSON.stringify([{...entry,extra:'not retained'}]))[0].extra,undefined);console.log('History validation passed: bounded records, safe fields, malformed data and unknown properties.');

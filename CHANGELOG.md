@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 0.8.0 — 2026-11-10
+- 新增最近 20 局本地记录及原种子、机型、起始船坞等级重试。
+- Added a local last-20 flight log and retries with original seed, ship and starting shipyard levels.
+- 记录字段严格筛选，保持旧存档/备份兼容，并保留存储失败提示。
+- Validated log fields, preserved existing save/backup compatibility and retained storage-failure warnings.
+- 重复结算/点击、容量限制、每日模式及原起始属性回归通过；不承诺录像式复现。
+- Duplicate settlement/clicks, bounded history, daily mode and original starting stats pass regression; retries are not recording playback.
+
 ## 0.7.0 — 2026-11-10
 - 升级数值预览、暂停构筑面板和满射速选项过滤。
 - Added stat previews, pause build stats and capped fire-rate filtering.

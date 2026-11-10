@@ -1,6 +1,11 @@
 /* Presentation translation. Language changes are offered in the main menu only. */
 (()=>{'use strict';let en=false;try{en=localStorage.getItem('neon_lang')==='en';}catch{}if(location.hash==='#lang=en')en=true;if(location.hash==='#lang=zh')en=false;globalThis.neonEnglish=en;if(!en)return;document.documentElement.lang='en';document.title='Neon Salvage';document.querySelector('#game').setAttribute('aria-label','Neon Salvage game canvas');
 const phrases={
+'航行记录':'Flight log','成功撤离':'Extracted','航行结束':'Flight ended','同种子再挑战':'Retry same seed','还没有航行记录，出发完成第一局吧。':'No flights yet. Complete your first run to start the log.',
+'最近 20 局，仅保存在本地。同种子重试使用原机型及起始船坞等级，但操作、窗口尺寸与游戏版本会改变结果。这不是录像回放。':'The last 20 runs stay local. Same-seed retries use the original ship and starting shipyard levels, but your actions, window size and game version change the result. This is not a recording.',
+'进度备份只包含合金与船坞数据，不包含航行记录。恢复进度不会清除记录。':'Progress backups include alloy and shipyard data, not flight history. Restoring progress does not erase the log.',
+'航行记录仅在本次页面保存':'Flight log kept only for this page session',
+
 '跃迁冷却':'Dash cooldown','经验倍率':'XP multiplier','当前船体':'Current hull',
 '武器面板':'Weapon stats','主炮伤害':'Main damage','射击间隔':'Shot interval','散射数量':'Projectiles','移动速度':'Move speed','最大船体':'Max hull','回收范围':'Pickup range','无人机':'Drones','穿透次数':'Pierces','每秒修复':'Hull regen',
 '航行指南':'Flight guide','第一次出航':'Your first flight','移动与跃迁':'Move and dash','回收与成长':'Salvage and grow','撤离与风险':'Extract or risk more','返回暂停':'Back to pause',

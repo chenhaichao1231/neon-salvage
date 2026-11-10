@@ -1,10 +1,10 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.7.0**.
-- Next: add local run history and a same-seed retry option, validate save compatibility and replay limits, and continue balance and performance checks. Keep both UI languages and guides synchronized.
-- Estimated update: **November 10, 2026, 16:35–17:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 15:55 Beijing time.
+- Current version: **0.8.0**.
+- Next: add guardian phase changes and combat-event cues, verify that warnings match attacks, and continue balance and performance checks. Keep both UI languages and guides synchronized.
+- Estimated update: **November 10, 2026, 16:45–17:15 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
+- Plan last updated: November 10, 2026, 16:02 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
@@ -26,7 +26,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.7.0
+## Current version: 0.8.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 
@@ -65,3 +65,6 @@ Upgrade cards preview actual stat changes. Maxed fire rate, projectiles and dron
 Enemies are capped at 240. Regular spawning pauses at the cap; a guardian replaces the farthest regular enemy without kill credit or rewards. If every enemy is a guardian, new spawning is skipped. This protects long runs; it does not guarantee difficulty or frame rate.
 
 Performance spot-check: in a fixed-seed, stationary 600-second stress scenario with health restored each frame, peak enemies fell from 3,048 to 240. Health restoration existed only in the stress harness, not the game. This Node simulation excludes drawing and browser DOM and does not establish actual mobile frame rates.
+
+## Local flight log
+The main-menu flight log retains the last 20 runs and lets you retry the original seed, ship and starting shipyard levels. Daily retries always omit shipyard boosts. Actions, viewport size, route and version change results: this is not a recording or a reproducibility guarantee. Logs never leave the device; blocked storage keeps them only until the page closes. Progress JSON backups remain compatible, exclude flight history, and do not erase existing history when restored.

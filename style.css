@@ -8,3 +8,5 @@
 .reduced-motion *, .reduced-motion *::before, .reduced-motion *::after { transition: none !important; animation: none !important; }
 
 .reduced-motion button:hover { transform: none; }
+
+#overlay{align-items:flex-start}.panel{margin:auto}.log-entry{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #34465b;padding:14px 0}.log-entry p{margin:4px 0}@media(max-width:560px){.log-entry{align-items:flex-start;flex-direction:column}}
