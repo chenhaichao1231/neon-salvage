@@ -2,9 +2,9 @@
 
 ## Next update plan and estimate
 - Current version: **0.15.1**.
-- Next: expand the station investigation behind the misleading broadcast and add dynamic encounters. Refine practical engineering choices and relay tradeoffs, checking both languages, control feedback and old-save compatibility rather than treating higher old level caps as the main content.
-- Estimated update: **November 10, 2026, 19:30–20:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 17:37 Beijing time.
+- Next: pause peripheral investigation additions and prioritize a new standalone “Scrapship Breakout” playable slice: manual aim, directional defense, recovered functional modules, destructible external parts, and a short run with a clear outcome. Existing modes and saves remain. Actual play must validate actions and tradeoffs; more modules or passing tests do not prove replayability.
+- Estimated update: first playable candidate, **November 10, 2026, 21:00–22:00 Beijing time (UTC+8)**. This larger redesign is an estimate, not a guarantee. If play or tests fall short, this plan will be revised rather than calling unfinished work complete.
+- Plan last updated: November 10, 2026, 17:41 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
