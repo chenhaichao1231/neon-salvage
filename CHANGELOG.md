@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 0.11.0 — 2026-11-10
+- 三种玩家舰与主要敌舰改为原创分层舰体图，加入机库预览与星云背景。
+- Replaced player and main enemy geometry with original layered spacecraft sprites, hangar previews and a nebula background.
+- 素材嵌入代码，离线无需额外网络。素材与绘制路径测试通过，未完成浏览器视觉验证。
+- Embedded assets need no extra network access. Asset/render-path checks pass; browser visual verification is incomplete.
+- 按最新反馈将下一阶段重点转为物理拾荒交互，替代继续堆叠固定任务链。
+- Following current feedback, the next focus is physical salvage interactions rather than another fixed task chain.
+
 ## 0.10.0 — 2026-11-10
 - 新增可主动接近的紫色宝库：选择增援风险换经验/赏金、安全修复或离开。
 - Added optional violet vaults: risk reinforcements for XP/bounty, safely repair, or leave.

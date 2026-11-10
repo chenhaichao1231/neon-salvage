@@ -1,10 +1,10 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.10.0**.
-- Next: add weapon evolutions unlocked by different upgrade combinations, giving builds distinctive late-run effects while retaining necessary checks and both languages. Keep both UI languages and guides synchronized.
-- Estimated update: **November 10, 2026, 17:15–17:45 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 16:12 Beijing time.
+- Current version: **0.11.0**.
+- Next: prioritize a physical-salvage prototype: tow the same wreck for sale, use it to block either side’s bullets, or spend it as a thrown weapon. Mass and damage create tradeoffs. Validate core interactions before expanding enemies and field systems, in both languages. Keep both UI languages and guides synchronized.
+- Estimated update: **November 10, 2026, 17:30–18:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
+- Plan last updated: November 10, 2026, 16:22 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
@@ -26,7 +26,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.10.0
+## Current version: 0.11.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 
@@ -76,3 +76,6 @@ Defeat a guardian to choose from up to three randomly offered relics, each of si
 ## Optional vault encounters
 Starting at 30 seconds, a violet signal appears every 90 seconds and lasts 25 seconds. Approach and choose: cracking it causes denser normal spawns for 20 seconds, then pays 25 XP (scaled by XP multiplier) and 40 bonus alloy if you survive. Safe salvage repairs 20 immediately, or ignore it. Bonus alloy is not doubled on extraction; death or extraction before completion pays nothing.
 The first guardian has 1,000 base hull; later guardians retain 1,800, before time scaling. In a small real-damage bot sample, relic access increased from 1/15 to 7/15. This does not guarantee access or human enjoyment.
+
+## Spacecraft art
+This release replaces basic player/main-enemy shapes with six original transparent ship sprites, hangar previews and a nebula background. Assets are embedded for offline use. Source art and the contact sheet were inspected; browser-scene and physical-mobile validation remain incomplete.
