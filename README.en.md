@@ -2,15 +2,23 @@
 
 [Portrait hotel game](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [How to play](HOTEL.en.md) · [中文](README.md)
 
-**v0.3.0 is live and has completed this round of online browser checks.** Two choices with action costs and character consequences join the existing three-night, four-guest short story. No chapter is added.
+**v0.4.0 release draft: online checks of the update are pending.** Discovered evidence gains an object-view presentation within the existing three-night story and reasoning rules. No case or chapter is added.
 
 The three-night, four-guest short story keeps its three actions per night. Reasoning questions emerge with evidence, with neutral question and option wording. The key question supports an alternative evidence chain rather than only one fixed pair. Each offers three explanations: choose two records and actively select an explanation, with no default answer. Wrong-interpretation feedback costs no time. Dialogue better reflects admissions, cooperation and record custody, while historical entries retain what was known at the time.
 
 Existing v0.1 saves continue with established deductions and endings intact. Players who have finished must start a new story to experience the revised reasoning flow. No chapter is added, and deeper replay value is not claimed. [Full guide and verification limits](HOTEL.en.md).
 
-**Current v0.3.0 checks:** 44 engine tests and UI tests passed. In a real online browser at 360px width, a new story was played through all three nights using normal buttons, making the hearing-first promise and then publishing. The warning about breaking the promise was checked in Chinese and English; the publication ending delivered Xu’s refusal of further interviews. There was no horizontal overflow. Full text for selected records and expandable unselected evidence are covered by automated tests and were also seen online. The spare-key route passed automated UI tests this round; it was not manually completed online. These were not physical-phone tests.
+**Historical v0.3.0 checks:** 44 engine tests and UI tests passed. In a real online browser at 360px width, a new story was played through all three nights using normal buttons, making the hearing-first promise and then publishing. The warning about breaking the promise was checked in Chinese and English; the publication ending delivered Xu’s refusal of further interviews. There was no horizontal overflow. Full text for selected records and expandable unselected evidence are covered by automated tests and were also seen online. The company spare-key route was also completed through normal buttons in the online browser at 360px, without asking Shen for a key. Corridor dialogue correctly recognized the company key, and the publication ending reflected Zhou’s handover responsibility. Both new routes have now been manually completed online. These were not physical-phone tests.
 
 **Historical v0.2.0 checks:** 35 engine tests and UI tests covering two complete routes passed. In a real online browser at 360×640, a v0.1 Night One save was continued through the full publication route using normal buttons. Chinese and English reasoning, disabled submission without an explanation, free wrong-interpretation feedback, successful deductions and the alternative evidence chain were checked with no horizontal overflow. The cover loaded at 390px. The full online hearing playthrough remains the v0.1.1 run; v0.2.0 hearing-route automated tests passed. These were not physical-phone tests and do not establish manual coverage of every ending or long-term replay value.
+
+## v0.4.0: View evidence objects
+
+Choose **View object** on a discovered evidence card to inspect CSS/SVG schematic recreations of five material types: the log, medical card, key comparison, borrowing book and tape. Undiscovered material has no entry. Players who have finished can inspect their collected evidence without clearing the save or starting again.
+
+These are schematic recreations, not new hidden clues or pixel-hunting puzzles. All actual information comes from DOM text supplied by the current engine, with object state reflected in the current record. Evidence pairing keeps the existing reasoning mechanism. Viewing, testing a pair and closing the view cost no night action; no new puzzle rules are introduced.
+
+**Current v0.4.0 checks:** candidate review passed, along with 5 object-view tests, 44 engine tests and UI tests. Online browser verification of the update remains pending; earlier online results do not substitute for it.
 
 ## v0.3.0: Choices and agreements
 
@@ -24,7 +32,8 @@ Expand evidence to read the full text, and use summaries of selected records to 
 Old saves can continue, but missed time windows cannot be replayed within that save. Players who have finished must start a new story to experience these branches. This is not a long-form expansion or a claim that repetition has been solved.
 
 ## Next update plan and estimate
-- Deepen cross-checking of character testimony and ending postscripts rather than adding levels or resource grinding.
+- A second case is only under design evaluation, not implemented or promised.
+- Deepen interactive investigation and character postscripts rather than adding levels or resource grinding.
 - Estimated next update: **November 10, 2026, 19:00–20:00 Beijing time (UTC+8)**. This is not guaranteed; blockers take priority and may change the plan.
 - Plan updated November 10, 2026, 18:17 Beijing time. Development window ends November 11 at 15:01 Beijing time, unless stopped earlier.
 - Existing Neon Salvage v0.15.1 and saves remain: [original game](https://chenhaichao1231.github.io/neon-salvage/). The hotel uses an independent save and requires no space-game progress or currency.

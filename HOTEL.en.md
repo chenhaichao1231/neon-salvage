@@ -2,7 +2,7 @@
 
 [中文说明](HOTEL.md)
 
-**v0.3.0 is live and has completed this round of online browser checks.** Two choices with action costs and character consequences join the existing three-night, four-guest short story. No chapter is added.
+**v0.4.0 release draft: online checks of the update are pending.** Discovered evidence gains an object-view presentation within the existing three-night story and reasoning rules. No case or chapter is added.
 
 ## Four guests, three snowy nights
 
@@ -47,6 +47,14 @@ Testing costs no night action, including when an explanation is wrong. Feedback 
 
 Later dialogue and current evidence descriptions better reflect admissions, cooperation and the custody of important records. Historical journal entries retain what was known when the event happened rather than being rewritten with later knowledge. This guide does not reveal the correct explanations, evidence combinations or central solution.
 
+## v0.4.0: View evidence objects
+
+Choose **View object** on a discovered evidence card to inspect CSS/SVG schematic recreations of five material types: the log, medical card, key comparison, borrowing book and tape. Undiscovered material has no entry. Players who have finished can inspect their collected evidence without clearing the save or starting again.
+
+These are schematic recreations, not new hidden clues or pixel-hunting puzzles. All actual information comes from DOM text supplied by the current engine, with object state reflected in the current record. Evidence pairing keeps the existing reasoning mechanism. Viewing, testing a pair and closing the view cost no night action; no new puzzle rules are introduced.
+
+**Current v0.4.0 checks:** candidate review passed, along with 5 object-view tests, 44 engine tests and UI tests. Online browser verification of the update remains pending; earlier online results do not substitute for it.
+
 ## v0.3.0: Choices and agreements
 
 Open the **Choices / Agreements** action category to inspect each strategy’s prerequisites and consequences. Ordinary conversation or inspection does not silently make these choices for you.
@@ -77,12 +85,14 @@ The story has a definite conclusion, but not every run will uncover every fact. 
 
 The initial scope is three nights, four guests, four rooms, up to two of three power circuits, three actions per night and conditional endings. It is not a large management simulation, open world or finished long-term content service.
 
-**Current v0.3.0 checks:** 44 engine tests and UI tests passed. In a real online browser at 360px width, a new story was played through all three nights using normal buttons, making the hearing-first promise and then publishing. The warning about breaking the promise was checked in Chinese and English; the publication ending delivered Xu’s refusal of further interviews. There was no horizontal overflow. Full text for selected records and expandable unselected evidence are covered by automated tests and were also seen online. The spare-key route passed automated UI tests this round; it was not manually completed online. These were not physical-phone tests.
+**Historical v0.3.0 checks:** 44 engine tests and UI tests passed. In a real online browser at 360px width, a new story was played through all three nights using normal buttons, making the hearing-first promise and then publishing. The warning about breaking the promise was checked in Chinese and English; the publication ending delivered Xu’s refusal of further interviews. There was no horizontal overflow. Full text for selected records and expandable unselected evidence are covered by automated tests and were also seen online. The company spare-key route was also completed through normal buttons in the online browser at 360px, without asking Shen for a key. Corridor dialogue correctly recognized the company key, and the publication ending reflected Zhou’s handover responsibility. Both new routes have now been manually completed online. These were not physical-phone tests.
 
 **Historical v0.2.0 checks:** 35 engine tests and UI tests covering two complete routes passed. In a real online browser at 360×640, a v0.1 Night One save was continued through the full publication route using normal buttons. Chinese and English reasoning, disabled submission without an explanation, free wrong-interpretation feedback, successful deductions and the alternative evidence chain were checked with no horizontal overflow. The cover loaded at 390px. The full online hearing playthrough remains the v0.1.1 run; v0.2.0 hearing-route automated tests passed. These were not physical-phone tests and do not establish manual coverage of every ending or long-term replay value.
 
 ## Next steps
 
-The next focus is cross-checking character testimony and richer ending postscripts, not a claim that long-term replay value is solved. The estimated next update window is November 10, 2026, 19:00–20:00 Beijing time (UTC+8). This is an estimate, not a guarantee; blockers will take priority and may change the plan.
+A second case is only under design evaluation, not completed or promised content.
+
+The next focus is deeper interactive investigation and character postscripts, not a claim that long-term replay value is solved. The estimated next update window is November 10, 2026, 19:00–20:00 Beijing time (UTC+8). This is an estimate, not a guarantee; blockers will take priority and may change the plan.
 
 The story concerns a past disaster, bereavement, responsibility and concealment, primarily through text. You may stop whenever you need to; reading itself carries no time pressure.
