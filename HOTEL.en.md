@@ -2,7 +2,7 @@
 
 [中文说明](HOTEL.md)
 
-**v0.3.0 release draft: online verification of the update is pending.** Two choices add action costs and character consequences within the existing three-night, four-guest short story. No chapter is added.
+**v0.3.0 is live and has completed this round of online browser checks.** Two choices with action costs and character consequences join the existing three-night, four-guest short story. No chapter is added.
 
 ## Four guests, three snowy nights
 
@@ -12,7 +12,7 @@ The story is structured as a **complete short narrative across three nights, fou
 
 ## Getting started
 
-The independent entry is `hotel.html`, not the original game’s `index.html`. For local play, open `hotel.html` with its accompanying scripts, styles and artwork kept together rather than copying the HTML alone. Use the [direct hotel entry](https://chenhaichao1231.github.io/neon-salvage/hotel.html) online; its v0.2.0 online loading check has passed. The original game and its entry remain available and are not overwritten by The Seventh Night Hotel.
+The independent entry is `hotel.html`, not the original game’s `index.html`. For local play, open `hotel.html` with its accompanying scripts, styles and artwork kept together rather than copying the HTML alone. Use the [direct hotel entry](https://chenhaichao1231.github.io/neon-salvage/hotel.html) online; its v0.3.0 online loading check has passed. The original game and its entry remain available and are not overwritten by The Seventh Night Hotel.
 
 Choose **Open the hotel door** to begin. A readable local save lets you continue your existing story. Use the top-right language control to switch between Chinese and English.
 
@@ -77,7 +77,7 @@ The story has a definite conclusion, but not every run will uncover every fact. 
 
 The initial scope is three nights, four guests, four rooms, up to two of three power circuits, three actions per night and conditional endings. It is not a large management simulation, open world or finished long-term content service.
 
-**Current v0.3.0 checks:** 44 engine tests and UI tests pass; independent review corrected the current item description after the spare key is taken. Online testing of the update remains pending.
+**Current v0.3.0 checks:** 44 engine tests and UI tests passed. In a real online browser at 360px width, a new story was played through all three nights using normal buttons, making the hearing-first promise and then publishing. The warning about breaking the promise was checked in Chinese and English; the publication ending delivered Xu’s refusal of further interviews. There was no horizontal overflow. Full text for selected records and expandable unselected evidence are covered by automated tests and were also seen online. The spare-key route passed automated UI tests this round; it was not manually completed online. These were not physical-phone tests.
 
 **Historical v0.2.0 checks:** 35 engine tests and UI tests covering two complete routes passed. In a real online browser at 360×640, a v0.1 Night One save was continued through the full publication route using normal buttons. Chinese and English reasoning, disabled submission without an explanation, free wrong-interpretation feedback, successful deductions and the alternative evidence chain were checked with no horizontal overflow. The cover loaded at 390px. The full online hearing playthrough remains the v0.1.1 run; v0.2.0 hearing-route automated tests passed. These were not physical-phone tests and do not establish manual coverage of every ending or long-term replay value.
 

@@ -2,13 +2,13 @@
 
 [Portrait hotel game](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [How to play](HOTEL.en.md) · [中文](README.md)
 
-**v0.3.0 release draft: online verification of the update is pending.** Two choices add action costs and character consequences within the existing three-night, four-guest short story. No chapter is added.
+**v0.3.0 is live and has completed this round of online browser checks.** Two choices with action costs and character consequences join the existing three-night, four-guest short story. No chapter is added.
 
 The three-night, four-guest short story keeps its three actions per night. Reasoning questions emerge with evidence, with neutral question and option wording. The key question supports an alternative evidence chain rather than only one fixed pair. Each offers three explanations: choose two records and actively select an explanation, with no default answer. Wrong-interpretation feedback costs no time. Dialogue better reflects admissions, cooperation and record custody, while historical entries retain what was known at the time.
 
 Existing v0.1 saves continue with established deductions and endings intact. Players who have finished must start a new story to experience the revised reasoning flow. No chapter is added, and deeper replay value is not claimed. [Full guide and verification limits](HOTEL.en.md).
 
-**Current v0.3.0 checks:** 44 engine tests and UI tests pass; independent review corrected the current item description after the spare key is taken. Online testing of the update remains pending.
+**Current v0.3.0 checks:** 44 engine tests and UI tests passed. In a real online browser at 360px width, a new story was played through all three nights using normal buttons, making the hearing-first promise and then publishing. The warning about breaking the promise was checked in Chinese and English; the publication ending delivered Xu’s refusal of further interviews. There was no horizontal overflow. Full text for selected records and expandable unselected evidence are covered by automated tests and were also seen online. The spare-key route passed automated UI tests this round; it was not manually completed online. These were not physical-phone tests.
 
 **Historical v0.2.0 checks:** 35 engine tests and UI tests covering two complete routes passed. In a real online browser at 360×640, a v0.1 Night One save was continued through the full publication route using normal buttons. Chinese and English reasoning, disabled submission without an explanation, free wrong-interpretation feedback, successful deductions and the alternative evidence chain were checked with no horizontal overflow. The cover loaded at 390px. The full online hearing playthrough remains the v0.1.1 run; v0.2.0 hearing-route automated tests passed. These were not physical-phone tests and do not establish manual coverage of every ending or long-term replay value.
 
