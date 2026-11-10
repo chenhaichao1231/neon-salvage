@@ -1,1 +1,5 @@
 const assert=require('node:assert/strict');const {clamp,normalize,seeded,reward,safeSave}=require('./engine.js');assert.equal(clamp(5,0,3),3);assert.deepEqual(normalize(0,0),{x:0,y:0});assert.equal(normalize(3,4).x,.6);let a=seeded(42),b=seeded(42);for(let i=0;i<1000;i++)assert.equal(a(),b());assert.equal(reward(20,90,true),reward(20,90,false)*2);assert.equal(safeSave('{broken').credits,0);assert.equal(safeSave('{"hull":99,"credits":-1}').hull,5);assert.equal(safeSave('{"hull":99,"credits":-1}').credits,0);console.log('8 utility checks passed');
+const {edgeIndicator,contractBonus}=require('./engine');
+assert.equal(contractBonus(59,2,0),0);assert.equal(contractBonus(60,3,1),60);assert.equal(contractBonus(10000,99,10),60);
+for(const [w,h] of [[1440,900],[390,844],[844,390],[200,200]])for(const [dx,dy] of [[1000,1000],[-1000,1000],[0,-1000],[0,0]]){const q=edgeIndicator(dx,dy,w,h);assert.ok(q.x>=0&&q.x<=w&&q.y>=0&&q.y<=h);assert.ok(Number.isFinite(q.angle));}
+console.log('Contract thresholds and directional indicator bounds passed.');

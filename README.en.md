@@ -1,5 +1,13 @@
 # Neon Salvage
 
+## Next update plan and estimate
+- Current version: **0.3.0**.
+- Next: improve enemy attack warnings, reduce HUD obstruction on small screens, and add regression checks. Keep both UI languages and guides synchronized.
+- Estimated update: **November 10, 2026, 15:45–16:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
+- Plan last updated: November 10, 2026, 15:23 Beijing time.
+- This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
+
+
 An offline-first space-survival roguelite. No installation, registration, payment, or external assets required. [中文说明](README.md)
 
 ## Download and play
@@ -18,7 +26,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.2.1
+## Current version: 0.3.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 
@@ -32,3 +40,6 @@ Development is ongoing. Each version retains direct `index.html` launch support.
 A golden supply ring appears after 15 seconds. Charge inside for 2 seconds to gain 18 hull, 8 XP, and 100 points. Charge slowly decays outside; the beacon expires after 22 seconds. Chasing supplies creates new routes and risks getting surrounded.
 
 Simulation smoke test: `node smoke-test.js` (not a replacement for visual browser testing).
+
+## Flight contracts
+Each run has three bonus goals: destroy 60 enemies, collect 3 caches, and defeat 1 guardian. Each completed contract grants 20 extra alloy at settlement. Check progress on pause and extraction screens. Contract rewards are not doubled and progress does not carry between runs. A golden edge arrow points toward offscreen supplies.

@@ -1,5 +1,11 @@
 # 更新记录 / Changelog
 
+## 0.3.0 — 2026-11-10
+- 新增三项航行委托，暂停、撤离和结算可查看进度，每项结算额外 +20 合金。
+- Added three flight contracts with progress on pause, extraction and results screens; each pays +20 alloy at settlement.
+- 新增屏幕外补给方向箭头，帮助小屏幕寻找信标。
+- Added an offscreen supply direction arrow for smaller screens.
+
 ## 0.2.1 — 2026-11-10
 - 修复重复结算奖励；允许页面缩放；菜单空格和方向键恢复浏览器默认行为。
 - Prevent duplicate settlement rewards, allow page zoom, and preserve native Space/arrow behavior in menus.
