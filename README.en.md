@@ -2,7 +2,7 @@
 
 **[Play the online demo](https://chenhaichao1231.github.io/neon-salvage/)**
 
-## Animation & Return Demo 0.7
+## Animation & Return Demo 0.8
 
 Defend five lanes from runaway data, collect GPU compute, and deploy AI characters. This first demo tests the interaction loop and two units, not final art or balance.
 
@@ -12,7 +12,7 @@ Select DS or GPT, then an empty cell. Start the wave when ready. During preparat
 
 GPU drops can be clicked or automatically collected after four seconds; they never expire. Every stage has a finite supply, so waiting cannot farm unlimited money. Preparation refunds are complete. Reinforce during combat, pause, switch to 2× speed, retry the same schedule, or change language without resetting play. Wins also offer a same-stage retry using the original seed and pre-wave layout, without carrying earned GPU.
 
-Three short stages are available. Cheap-unit strategies may currently be too strong; the next pass focuses on meaningful placement and combinations rather than stage count. This browser now remembers only reached stages and language. Refresh returns to an empty preparation phase with 180 GPU, without auto-start or battle income. Versions 0.6 and earlier had no bookmark, so previously closed progress cannot be recovered. No accounts, payments, or personal-identity collection.
+Three introductory stages and an optional two-enemy placement challenge are available. The first three schedules are unchanged. This browser now remembers only reached stages and language. Refresh returns to an empty preparation phase with 180 GPU, without auto-start or battle income. Versions 0.6 and earlier had no bookmark, so previously closed progress cannot be recovered. No accounts, payments, or personal-identity collection.
 
 Old games are removed from the local current project; online source cleanup is still in progress. Git history remains. The separate old player ZIP has been removed.
 
@@ -31,7 +31,7 @@ DeepSeek now has a foot-aligned wind-up, push, release and distinct recovery ins
 
 ## Next version and estimate
 
-Next: verify the bookmark and bat poses online, refine larger existing enemy movement, and investigate one enemy mechanic that changes deployment decisions. Validate multiple solutions before deciding to add it. Further AI characters await the user's instruction.
+Next: test whether the detour challenge arrows, two-cell range and countdown explain its choices clearly, compare cheaper direct defense with bait into piercing, and refine existing enemy movement. Further AI characters await the user's instruction.
 
 Estimated next check/update: **November 11, 2026, 02:30–03:30 Beijing time**, not a guaranteed launch time. Concrete blockers will be reflected here. The agreed development window ends November 11 at 22:57 Beijing.
 
@@ -43,4 +43,15 @@ Local rule checks (with Node.js installed): run `node td-lanes.test.js`, `node t
 
 Version 0.6 adds independent simulations across 30 seeds, multiple depths and two GPU collection styles. Focused rear-line piercing clears faster than five DS units but costs more; forward placement is not necessarily safe. Simulations do not prove fun. Version 0.6 is now checked online: stage one at 5/5 core; two focused GPT lanes plus DS elsewhere won stage two at 4/5, one guard lost, 330 GPU and 78.1 battle seconds after delayed reinforcement. Both languages’ planned counts fit their lanes, and victory retry restored the original budget and placement. This live route is not a controlled balance comparison.
 
-The 0.7 bookmark is browser-local and does not sync between devices. Blocked or invalid storage shows a notice while play remains available. Clearing site data removes the bookmark. It stores stage access, not an entire battle or best formation. Online bookmark and animation acceptance follows deployment.
+The 0.7 bookmark is browser-local and does not sync between devices. Blocked or invalid storage shows a notice while play remains available. Clearing site data removes the bookmark. It stores stage access, not an entire battle or best formation. Online bookmark and animation acceptance completed for 0.7, as described below.
+
+
+## Optional detour challenge (0.8 candidate)
+
+The first three stages keep their existing schedules. After stage 3, choose the optional two-enemy challenge. This is not a new AI guard or a full-length level. Within two cells of a guard ahead in its original lane, the marked charger pauses for 2 seconds while vulnerable, then changes once to the marked lane 3. No original-lane guard means it continues straight. An occupied landing uses normal contact combat. Preparation shows the actual two-cell trigger range; combat shows destination and countdown. Cheap two-DS coverage and DS bait into GPT piercing are both viable in local probes, not proven human fun.
+
+0.7 was verified live: stage 2 refresh restores empty 180 GPU setup and English, placement disables stage selection, refund re-enables it, and pause freezes animation. Both stage 1 and the completed stage 2 attempt finished with 5/5 core and no guard loss. Another delayed-input attempt lost; these are not controlled balance comparisons.
+
+0.8 adds seven detour boundary tests and 28 UI tests; live verification is still pending. Next: test whether range/arrow/countdown explain the choice clearly, compare cheaper direct defense against bait/piercing, and improve existing enemy motion. No additional AI guards until requested. Estimated next check/update: Beijing 2026-11-11 02:30–03:30, not a guaranteed release time.
+
+The optional challenge requires stopping both enemies. Any leak fails it, even if the core retains health.
