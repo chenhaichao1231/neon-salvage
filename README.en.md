@@ -2,7 +2,7 @@
 
 **[Play the online demo](https://chenhaichao1231.github.io/neon-salvage/)**
 
-## Animation & Return Demo 0.8
+## Animation & Return Demo 0.8.1
 
 Defend five lanes from runaway data, collect GPU compute, and deploy AI characters. This first demo tests the interaction loop and two units, not final art or balance.
 
@@ -52,6 +52,6 @@ The first three stages keep their existing schedules. After stage 3, choose the 
 
 0.7 was verified live: stage 2 refresh restores empty 180 GPU setup and English, placement disables stage selection, refund re-enables it, and pause freezes animation. Both stage 1 and the completed stage 2 attempt finished with 5/5 core and no guard loss. Another delayed-input attempt lost; these are not controlled balance comparisons.
 
-0.8 adds seven detour boundary tests and 28 UI tests; live verification is still pending. Next: test whether range/arrow/countdown explain the choice clearly, compare cheaper direct defense against bait/piercing, and improve existing enemy motion. No additional AI guards until requested. Estimated next check/update: Beijing 2026-11-11 02:30–03:30, not a guaranteed release time.
+0.8 adds seven detour boundary tests and 29 UI tests. The live 0.8 bait formation won with 5/5 core, zero losses, 140 GPU spent and 8.3 battle seconds, repeated on retry; the brief waiting frame was not captured. 0.8.1 shortens forecasts/main text, hides empty plans and separates arrows from forecasts; its visual acceptance follows deployment. Next: test whether range/arrow/countdown explain the choice clearly, compare cheaper direct defense against bait/piercing, and improve existing enemy motion. No additional AI guards until requested. Estimated next check/update: Beijing 2026-11-11 02:30–03:30, not a guaranteed release time.
 
 The optional challenge requires stopping both enemies. Any leak fails it, even if the core retains health.
