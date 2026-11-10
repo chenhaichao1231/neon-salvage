@@ -1,6 +1,8 @@
 /* Presentation translation. Language changes are offered in the main menu only. */
 (()=>{'use strict';let en=false;try{en=localStorage.getItem('neon_lang')==='en';}catch{}if(location.hash==='#lang=en')en=true;if(location.hash==='#lang=zh')en=false;globalThis.neonEnglish=en;if(!en)return;document.documentElement.lang='en';document.title='Neon Salvage';document.querySelector('#game').setAttribute('aria-label','Neon Salvage game canvas');
 const phrases={
+'跃迁冷却':'Dash cooldown','经验倍率':'XP multiplier','当前船体':'Current hull',
+'武器面板':'Weapon stats','主炮伤害':'Main damage','射击间隔':'Shot interval','散射数量':'Projectiles','移动速度':'Move speed','最大船体':'Max hull','回收范围':'Pickup range','无人机':'Drones','穿透次数':'Pierces','每秒修复':'Hull regen',
 '航行指南':'Flight guide','第一次出航':'Your first flight','移动与跃迁':'Move and dash','回收与成长':'Salvage and grow','撤离与风险':'Extract or risk more','返回暂停':'Back to pause',
 'WASD / 方向键移动，空格跃迁。手机拖动画面，点击跃迁按钮。飞船自动瞄准射击。':'Move with WASD / arrows and dash with Space. On mobile, drag to move and tap Dash. The ship aims and fires automatically.',
 '击破敌人后靠近绿色能量升级。金色信标需要在圆圈内停留 2 秒，提供修复与经验。':'Collect green energy from defeated enemies to upgrade. Stay inside a gold beacon for 2 seconds to gain repairs and XP.',

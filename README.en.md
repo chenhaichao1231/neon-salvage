@@ -1,10 +1,10 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.6.0**.
-- Next: improve upgrade choices and build information, check long-run performance and mobile-input boundaries, and continue regression and balance checks. Keep both UI languages and guides synchronized.
-- Estimated update: **November 10, 2026, 16:20–16:45 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 15:47 Beijing time.
+- Current version: **0.7.0**.
+- Next: add local run history and a same-seed retry option, validate save compatibility and replay limits, and continue balance and performance checks. Keep both UI languages and guides synchronized.
+- Estimated update: **November 10, 2026, 16:35–17:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
+- Plan last updated: November 10, 2026, 15:55 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
@@ -26,7 +26,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.6.0
+## Current version: 0.7.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 
@@ -59,3 +59,9 @@ Daily seeds do not guarantee cross-device competitive parity: viewport, input an
 
 ## Flight guide and feedback
 Open the flight guide from the main or pause menu without advancing game time. Three ships have distinct silhouettes. A shield ring indicates temporary invulnerability; a red border indicates recent damage, replacing rapid flicker. Reduced motion initially follows your system preference and can be toggled in the guide for this page session. It hides camera shake, decorative particles and menu background drift without changing combat rules.
+
+## Build clarity and long-run protection
+Upgrade cards preview actual stat changes. Maxed fire rate, projectiles and drones are excluded. Pause shows weapon stats. The touch stick has an 8px deadzone and reaches full speed at 42px; a second finger cannot steal movement, and dash retains a fixed 130-unit distance.
+Enemies are capped at 240. Regular spawning pauses at the cap; a guardian replaces the farthest regular enemy without kill credit or rewards. If every enemy is a guardian, new spawning is skipped. This protects long runs; it does not guarantee difficulty or frame rate.
+
+Performance spot-check: in a fixed-seed, stationary 600-second stress scenario with health restored each frame, peak enemies fell from 3,048 to 240. Health restoration existed only in the stress harness, not the game. This Node simulation excludes drawing and browser DOM and does not establish actual mobile frame rates.

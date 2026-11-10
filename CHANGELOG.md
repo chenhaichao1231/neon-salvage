@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+## 0.7.0 — 2026-11-10
+- 升级数值预览、暂停构筑面板和满射速选项过滤。
+- Added stat previews, pause build stats and capped fire-rate filtering.
+- 修复多指抢占/误取消移动，新增触控死区与比例速度；跃迁距离保持不变。
+- Fixed multi-touch ownership/cancellation and added a deadzone with proportional speed; dash distance is unchanged.
+- 根据十分钟压力测试发现的敌人数增长，加入 240 敌人预算和守卫预留处理。
+- Added a 240-enemy budget with guardian handling after ten-minute stress tests exposed growing populations.
+- 预览无副作用、满级排除、触控与生成预算回归通过；未完成浏览器视觉验证。
+- Preview purity, capped-choice exclusion, touch and spawn-budget checks pass; browser visual verification remains incomplete.
+
 ## 0.6.0 — 2026-11-10
 - 新增主菜单/暂停内航行指南、三种飞船轮廓、无闪烁护盾提示和受击边框。
 - Added main/pause flight guides, distinct ship silhouettes, non-flickering shield cues and damage borders.
