@@ -2,7 +2,7 @@
 
 [中文说明](HOTEL.md)
 
-**v0.6.0 release candidate: review and local tests passed; real-browser verification is pending.** The entry remains `hotel.html`. The candidate is not yet the production release.
+**v0.6.0 is published and has passed this round of online browser checks.** The entry remains `hotel.html`. Published revision: `b0d9323b38e545a26ab932701222a8d6483e79af`.
 
 ## v0.6.0: Finish investigating without filling turns
 
@@ -12,7 +12,7 @@ This requires explicit confirmation: remaining investigation opportunities are f
 
 Old saves can upgrade without restarting. Saves containing the new waiting-history entry are not guaranteed to load in an older version. Deploy the complete current set of scripts together, not a mixture of old and new files.
 
-**Candidate checks:** 44 baseline engine tests, 6 waiting tests and UI regressions passed review and local testing. v0.6.0 browser verification remains pending. No chapter is added.
+**v0.6.0 verification:** all 12 `*.test.js` files passed, including the 44 baseline engine tests, 6 waiting tests and UI regressions. In a real browser at 360×640, the v0.6 footer and an existing hearing ending restored correctly. After restarting the tester’s own QA save, cancelling the wait kept Night One planning unchanged; confirming it reached the final decision with zero evidence. The unsecured original was taken away, and publication/hearing requirements were explicitly unmet. This was not a complete three-night v0.6 playthrough or physical-phone testing. The earlier v0.5.1 full hearing playthrough remains a separate historical check. No chapter is added.
 
 ## v0.5: Know what you are investigating
 
@@ -116,8 +116,8 @@ The initial scope is three nights, four guests, four rooms, up to two of three p
 
 ## Next steps
 
-The next focus is the first case’s play experience and easier onboarding for Case Two. This is not a promise to release a new chapter; reducing player burden remains the priority.
+The next priority is paginated reading in Case One; Case Two is paused. Planned improvements cover Chinese and English dialogue and clues on portrait phones, with page numbers, previous/next controls and retained context instead of shrinking the text. These changes are not yet complete.
 
-The next update is estimated for November 10, 2026, 21:00–22:00 Beijing time (UTC+8), not guaranteed; blockers take priority. Plan checked November 10, 2026, 19:40 Beijing time. v0.5.1 has completed the online checks described above.
+The next update is estimated for November 10, 2026, 21:00–22:00 Beijing time (UTC+8), not guaranteed; verification will determine release timing, and blockers take priority. Plan checked November 10, 2026, 19:46 Beijing time. v0.5.1 has completed the online checks described above.
 
 The story concerns a past disaster, bereavement, responsibility and concealment, primarily through text. You may stop whenever you need to; reading itself carries no time pressure.
