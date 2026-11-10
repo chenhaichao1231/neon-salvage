@@ -7,3 +7,7 @@ The six ship sprites are original vector designs rendered to transparent PNGs, w
 已检查 512×512 RGBA 素材和整组预览；渲染分支测试不是浏览器视觉或手机验证。
 
 The 512×512 RGBA assets and contact sheet were inspected. Render-branch tests are not browser visual or mobile verification.
+
+新增三套原创空间设施素材：回收前哨、供能炮台、记录核心，512×512透明PNG嵌入代码。联系表已视觉检查，实际浏览器缩放辨识度尚未验证。
+
+Three additional original facility assets: recycling outpost, powered turret and record core. Their 512×512 transparent PNGs are embedded in code. The contact sheet was visually checked; readability at browser gameplay scale remains unverified.

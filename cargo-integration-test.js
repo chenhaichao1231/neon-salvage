@@ -5,7 +5,7 @@ const doc={querySelector(s){if(!nodes.has(s))nodes.set(s,node());return nodes.ge
 const sandbox={document:doc,innerWidth:1280,innerHeight:720,devicePixelRatio:1,performance:{now:()=>0},localStorage:{getItem:()=>null,setItem(){}},location:{hash:'',reload(){reloaded=true;}},addEventListener(type,fn){events[type]=fn;},requestAnimationFrame(){},Math,Date,Set,console};sandbox.globalThis=sandbox;
 vm.createContext(sandbox);vm.runInContext(fs.readFileSync(__dirname+'/engine.js','utf8'),sandbox);
 vm.runInContext(fs.readFileSync(__dirname+'/cargo.js','utf8'),sandbox);
-for(const f of ['rivals.js','stations.js'])vm.runInContext(fs.readFileSync(__dirname+'/'+f,'utf8'),sandbox);
+for(const f of ['rivals.js','stations.js','campaign.js','rigs.js'])vm.runInContext(fs.readFileSync(__dirname+'/'+f,'utf8'),sandbox);
 let src=fs.readFileSync(__dirname+'/game.js','utf8').replace('menu();requestAnimationFrame(frame);','globalThis.testApi={cargoAction,cargoExit,start,update,pause,dash,end,menu,garage,getRun:()=>run,getState:()=>state,setState:v=>state=v,getSave:()=>save,spawn,routes,upgrades,draw,help,getReduced:()=>reducedMotion,upgradePreview,choose,moveDir,getHistory:()=>history,relics,chooseRelic,attackAngles,anomalyChoice,extraction};menu();');vm.runInContext(src,sandbox);
 
 const api=sandbox.testApi,Cargo=sandbox.Cargo;
@@ -16,8 +16,8 @@ r.spawn=999;r.fire=999;r.bossAt=999;r.time=91;api.update(.01);assert.equal(api.g
 r.cargo.items=[];let item=Cargo.add(r.cargo,0,0,2);api.cargoAction();assert.equal(r.cargo.heldId,item.id);
 for(let i=0;i<95;i++)api.update(1/60);assert.equal(r.cargo.banked,24);assert.equal(r.cargo.items.length,0);
 item=Cargo.add(r.cargo,0,0);api.cargoAction();api.dash();assert.equal(r.cargo.heldId,null);assert.equal(r.cargo.items.length,1);
-r.cargo.items=[];r.p.x=500;r.p.y=0;r.p.inv=0;item=Cargo.add(r.cargo,500,0);const hp=r.p.hp;r.shots=[{x:500,y:0,vx:0,vy:0,enemy:true,life:1}];api.update(.01);assert.equal(r.p.hp,hp);assert.equal(item.hp,20);assert.equal(r.shots.length,0);
-r.cargo.items=[];item=Cargo.add(r.cargo,500,0);r.enemies=[{x:500,y:0,type:'chaser',hp:100,maxHp:100,speed:0,radius:12,shot:9,hit:0}];r.shots=[{x:500,y:0,vx:0,vy:0,enemy:false,life:1,damage:10,pierce:0,hits:new Set()}];api.update(.01);assert.equal(r.enemies[0].hp,100);assert.equal(item.hp,20);
+r.cargo.items=[];r.p.x=500;r.p.y=0;r.p.inv=0;item=Cargo.add(r.cargo,470,0);const hp=r.p.hp;r.shots=[{x:450,y:0,vx:2000,vy:0,enemy:true,life:1}];api.update(.01);assert.equal(r.p.hp,hp);assert.equal(item.hp,20);assert.equal(r.shots.length,0);
+r.cargo.items=[];item=Cargo.add(r.cargo,470,0);r.enemies=[{x:500,y:0,type:'chaser',hp:100,maxHp:100,speed:0,radius:12,shot:9,hit:0}];r.shots=[{x:450,y:0,vx:2000,vy:0,enemy:false,life:1,damage:10,pierce:0,hits:new Set()}];api.update(.01);assert.equal(r.enemies[0].hp,100);assert.equal(item.hp,20);
 r.enemies=[];r.shots=[];r.cargo.items=[];item=Cargo.add(r.cargo,r.p.x,r.p.y);r.p.towAngle=Math.PI/2;r.p.angle=0;api.cargoAction();api.cargoAction();assert.ok(Math.abs(item.vx)<1e-6);assert.equal(item.vy,520);
 const historyCount=api.getHistory().length,credits=api.getSave().credits;r.cargo.banked=24.8;api.end(false);assert.equal(api.getSave().credits,credits+24);assert.equal(api.getHistory().length,historyCount);api.end(false);assert.equal(api.getSave().credits,credits+24);
 doc.querySelector('#again').onclick();r=api.getRun();assert.equal(r.mode,'cargo');r.cargo.banked=12;api.cargoExit();assert.equal(api.getState(),'cargo-exit');doc.querySelector('#cargo-cancel').onclick();assert.equal(api.getState(),'playing');api.cargoExit();doc.querySelector('#cargo-confirm').onclick();assert.equal(api.getState(),'ended');assert.equal(api.getHistory().length,historyCount);

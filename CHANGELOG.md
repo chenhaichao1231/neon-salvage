@@ -1,3 +1,12 @@
+## 0.13.0
+
+- 免费失联空间站首章、定点物理记录核心、一次性供电分支、可见站内变化。
+- X主动装备：斥力脉冲；分支解锁急救压机或反射屏障。合金可购买永久回收前哨和有限炮台补给，旧满级进度保留。
+- 新增前哨/炮台/记录核心原创素材。整包备份format2含剧情工程，旧format1导入保留剧情。
+- Free Silent Station chapter, guaranteed physical core, persistent power-line choice and visible station changes.
+- Active rigs, real alloy-funded outposts/supply packs, original facility artwork and compatible story-inclusive backups.
+- Prototype limitations remain: only Chapter One is playable; no browser/phone visual QA claim.
+
 ## 0.12.0
 
 - 新增独立拾荒争夺：拖载、掩体、投掷、回收站交付，质量和损伤影响取舍。

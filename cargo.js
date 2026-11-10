@@ -10,7 +10,7 @@
   const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
   const distance = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
 
-  function create() { return { items: [], heldId: null, nextId: 1, banked: 0 }; }
+  function create() { return { items: [], heldId: null, nextId: 1, banked: 0, depots: [{ ...RECYCLER }] }; }
   function held(state) { return state.items.find(item => item.id === state.heldId) || null; }
   function remove(state, item) {
     const index = state.items.indexOf(item);
@@ -19,7 +19,7 @@
   }
   function add(state, x, y, mass = 1) {
     if (state.items.length >= 24) {
-      const oldestFree = state.items.find(item => item.id !== state.heldId && !item.thrown && !item.owner);
+      const oldestFree = state.items.find(item => item.id !== state.heldId && !item.thrown && !item.owner && !item.storyId);
       if (!oldestFree) return null;
       remove(state, oldestFree);
     }
@@ -96,7 +96,7 @@
         }
         item.x += item.vx * step; item.y += item.vy * step;
         if (item.id === state.heldId) {
-          const inside = Math.hypot(px, py) <= RECYCLER.radius && distance(item, RECYCLER) <= RECYCLER.radius;
+          const inside = (state.depots || [RECYCLER]).some(depot => Math.hypot(px-depot.x, py-depot.y) <= (depot.radius || 65) && distance(item, depot) <= (depot.radius || 65));
           item.bankTime = inside ? item.bankTime + step : 0;
         }
         if (item.thrown) {
@@ -136,6 +136,7 @@
         if (t < earliest) { earliest = t; target = item; }
       }
       if (!target) continue;
+      if (options.deferShots) { shot.cargoHit = { item: target, t: earliest }; continue; }
       // An entity in front of the cover must resolve first. Preserve the later
       // cover intersection so a piercing shot can still hit it this frame.
       let entityTime = Infinity;

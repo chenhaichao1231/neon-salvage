@@ -1,14 +1,37 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.12.0**.
-- Next: expand the salvage core with equipment that changes how you play and distinct cargo uses; improve goals and route tradeoffs using real simulation results, rather than merely increasing enemy stats. Keep both languages aligned.
-- Estimated update: **November 10, 2026, 18:00–18:30 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 16:36 Beijing time.
+- Current version: **0.13.0**.
+- Next: develop the Dock Seven continuation so Chapter One choices affect later events and solutions; expand practical station projects and active equipment without raising old level caps. Keep both languages and old-save compatibility aligned.
+- Estimated update: **November 10, 2026, 18:30–19:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
+- Plan last updated: November 10, 2026, 16:50 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
 An offline-first space-survival roguelite. No installation, registration, payment, or external assets required. [中文说明](README.md)
+
+## Returning with a maxed shipyard: what is new?
+
+Choose **Silent Station · Free new chapter** from the main menu. Keep your existing alloy and maxed shipyard. Chapter One costs nothing and requires no reset.
+
+- Answer Echo Station’s distress call and tow home a guaranteed physical record core. If it is destroyed or stolen, it returns on your next sortie; no rare-drop grind.
+- Use **X Repulsor** immediately to push enemies and loose cargo away. After delivery, choose the habitat or workshop power line. Station lights and dialogue change.
+- Habitat unlocks the **Repair press**, which consumes held salvage to repair your ship. A shelter beacon repairs cargo on later salvage runs, with a finite repair budget.
+- Workshop unlocks the **Reflector**, briefly returning enemy bullets without preventing collision damage. Story sorties gain salvage-powered turrets.
+- Select one unlocked active rig at the station before each run. The branch choice is currently irreversible. The next chapter is not available yet; the closing clue is not a finished campaign.
+
+### What can alloy buy now?
+
+Use old savings or new earnings in **Station projects**:
+
+- **180 alloy: permanent recycling outpost**, west or east. From your next salvage run, this is a real delivery/extraction location that changes collection routes, not a damage upgrade.
+- **40 alloy: turret supply pack**, 12 rounds each, maximum 3 stored packs. Your next salvage sortie with turrets loads the first turret. If there are no turrets, supplies remain stored. You need not sacrifice cargo to power that turret first.
+
+These are implemented uses, not a claim of endless progression. Story, projects and tactical choices remain under development.
+
+### Save compatibility
+
+Old alloy, shipyard levels, best score and run count remain. Story/projects are stored separately, and full backups now include them. Importing a legacy format 1 backup restores old progress while retaining your current story; format 2 restores story and projects too. Export through Shipyard→Backup & restore before updating. Different directories or browsers may use different local storage, so keep a backup.
 
 ## Download and play
 
@@ -26,7 +49,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.12.0
+## Current version: 0.13.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 
@@ -84,8 +107,8 @@ This release replaces basic player/main-enemy shapes with six original transpare
 
 Choose Salvage Skirmish from the main menu. Wrecks are shared resources: tow them home for alloy, use them as cover against both sides, throw them as weapons, or press F to exchange them for finite turret ammunition. A rival pursues the same cargo; damage makes it drop the original object. See [system guide](SYSTEMS.md).
 
-E grabs/throws along movement heading; Q toggles the main gun; F powers a nearby turret; R requests extraction at the origin. Touch controls are available. Heavy loads slow you down, damage lowers value, and dashing drops cargo. Both pilot and cargo must remain inside the recycler for1.5 seconds to bank. Banked earnings survive death; undelivered cargo earns nothing. This mode has no original90-second extraction popup, cache beacons or violet events, and does not yet support same-seed history retries.
+E grabs/throws along movement heading; Q toggles the main gun; F powers a nearby turret; R requests extraction at the origin. Touch controls are available. Heavy loads slow you down, damage lowers value, and dashing drops cargo. Both pilot and cargo must remain inside the recycler for 1.5 seconds to bank. Banked earnings survive death; undelivered cargo earns nothing. This mode has no original 90-second extraction popup, cache beacons or violet events, and does not yet support same-seed history retries.
 
-This is a playable prototype, not a complete campaign or mature long-term unlock system. If your shipyard is already maxed, alloy does not unlock new systems automatically. Depth and balance remain under development; this is not a claim that repetition is solved. Rivals and turrets are simulated locally, with no multiplayer.
+This is a playable prototype, not a complete campaign or mature long-term unlock system. Version 0.13 adds story equipment and purchasable station projects. Depth and balance remain under development; this is not a claim that repetition is solved. Rivals and turrets are simulated locally, with no multiplayer.
 
 Additional checks: `node cargo-integration-test.js`, `node rivals.test.js`, `node stations.test.js`. These cover real-game banking, piercing and cover order, no new delivery after lethal damage, original-item rival drops, and single-consumption turret supply. They do not replace browser or phone testing.
