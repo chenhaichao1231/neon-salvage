@@ -1,21 +1,30 @@
-# 塔防游戏 / Tower Defense
+# 校园防线 · Campus Defense
 
-[项目在线页面 / Project website](https://chenhaichao1231.github.io/neon-salvage/) · 建设中，尚不可玩 / In development, not playable yet
+**[立即在线试玩 / Play the demo](https://chenhaichao1231.github.io/neon-salvage/)**
 
-此前游戏已从当前项目文件中移除，不再作为游戏入口或附带内容保留。Git 版本历史未改写。
+## 基础 Demo 0.1
 
-Previous games have been removed from the current project files. They are no longer retained as playable entries or bundled content. Git history has not been rewritten.
+AI角色守住五行防线，收集显卡算力、安排部署，阻止失控数据到达左侧核心。本版先验证基础操作与两种角色，不是最终美术或完整平衡版。
 
-当前阶段：先完成十轮顺序设计反思，再开始塔防开发。初始塔使用简单易上手的规则，随后持续添加新塔供玩家自由搭配；设计与数值可根据测试调整；具体规则以完成的设计稿为准。
+**画面目前使用临时原创轮廓，与此前效果图有明显差距。没有将许可未核实的社区角色图片打包发布。**
 
-Current stage: complete ten sequential design reviews before implementation. Initial towers will have simple, beginner-friendly rules. Further towers will expand player-made combinations; designs and balance may change with testing. Rules will follow the reviewed design.
+- 选择下方DS或GPT，再点空格部署；点“开始入侵”。右侧显示各行下一位来敌，详细时间表可展开。
+- DS费用低，偶尔预告后吃白饭2秒暂停射击。GPT每第四发能穿透两个目标，偶尔预告后3秒伤害降至70%。都有恢复提示；这些是虚构游戏规则，不是对现实产品的事实评价。
+- 顶部定时掉落GPU。可以点击，也会在4秒后自动收取，不会消失；每关总补给固定，拖延不会无限刷资源。
+- 准备期可全额退回角色；战斗中可以补位。支持暂停、2倍速度、同一安排重试及中英切换。
+- 三个短关。目前廉价单位策略可能偏强，下一轮将重点检查不同搭配和部署是否真正有意义，而非只增加关数。
+- 本Demo尚未保存游戏进度，刷新会重新开始。没有账号、付费或个人身份收集。
 
-本次开始同步线上清理并替换为建设中页面。旧游戏文件将从当前分支移除，Git历史不改写。
+旧游戏已从本地当前项目移除，线上旧文件清理仍在进行；Git历史保留。此前独立旧版ZIP下载包已移除。
 
-This update begins the online cleanup and replaces the homepage with an under-construction page. Previous game files will be removed from the current branch without rewriting Git history.
+## 下一版计划与预计时间
 
-## 下一版 / Next version
+下一步：完成线上真实浏览器试玩，调整第二/三关的队列与部署压力，让穿透和低成本覆盖都能形成有效策略；继续改善角色动作与场景反馈。更多AI角色暂不开发，等待用户后续指令。
 
-十轮设计反思已完成，下一步开发首个可玩塔防闭环：简单初始单位、来敌预告、布置防线、自动战斗、失败重试与逐步增加的新单位。拟物化主题正在选择。预计本地首轮检查为北京时间2026年11月11日00:00–01:00，不是上线承诺。约定开发窗口至11月11日22:57。
+预计下一次检查与更新：**北京时间2026年11月11日00:15–01:00**。这是估计，不保证准时上线；遇到具体阻碍会更新说明。约定开发窗口至11月11日22:57。
 
-Ten sequential design reviews are complete. Next: build the first playable loop with simple initial units, wave previews, placement, automatic combat, retries and gradual unit additions. The themed units are being chosen. Estimated first local review: November 11, 2026, 00:00–01:00 Beijing, not a launch promise. The agreed development window ends November 11 at22:57 Beijing.
+## 验证范围
+
+当前19组引擎测试、12组UI/真实引擎集成测试通过，包含GPU总量、暂停、双语不重置、确定性重试和吃饭/弱输出提示。自动模拟可以确认规则与通关路径，不代表人类觉得有趣。线上浏览器验收将在部署后进行，本段不提前宣称通过。
+
+[English documentation](README.en.md)
