@@ -1,8 +1,8 @@
-# 怪奇实验室 / Strange Worlds — v0.2.0
+# 怪奇实验室 / Strange Worlds — v0.3.0
 
-三个中英双语网页游戏的持续迭代版本，目前各五关，不是完成品。原有游戏和存档不受影响。
+三个中英双语网页游戏的持续迭代版本，目前各六关，不是完成品。原有游戏和存档不受影响。
 
-Three evolving bilingual browser games, currently five levels each, not finished products. Previous games and saves are unaffected.
+Three evolving bilingual browser games, currently six levels each, not finished products. Previous games and saves are unaffected.
 
 ## 开始 / Start
 
@@ -16,20 +16,24 @@ Extract the complete folder and open `index.html`. Each prototype is self-contai
 
 ## 当前状态 / Status
 
-五关版本已完成本地逻辑与整合检查，准备发布到原公开游戏地址。实际在线浏览器验收尚待部署完成，不把自动化测试当作实际游玩。旧打飞机游戏保留在 space.html，首页改为三款游戏入口；旧存档不删除。
+v0.3.0 发布候选：每款第六关将既有规则组合成短终章，并改为桌面同屏布局，避免点击按钮导致整页跳动。六关解法与自动化回归已通过；新布局和终章仍待实际在线验收。
 
-The five-level build passed local logic and integration checks and is being published to the original public game address. Actual live browser acceptance is still pending deployment. Automated tests are not a substitute for playtesting. The old space game remains at space.html; the homepage now opens the three puzzle worlds. Previous saves are not deleted.
+v0.3.0 release candidate: each game's sixth challenge combines familiar mechanics into a short finale. Desktop layouts fit the main play area and controls into the viewport. Six-level solutions and automated regressions passed; the new layouts and finales still await live browser acceptance.
+
+此前 v0.2.0 已在线核验：首页三入口；规则世界与身体协作第一关完整通关、下一关和双语；快递拖动、失败/重试、选关和英文；完成记录回到首页正确显示。并非全部关卡都已经实际浏览器通关。旧打飞机游戏保留在 space.html，旧存档不删除。
+
+v0.2.0 was checked live: all three homepage entries; complete first-level wins, next-level flow and language switching in World and Bodies; Cargo dragging, failure/retry, level selection and English; completion displayed correctly on returning to the gallery. This is not a claim that every level was cleared in a browser. The old space game remains at space.html and its saves are preserved.
 
 本轮为新的24小时迭代，暂以请求接收时间起算至北京时间 **2026-11-11 21:46**。预计时间是检查节点，不是保证所有功能完成。
-This new 24-hour iteration is provisionally measured from request receipt until **2026-11-11 21:46 Beijing (UTC+8)**. Estimates are review checkpoints, not guarantees that all features will be finished.
+This new 24-hour iteration is provisionally measured from request receipt until **2026-11-11 21:46 Beijing (UTC+8)**. Estimates are review checkpoints, not feature-completion guarantees.
 
 ## 下一版 / Next iteration
 
-本轮新增：规则世界的可逆隔板停靠/顺序节点断桥；快递的镜像双胞胎/充放气气球；身体协作的电池架桥/双桥转运。全部关卡可直接选择，已有玩家不用重打前三关。完成记录保存在独立本地存档，不影响旧游戏。
+本轮新增：规则世界的三段规则修复终章、快递的气球光照组合夜航、身体协作的箱子接替与双板合作终章；另加入主动提示和桌面同屏布局。全部关卡可直接选择，已有玩家不用重打前三关。完成记录保存在独立本地存档，不影响旧游戏。
 
 下一轮：在不堆数值与重复刷关的前提下，继续增加规则组合与不同策略，改善关卡提示、结果反馈和画面；优先检查新增关卡实际体验。
 
-New this round: reversible-wall braking and ordered nodes/gaps; mirrored parcels and an inflatable balloon; battery bridges and sequential bridge power. Every level is freely selectable. Returning players can skip the first three. Completion records use separate local storage, leaving old games intact.
+New this round: a three-stage rule-repair finale, a balloon-and-light night delivery, and a crate/body two-plate cooperation finale, plus optional hints and viewport-fitted desktop layouts. Every level is freely selectable. Returning players can skip the first three. Completion records use separate local storage, leaving old games intact.
 
 Next: deepen rule combinations and strategies without stat inflation or grinding, and improve hints, feedback, and artwork. Prioritize checking the new levels in actual play.
 
