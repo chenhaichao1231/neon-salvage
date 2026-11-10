@@ -2,7 +2,17 @@
 
 [Portrait hotel game](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [How to play](HOTEL.en.md) · [中文](README.md)
 
-**v0.5.1 is live and has passed this round of online browser checks.** The next step takes priority; the full case objective moves into an expandable section you can revisit. This reduces repeated text without changing the case rules or chapter count.
+**v0.6.0 release candidate: review and local tests passed; real-browser verification is pending.** The entry remains `hotel.html`. The candidate is not yet the production release.
+
+## v0.6.0: Finish investigating without filling turns
+
+Guidance no longer repeatedly recommends a witness whose relevant account has already been established. If you have finished your investigation, the optional collapsed **End the investigation and wait for dawn** control lets you proceed to the final decision without spending remaining turns on filler actions.
+
+This requires explicit confirmation: remaining investigation opportunities are forfeited. Waiting grants no missing evidence, cooperation or ending requirements, and does not choose an ending for you. An unsecured original is still taken away as usual. You can instead cancel and keep investigating.
+
+Old saves can upgrade without restarting. Saves containing the new waiting-history entry are not guaranteed to load in an older version. Deploy the complete current set of scripts together, not a mixture of old and new files.
+
+**Candidate checks:** 44 baseline engine tests, 6 waiting tests and UI regressions passed review and local testing. v0.6.0 browser verification remains pending. No chapter is added.
 
 ## v0.5: Know what you are investigating
 
@@ -15,7 +25,7 @@ Establish the order of the warning and floodgate opening seven years ago, assess
 
 Existing saves need no restart to use the interface. Evidence, deductions and endings remain intact; completed stories do not regain night actions. The same three nights, three actions per night, free reading and comparisons, promises, key strategies and ending requirements remain.
 
-**Online verification:** v0.5.1 restored an existing Night Two planning save at 360×640, displayed the correct version footer, and kept the short English next-step prompt and primary button within the viewport. The full objective expanded correctly and remained open when switching languages. The power-setup link opened the controls without changing power automatically. Both html/body width and scrollWidth measured 345px, with no horizontal overflow. This patch changes layout and short text only; the earlier v0.5 first-guide playthrough, incorrect/correct comparisons and v0.4 ending restoration checks remain applicable. Local coverage includes 44 engine tests, 5 object-view tests and additional UI regressions. These are browser checks, not physical-phone tests or a new full three-night playthrough.
+**Online verification:** v0.5.1 restored an existing Night Two planning save at 360×640, displayed the correct version footer, and kept the short English next-step prompt and primary button within the viewport. The full objective expanded correctly and remained open when switching languages. The power-setup link opened the controls without changing power automatically. Both html/body width and scrollWidth measured 345px, with no horizontal overflow. This patch changes layout and short text only; the earlier v0.5 first-guide playthrough, incorrect/correct comparisons and v0.4 ending restoration checks remain applicable. Local coverage includes 44 engine tests, 5 object-view tests and additional UI regressions. The v0.5.1 online playthrough has also now completed all three nights through the hearing ending. These are browser checks, not physical-phone tests; they do not substitute for v0.6.0 validation.
 
 Earlier test and online playthrough records are retained in the [full guide and verification limits](HOTEL.en.md).
 
@@ -38,7 +48,7 @@ Old saves can continue, but missed time windows cannot be replayed within that s
 
 ## Next update plan and estimate
 
-Case Two is paused while we reduce the current case’s onboarding burden and clarify goals and controls. The next update is estimated for **November 10, 2026, 20:00–21:00 Beijing time (UTC+8)**, not guaranteed; blockers take priority. Plan checked November 10, 2026, 19:13 Beijing time.
+The next focus is the first case’s play experience and easier onboarding for Case Two, without promising a new chapter release. The next update is estimated for **November 10, 2026, 21:00–22:00 Beijing time (UTC+8)**, not guaranteed; blockers take priority. Plan checked November 10, 2026, 19:40 Beijing time.
 
 Existing Neon Salvage and saves remain available at the [original entry](https://chenhaichao1231.github.io/neon-salvage/). The hotel has an independent save.
 

@@ -167,6 +167,7 @@ function branchEpilogue(s){
  }
  return bi(zh,en);
 }
+messages['wait-dawn']=bi('你明确结束余下调查，等待天亮。没有补入线索、合作或推断；未封存原件仍会按原有规则被取走。','You explicitly end the remaining investigation and wait for dawn. No clues, cooperation or deductions are added; an unsecured original is still removed under the existing rule.');
 function create(){return {version:1,night:1,phase:'planning',slot:0,rooms:['shen','lin','zhou','xu'],power:['heat','archive'],trust:{shen:0,lin:0,zhou:0,xu:0},deductions:[],evidence:[],flags:{secured:false,originalLost:false,radioReady:false,copied:false},history:['opening'],ending:null};}
 function positions(s){const p={};for(const id of IDS)p[id]='room-'+s.rooms.indexOf(id);if(s.phase==='planning')return p;if(s.slot===1){for(const id of ['shen','xu'])if(s.power.includes('heat'))p[id]='hall';for(const id of ['lin','zhou'])p[id]=s.power.includes('archive')?'archive':'hall';}if(s.slot===2){p.zhou='archive';p.xu=s.power.includes('heat')?'hall':p.xu;if(Math.abs(s.rooms.indexOf('shen')-s.rooms.indexOf('lin'))===1){p.shen=p.lin='corridor';}else{p.shen=s.power.includes('heat')?'hall':p.shen;p.lin=s.power.includes('archive')?'archive':'hall';}}return p;}
 function add(s,id){if(!s.evidence.includes(id)){s.evidence.push(id);s.history.push('e:'+id);}}
@@ -176,6 +177,10 @@ function advance(s){s.slot++;if(s.slot<3){signalMeeting(s);return;}if(s.night<3)
 function proof(s){return s.deductions.includes('evacuation')||s.deductions.includes('timing');}
 function requirements(s){return {publish:proof(s)&&s.trust.lin>=1&&s.flags.radioReady&&(s.flags.secured||s.flags.copied),hearing:proof(s)&&s.flags.secured&&s.trust.shen>=1&&s.trust.xu>=1,conceal:true};}
 function reduce(state,a){validate(state);const s=JSON.parse(JSON.stringify(state));if(!a||typeof a!=='object'||s.phase==='ended')return s;
+ if(a.type==='wait-dawn'){
+  if(!['planning','night'].includes(s.phase)||a.confirm!==true)return s;
+  s.history.push('wait-dawn');s.night=3;s.slot=2;s.phase='night';advance(s);s.history=s.history.slice(-150);return s;
+ }
  if(a.type==='compare'){
   const q=QUESTIONS[a.hypothesis],ids=a.evidenceIds;
   if(!q||!questionOpen(s,a.hypothesis)||!q.explanations.some(e=>e.id===a.explanationId)){s.history.push('compare-select');return s;}
@@ -266,6 +271,7 @@ function getView(state,lang='zh'){
   for(const target of ['hall','archive','corridor'])addAction({type:'listen',target},bi('在'+locations[target].zh+'聆听','Listen in the '+locations[target].en),bi('消耗1行动。只有此刻实际相遇的人会留下对话；先查看客人位置。','Costs 1 action. Only people actually meeting here can be overheard. Check their current locations first.'),false,{locationName:loc(target),targetLabel:loc(target)});
   addAction({type:'secure'},bi('封存原日志','Secure the original log'),bi('消耗1行动。保护已找到的原件，防止第三夜被取走。','Costs 1 action. Protect the discovered original from removal on the third night.'),!has(s,'log')||s.flags.secured);
  }
+ if(['planning','night'].includes(s.phase))addAction({type:'wait-dawn'},bi('结束调查，等待天亮','End investigation and wait for dawn'),bi('需再次确认。放弃全部剩余夜间调查；不补线索、信任或推断，也不替你选结局。未封存原件会被取走。','Requires confirmation. Gives up all remaining night investigation without adding clues, trust or deductions or selecting an ending. Unsecured originals will be taken.'));
  if(s.phase==='decision'){
   const r=requirements(s),suffix=ok=>l==='en'?(ok?' Ready.':' Requirements NOT met; this will fail.'):(ok?' 条件已满足。':' 条件尚未满足，贸然选择会失败。');
   addAction({type:'finish',choice:'publish'},bi('交给林乔公开报道','Publish with Lin'),bi('需要证据板已确认的撤离/警报矛盾、林乔信任≥1、曾给电台供电、封存原件或照片备份。'+suffix(r.publish),'Requires a confirmed evacuation/siren deduction, Lin trust ≥1, radio powered at least once, and secured original or photo backup.'+suffix(r.publish)));
