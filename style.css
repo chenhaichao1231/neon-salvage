@@ -12,3 +12,11 @@
 #overlay{align-items:flex-start}.panel{margin:auto}.log-entry{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #34465b;padding:14px 0}.log-entry p{margin:4px 0}@media(max-width:560px){.log-entry{align-items:flex-start;flex-direction:column}}
 
 .ship-preview{display:block;width:100%;height:140px;object-fit:contain;filter:drop-shadow(0 10px 14px #0008)}.card.selected{background:linear-gradient(150deg,#183a42,#111d2e)}.eyebrow{letter-spacing:4px}#overlay{background:linear-gradient(110deg,#070d19e8,#131c36b8)}@media(max-width:560px){.ship-preview{height:84px}}
+
+#cargo-action,#cargo-exit,#cargo-fire{position:absolute;right:24px;background:#172f32e8;border-color:#8bffe0}#cargo-action{bottom:84px}#cargo-exit{bottom:144px}#hint{white-space:pre-line;max-width:calc(100% - 220px)}#hud button[hidden]{display:none}@media(max-width:620px){#cargo-action,#cargo-exit,#cargo-fire{right:14px;padding:12px;font-size:12px}#hint{max-width:calc(100% - 160px)}}
+
+#cargo-fire{bottom:204px}
+
+#cargo-feed{position:absolute;right:24px;bottom:264px;background:#172f32e8;border-color:#a6c8ff}@media(max-width:620px){#cargo-feed{right:14px;padding:12px;font-size:12px}}
+
+@media(max-height:480px) and (min-width:500px){#cargo-feed,#cargo-fire,#cargo-action,#cargo-exit{bottom:12px;right:auto;width:118px;min-height:44px;padding:6px;font-size:11px}#cargo-feed{left:12px}#cargo-fire{left:134px}#cargo-action{left:256px}#cargo-exit{left:378px}#dash{bottom:68px}#hint{bottom:70px;max-width:calc(100% - 160px)}}

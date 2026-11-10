@@ -1,3 +1,12 @@
+## 0.12.0
+
+- 新增独立拾荒争夺：拖载、掩体、投掷、回收站交付，质量和损伤影响取舍。
+- 竞争拾荒者争夺原货物；炮台消耗同一货物获得有限弹药。Q停火、E抓投、F供能、R撤离及触屏按钮。
+- 两语言指南、碰撞顺序/穿透/致死帧交付测试；旧自由航行保留。新模式仍是原型，无完整战役或新长期解锁。
+- Added independent Salvage Skirmish: tow, cover, throw and bank, with mass/damage tradeoffs.
+- A rival competes for original cargo; turrets consume that same cargo for finite ammunition. Bilingual guides and keyboard/touch controls.
+- Tested collision ordering, piercing, lethal-frame delivery and resource ownership. Original Free Flight remains. Prototype only, without a full campaign or new long-term unlocks.
+
 # 更新记录 / Changelog
 
 ## 0.11.0 — 2026-11-10

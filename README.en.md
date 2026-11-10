@@ -1,10 +1,10 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.11.0**.
-- Next: prioritize a physical-salvage prototype: tow the same wreck for sale, use it to block either side’s bullets, or spend it as a thrown weapon. Mass and damage create tradeoffs. Validate core interactions before expanding enemies and field systems, in both languages. Keep both UI languages and guides synchronized.
-- Estimated update: **November 10, 2026, 17:30–18:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 16:22 Beijing time.
+- Current version: **0.12.0**.
+- Next: expand the salvage core with equipment that changes how you play and distinct cargo uses; improve goals and route tradeoffs using real simulation results, rather than merely increasing enemy stats. Keep both languages aligned.
+- Estimated update: **November 10, 2026, 18:00–18:30 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
+- Plan last updated: November 10, 2026, 16:36 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
@@ -26,7 +26,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.11.0
+## Current version: 0.12.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 
@@ -79,3 +79,13 @@ The first guardian has 1,000 base hull; later guardians retain 1,800, before tim
 
 ## Spacecraft art
 This release replaces basic player/main-enemy shapes with six original transparent ship sprites, hangar previews and a nebula background. Assets are embedded for offline use. Source art and the contact sheet were inspected; browser-scene and physical-mobile validation remain incomplete.
+
+## v0.12: Salvage Skirmish
+
+Choose Salvage Skirmish from the main menu. Wrecks are shared resources: tow them home for alloy, use them as cover against both sides, throw them as weapons, or press F to exchange them for finite turret ammunition. A rival pursues the same cargo; damage makes it drop the original object. See [system guide](SYSTEMS.md).
+
+E grabs/throws along movement heading; Q toggles the main gun; F powers a nearby turret; R requests extraction at the origin. Touch controls are available. Heavy loads slow you down, damage lowers value, and dashing drops cargo. Both pilot and cargo must remain inside the recycler for1.5 seconds to bank. Banked earnings survive death; undelivered cargo earns nothing. This mode has no original90-second extraction popup, cache beacons or violet events, and does not yet support same-seed history retries.
+
+This is a playable prototype, not a complete campaign or mature long-term unlock system. If your shipyard is already maxed, alloy does not unlock new systems automatically. Depth and balance remain under development; this is not a claim that repetition is solved. Rivals and turrets are simulated locally, with no multiplayer.
+
+Additional checks: `node cargo-integration-test.js`, `node rivals.test.js`, `node stations.test.js`. These cover real-game banking, piercing and cover order, no new delivery after lethal damage, original-item rival drops, and single-consumption turret supply. They do not replace browser or phone testing.
