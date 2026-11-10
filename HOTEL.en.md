@@ -2,11 +2,24 @@
 
 [中文说明](HOTEL.md)
 
-**v0.4.0 is live and has completed this round of online browser checks.** Discovered evidence gains an object-view presentation within the existing three-night story and reasoning rules. No case or chapter is added.
+**v0.5 candidate: local tests passed; online verification is pending.** This update clarifies the investigation goal and reduces interface burden. It changes neither the case rules nor the chapter count.
+
+## v0.5: Know what you are investigating
+
+Establish the order of the warning and floodgate opening seven years ago, assess whether the old report is trustworthy, then decide where the evidence goes. The opening no longer substitutes a side question about keys for the case objective.
+
+- **Three entries, one workspace at a time:** Current action, Room setup / Guest locations, and Clue notebook open separately instead of demanding attention to every panel at once.
+- **Select a guest directly:** at night, choose the person you want to find, then see the available actions. Selecting someone is free; confirming an investigation advances time.
+- **Skippable first-discovery guidance:** default rooms and power are ready to use. Prompts introduce finding a record, opening it to read, and testing an idea with two sources. They do not execute actions or choose the correct explanation. Skip the guide or reopen it when needed.
+- **Step-by-step evidence and feedback nearby:** choose two records, a question and an explanation, with no default answer. Action results and reasoning feedback appear beside the current interaction rather than requiring a search through the journal.
+
+Existing saves need no restart to use the interface. Evidence, deductions and endings remain intact; completed stories do not regain night actions. The same three nights, three actions per night, free reading and comparisons, promises, key strategies and ending requirements remain.
+
+**Verification status:** 44 engine tests, 5 object-view tests and additional UI regressions passed locally. v0.5 online loading, save restoration and portrait-browser interaction remain to be verified. Earlier online checks are not validation of this release, physical-phone testing or proof that onboarding is now easy.
 
 ## Four guests, three snowy nights
 
-A blizzard closes the mountain road. Four strangers arrive at your hotel carrying the same invitation. You arrange their rooms, allocate limited power and listen to their accounts. As old records emerge, you must decide what can be trusted and what to do with it at dawn.
+A blizzard closes the mountain road. Four guests arrive carrying the same invitation. The public report of a flood seven years ago says the warning sounded before the gate opened. Find original records and check that account. After three nights, decide where the evidence goes.
 
 The story is structured as a **complete short narrative across three nights, four guests, a final decision and different endings**. It is not endless hotel management or combat progression. Reading has no countdown; the limited resource is your nightly actions.
 
@@ -16,11 +29,13 @@ The independent entry is `hotel.html`, not the original game’s `index.html`. F
 
 Choose **Open the hotel door** to begin. A readable local save lets you continue your existing story. Use the top-right language control to switch between Chinese and English.
 
-The interface is designed around **portrait-phone tapping and vertical scrolling**, with no keyboard, dragging or fast reflexes required. The map shows arrangements, the story panel holds dialogue and actions, and the ledger below retains known evidence and earlier entries.
+The interface is designed around **portrait-phone tapping and vertical scrolling**, with no keyboard, dragging or fast reflexes required. Three entries show one workspace at a time. Start in Current action, then switch when you want to inspect guest locations or compare records.
 
 ## Each night
 
-### 1. Before nightfall: rooms and power
+### 1. Before nightfall: begin with the defaults
+
+Default rooms and power are ready for the first investigation. You do not need to learn every setting first. Open Room setup when you want to make adjustments:
 
 - Select a guest, then a room. Occupied rooms swap their guests; you can revise arrangements before beginning the night.
 - Power at most two of three circuits: heating, archive and radio. To replace an active circuit, switch one off first.
@@ -53,7 +68,7 @@ Choose **View object** on a discovered evidence card to inspect CSS/SVG schemati
 
 These are schematic recreations, not new hidden clues or pixel-hunting puzzles. All actual information comes from DOM text supplied by the current engine, with object state reflected in the current record. Evidence pairing keeps the existing reasoning mechanism. Viewing, testing a pair and closing the view cost no night action; no new puzzle rules are introduced.
 
-**Current v0.4.0 checks:** review, 5 object-view tests, 44 engine tests and UI tests passed. The deployed version was checked in a real online browser using a 360×640 QA viewport. An existing v0.3 company-spare-key publication ending restored correctly. All five material types opened; long English text displayed in full after switching languages. Close/return and Escape worked, and choice buttons were disabled after the ending. Paper and brass-key visuals were inspected; html/body width and scrollWidth both measured 360px, with no horizontal overflow. No physical-phone testing was performed, and the story was not replayed in full this round. The engine is unchanged; the two earlier v0.3 online playthrough records remain applicable.
+**Historical v0.4.0 checks:** review, 5 object-view tests, 44 engine tests and UI tests passed. The deployed version was checked in a real online browser using a 360×640 QA viewport. An existing v0.3 company-spare-key publication ending restored correctly. All five material types opened; long English text displayed in full after switching languages. Close/return and Escape worked, and choice buttons were disabled after the ending. Paper and brass-key visuals were inspected; html/body width and scrollWidth both measured 360px, with no horizontal overflow. No physical-phone testing was performed, and the story was not replayed in full this round. The engine is unchanged; the two earlier v0.3 online playthrough records remain applicable.
 
 ## v0.3.0: Choices and agreements
 
@@ -91,8 +106,8 @@ The initial scope is three nights, four guests, four rooms, up to two of three p
 
 ## Next steps
 
-A second case is only under design evaluation, not completed or promised content.
+Case Two is paused. Reducing the current case’s onboarding burden takes priority over adding more content.
 
-The next focus is deeper interactive investigation and character postscripts, not a claim that long-term replay value is solved. The estimated next update window is November 10, 2026, 19:00–20:00 Beijing time (UTC+8). This is an estimate, not a guarantee; blockers will take priority and may change the plan.
+The next update is estimated for November 10, 2026, 20:00–21:00 Beijing time (UTC+8), not guaranteed; blockers take priority. Plan checked November 10, 2026, 19:13 Beijing time. Online verification of v0.5 is still pending.
 
 The story concerns a past disaster, bereavement, responsibility and concealment, primarily through text. You may stop whenever you need to; reading itself carries no time pressure.
