@@ -2,7 +2,7 @@
 
 **[Play the online demo](https://chenhaichao1231.github.io/neon-salvage/)**
 
-## Visual Demo 0.2
+## Animation Demo 0.3
 
 Defend five lanes from runaway data, collect GPU compute, and deploy AI characters. This first demo tests the interaction loop and two units, not final art or balance.
 
@@ -15,6 +15,10 @@ GPU drops can be clicked or automatically collected after four seconds; they nev
 Three short stages are available. Cheap-unit strategies may currently be too strong; the next pass focuses on meaningful placement and combinations rather than stage count. Progress is not saved yet, so refreshing starts over. No accounts, payments, or personal-identity collection.
 
 Old games are removed from the local current project; online source cleanup is still in progress. Git history remains. The separate old player ZIP has been removed.
+
+## Animation changes
+
+DeepSeek now uses drawn idle/blink, wind-up/cast and bowl/chopstick/chewing frames tied to live shooting and rice-break state. GPU pickups arc from the four supply positions with matching clickable bounds. GPT and enemies still use their existing static poses and are not claimed as animated.
 
 ## Next version and estimate
 
