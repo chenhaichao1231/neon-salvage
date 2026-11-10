@@ -27,3 +27,8 @@ Three ships, nine upgrades, four enemy types including a guardian, extraction de
 Run `node --check game.js` and `node test.js`. No build step or package installation is required.
 
 Development is ongoing. Each version retains direct `index.html` launch support. See CHANGELOG.md.
+
+## New in v0.2: supply beacons
+A golden supply ring appears after 15 seconds. Charge inside for 2 seconds to gain 18 hull, 8 XP, and 100 points. Charge slowly decays outside; the beacon expires after 22 seconds. Chasing supplies creates new routes and risks getting surrounded.
+
+Simulation smoke test: `node smoke-test.js` (not a replacement for visual browser testing).

@@ -1,0 +1,13 @@
+/* Run the real simulation with a minimal DOM adapter, not a substitute browser. */
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const nodes=new Map();const node=()=>({style:{},hidden:false,innerHTML:'',textContent:'',querySelectorAll:()=>[],addEventListener(){},getContext(){return new Proxy({},{get:()=>()=>{}});}});
+const doc={querySelector(s){if(!nodes.has(s))nodes.set(s,node());return nodes.get(s);},addEventListener(){},hidden:false};
+const sandbox={document:doc,innerWidth:1280,innerHeight:720,devicePixelRatio:1,performance:{now:()=>0},localStorage:{getItem:()=>null,setItem(){}},addEventListener(){},requestAnimationFrame(){},Math,Date,Set,console};sandbox.globalThis=sandbox;
+vm.createContext(sandbox);vm.runInContext(fs.readFileSync(__dirname+'/engine.js','utf8'),sandbox);
+let src=fs.readFileSync(__dirname+'/game.js','utf8').replace('menu();requestAnimationFrame(frame);','globalThis.testApi={start,update,pause,dash,end,menu,garage,getRun:()=>run,getState:()=>state,setState:v=>state=v,upgrades};menu();');vm.runInContext(src,sandbox);
+const api=sandbox.testApi;assert.equal(api.getState(),'menu');api.start(false);assert.equal(api.getState(),'playing');assert.equal(api.getRun().p.hp,100);
+api.pause();assert.equal(api.getState(),'paused');api.pause();assert.equal(api.getState(),'playing');api.dash();assert.ok(api.getRun().p.dash>0);const x=api.getRun().p.x;api.dash();assert.equal(api.getRun().p.x,x);
+// Simulate three minutes, applying a valid upgrade whenever the overlay opens.
+for(let i=0;i<60*180;i++){const r=api.getRun();r.p.hp=r.p.maxHp;if(api.getState()==='upgrade'){api.upgrades[i%api.upgrades.length].apply(r.p);api.setState('playing');}if(api.getState()==='extract'){r.extractAt+=90;r.sector++;api.setState('playing');}api.update(1/60);for(const v of [r.p.hp,r.p.x,r.p.y,r.score,r.xp])assert.ok(Number.isFinite(v));}
+assert.ok(api.getRun().kills>0);assert.ok(api.getRun().time>179);api.end(true);assert.equal(api.getState(),'ended');api.start(true);assert.equal(api.getRun().daily,true);api.menu();assert.equal(api.getRun(),null);console.log('Gameplay smoke passed: start, pause/resume, dash cooldown, 180s combat, upgrades, extraction, settlement, restart.');
+api.start(false);let r=api.getRun();r.time=15;api.update(.01);assert.ok(r.beacon);r.p.x=r.beacon.x;r.p.y=r.beacon.y;r.p.hp=50;for(let i=0;i<125;i++)api.update(1/60);assert.equal(r.caches,1);assert.ok(r.p.hp>=68);assert.equal(r.beacon,null);r.time=r.beaconAt;api.update(.01);assert.ok(r.beacon);r.beacon.life=.001;api.update(.01);assert.equal(r.beacon,null);assert.equal(r.caches,1);console.log('Beacon tests passed: spawning, charging, rewards, expiry, no double credit.');

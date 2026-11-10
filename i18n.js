@@ -1,6 +1,9 @@
 /* Presentation translation. Language changes are offered in the main menu only. */
 (()=>{'use strict';let en=false;try{en=localStorage.getItem('neon_lang')==='en';}catch{}if(!en)return;document.documentElement.lang='en';document.title='Neon Salvage';
 const phrases={
+'发现补给信标 · 靠近停留 2 秒回收':'Supply beacon found · Stay inside for 2 seconds',
+'补给回收 · 修复 +18 / 经验 +8':'Cache secured · Hull +18 / XP +8',
+'信标':'Beacon','补给':'Caches',
 '在坍缩的星域里，做一名不肯空手返航的拾荒者。穿越追猎机群，回收能量，拼出属于你的武器组合。':'Become a scavenger in a collapsing starfield. Evade hunters, collect energy, and assemble your own weapon build.',
 '每 90 秒，决定撤离兑现，还是再赌一程。':'Every 90 seconds: cash out, or risk another sector.',
 '灵活机动。跃迁恢复更快，适合穿越敌群。':'Agile and quick to dash again. Slip through enemy formations.',
