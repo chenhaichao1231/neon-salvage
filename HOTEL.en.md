@@ -2,7 +2,7 @@
 
 [中文说明](HOTEL.md)
 
-**v0.2.0 is being prepared for release; the new version is not yet confirmed live.** This update improves evidence reasoning and character responses without adding a chapter. The instructions below describe the v0.2.0 candidate; earlier v0.1.1 online checks do not establish verification of this update.
+**v0.3.0 release draft: online verification of the update is pending.** Two choices add action costs and character consequences within the existing three-night, four-guest short story. No chapter is added.
 
 ## Four guests, three snowy nights
 
@@ -12,7 +12,7 @@ The story is structured as a **complete short narrative across three nights, fou
 
 ## Getting started
 
-The independent entry is `hotel.html`, not the original game’s `index.html`. For local play, open `hotel.html` with its accompanying scripts, styles and artwork kept together rather than copying the HTML alone. Use the [direct hotel entry](https://chenhaichao1231.github.io/neon-salvage/hotel.html) online; its v0.1.1 loading check has passed. The original game and its entry remain available and are not overwritten by The Seventh Night Hotel.
+The independent entry is `hotel.html`, not the original game’s `index.html`. For local play, open `hotel.html` with its accompanying scripts, styles and artwork kept together rather than copying the HTML alone. Use the [direct hotel entry](https://chenhaichao1231.github.io/neon-salvage/hotel.html) online; its v0.2.0 online loading check has passed. The original game and its entry remain available and are not overwritten by The Seventh Night Hotel.
 
 Choose **Open the hotel door** to begin. A readable local save lets you continue your existing story. Use the top-right language control to switch between Chinese and English.
 
@@ -39,11 +39,24 @@ The third slot leads automatically to the next night’s planning. After Night T
 
 The ledger records discovered facts, guest accounts and earlier events. Consider whether independent records support one another. Distinguish evidence that someone did something from proof of a broader conclusion. Cooperation and the safe preservation of records may matter as well.
 
+Question titles and explanation options use neutral wording rather than revealing the intended conclusion. The key question supports an alternative evidence chain, so it does not depend on a single fixed pair. The exact combinations are left for you to discover.
+
 Questions appear as you discover relevant evidence rather than being listed in full at the start. Each offers three explanations. Select two acquired records, then actively choose an explanation to test. No answer is preselected or assumed correct. You can keep investigating before any question has appeared.
 
 Testing costs no night action, including when an explanation is wrong. Feedback distinguishes insufficient evidence from an interpretation that goes beyond what the records support. Reread and try again. Collecting records is not the same as establishing a deduction; some follow-up questions and final conditions still require a completed test. Testing is unavailable after an ending, so start a new story to experience the revised flow.
 
 Later dialogue and current evidence descriptions better reflect admissions, cooperation and the custody of important records. Historical journal entries retain what was known when the event happened rather than being rewritten with later knowledge. This guide does not reveal the correct explanations, evidence combinations or central solution.
+
+## v0.3.0: Choices and agreements
+
+Open the **Choices / Agreements** action category to inspect each strategy’s prerequisites and consequences. Ordinary conversation or inspection does not silently make these choices for you.
+
+- **A hearing-first promise:** inspect the registration record first, then choose this when Xu is available for a private conversation. It costs one action and obtains raw material and her cooperation, not an automatic deduction. You promise a hearing before publication. Choosing publication later gives an explicit advance warning and affects her willingness to continue interviews. Silence does not fulfill the hearing agreement either. Ordinary conversation remains a way to obtain the relevant material without making a promise.
+- **Take the company spare key:** first read Zhou’s retrieval order, then choose this while he is absent and you do not already have a brass key. It costs one action; reading the letter alone does not take the key. This offers a different access strategy, but damages trust with Zhou and leaves consequences for missing property and handover responsibility. It proves nobody’s guilt. The normal UI explains and disables the option when prerequisites are unmet.
+
+Expand evidence to read the full text, and use summaries of selected records to compare them. Choice records cannot substitute for independent accident evidence. No complete route or correct interpretation is given here.
+
+Old saves can continue, but missed time windows cannot be replayed within that save. Players who have finished must start a new story to experience these branches. This is not a long-form expansion or a claim that repetition has been solved.
 
 ## Endings depend on more than the last button
 
@@ -64,14 +77,12 @@ The story has a definite conclusion, but not every run will uncover every fact. 
 
 The initial scope is three nights, four guests, four rooms, up to two of three power circuits, three actions per night and conditional endings. It is not a large management simulation, open world or finished long-term content service.
 
-**Passed for v0.1.1:** 17 automated tests, UI flow tests and checks of 100 random legal paths.
+**Current v0.3.0 checks:** 44 engine tests and UI tests pass; independent review corrected the current item description after the spare key is taken. Online testing of the update remains pending.
 
-**Earlier v0.1.1 live browser checks:** the v0.1.1 direct entry loads correctly. Fixed 390×844 and 360×640 portrait iframe viewports in a real browser showed no horizontal overflow. Normal UI clicks completed the three-night hearing route in Chinese, and switching the ending to English worked. Checks also passed for 44px buttons, retention of all four responses from the latest action, ending restoration after reload, and both confirming and cancelling a restart.
-
-**Verification limits:** these were not physical-phone tests, and not every ending has been manually played. They do not establish long-term replay value. Integration and live verification of v0.2.0 still await release confirmation; earlier results are not counted as passing tests for the update.
+**Historical v0.2.0 checks:** 35 engine tests and UI tests covering two complete routes passed. In a real online browser at 360×640, a v0.1 Night One save was continued through the full publication route using normal buttons. Chinese and English reasoning, disabled submission without an explanation, free wrong-interpretation feedback, successful deductions and the alternative evidence chain were checked with no horizontal overflow. The cover loaded at 390px. The full online hearing playthrough remains the v0.1.1 run; v0.2.0 hearing-route automated tests passed. These were not physical-phone tests and do not establish manual coverage of every ending or long-term replay value.
 
 ## Next steps
 
-The next focus is deeper character clues that support reasoning and more meaningful branch consequences, not a claim that long-term replay value is solved. The estimated next update window is November 10, 2026, 19:00–20:00 Beijing time (UTC+8). This is an estimate, not a guarantee; blockers will take priority and may change the plan.
+The next focus is cross-checking character testimony and richer ending postscripts, not a claim that long-term replay value is solved. The estimated next update window is November 10, 2026, 19:00–20:00 Beijing time (UTC+8). This is an estimate, not a guarantee; blockers will take priority and may change the plan.
 
 The story concerns a past disaster, bereavement, responsibility and concealment, primarily through text. You may stop whenever you need to; reading itself carries no time pressure.

@@ -2,14 +2,29 @@
 
 [Portrait hotel game](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [How to play](HOTEL.en.md) · [中文](README.md)
 
-**v0.2.0 is being prepared for release; the new version is not yet confirmed live.** This update improves evidence reasoning and character responses without adding a chapter. The instructions below describe the v0.2.0 candidate; earlier v0.1.1 online checks do not establish verification of this update.
+**v0.3.0 release draft: online verification of the update is pending.** Two choices add action costs and character consequences within the existing three-night, four-guest short story. No chapter is added.
 
-The three-night, four-guest short story keeps its three actions per night. Reasoning questions emerge with evidence. Each offers three explanations: choose two records and actively select an explanation, with no default answer. Wrong-interpretation feedback costs no time. Dialogue better reflects admissions, cooperation and record custody, while historical entries retain what was known at the time.
+The three-night, four-guest short story keeps its three actions per night. Reasoning questions emerge with evidence, with neutral question and option wording. The key question supports an alternative evidence chain rather than only one fixed pair. Each offers three explanations: choose two records and actively select an explanation, with no default answer. Wrong-interpretation feedback costs no time. Dialogue better reflects admissions, cooperation and record custody, while historical entries retain what was known at the time.
 
-Existing v0.1 saves continue with established deductions and endings intact. Players who have finished must start a new story to experience the revised reasoning flow. No chapter is added, and deeper replay value is not claimed. [Full guide and verification limits](HOTEL.en.md). Earlier v0.1.1 automated and live-browser portrait-viewport checks were not physical-phone testing and do not establish online verification of v0.2.0.
+Existing v0.1 saves continue with established deductions and endings intact. Players who have finished must start a new story to experience the revised reasoning flow. No chapter is added, and deeper replay value is not claimed. [Full guide and verification limits](HOTEL.en.md).
+
+**Current v0.3.0 checks:** 44 engine tests and UI tests pass; independent review corrected the current item description after the spare key is taken. Online testing of the update remains pending.
+
+**Historical v0.2.0 checks:** 35 engine tests and UI tests covering two complete routes passed. In a real online browser at 360×640, a v0.1 Night One save was continued through the full publication route using normal buttons. Chinese and English reasoning, disabled submission without an explanation, free wrong-interpretation feedback, successful deductions and the alternative evidence chain were checked with no horizontal overflow. The cover loaded at 390px. The full online hearing playthrough remains the v0.1.1 run; v0.2.0 hearing-route automated tests passed. These were not physical-phone tests and do not establish manual coverage of every ending or long-term replay value.
+
+## v0.3.0: Choices and agreements
+
+Open the **Choices / Agreements** action category to inspect each strategy’s prerequisites and consequences. Ordinary conversation or inspection does not silently make these choices for you.
+
+- **A hearing-first promise:** inspect the registration record first, then choose this when Xu is available for a private conversation. It costs one action and obtains raw material and her cooperation, not an automatic deduction. You promise a hearing before publication. Choosing publication later gives an explicit advance warning and affects her willingness to continue interviews. Silence does not fulfill the hearing agreement either. Ordinary conversation remains a way to obtain the relevant material without making a promise.
+- **Take the company spare key:** first read Zhou’s retrieval order, then choose this while he is absent and you do not already have a brass key. It costs one action; reading the letter alone does not take the key. This offers a different access strategy, but damages trust with Zhou and leaves consequences for missing property and handover responsibility. It proves nobody’s guilt. The normal UI explains and disables the option when prerequisites are unmet.
+
+Expand evidence to read the full text, and use summaries of selected records to compare them. Choice records cannot substitute for independent accident evidence. No complete route or correct interpretation is given here.
+
+Old saves can continue, but missed time windows cannot be replayed within that save. Players who have finished must start a new story to experience these branches. This is not a long-form expansion or a claim that repetition has been solved.
 
 ## Next update plan and estimate
-- Deepen character clues that support reasoning and branch consequences rather than adding levels or resource grinding.
+- Deepen cross-checking of character testimony and ending postscripts rather than adding levels or resource grinding.
 - Estimated next update: **November 10, 2026, 19:00–20:00 Beijing time (UTC+8)**. This is not guaranteed; blockers take priority and may change the plan.
 - Plan updated November 10, 2026, 18:17 Beijing time. Development window ends November 11 at 15:01 Beijing time, unless stopped earlier.
 - Existing Neon Salvage v0.15.1 and saves remain: [original game](https://chenhaichao1231.github.io/neon-salvage/). The hotel uses an independent save and requires no space-game progress or currency.
