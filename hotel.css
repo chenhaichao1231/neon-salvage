@@ -25,5 +25,5 @@
 #next-step{display:none}.compare-feedback{margin:16px 0;padding:16px;border:1px solid #cba76c;border-radius:10px;background:#332c24;line-height:1.7}
 #action-panel,#compare-feedback,#deduction-workbench{scroll-margin-top:95px}
 .guide-card{padding:14px 16px;border:1px solid #a98b59;background:#30291f;border-radius:12px;margin:10px 0}.guide-card h3{margin:0 0 8px}.guide-card p{line-height:1.6;margin:8px 0}.guide-controls{display:flex;flex-wrap:wrap;gap:8px}.guide-controls button{min-height:44px}
-
-.guide-controls #guide-next{background:#d1af75;color:#241d16;border-color:#e3c592;font-weight:600}.guide-controls #guide-skip{background:transparent;color:#c4b49c}
+/* v0.5.1: next action before optional background. */
+#guide-goal{margin-top:12px;border-top:1px solid #66533e;padding-top:8px}#guide-goal summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-size:14px;color:#d6c4a9}.guide-card .guide-controls{align-items:center}.guide-card .guide-controls .primary{flex:1}.guide-card .guide-controls .quiet{flex:0 1 auto}

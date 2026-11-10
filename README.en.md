@@ -2,7 +2,7 @@
 
 [Portrait hotel game](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [How to play](HOTEL.en.md) · [中文](README.md)
 
-**v0.5 candidate: local tests passed; online verification is pending.** This update clarifies the investigation goal and reduces interface burden. It changes neither the case rules nor the chapter count.
+**v0.5.1 pre-release candidate: online verification is pending.** The next step takes priority; the full case objective moves into an expandable section you can revisit. This reduces repeated text without changing the case rules or chapter count.
 
 ## v0.5: Know what you are investigating
 
@@ -15,7 +15,9 @@ Establish the order of the warning and floodgate opening seven years ago, assess
 
 Existing saves need no restart to use the interface. Evidence, deductions and endings remain intact; completed stories do not regain night actions. The same three nights, three actions per night, free reading and comparisons, promises, key strategies and ending requirements remain.
 
-**Verification status:** 44 engine tests, 5 object-view tests and additional UI regressions passed locally. v0.5 online loading, save restoration and portrait-browser interaction remain to be verified. Earlier online checks are not validation of this release, physical-phone testing or proof that onboarding is now easy.
+**v0.5 verified online:** in a real browser at a 360px portrait viewport, an existing v0.4 ending loaded, then the tester restarted their own QA save and completed the first guided sequence: discover, read and use records. Both an incorrect and a correct comparison were checked, as was switching to English. At the measured content boundary, width and scrollWidth were both 345px, with no horizontal overflow. This was not a physical-phone test or a full three-night replay. Local coverage included 44 engine tests, 5 object-view tests and additional UI regressions.
+
+**v0.5.1 pending:** screenshots of v0.5 showed excessive repetition of the overall objective. The candidate prioritizes the immediate next step and keeps the objective available under an expandable section. Online validation of this patch is still pending; the v0.5 checks do not establish that the patch is verified.
 
 Earlier test and online playthrough records are retained in the [full guide and verification limits](HOTEL.en.md).
 
