@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 0.2.1 — 2026-11-10
+- 修复重复结算奖励；允许页面缩放；菜单空格和方向键恢复浏览器默认行为。
+- Prevent duplicate settlement rewards, allow page zoom, and preserve native Space/arrow behavior in menus.
+- 存储不可用时仍可通过地址片段切换语言；英文画布无障碍标签同步翻译。
+- Language switching now works with blocked storage via a URL fragment; the canvas accessibility label is translated in English mode.
+- 修正文档版本号与五项结算统计布局。
+- Correct guide version numbers and the five-stat results layout.
+
 ## 0.2.0 — 2026-11-10
 - 新增补给信标：首个在 15 秒出现，进入光圈累计 2 秒可获得修复、经验和分数；离开会逐渐失去进度，信标会过期。
 - Added supply beacons: first appears at 15 seconds. Charge inside the ring for 2 seconds to gain hull repair, XP, and score. Charge decays outside and beacons expire.

@@ -1,5 +1,5 @@
 /* Presentation translation. Language changes are offered in the main menu only. */
-(()=>{'use strict';let en=false;try{en=localStorage.getItem('neon_lang')==='en';}catch{}if(!en)return;document.documentElement.lang='en';document.title='Neon Salvage';
+(()=>{'use strict';let en=false;try{en=localStorage.getItem('neon_lang')==='en';}catch{}if(location.hash==='#lang=en')en=true;if(location.hash==='#lang=zh')en=false;globalThis.neonEnglish=en;if(!en)return;document.documentElement.lang='en';document.title='Neon Salvage';document.querySelector('#game').setAttribute('aria-label','Neon Salvage game canvas');
 const phrases={
 '发现补给信标 · 靠近停留 2 秒回收':'Supply beacon found · Stay inside for 2 seconds',
 '补给回收 · 修复 +18 / 经验 +8':'Cache secured · Hull +18 / XP +8',
