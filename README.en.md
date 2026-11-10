@@ -1,3 +1,50 @@
+# 怪奇实验室 / Strange Worlds — v0.2.0
+
+三个中英双语网页游戏的持续迭代版本，目前各五关，不是完成品。原有游戏和存档不受影响。
+
+Three evolving bilingual browser games, currently five levels each, not finished products. Previous games and saves are unaffected.
+
+## 开始 / Start
+
+解压完整文件夹后打开 `index.html`，选择游戏。各小样为独立 HTML，无需安装和联网。浏览器兼容性仍须实际检查，不保证手机文件管理器能正确打开网页。
+
+Extract the complete folder and open `index.html`. Each prototype is self-contained HTML with no installation or network dependency. Browser compatibility still requires testing; mobile file managers may not open local HTML correctly.
+
+- 《世界坏掉了》/ World Out of Order: 改写物理规则 / Rewrite physics rules.
+- 《不正常的快递》/ Odd Cargo: 与奇特货物互动并送达 / Handle and deliver unusual cargo.
+- 《借来的身体》/ Borrowed Bodies: 切换能力不同的身体合作脱出 / Switch bodies and combine abilities to escape.
+
+## 当前状态 / Status
+
+五关版本已完成本地逻辑与整合检查，准备发布到原公开游戏地址。实际在线浏览器验收尚待部署完成，不把自动化测试当作实际游玩。旧打飞机游戏保留在 space.html，首页改为三款游戏入口；旧存档不删除。
+
+The five-level build passed local logic and integration checks and is being published to the original public game address. Actual live browser acceptance is still pending deployment. Automated tests are not a substitute for playtesting. The old space game remains at space.html; the homepage now opens the three puzzle worlds. Previous saves are not deleted.
+
+本轮为新的24小时迭代，暂以请求接收时间起算至北京时间 **2026-11-11 21:46**。预计时间是检查节点，不是保证所有功能完成。
+This new 24-hour iteration is provisionally measured from request receipt until **2026-11-11 21:46 Beijing (UTC+8)**. Estimates are review checkpoints, not guarantees that all features will be finished.
+
+## 下一版 / Next iteration
+
+本轮新增：规则世界的可逆隔板停靠/顺序节点断桥；快递的镜像双胞胎/充放气气球；身体协作的电池架桥/双桥转运。全部关卡可直接选择，已有玩家不用重打前三关。完成记录保存在独立本地存档，不影响旧游戏。
+
+下一轮：在不堆数值与重复刷关的前提下，继续增加规则组合与不同策略，改善关卡提示、结果反馈和画面；优先检查新增关卡实际体验。
+
+New this round: reversible-wall braking and ordered nodes/gaps; mirrored parcels and an inflatable balloon; battery bridges and sequential bridge power. Every level is freely selectable. Returning players can skip the first three. Completion records use separate local storage, leaving old games intact.
+
+Next: deepen rule combinations and strategies without stat inflation or grinding, and improve hints, feedback, and artwork. Prioritize checking the new levels in actual play.
+
+预计本地检查节点：北京时间 **2026年11月10日23:00至11月11日00:00**，这是估计而非上线承诺。本次发布已获授权；下一轮计划仍须完成对应检查，实际时间可能调整。
+
+Estimated local review checkpoint: **2026-11-10 23:00 to 2026-11-11 00:00 Beijing (UTC+8)**. This is an estimate, not a launch promise. Publication for this update is authorized. The next iteration still requires its own checks, and timing may change.
+
+
+---
+
+## 旧项目记录 / Archived project notes
+
+以下历史计划已被当前三款游戏迭代计划取代；旧游戏保留入口和存档。
+Historical plans below are superseded by the current three-game iteration. Old games and saves are preserved.
+
 # Demolition Expert · Browser demo
 
 **v0.1.1 layout candidate:** a fixed desktop worksite, contextual editing controls, keyboard placement and bilingual accessibility labels. Twelve UI and ten engine test groups pass; browser validation of this patch is pending. Next iteration remains estimated for November 10, 21:00–22:00 Beijing time, focused on playtest feedback, controls and result clarity, without a multi-level promise.
