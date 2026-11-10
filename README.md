@@ -1,276 +1,50 @@
-# 怪奇实验室 / Strange Worlds — v0.3.0
+# 怪奇实验室 / Strange Worlds — v0.5.0
 
-三个中英双语网页游戏的持续迭代版本，目前各六关，不是完成品。原有游戏和存档不受影响。
+## [▶ 点击在线试玩 / Play online now](https://chenhaichao1231.github.io/neon-salvage/)
 
-Three evolving bilingual browser games, currently six levels each, not finished products. Previous games and saves are unaffected.
+无需下载，打开即可选择三款游戏。No download needed: open the link and choose a game.
+
+三款中英双语网页游戏的持续开发版本，已授权发布。新内容自动化检查通过，新增关卡实际浏览器验收随后记录。
+
+Three evolving bilingual browser games. Publication is authorized and automated checks passed; live browser acceptance for new content will be recorded after deployment.
 
 ## 开始 / Start
 
-解压完整文件夹后打开 `index.html`，选择游戏。各小样为独立 HTML，无需安装和联网。浏览器兼容性仍须实际检查，不保证手机文件管理器能正确打开网页。
+打开 index.html，选一种玩法。无需安装，无外部素材或网络依赖。手机能否直接打开下载的HTML取决于浏览器和文件管理器，未保证全部兼容。
 
-Extract the complete folder and open `index.html`. Each prototype is self-contained HTML with no installation or network dependency. Browser compatibility still requires testing; mobile file managers may not open local HTML correctly.
+Open index.html and choose a game. No installation, external assets or network dependency. Opening downloaded HTML on a phone depends on its browser and file manager; universal compatibility is not claimed.
 
-- 《世界坏掉了》/ World Out of Order: 改写物理规则 / Rewrite physics rules.
-- 《不正常的快递》/ Odd Cargo: 与奇特货物互动并送达 / Handle and deliver unusual cargo.
-- 《借来的身体》/ Borrowed Bodies: 切换能力不同的身体合作脱出 / Switch bodies and combine abilities to escape.
+## 这次回来玩什么 / What to return for
 
-## 当前状态 / Status
+- 世界坏掉了：七关。第7关“空间书签”允许记录站定位置，带着能量返回一次。原第5/6关另有逆序/返航挑战。
+- 不正常的快递：七趟。第7趟河豚包裹要瘦身穿窄道、鼓起抵抗风带。第1趟另可选择搬灯护送植物。支持暂停，切到后台后需主动继续。
+- 借来的身体：八关。第7关使用交换台接送身体；第8关可选择用箱子固定门再步行，或不搬箱子、通过身体交换运送队友。
 
-v0.3.0 发布候选：每款第六关将既有规则组合成短终章，并改为桌面同屏布局，避免点击按钮导致整页跳动。六关解法与自动化回归已通过；新布局和终章仍待实际在线验收。
+- World Out of Order: seven levels. Level 7's spatial bookmark stores a resting position for one return trip with collected energy. Levels 5–6 retain optional reverse/return variants.
+- Odd Cargo: seven deliveries. Level 7's puffer parcel becomes slim for gaps and inflated for wind resistance. Level 1 also offers the movable-lamp variant. Pause is supported; returning from a hidden tab requires explicit resume.
+- Borrowed Bodies: eight levels. Level 7 introduces body-exchange pads. Level 8 supports a crate-held walking route or a no-crate exchange route.
 
-v0.3.0 release candidate: each game's sixth challenge combines familiar mechanics into a short finale. Desktop layouts fit the main play area and controls into the viewport. Six-level solutions and automated regressions passed; the new layouts and finales still await live browser acceptance.
+全部关卡自由选择，无需重刷解锁。普通关和变体完成记录分开，不用最优步数强制通关。完成记录仅保存在当前浏览器；下载版与在线版可能不同源，不自动同步。旧游戏文件和存档不删除；仓库保留旧游戏入口：space.html、hotel.html、demolition.html。
 
-此前 v0.2.0 已在线核验：首页三入口；规则世界与身体协作第一关完整通关、下一关和双语；快递拖动、失败/重试、选关和英文；完成记录回到首页正确显示。并非全部关卡都已经实际浏览器通关。旧打飞机游戏保留在 space.html，旧存档不删除。
+Every level is freely selectable. Normal and variant completion are separate; optimal move counts are not required. Progress is stored only in this browser. Downloaded and online versions may have separate storage and do not sync. Old game files and saves are not deleted; the repository retains space.html, hotel.html and demolition.html.
 
-v0.2.0 was checked live: all three homepage entries; complete first-level wins, next-level flow and language switching in World and Bodies; Cargo dragging, failure/retry, level selection and English; completion displayed correctly on returning to the gallery. This is not a claim that every level was cleared in a browser. The old space game remains at space.html and its saves are preserved.
+## 验证范围 / Verification
 
-本轮为新的24小时迭代，暂以请求接收时间起算至北京时间 **2026-11-11 21:46**。预计时间是检查节点，不是保证所有功能完成。
-This new 24-hour iteration is provisionally measured from request receipt until **2026-11-11 21:46 Beijing (UTC+8)**. Estimates are review checkpoints, not feature-completion guarantees.
+新增内容已通过自动化解法、反例和UI处理器测试；这不等同实际浏览器试玩，更不证明玩家会觉得有趣。新内容的真实浏览器布局与游玩尚待验证。线上v0.3的已完成检查见QA历史记录。
+
+New content has automated solution, counterexample and UI-handler checks. These are not actual browser playtests and do not prove human enjoyment. New-content browser layout and play remain unverified. See QA history for completed live v0.3 checks.
 
 ## 下一版 / Next iteration
 
-本轮新增：规则世界的三段规则修复终章、快递的气球光照组合夜航、身体协作的箱子接替与双板合作终章；另加入主动提示和桌面同屏布局。全部关卡可直接选择，已有玩家不用重打前三关。完成记录保存在独立本地存档，不影响旧游戏。
+优先审查新能力是否形成真正不同的选择，检查目标说明、失败反馈与替代路线；不为凑关卡延长走路，不用刷资源或加数值替代新体验。本次上传已获授权，完成部署后进行在线实际操作核验。后续发布遵循用户授权。
 
-下一轮：在不堆数值与重复刷关的前提下，继续增加规则组合与不同策略，改善关卡提示、结果反馈和画面；优先检查新增关卡实际体验。
+Next, review whether the new abilities create genuinely different choices, and inspect goals, failure feedback and alternative routes. Avoid longer walks merely to increase level counts, resource grinding or stat inflation. This upload is authorized; live browser acceptance follows deployment. Later releases follow the user’s publication authorization.
 
-New this round: a three-stage rule-repair finale, a balloon-and-light night delivery, and a crate/body two-plate cooperation finale, plus optional hints and viewport-fitted desktop layouts. Every level is freely selectable. Returning players can skip the first three. Completion records use separate local storage, leaving old games intact.
+预计下一次本地检查：北京时间2026年11月10日23:00–11月11日00:00。这是检查节点估计，不是上线承诺。24小时本轮迭代暂以请求接收时间起算至北京时间2026年11月11日21:46；用户停止指令优先。
 
-Next: deepen rule combinations and strategies without stat inflation or grinding, and improve hints, feedback, and artwork. Prioritize checking the new levels in actual play.
+Estimated next local review: 2026-11-10 23:00 to 2026-11-11 00:00 Beijing (UTC+8), a review checkpoint rather than a launch promise. This 24-hour iteration is provisionally measured from request receipt until 2026-11-11 21:46 Beijing; a user stop instruction takes priority.
 
-预计本地检查节点：北京时间 **2026年11月10日23:00至11月11日00:00**，这是估计而非上线承诺。本次发布已获授权；下一轮计划仍须完成对应检查，实际时间可能调整。
 
-Estimated local review checkpoint: **2026-11-10 23:00 to 2026-11-11 00:00 Beijing (UTC+8)**. This is an estimate, not a launch promise. Publication for this update is authorized. The next iteration still requires its own checks, and timing may change.
+## 旧版 / Archive
 
-
----
-
-## 旧项目记录 / Archived project notes
-
-以下历史计划已被当前三款游戏迭代计划取代；旧游戏保留入口和存档。
-Historical plans below are superseded by the current three-game iteration. Old games and saves are preserved.
-
-# 拆楼专家 · 网页单关演示
-
-**v0.1.1 布局候选：**桌面工地保持同屏，编辑按钮仅在选中时展开，补充键盘布置及中英无障碍标签。12组UI与10组引擎测试通过；本补丁实际浏览器验证待完成。下一轮仍预计北京时间11月10日21:00–22:00，先依据试玩反馈改善操作和结果解释，不承诺多关。
-
-
-[拆楼演示入口](https://chenhaichao1231.github.io/neon-salvage/demolition.html) · [玩法与边界](DEMOLITION.md) · [English](README.en.md)
-
-**演示已上线，并完成本轮实际浏览器验证。**用3个定点切断药包拆除框架楼：所有剩余材料需稳定降到目标线以下，右侧工坊不能被构件或碎片触碰。先布置、再引爆，查看失败原因并快速重试。模型使用不旋转构件、可断连接与局部碎裂，不是工程真实模拟。
-
-**上线验证：**发布版本 `f1ebe7ec0247c21abb5c556152d15280a6a16447`。真实浏览器约 1200×789 视口验证了单点拆除的失败反馈（剩高13、工坊触碰2次），以及清空方案后重新布置成功；中英切换与保留方案重试通过。不是手机真机测试，也不代表所有布置已人工试玩。
-
-下一次进展预计北京时间2026年11月10日21:00–22:00，以验证结果为准。下一迭代优先让桌面上的场景与操作同屏，避免点击时上下滚动打断思路，并改善操作清晰度；这些改进尚待验证，不承诺新增多关。
-
-原有入口与存档保留：[第七夜旅馆](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [旧航线游戏](https://chenhaichao1231.github.io/neon-salvage/)。以下保留原有游戏说明。
-
-
-
-当前开发方向已按选择切换为拆楼 demo；以下旅馆旧计划仅作历史记录，尚未发布的分页及第二案暂存。
-
----
-
-# 第七夜旅馆 · The Seventh Night Hotel
-
-[旅馆竖屏试玩入口](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [中文玩法说明](HOTEL.md) · [English](README.en.md)
-
-**v0.6.0 已发布，并完成本轮在线浏览器验证。**入口仍为 `hotel.html`。发布版本：`b0d9323b38e545a26ab932701222a8d6483e79af`。
-
-## v0.6.0：调查完成，不必刷完剩余回合
-
-提示不再反复推荐已完成相关核实的人物。觉得调查已足够时，可以展开可选的「结束调查，等待天亮」，提前进入最终决定，不必为了耗完回合重复行动。
-
-这一步需要明确确认：你会放弃所有剩余调查机会。等待不会补齐证据、合作或结局条件，也不会替你选择结局；未封存的原件仍会照常被取走。你也可以取消，继续调查。
-
-旧存档可直接升级，无需重开。包含新增等待历史的新存档不保证能由旧版读取；发布或本地更新应配套使用整套最新脚本，不混用新旧文件。
-
-**v0.6.0 验证：**全部 12 个 `*.test.js` 文件通过，包括 44 项基线引擎测试、6 项等待测试及 UI 回归。真实浏览器在 360×640 视口核验页脚 v0.6，并恢复旧听证结局。测试者重开自己的 QA 存档后，取消等待仍停在第一夜安排；确认等待则进入最终决定，证据为零，未封存原件被取走，公开／听证条件明确显示未满足。本轮不是 v0.6 完整三夜重玩，也不是手机真机测试；此前 v0.5.1 三夜听证实玩作为独立历史记录保留。本版不增加章节。
-
-## v0.5：先知道要查什么，再开始调查
-
-你要查清七年前警报与开闸的先后，判断旧报告是否可信，最后决定材料的去向。开场不再用钥匙枝节代替案件目标。
-
-- **三个入口，一次一块：**「当前行动」「房间安排／住客位置」「线索笔记」分别打开，不再要求同时理解整页面板。
-- **直接选住客：**夜间先点想找的人，再看当前可做的事。选择对象不耗行动，确认调查才推进时段。
-- **可跳过的首次导引：**默认房间与供电即可开始。提示带你经历发现材料、打开阅读、用两份记录检验想法；不会替你执行行动或选择正确解释。可以跳过，也可以重新打开提示。
-- **逐步证据台与就地反馈：**先选两份材料，再选疑问与解释；不默认正确答案。行动结果和检验反馈在当前操作处显示，不必翻找长日志。
-
-旧存档无需重开即可使用新界面，已有证据、推断与结局保留；已结束的故事不会恢复夜间行动。仍是三夜、每夜三次行动，免费阅读与比较，原有承诺、钥匙策略和结局条件不变。
-
-**在线验证：**v0.5.1 在 360×640 浏览器视口恢复旧第二夜安排存档，页脚版本正确；简短英文下一步提示与主按钮在视口内可见。总目标可展开，中英切换后展开状态保留；查看供电入口能打开设置，但不会自动改电。html/body 的宽度与滚动宽度均为 345px，无横向溢出。本补丁只改布局与短文案，此前 v0.5 完整首轮导引、错误与正确比较及旧 v0.4 结局恢复的实玩记录仍适用。本地覆盖包括 44 项引擎测试、5 项原物查看测试及新增 UI 回归。v0.5.1 线上实玩现已进一步完整走完三夜并到达听证结局。以上是浏览器检查，不是手机真机测试，也不能替代 v0.6.0 的验证。
-
-历史版本的测试与在线试玩记录见[完整玩法与验证边界](HOTEL.md)。
-
-## v0.4.0：查看证据原物
-
-在已经发现的证据卡上点击「查看原物」，可查看五类材料的 CSS/SVG 复绘示意：日志、医疗卡、钥匙对照、借用簿与磁带。尚未发现的材料不显示入口，已通关玩家也能查看已收集的材料，不必清档或重开。
-
-这些画面是示意复绘，不是新的隐藏线索或像素找物谜题。实际信息全部来自当前引擎提供的 DOM 文字，物件状态以当前记录为准。证据配对仍使用既有推理机制，查看、配对检验与关闭均不消耗夜间行动；本版不增加解谜规则。
-
-## v0.3.0：选择与约定
-
-在行动分类的「选择/约定」中查看可用策略、前提与后果；它们不会随普通交谈或查证自动执行。
-
-- **先听证的承诺：**先查阅登记记录，并在能与许女士私下交谈时选择。花费一次行动，取得原始材料与她的合作，但不自动完成推断。你承诺先听证再公开；之后选择公开会提前明确警告，并影响她后续接受采访的意愿。保持沉默也不等于履行听证约定。普通交谈仍可获取相关材料，不必为了拿线索作出承诺。
-- **取得公司备用钥匙：**先读过周弥的取回委托，等他不在场、且你尚无黄铜钥匙时选择。花费一次行动；读信本身不会取钥匙。它提供不同的进入策略，但会损害与周弥的信任，留下物件缺失与交接责任的后果，不证明任何人有罪。前提不满足时，正常界面会说明并禁用。
-
-证据可以展开阅读全文，已选择的材料会显示摘要，方便比较原文。选择记录不能代替独立事故证据。这里不提供完整通关顺序或正确解释。
-
-旧存档可继续，但已经错过的时段不能补做这些选择；已通关玩家需要重新开始才能体验分支。新版不是长篇扩章，也不宣称已经解决长期重复性。
-
-## 下一版计划与预计时间
-
-下一版优先处理第一案的分页阅读，第二案暂缓。计划针对手机竖屏中的中英文对话与线索加入页码、上一页／下一页，并保留阅读上下文，避免靠缩小字体解决长内容。这些改动尚未完成。预计下一次更新为**北京时间 2026 年 11 月 10 日 21:00–22:00**，并非保证；实际发布时间由验证结果决定，阻断问题优先处理。计划核准时间：北京时间 2026 年 11 月 10 日 19:46。
-
-旧《余烬航线》与存档完整保留：[旧游戏入口](https://chenhaichao1231.github.io/neon-salvage/)。旅馆使用独立存档。
-
-## 旧游戏说明 / Neon Salvage
-
-## v0.15.1：先看覆盖，再决定是否供能
-
-中继面板现在显示附近自由残骸的件数和剩余货值、聚拢可移动数量、可诱导敌人数及竞争者目标是否处于屏蔽范围。它是打开时的状态快照，不是收益保证；没有值得保护或集中之物时，可以不花燃料。场上金色细圈提示正在聚拢的货物，蓝色细圈表示当前屏蔽覆盖，不是防弹护盾。长机制说明收进可展开的“工作原理”，主要取舍与按钮优先显示。
-
-## v0.15.0：误导广播，同一片残骸
-
-**已有存档可直接从主菜单进入「拾荒争夺」，或从失联站「前往拾荒区」。** 三台中继也会出现在第七码头的拾荒场，不要求先完成首章或码头；原「自由航行」不增加这一机制。旧合金、章节和工程保留。
-
-在任意中继 **90 米内按 H**，或点触屏「中继控制」。它们互不依赖，没有必须依次完成的目标清单：
-
-- **供能**：把一件普通残骸拖到台旁，整件消耗。每点剩余货值换 1.5 秒供能，单台最多储存 60 秒；超出容量的部分不会返还。剧情核心不能投入，损坏货物提供的供能更少。
-- **聚拢**：供能后默认吸引 250 米内的自由普通残骸，移动的是原物，不创造货物。同时会引来附近普通敌人；它们接近中继后会重新追击，首领不受引诱。把货物聚到一起，也可能把风险聚到一起。
-- **屏蔽**：将有电的中继切到屏蔽，让 250 米内的自由普通货物暂时不被竞争者选中。不能抢回它已拖住的货物，也不会清除现有敌人或挡住子弹。改频不再耗货，但每次切换后锁定 5 秒。
-
-**成功使用至少一次中继，并存活撤离**，即可免费解锁站内「中央 / 西侧 / 东侧」布局选择。只移动一台中继，下次出航生效；另外两台不动，没有伤害加成。死亡或暂停菜单直接结束不会解锁。本局供能、消耗和货物不会带到下局。
-
-中继完全可选：忽略全部三台，仍可正常拾荒撤离。广播增加了原有场地的取舍与一段调查线索，不意味着长期耐玩性或完整战役已经解决。
-
-## v0.14.0：第七码头，带回艇还是带回记录？
-
-**老玩家入口：完成首章供电选择后，打开「失联空间站」→「前往第七码头」。** 无需清档，也不用重新刷满级船坞。循目标提示找到货运艇，在 100 米内按 **G** 或触屏联系按钮：
-
-- **为艇供能**：消耗一件拖到艇旁、剩余价值至少 12 的普通残骸。货运艇会实际驶向原点，敌人会追击并用碰撞和子弹损伤它；不是等待倒计时。你可以护航或清理返航路线。
-- **拆下黑匣子**：取出艇内唯一的原物，船员乘救生舱撤离。使用 E 拖住它，把你和黑匣子一起带回**原点**，停留 1.5 秒完成交付；回收前哨不能替代原点，黑匣子不按普通货物换合金。
-- 首章选择会提供不同援助：居住区给返航艇一次恢复至 40 船体的应急机会；工坊提供一次最多 30 船体修补并提升返航速度。
-- 完成护航会永久解锁**转运点**：后续每次拾荒可自动交付一件带入设施范围的普通拖载货物，按剩余价值入账。完成黑匣子路线则解锁**监听台**：持续标记现场剩余价值最高的自由普通货物，不生成货物、不增加价值。
-
-两路线在本局选定后不可切换，完成后的设施结果也不能重选；失败可从失联站再次出发，旧章节、工程和余额保留。当前只是首章及这一段可玩续章，不是完整长篇战役。
-
-本版新增货运艇、转运站、监听阵列 3 套嵌入式原创素材，总计 12 套。离线运行仍无需外部素材请求。
-
-## v0.13.1：拾荒手感补丁
-
-根据实际游玩反馈，友方主炮、炮台和反射子弹不再被货物阻挡，也不会损伤货物；子弹可穿过货物继续命中敌人。货物仍会阻挡敌弹并受到损伤，投掷和交付规则不变。不需要清档。
-
-新增回归覆盖三种友方弹源，以及散落、拖载、竞争者持有和剧情核心四类货物；现有剧情、装备、前哨、备份测试继续通过。该验证不替代浏览器或手机手感实测。
-
-## 已满级玩家：这次回来玩什么？
-
-从主菜单点击 **失联空间站 · 免费新章节**，不是继续刷旧等级。已有合金和满级船坞保留，首章不收费、不要求清档。
-
-- 接到回声站的求救，出航拖回定点记录核心。核心毁损或被抢走，下次出航会重新出现，不靠稀有掉落。
-- 初始即可用 **X 斥力脉冲** 推开敌人与松散货物。交付核心后，选择恢复居住环或工坊，站内供电图和对话会改变。
-- 居住环解锁 **急救压机**：消耗手中货物修船；下次拾荒可利用避难信标修复货物，提高其剩余价值，但每局修复预算有限。
-- 工坊解锁 **反射屏障**：短时反弹敌弹，不免疫碰撞；剧情拾荒场出现可用货物供能的炮台。
-- 站内可以选择每局携带的一件主动装备。分支选择当前不可更改；完成后可前往第七码头，但后续长篇战役仍未完成。
-
-### 合金现在可以做什么？
-
-在失联站的 **站内工程** 使用旧余额或新收益：
-
-- **180 合金建永久回收前哨**：西侧或东侧二选一，下次拾荒出航出现真正可交付、撤离的新地点，改变往返路线，不是伤害加成。
-- **40 合金买炮台补给包**：每包12发，最多储备3包。在下次有炮台的拾荒航行中装填首座炮台；没有炮台就保留。它让你不必先牺牲货物给炮台供能。
-
-这些是现有用途，并非已完成的无限成长体系。新故事、工程与操作选择会继续迭代，当前仍是原型。
-
-### 存档兼容
-
-旧合金、船坞等级、最高分和航行次数保留。剧情、工程、码头与广播布局独立保存；当前 format 4 整包备份包含全部进度。导入旧 format 1 只恢复旧进度，保留已有剧情、码头和广播布局；format 2 恢复剧情及工程，但保留码头和广播布局；format 3 恢复剧情、工程及码头，但保留当前广播布局。更新前建议在「船坞升级→备份与恢复存档」导出。不同文件目录/浏览器可能使用不同本地存储，备份更稳妥。
-
-## 在线即玩
-
-[打开网页版](https://chenhaichao1231.github.io/neon-salvage/)，无需下载。
-
-网页版与本地离线文件使用不同来源的浏览器存储，进度不会自动同步。切换前请在原版本「船坞升级→备份与恢复存档」导出整包备份，再到目标版本导入；不要清空旧存档。不同浏览器同样需要备份迁移。
-
-## 下载即玩
-
-[下载已发布的 v0.14.0 玩家运行包](https://github.com/chenhaichao1231/neon-salvage/releases/tag/v0.14.0)：在发布页附件中选择 **Neon-Salvage-Play.zip**，解压后打开 **index.html**。这是固定的 **0.14.0** 精简运行包；仓库或网页版更新至 0.15 后，该附件仍是 0.14.0，不会自动升级。
-
-发布页的 **Source code** 下载项是该版本的完整源码归档，不是上述精简玩家包。下方 **Code → Download ZIP** 则下载仓库当前源码，版本可能比固定附件更新。
-
-在 GitHub 点击 **Code → Download ZIP**，解压后直接打开 **index.html**。使用现代 Chrome、Edge、Firefox 或 Safari。也可在目录中运行 `python3 -m http.server 8000` 后访问 `http://localhost:8000`。
-
-主菜单点击 **中文 / English** 切换语言，选择保存在本地。
-
-## 玩法
-
-- WASD / 方向键移动，自动瞄准射击；空格跃迁，P / Esc 暂停。
-- 手机拖动画面移动，右下角跃迁。
-- 回收绿色能量升级，选择改装组合。每 90 秒选择安全撤离（双倍合金）或继续冒险。
-- 守卫会周期出现；击败可获得大量经验并修复船体。
-- 合金可永久升级船坞。每日同种子挑战禁用船坞加成。
-- 进度仅存于当前浏览器本地；隐私模式、清理浏览器或切换来源可能使存档不可用。
-
-## 版本
-
-当前 **0.15.1**：3 种飞船、9 种改装、4 类敌人、周期首领、撤离抉择、永久升级、每日种子、触屏操作、可选合成音效。
-
-## 验证
-
-`node --check game.js` 与 `node test.js`。无构建步骤。
-
-本项目在持续迭代中。新版本保持 `index.html` 直接运行；更新内容见 CHANGELOG.md。
-
-## v0.2 新增：补给信标
-15 秒后出现金色补给光圈。进入并累计停留 2 秒，获得 18 点修复、8 点经验和 100 分。离开光圈会逐渐损失进度，22 秒内未回收则消失。追逐补给会让你改变航线，也可能被敌人包围。
-
-逻辑冒烟测试：`node smoke-test.js`（不替代浏览器视觉测试）。
-
-## 航行委托
-每局有三项额外目标：击破 60 架、回收 3 个补给、击败 1 名守卫。每项完成后在结算时额外获得 20 合金，暂停和撤离界面可查看进度。委托奖励不翻倍，不跨局累计。屏幕边缘金色箭头指向屏幕外的补给。
-
-## 战斗预警与测试
-远程敌人与守卫在发射前约 0.65 秒显示瞄准线，并锁定发射方向。看到预警后侧向移动可避开攻击。横屏小窗口使用更紧凑的 HUD。
-测试：`node test.js`、`node smoke-test.js`、`node i18n-test.js`、`node validate-release.js`。逻辑与文字测试已通过，完整浏览器视觉验证尚未完成。
-
-## 本地存档备份与恢复
-在「船坞升级 → 备份与恢复存档」下载 JSON 备份。新版本或另一浏览器中读取该文件，也可粘贴备份文本。点击「检查备份」核对数值，然后「确认替换当前进度」。恢复会替换合金、船坞等级、最高分和航行次数，建议先备份当前进度；不恢复正在进行的航行。文件只在你的设备处理，不会上传到服务器。浏览器无法自动下载时可复制文本保存；无法持久保存时会明确提示。
-
-## 路线选择与启动便利
-每次选择深入星域，可选蜂群或猎手：蜂群普通敌人更多、更脆弱；猎手是高危路线，远程敌人更多、弹速更快，但新普通敌人给双倍经验和击破分。两者都只在进入时修复一次 25% 船体，已有敌人不追溯变更，守卫属性不变。猎手不额外翻倍合金。
-成功回收补给后，下一信标等待 30 秒，使第一轮撤离前有机会完成三补给委托。
-Windows 可双击 `launch.bat`，它只在默认浏览器打开同目录的 `index.html`，不安装、不下载、不修改设置。请完整解压 ZIP；其他系统直接打开 `index.html`。脚本已作静态安全检查，未在 Windows 上实机执行。
-每日种子不是跨设备竞技公平保证：窗口尺寸、输入和升级选择仍会影响结果。
-
-## 航行指南与反馈
-主菜单及暂停菜单可打开航行指南，阅读不会推进游戏时间。三种机型具有独立轮廓；护盾圆环表示短暂无敌，红色边框表示刚受伤，取消快速闪烁。减少动态默认遵循系统偏好，可在指南内切换，当前页面内有效；关闭镜头震动、装饰粒子及菜单背景漂移，不改变战斗规则。
-
-## 构筑与长局保护
-升级卡会预览实际数值变化，已满的射速/散射/无人机选项不再出现。暂停页可查看武器面板。手机摇杆有 8 像素死区，拖动到 42 像素达到全速；第二根手指不会抢走移动控制，跃迁仍固定 130 距离。
-场上最多 240 名敌人，达到上限暂停普通敌人生成；守卫到来时替换最远普通敌人，不计击破或奖励。如已全部为守卫则跳过新生成。此上限是长局性能保护，不是难度或帧率保证。
-
-性能抽测：固定种子、静止飞船、每帧补满生命的 600 秒压力场景中，敌人峰值从 3048 降为 240。补满生命只用于压力测试，正式游戏没有无敌修改。这是 Node 模拟测试，不包含绘制或浏览器 DOM，不代表真实手机帧率。
-
-## 本地航行记录
-主菜单的航行记录保留最近 20 局，可按原种子、机型和起始船坞等级重试。每日模式重试始终无船坞加成。不同操作、窗口尺寸、路线和版本都会改变结果，它不是录像或结果复现保证。记录不会联网；存储被阻止时仅保留到页面关闭。进度 JSON 备份格式保持兼容，不包含航行记录，恢复进度也不会删除已有记录。
-
-## 守卫与遗物
-守卫半血以下将在下一次瞄准时进入暴走阶段：弹幕变快，但留有面向瞄准位置的缺口。预警和实际发射共享方向，锁定后不会追踪你；移动或跃迁寻找安全位置。
-击败守卫后，从最多三项随机遗物中选一项，六种遗物每局各限一次。破限反应堆以船体换伤害；引力王冠以速度换回收与经验；蜂后协议扩充无人机；相位残响强化跃迁；星矛核心强化穿透；不灭余烬强化续航。也可保留构筑、修复 25。遗物用尽后守卫奖励额外修复 40。遗物只属于当前航行，不是永久船坞升级。
-
-## 可选宝库事件
-第 30 秒起每 90 秒出现紫色信号，存在 25 秒，靠近后选择：强行开启会让随后 20 秒普通敌人更密集，存活到结束可得 25 经验（受经验倍率影响）及 40 赏金合金；安全拆解立即修复 20；也可忽略。赏金不受撤离翻倍，完成前死亡或撤离不发奖。
-首名守卫基础船体降低为 1000，后续保留 1800，再按时间缩放，让遗物路线更早可接触。真实伤害机器人小样本中，遗物接触从 1/15 提升到 7/15；这不是人人可获或真人体验保证。
-
-## 舰船美术
-本版替换玩家与主要敌人的简易几何外形，加入六套原创透明舰船图、机库预览和星云背景。素材直接嵌入代码，保持离线运行。美术原图与联系表已检查，但不代表已完成浏览器场景或手机真机验证。
-
-## v0.12 新模式：拾荒争夺
-
-主菜单选择「拾荒争夺」。残骸是同一份资源：可以拖回回收站售卖、挡住敌方子弹（友方主炮、炮台和反射子弹直接穿过，不伤货物）、投掷攻击，或按 F 给炮台换有限弹药。竞争拾荒者会争夺同一批货物；攻击会令其掉落原物。详见 [机制说明](SYSTEMS.md)。
-
-E 抓取/按移动方向投掷；Q 切换主炮；F 给附近炮台供能；R 在原点申请撤离。触屏使用按钮。重货减速、损伤贬值、跃迁丢货。你和货物都在回收站内停留1.5秒后计入收益，死亡保留已入站部分，未入站不计。此模式不使用原90秒撤离弹窗、信标或紫色事件，暂不支持同种子历史重试。
-
-这是可玩原型，尚无完整战役或成熟的长期解锁体系。v0.13已经加入剧情装备与可花费合金的工程；玩法深度与平衡仍在迭代，不宣称已解决重复性问题。竞争者和炮台为本地模拟，没有多人联网。
-
-新增验证：`node cargo-integration-test.js`、`node rivals.test.js`、`node stations.test.js`。覆盖真实游戏中的银行入账、穿透与掩体碰撞顺序、致死帧不新增交付、竞争者掉落原物和炮台单次消费；不替代浏览器或手机实测。
+原有游戏保留，历史开发说明移至 [ARCHIVE.md](ARCHIVE.md)。Old games remain available; historical development notes are preserved in [ARCHIVE.md](ARCHIVE.md).

@@ -38,3 +38,20 @@ Automated tests support reachability and state correctness, not human enjoyment.
 All three now have five freely selectable levels. World: five BFS solutions, mechanism-necessity counterexamples and 2,500 transitions passed. Bodies: 17 groups passed, including battery ownership, occupied-bridge refusal, sequential battery transport, reset/undo and UI progress hook. Cargo: 19 groups passed, including mirrored movement/collision, balloon timing/impact, actual input handlers and one-time progress callbacks. Separate local-progress tests cover corruption, blocked storage, best result retention, reload and isolation from old saves. All four pages initialize in DOM/canvas stubs; standalone syntax/packaging checks pass. Canvas-only render samples inspected for Cargo are not full browser layout verification.
 
 Actual browser playtesting remains pending because the browser cannot reach the local server. No remote publishing occurred.
+
+## Live acceptance / 在线验收 — 2026-11-10 22:12 Beijing
+
+Earlier pending/offline statements above are historical checkpoints, superseded for the specific checks below. v0.3.0 commit a357ae7a88153bbf879d22cb6dd1508e1e85734f deployed successfully via Pages run 42830447385.
+
+- Actual Chrome: World level 6 completed in 13 UI actions, using friction, phase and ordered-node mechanics. Result and gallery completion count verified.
+- Bodies level 6: actual map clicks selected heavy body and moved to adjacent tile after SVG viewport fitting. First-level win and next-level flow were checked in v0.2.
+- Cargo level 6: English instructions and ARIA labels, start, held Space inflation, visible flight and retry verified. Earlier plant drag and failure/retry verified in v0.2.
+- All three game pages measured viewport height 799, document height 799, scrollY 0 at width 1212. Screenshots inspected. Long Body/World help remains within the sidebar. Mobile browser and all 18 browser wins were not tested.
+- Homepage visibly v0.3.0, six levels each, with preserved old-game links and actual locally saved World/Bodies completion counts.
+- All 19 production *.test.js files and release validator passed before publication. Automated replay proves reachability, not human enjoyment.
+
+以上为实际在线检查范围，不代表所有设备、所有关卡人工式通关，也不证明玩家主观乐趣。
+
+
+## v0.5 release checks / 发布检查
+World seven levels and two variants, Cargo seven levels and lamp variant, Bodies eight levels and two level8 routes pass automated solutions and counterexamples. Top-edge puffer detour intentionally retained and tested; initial bookmark prompt corrected. Separate variant progress and all-page embedded-module parity pass. New live checks remain pending deployment; no all-device or human-fun guarantee.
