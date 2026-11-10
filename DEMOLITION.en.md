@@ -1,6 +1,8 @@
 # Demolition Expert · Single-level demo
 
-**Development candidate, pending browser playtesting and release verification.** The entry is `demolition.html`. This is one quickly retryable demolition level, not a complete level pack.
+**The demo is live and has passed this round of browser checks.** The entry is `demolition.html`. This is one quickly retryable demolition level, not a complete level pack.
+
+**Release verification:** revision `f1ebe7ec0247c21abb5c556152d15280a6a16447`. A real browser at approximately 1200×789 verified a single-charge failure (13 pieces still high, two workshop contacts), followed by clearing the plan and successfully rebuilding it. Chinese/English switching and retrying with the plan retained also passed. This was not physical-phone testing or manual coverage of every placement.
 
 ## Goal and controls
 
@@ -20,7 +22,7 @@ The target line is at world y=440, with a 2-pixel display tolerance. Every survi
 
 This is a simplified model: rectangular pieces **do not rotate**. Distance links hold the structure together, excessive strain can break them, and impacts can cause local fractures. Pieces collide with the ground, shield wall and each other. This is not a building-engineering or real demolition-safety simulator.
 
-Independent automated checks found multiple successful placements and demonstrated failures from incomplete clearance and workshop impacts. Representative plans reproduce across different caller frame steps. That does not establish that players can predict outcomes or that the game is fun. Browser targeting, visual feedback and retry usability still require verification.
+Independent automated checks found multiple successful placements and demonstrated failures from incomplete clearance and workshop impacts. Representative plans reproduce across different caller frame steps. That does not establish that players can predict outcomes or that the game is fun. The browser checks below cover targeting, failure/success feedback and retry; broader usability still needs player feedback.
 
 Desktop landscape is the priority, not a portrait-phone restriction. Touch layouts and usability need separate checks. No installation or server connection is needed to simulate this level.
 
@@ -28,4 +30,4 @@ Desktop landscape is the priority, not a portrait-phone restriction. Touch layou
 
 The hotel remains at `hotel.html`, and the original space game at `index.html`. Their saves are not replaced by the demolition demo.
 
-The next progress update is estimated for **November 10, 2026, 21:00–22:00 Beijing time (UTC+8)**. Verification determines release timing. The next focus is feedback-driven improvement to this level’s controls and explanations, not a promise of more levels or a complete game within that window.
+The next progress update is estimated for **November 10, 2026, 21:00–22:00 Beijing time (UTC+8)**. Verification determines release timing. The next iteration prioritizes a desktop layout that keeps the playfield and controls on one screen, avoiding scroll jumps during clicks, plus clearer controls. These improvements are not yet verified; no extra levels or complete game are promised within that window.
