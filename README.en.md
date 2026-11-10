@@ -2,9 +2,9 @@
 
 ## Next update plan and estimate
 - Current version: **0.15.1**.
-- Next: pause peripheral investigation additions and prioritize a new standalone “Scrapship Breakout” playable slice: manual aim, directional defense, recovered functional modules, destructible external parts, and a short run with a clear outcome. Existing modes and saves remain. Actual play must validate actions and tradeoffs; more modules or passing tests do not prove replayability.
-- Estimated update: first playable candidate, **November 10, 2026, 21:00–22:00 Beijing time (UTC+8)**. This larger redesign is an estimate, not a guarantee. If play or tests fall short, this plan will be revised rather than calling unfinished work complete.
-- Plan last updated: November 10, 2026, 17:41 Beijing time.
+- Next: stop the modular-combat direction following the latest feedback and build a separate narrative mystery, **The Seventh-Night Inn**. A snowbound inn, room assignments, limited evening actions, conversations, overhearing, searches and protection will drive a complete three-night, four-guest story with evidence-based choices and different endings. No combat grind or higher level caps. The existing space game and saves remain, with a clear separate online entry for the new game.
+- Estimated update: **November 10, 2026, 21:00–22:00 Beijing time (UTC+8)** for the first complete short-story candidate. This is an estimate, not a guarantee; solvability, flow tests and actual play may change it. The new game is not published yet.
+- Plan last updated: November 10, 2026, 17:46 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
