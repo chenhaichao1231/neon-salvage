@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#26201e"><title>第七夜旅馆 · The Seventh Night</title><link rel="stylesheet" href="hotel.css?v=0.1.0"></head>
+<body>
+<div class="weather" aria-hidden="true"></div>
+<header class="masthead"><a class="brand" href="#" id="home"><span class="brand-mark" aria-hidden="true">Ⅶ</span><div><span class="eyebrow" data-i18n="brandOverline">A SHELTER. FOUR STRANGERS.</span><h1 data-i18n="title">第七夜旅馆</h1></div></a><nav aria-label="设置"><button id="language" class="quiet">EN</button><button id="restart" class="quiet" data-i18n="restart">重新开始</button></nav></header>
+<section id="cover" class="cover" hidden><div class="cover-art" id="cover-art"><div class="cover-shade"></div><div class="cover-title"><span class="eyebrow">A WINTER MYSTERY IN THREE NIGHTS</span><h2 data-i18n="title">第七夜旅馆</h2><p data-i18n="coverLead">四位住客，三夜风雪。你留下谁的故事？</p></div></div><div class="cover-bottom"><p id="cover-description"></p><button class="primary" id="enter" data-i18n="enter">推开旅馆的门</button><p class="fine" data-i18n="coverHint">点击安排、交谈和查证。没有计时催促。</p></div></section>
+<main id="game" hidden>
+ <section class="chapter-strip" aria-label="进度"><div><span id="night-label" class="eyebrow"></span><h2 id="phase-label"></h2></div><p id="next-step"></p><div id="resources" class="resources"></div></section>
+ <div class="workspace">
+  <section class="hotel-view" aria-labelledby="map-title"><div class="section-heading"><div><span class="eyebrow" data-i18n="mapOverline">THE HOUSE</span><h2 id="map-title" data-i18n="mapTitle">风雪中的落脚处</h2></div><span class="live-tag" id="map-hint"></span></div><div class="house"><div class="cold-window" aria-hidden="true"><i></i><i></i><i></i><i></i><span></span></div><div id="rooms" class="rooms"></div><div class="hallway"><span class="hall-line"></span><span data-i18n="hall">走廊</span><span class="hall-line"></span></div><div id="guests" class="guests"></div><div class="lobby-label"><span class="fireplace" aria-hidden="true">♨</span><div><strong data-i18n="lobby">一楼接待处</strong><small data-i18n="lobbyHint">每个人都带来一段故事。</small></div><span class="desk-bell" aria-hidden="true">⌒</span></div></div><div id="map-details" class="map-details" aria-live="polite"></div></section>
+  <section class="story-view" aria-labelledby="scene-title"><div class="scene-heading"><span class="eyebrow" id="scene-overline"></span><h2 id="scene-title"></h2></div><div id="scene-portrait" class="scene-portrait" hidden></div><div id="scene-body" class="scene-body"></div><div id="dialogue" class="dialogue" aria-live="polite"></div><div id="actions" class="actions"></div><p id="action-hint" class="fine"></p></section>
+ </div>
+ <section class="notebook" aria-labelledby="notes-title"><button id="notes-toggle" class="notebook-heading" aria-expanded="true"><div><span class="eyebrow" data-i18n="notesOverline">THE LEDGER</span><h2 id="notes-title" data-i18n="notesTitle">证据与住客笔记</h2></div><span id="notes-count"></span><span aria-hidden="true">⌄</span></button><div id="notes-content"><p class="fine" data-i18n="notesHint">记录已知事实。留意不同说法之间的空隙。</p><div id="evidence" class="evidence"></div><div id="history" class="history"></div></div></section>
+</main>
+<section id="loading" class="loading"><span class="eyebrow">THE SEVENTH NIGHT</span><h2 data-i18n="loadingTitle">门外的风雪还没有停。</h2><p data-i18n="loading">正在准备旅馆…</p></section>
+<div id="modal" class="modal" hidden></div><div id="toast" class="toast" role="status"></div>
+<footer><span>v0.1.0</span><span id="save-status" data-i18n="saveHint">进度仅保存在此设备。</span><span data-i18n="footer">没有计时催促。读完，再做决定。</span></footer>
+<script src="seventh-night-art.js?v=0.1.0"></script><script src="hotel-engine.js?v=0.1.0"></script><script src="hotel-ui.js?v=0.1.0"></script>
+</body></html>

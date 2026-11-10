@@ -1,14 +1,16 @@
-# Neon Salvage
+# The Seventh Night Hotel · 第七夜旅馆
+
+[Portrait hotel game](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [How to play](HOTEL.en.md) · [中文](README.md)
+
+**Hotel v0.1.0 candidate:** a complete three-night, four-guest mystery. Room assignments and two powered circuits affect encounters. Spend three actions each night, select two records to test a hypothesis, then confront guests with a deduction. Original painted characters and snowbound inn art, portrait-first, no combat grind. All 17 engine checks and the UI flow test pass. Real portrait layout and full click-through verification follow this deployment; automated tests do not establish human enjoyment.
 
 ## Next update plan and estimate
-- Current version: **0.15.1**.
-- Next: stop the modular-combat direction following the latest feedback and build a separate narrative mystery, **The Seventh-Night Inn**. A snowbound inn, room assignments, limited evening actions, conversations, overhearing, searches and protection will drive a complete three-night, four-guest story with evidence-based choices and different endings. No combat grind or higher level caps. The existing space game and saves remain, with a clear separate online entry for the new game.
-- Estimated update: **November 10, 2026, 21:00–22:00 Beijing time (UTC+8)** for the first complete short-story candidate. This is an estimate, not a guarantee; solvability, flow tests and actual play may change it. The new game is not published yet.
-- Plan last updated: November 10, 2026, 17:46 Beijing time.
-- This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
+- Next: verify portrait layouts and a complete online route, fix observed problems, then improve character interaction and clue feedback based on actual reading and decisions rather than levels or resource grinding.
+- Estimated next update: **November 10, 2026, 19:00–20:00 Beijing time (UTC+8)**. This is not guaranteed; blockers take priority and the plan will be revised.
+- Plan updated November 10, 2026, 18:05 Beijing time. Development window ends November 11 at 15:01 Beijing time, unless stopped earlier.
+- Existing Neon Salvage v0.15.1 and saves remain: [original game](https://chenhaichao1231.github.io/neon-salvage/). The hotel uses an independent save and requires no space-game progress or currency.
 
-
-An offline-first space-survival roguelite. No installation, registration, payment, or external assets required. [中文说明](README.md)
+## Original Neon Salvage documentation
 
 ## v0.15.1: Inspect coverage before spending cargo
 

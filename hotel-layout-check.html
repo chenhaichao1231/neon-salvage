@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>旅馆 · 竖屏布局检查（开发 QA）</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#171b22;color:#edf0f5;font:15px/1.5 system-ui,sans-serif}header,main{max-width:1100px;margin:auto;padding:20px}h1{font-size:23px;margin:0 0 10px}p{margin:8px 0;color:#c4ccda}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:16px 0}button,select{font:inherit;background:#293445;color:inherit;border:1px solid #71829b;padding:10px 14px;border-radius:6px;min-height:44px}button:focus-visible,select:focus-visible{outline:3px solid #ffcc78;outline-offset:3px}.stage{overflow:auto;border:1px solid #566175;padding:12px;background:#10141a}iframe{display:block;border:0;width:390px;height:844px;background:#fff;margin:0 auto;box-sizing:content-box}.readout{margin-top:20px;padding:16px;background:#202832;border-radius:8px}.summary{white-space:pre-wrap;font:14px/1.6 ui-monospace,monospace}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:8px;text-align:left;border-bottom:1px solid #526074;vertical-align:top}th{white-space:nowrap}td:first-child{min-width:160px;overflow-wrap:anywhere}caption{text-align:left;font-weight:bold;padding:12px 0}.note{font-size:13px}details{margin:12px 0}#status{color:#ffda9c}code{color:#b9eadf}
+</style>
+</head>
+<body>
+<header>
+<h1>第七夜旅馆 · 竖屏布局检查</h1>
+<p>开发 QA 工程页，不是玩家入口。仅在浏览器中用固定尺寸的同源 iframe 检查布局与 CSS 媒体查询，<strong>不等于手机真机测试</strong>。</p>
+<p>一次只展示一个视口。可直接在下方游戏内完成流程；切换尺寸只调整视口，不重新加载游戏。正文可在游戏内正常滚动。</p>
+<p class="note">检测只读取已呈现 DOM 的几何尺寸，不读取游戏变量、隐藏剧情或存档，不替你操作游戏。你在 iframe 中亲自游玩仍会触发游戏自己的正常存档；它与同源正式页面共享浏览器存储。</p>
+<div class="controls">
+<label for="size">竖屏视口：</label>
+<select id="size"><option value="390x844">390 × 844</option><option value="360x640">360 × 640</option></select>
+<button id="inspect" type="button">检查当前可见画面</button>
+</div>
+<p id="status" role="status">等待同源游戏页面加载。</p>
+<p class="note">若外层窗口小于视口宽度，外层检查台允许横向滚动，不缩放游戏。请区分检查台滚动与下方报告的游戏内部横向溢出。推荐用同源 HTTP(S) 打开；部分浏览器会限制 file:// iframe 检查。</p>
+</header>
+<main>
+<div class="stage"><iframe id="game-frame" src="hotel.html" title="第七夜旅馆：390 × 844 竖屏测试视口" width="390" height="844"></iframe></div>
+<section class="readout" aria-label="只读布局检测报告">
+<h2>当前画面检测</h2>
+<pre class="summary" id="summary">尚未检测。</pre>
+<div class="table-scroll"><table><caption>当前视口内按钮（滚动到其他区域后重新检查）</caption><thead><tr><th>可见文字 / ID</th><th>实际尺寸</th><th>视口内比例</th><th>提示</th></tr></thead><tbody id="buttons"></tbody></table></div>
+<details><summary>可见图片加载情况</summary><ul id="images"></ul></details>
+<details><summary>当前可见的横向越界元素（最多20个）</summary><ul id="overflow"></ul></details>
+<p class="note">44 × 44 CSS px 为本页触控参考值，不是完整无障碍判定。按钮中心遮挡检测仅为线索，不能代替实际点击；滚动导致部分按钮露出也会标为裁切。图片报告只检查可见 &lt;img&gt;，CSS 背景、SVG、Canvas、美术辨认度仍需人工观察。检测不评价剧情、结局或趣味性。</p>
+</section>
+</main>
+<script>
+'use strict';
+const frame=document.getElementById('game-frame');
+const size=document.getElementById('size');
+const status=document.getElementById('status');
+const round=n=>Math.round(n*10)/10;
+function listItem(parent,text){const li=document.createElement('li');li.textContent=text;parent.append(li);}
+function inspect(){
+ const rows=document.getElementById('buttons'),images=document.getElementById('images'),overflow=document.getElementById('overflow');
+ rows.replaceChildren();images.replaceChildren();overflow.replaceChildren();
+ try{
+  const doc=frame.contentDocument,win=frame.contentWindow;
+  if(!doc||!doc.documentElement||!doc.body)throw Error('页面尚未就绪，或浏览器不允许同源读取。');
+  const root=doc.documentElement,body=doc.body,W=root.clientWidth,H=win.innerHeight;
+  function visible(el){const r=el.getBoundingClientRect();if(!r.width||!r.height||r.bottom<=0||r.top>=H||r.right<=0||r.left>=W)return false;for(let p=el;p&&p.nodeType===1;p=p.parentElement){const s=win.getComputedStyle(p);if(s.display==='none'||s.visibility==='hidden'||s.visibility==='collapse'||Number(s.opacity)===0)return false;}return true;}
+  const width=Math.max(root.scrollWidth,body.scrollWidth);
+  document.getElementById('summary').textContent=`时间：${new Date().toLocaleTimeString()}\n设定视口：${size.value.replace('x',' × ')} CSS px\niframe 元素 clientWidth/clientHeight：${frame.clientWidth} / ${frame.clientHeight}\n游戏 window.innerWidth/innerHeight：${win.innerWidth} / ${win.innerHeight}\nhtml clientWidth/scrollWidth：${root.clientWidth} / ${root.scrollWidth}\nbody clientWidth/scrollWidth：${body.clientWidth} / ${body.scrollWidth}\n游戏内部横向溢出：${width>W+1?'有，超出 '+round(width-W)+' px':'未检测到'}\n纵向内容高度：${Math.max(root.scrollHeight,body.scrollHeight)} px；当前滚动位置：${round(win.scrollY)} px`;
+  const buttons=[...doc.querySelectorAll('button,[role="button"],input[type="button"],input[type="submit"]')].filter(visible);
+  for(const b of buttons){const r=b.getBoundingClientRect(),clipped=Math.max(0,Math.min(r.right,W)-Math.max(0,r.left))*Math.max(0,Math.min(r.bottom,H)-Math.max(0,r.top))/(r.width*r.height);const cx=r.left+r.width/2,cy=r.top+r.height/2;const hit=cx>=0&&cx<W&&cy>=0&&cy<H?doc.elementFromPoint(cx,cy):null;const flags=[];if(r.width<44||r.height<44)flags.push('小于44×44');if(clipped<.99)flags.push('部分在视口外');if(hit&&hit!==b&&!b.contains(hit))flags.push('中心可能被遮挡');if(b.disabled)flags.push('禁用');const tr=document.createElement('tr');for(const text of [(b.innerText||b.value||'无可见文字').trim().slice(0,100)+(b.id?' (#'+b.id+')':''),`${round(r.width)} × ${round(r.height)} px`,Math.round(clipped*100)+'%',flags.join('；')||'尺寸与中心命中未见异常']){const td=document.createElement('td');td.textContent=text;tr.append(td);}rows.append(tr);}
+  if(!buttons.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=4;td.textContent='当前视口内没有可见按钮。';tr.append(td);rows.append(tr);}
+  const imgs=[...doc.images].filter(visible);for(const img of imgs){const r=img.getBoundingClientRect();listItem(images,`${img.alt||img.id||'未命名图片'}：${img.complete&&img.naturalWidth>0?'已加载':'未加载成功或仍在加载'}；显示 ${round(r.width)} × ${round(r.height)}；原图 ${img.naturalWidth} × ${img.naturalHeight}`);}if(!imgs.length)listItem(images,'当前视口无可见 <img>；背景/SVG/Canvas 请人工检查。');
+  let count=0;for(const el of doc.body.querySelectorAll('*')){if(!visible(el))continue;const r=el.getBoundingClientRect();if(r.left< -1||r.right>W+1){if(count++<20)listItem(overflow,`${el.tagName.toLowerCase()}${el.id?'#'+el.id:''}：left ${round(r.left)}, right ${round(r.right)}, width ${round(r.width)} px`);}}if(!count)listItem(overflow,'当前视口未发现可见横向越界元素。');else if(count>20)listItem(overflow,`共 ${count} 个，仅列前20个。`);
+  status.textContent='已读取当前可见画面。进行下一步、滚动或图片加载完成后，请再点检查。';
+ }catch(error){document.getElementById('summary').textContent='无法读取布局。请确认 hotel.html 可用，并使用同源 HTTP(S) 服务打开本页。';status.textContent=String(error.message||error);}
+}
+size.addEventListener('change',()=>{const [w,h]=size.value.split('x').map(Number);frame.style.width=w+'px';frame.style.height=h+'px';frame.width=w;frame.height=h;frame.title=`第七夜旅馆：${w} × ${h} 竖屏测试视口`;requestAnimationFrame(inspect);});
+document.getElementById('inspect').addEventListener('click',inspect);
+frame.addEventListener('load',inspect);
+</script>
+</body>
+</html>
