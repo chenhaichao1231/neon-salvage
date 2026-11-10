@@ -1,14 +1,20 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.13.0**.
+- Current version: **0.13.1**.
 - Next: develop the Dock Seven continuation so Chapter One choices affect later events and solutions; expand practical station projects and active equipment without raising old level caps. Keep both languages and old-save compatibility aligned.
 - Estimated update: **November 10, 2026, 18:30–19:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 16:50 Beijing time.
+- Plan last updated: November 10, 2026, 17:03 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
 An offline-first space-survival roguelite. No installation, registration, payment, or external assets required. [中文说明](README.md)
+
+## v0.13.1: salvage handling patch
+
+Following play feedback, friendly main-gun, turret and reflected shots no longer collide with or damage cargo. They pass through and can still hit enemies beyond it. Cargo continues to block hostile shots and take hostile damage; throwing and delivery are unchanged. No save reset is needed.
+
+New regressions cover all three friendly projectile sources and loose, held, rival-owned and story-core cargo. Existing story, rig, outpost and backup checks still pass. These tests do not replace browser or phone playtesting.
 
 ## Returning with a maxed shipyard: what is new?
 
@@ -33,6 +39,12 @@ These are implemented uses, not a claim of endless progression. Story, projects 
 
 Old alloy, shipyard levels, best score and run count remain. Story/projects are stored separately, and full backups now include them. Importing a legacy format 1 backup restores old progress while retaining your current story; format 2 restores story and projects too. Export through Shipyard→Backup & restore before updating. Different directories or browsers may use different local storage, so keep a backup.
 
+## Play online
+
+[Open the web version](https://chenhaichao1231.github.io/neon-salvage/) without downloading.
+
+The hosted game and local offline files use separate browser-storage origins. Progress does not sync automatically. Export a full backup through Shipyard → Backup & restore in your current version, then import it in the destination version. Keep your old save. Switching browsers also requires backup migration.
+
 ## Download and play
 
 Choose **Code → Download ZIP**, extract the archive, and open **index.html** in a modern Chrome, Edge, Firefox, or Safari browser. Alternatively, run `python3 -m http.server 8000` in the folder and open `http://localhost:8000`.
@@ -49,7 +61,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.13.0
+## Current version: 0.13.1
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 
@@ -105,7 +117,7 @@ This release replaces basic player/main-enemy shapes with six original transpare
 
 ## v0.12: Salvage Skirmish
 
-Choose Salvage Skirmish from the main menu. Wrecks are shared resources: tow them home for alloy, use them as cover against both sides, throw them as weapons, or press F to exchange them for finite turret ammunition. A rival pursues the same cargo; damage makes it drop the original object. See [system guide](SYSTEMS.md).
+Choose Salvage Skirmish from the main menu. Wrecks are shared resources: tow them home for alloy, use them as cover against hostile fire (friendly main-gun, turret and reflected shots pass through without damaging cargo), throw them as weapons, or press F to exchange them for finite turret ammunition. A rival pursues the same cargo; damage makes it drop the original object. See [system guide](SYSTEMS.md).
 
 E grabs/throws along movement heading; Q toggles the main gun; F powers a nearby turret; R requests extraction at the origin. Touch controls are available. Heavy loads slow you down, damage lowers value, and dashing drops cargo. Both pilot and cargo must remain inside the recycler for 1.5 seconds to bank. Banked earnings survive death; undelivered cargo earns nothing. This mode has no original 90-second extraction popup, cache beacons or violet events, and does not yet support same-seed history retries.
 

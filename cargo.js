@@ -127,7 +127,7 @@
     // Optional prevX/prevY provides swept cover detection for fast projectiles.
     for (const shot of shots) {
       shot.cargoHit = null;
-      if (!(shot.life > 0)) continue;
+      if (!(shot.life > 0) || !shot.enemy) continue;
       let target = null, earliest = Infinity;
       for (const item of state.items) {
         if (item.thrown || item.hp <= 0) continue;
@@ -158,9 +158,9 @@
     return events;
   }
   function blockShot(state, shot, target) {
-    if (!(shot.life > 0) || !state.items.includes(target) || target.hp <= 0) return null;
+    if (!shot.enemy || !(shot.life > 0) || !state.items.includes(target) || target.hp <= 0) return null;
     shot.life = 0;
-    target.hp -= shot.enemy ? 10 : Math.max(0, finite(shot.damage, 10));
+    target.hp -= 10;
     const event = { type: 'block', id: target.id, x: target.x, y: target.y, destroyed: target.hp <= 0 };
     if (target.hp <= 0) remove(state, target);
     return event;

@@ -1,3 +1,10 @@
+## 0.13.1 — 2026-11-10
+
+- 根据游玩反馈，友方主炮、炮台和反射子弹不再碰撞或损伤货物，可穿货继续命中敌人；敌弹掩体伤害和投掷保持不变。
+- 更新中英文指南与机制说明，新增三种友弹和四种货物状态的回归测试；无需清档。
+- Friendly main-gun, turret and reflected shots now pass through cargo without damage and can hit enemies beyond it. Hostile cover damage and thrown-cargo behavior are unchanged.
+- Updated bilingual guides and regression coverage for three friendly projectile sources and four cargo states. Existing saves remain compatible.
+
 ## 0.13.0
 
 - 免费失联空间站首章、定点物理记录核心、一次性供电分支、可见站内变化。

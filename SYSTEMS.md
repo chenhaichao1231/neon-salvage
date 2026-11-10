@@ -5,11 +5,11 @@
 ## 一块残骸，互相排斥的用途
 
 - 拖回原点回收站：你和货物都留在站内 1.5 秒后计入收益。重物更值钱，也让拖船更慢。
-- 留作掩体：挡住敌方与己方子弹。被击中会损坏，降低出售价值；己方开火也可能毁掉收益。
+- 留作掩体：只挡住敌方子弹；敌弹会损坏货物、降低出售价值。友方主炮、炮台和反射子弹直接穿过，不会损伤货物。
 - 投掷攻击：按当前移动方向掷出，质量决定伤害。命中后消耗，未命中也会碎裂，不能再卖。
-- 给炮台供能：靠近炮台主动交付，将货物换成有限弹药，不再获得出售收入。炮台射弹仍会损坏货物掩体。
+- 给炮台供能：靠近炮台主动交付，将货物换成有限弹药，不再获得出售收入。炮台射弹会穿过货物，不会损坏货物掩体。
 
-你能关闭主炮保住货物，也能开火抢路。跃迁会放下拖载物，因此逃命与保货不总是同一个选择。
+Q 可以切换主炮自动射击，但无需停火保护货物。跃迁会放下拖载物，因此逃命与保货不总是同一个选择。
 
 ## 动态竞争
 
@@ -24,11 +24,11 @@ This is an evolving shared-resource system, not another sequence of survival obj
 ## One wreck, mutually exclusive uses
 
 - Tow it to the origin recycler: both pilot and cargo must remain inside for 1.5 seconds. Heavy cargo is worth more but slows towing.
-- Keep it as cover: it blocks both friendly and hostile projectiles. Damage lowers sale value, and your own gun can destroy potential earnings.
+- Keep it as cover: it blocks hostile projectiles, whose damage lowers sale value. Friendly main-gun, turret and reflected shots pass through without damaging cargo.
 - Throw it as a weapon: throw along your movement heading; mass determines impact damage. It is consumed on impact or eventually shatters after a miss, so it cannot also be sold.
-- Power a turret: deliberately deliver cargo near a turret to exchange it for finite ammunition instead of sale income. Turret projectiles can still damage cargo cover.
+- Power a turret: deliberately deliver cargo near a turret to exchange it for finite ammunition instead of sale income. Turret projectiles pass through cargo without damaging it.
 
-Switch off the main gun to preserve cargo, or open fire to clear a route. Dashing drops the tow, so escaping danger and retaining cargo are not always the same decision.
+Q toggles the automatic main gun, but you do not need to cease fire to protect cargo. Dashing drops the tow, so escaping danger and retaining cargo are not always the same decision.
 
 ## Dynamic competition
 
