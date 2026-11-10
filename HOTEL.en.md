@@ -2,7 +2,7 @@
 
 [中文说明](HOTEL.md)
 
-**v0.4.0 release draft: online checks of the update are pending.** Discovered evidence gains an object-view presentation within the existing three-night story and reasoning rules. No case or chapter is added.
+**v0.4.0 is live and has completed this round of online browser checks.** Discovered evidence gains an object-view presentation within the existing three-night story and reasoning rules. No case or chapter is added.
 
 ## Four guests, three snowy nights
 
@@ -12,7 +12,7 @@ The story is structured as a **complete short narrative across three nights, fou
 
 ## Getting started
 
-The independent entry is `hotel.html`, not the original game’s `index.html`. For local play, open `hotel.html` with its accompanying scripts, styles and artwork kept together rather than copying the HTML alone. Use the [direct hotel entry](https://chenhaichao1231.github.io/neon-salvage/hotel.html) online; its v0.3.0 online loading check has passed. The original game and its entry remain available and are not overwritten by The Seventh Night Hotel.
+The independent entry is `hotel.html`, not the original game’s `index.html`. For local play, open `hotel.html` with its accompanying scripts, styles and artwork kept together rather than copying the HTML alone. Use the [direct hotel entry](https://chenhaichao1231.github.io/neon-salvage/hotel.html) online; its v0.4.0 online loading check has passed. The original game and its entry remain available and are not overwritten by The Seventh Night Hotel.
 
 Choose **Open the hotel door** to begin. A readable local save lets you continue your existing story. Use the top-right language control to switch between Chinese and English.
 
@@ -53,7 +53,7 @@ Choose **View object** on a discovered evidence card to inspect CSS/SVG schemati
 
 These are schematic recreations, not new hidden clues or pixel-hunting puzzles. All actual information comes from DOM text supplied by the current engine, with object state reflected in the current record. Evidence pairing keeps the existing reasoning mechanism. Viewing, testing a pair and closing the view cost no night action; no new puzzle rules are introduced.
 
-**Current v0.4.0 checks:** candidate review passed, along with 5 object-view tests, 44 engine tests and UI tests. Online browser verification of the update remains pending; earlier online results do not substitute for it.
+**Current v0.4.0 checks:** review, 5 object-view tests, 44 engine tests and UI tests passed. The deployed version was checked in a real online browser using a 360×640 QA viewport. An existing v0.3 company-spare-key publication ending restored correctly. All five material types opened; long English text displayed in full after switching languages. Close/return and Escape worked, and choice buttons were disabled after the ending. Paper and brass-key visuals were inspected; html/body width and scrollWidth both measured 360px, with no horizontal overflow. No physical-phone testing was performed, and the story was not replayed in full this round. The engine is unchanged; the two earlier v0.3 online playthrough records remain applicable.
 
 ## v0.3.0: Choices and agreements
 

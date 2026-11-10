@@ -2,7 +2,7 @@
 
 [Portrait hotel game](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [How to play](HOTEL.en.md) · [中文](README.md)
 
-**v0.4.0 release draft: online checks of the update are pending.** Discovered evidence gains an object-view presentation within the existing three-night story and reasoning rules. No case or chapter is added.
+**v0.4.0 is live and has completed this round of online browser checks.** Discovered evidence gains an object-view presentation within the existing three-night story and reasoning rules. No case or chapter is added.
 
 The three-night, four-guest short story keeps its three actions per night. Reasoning questions emerge with evidence, with neutral question and option wording. The key question supports an alternative evidence chain rather than only one fixed pair. Each offers three explanations: choose two records and actively select an explanation, with no default answer. Wrong-interpretation feedback costs no time. Dialogue better reflects admissions, cooperation and record custody, while historical entries retain what was known at the time.
 
@@ -18,7 +18,7 @@ Choose **View object** on a discovered evidence card to inspect CSS/SVG schemati
 
 These are schematic recreations, not new hidden clues or pixel-hunting puzzles. All actual information comes from DOM text supplied by the current engine, with object state reflected in the current record. Evidence pairing keeps the existing reasoning mechanism. Viewing, testing a pair and closing the view cost no night action; no new puzzle rules are introduced.
 
-**Current v0.4.0 checks:** candidate review passed, along with 5 object-view tests, 44 engine tests and UI tests. Online browser verification of the update remains pending; earlier online results do not substitute for it.
+**Current v0.4.0 checks:** review, 5 object-view tests, 44 engine tests and UI tests passed. The deployed version was checked in a real online browser using a 360×640 QA viewport. An existing v0.3 company-spare-key publication ending restored correctly. All five material types opened; long English text displayed in full after switching languages. Close/return and Escape worked, and choice buttons were disabled after the ending. Paper and brass-key visuals were inspected; html/body width and scrollWidth both measured 360px, with no horizontal overflow. No physical-phone testing was performed, and the story was not replayed in full this round. The engine is unchanged; the two earlier v0.3 online playthrough records remain applicable.
 
 ## v0.3.0: Choices and agreements
 
