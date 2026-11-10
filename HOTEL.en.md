@@ -2,7 +2,7 @@
 
 [中文说明](HOTEL.md)
 
-**Initial candidate guide: not yet verified online. Full-playthrough and mobile testing remain pending.** The planned entry is `hotel.html`. This guide describes the current short story without revealing its central solution or giving an ending walkthrough. It is not a release or test-completion announcement.
+**v0.1.1 candidate: 17 automated tests, UI flow tests and checks of 100 random legal paths have passed. Live portrait-screen verification remains pending.** The candidate has been uploaded and its Pages deployment is queued; this does not yet establish a verified online experience. This guide omits the central solution and ending walkthroughs.
 
 ## Four guests, three snowy nights
 
@@ -12,7 +12,7 @@ The story is structured as a **complete short narrative across three nights, fou
 
 ## Getting started
 
-The independent entry will be `hotel.html` when released. For local play, keep its accompanying scripts, styles and artwork together rather than copying the HTML alone. The current candidate is still being integrated, so this is not yet a download-and-play guarantee.
+The independent entry is `hotel.html`, not the original game’s `index.html`. For local play, open `hotel.html` with its accompanying scripts, styles and artwork kept together rather than copying the HTML alone. Once deployed, the online candidate also uses the `/hotel.html` entry; live verification remains pending. The original game and its entry remain available and are not overwritten by The Seventh Night Hotel.
 
 Choose **Open the hotel door** to begin. A readable local save lets you continue your existing story. Use the top-right language control to switch between Chinese and English.
 
@@ -41,7 +41,7 @@ The ledger records discovered facts, guest accounts and earlier events. Consider
 
 Select two acquired records on the evidence board, choose a claim and press **Test with these two clues**. Testing costs no night action. If the materials do not support the claim, reread them and try another selection. Collecting records is not the same as establishing a deduction: some follow-up questions and final conditions require you to complete the test.
 
-The current code includes this interaction, but end-to-end verification remains pending. This guide deliberately omits the correct action order, decisive evidence combinations and central solution.
+This interaction is included in the current UI flow tests; live portrait-screen verification remains pending. This guide deliberately omits the correct action order, decisive evidence combinations and central solution.
 
 ## Endings depend on more than the last button
 
@@ -61,6 +61,8 @@ The story has a definite conclusion, but not every run will uncover every fact. 
 
 The initial scope is three nights, four guests, four rooms, up to two of three power circuits, three actions per night and conditional endings. It is not a large management simulation, open world or finished long-term content service.
 
-**Before release, checks still needed include:** engine/UI integration, evidence-reasoning interactions, both-language playthroughs and ending paths, saving and restart behavior, portrait-phone tapping and scrolling, artwork completeness and entry-page loading. No verified public launch or next-update schedule is announced here.
+**Passed so far:** 17 automated tests, UI flow tests and checks of 100 random legal paths.
+
+**Still awaiting hands-on verification:** the deployed online entry and artwork loading, plus portrait-phone tapping, scrolling and full playthrough experience. Passing automated tests does not mean every device and narrative path has been manually verified. This guide does not claim completed live verification or promise a next-update feature set or schedule.
 
 The story concerns a past disaster, bereavement, responsibility and concealment, primarily through text. You may stop whenever you need to; reading itself carries no time pressure.

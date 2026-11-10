@@ -2,12 +2,12 @@
 
 [Portrait hotel game](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [How to play](HOTEL.en.md) · [中文](README.md)
 
-**Hotel v0.1.0 candidate:** a complete three-night, four-guest mystery. Room assignments and two powered circuits affect encounters. Spend three actions each night, select two records to test a hypothesis, then confront guests with a deduction. Original painted characters and snowbound inn art, portrait-first, no combat grind. All 17 engine checks and the UI flow test pass. Real portrait layout and full click-through verification follow this deployment; automated tests do not establish human enjoyment.
+**Hotel v0.1.1  :** a complete three-night, four-guest mystery. Room assignments and two powered circuits affect encounters. Spend three actions each night, select two records to test a hypothesis, then confront guests with a deduction. Original painted characters and snowbound inn art, portrait-first, no combat grind. All 17 engine checks and the UI flow test pass. A real browser at 390/360px portrait widths was checked, with a full three-night hearing route completed by normal clicks. Chinese and English showed no horizontal overflow. This is not physical-phone testing or evidence of lasting enjoyment. v0.1.1 keeps every response from the last action visible and enlarges the language button to 44px.
 
 ## Next update plan and estimate
-- Next: verify portrait layouts and a complete online route, fix observed problems, then improve character interaction and clue feedback based on actual reading and decisions rather than levels or resource grinding.
+- Next: improve character interaction and clue feedback based on actual reading and decisions, including responses that reflect known facts and clearer phase outcomes rather than levels or resource grinding.
 - Estimated next update: **November 10, 2026, 19:00–20:00 Beijing time (UTC+8)**. This is not guaranteed; blockers take priority and the plan will be revised.
-- Plan updated November 10, 2026, 18:05 Beijing time. Development window ends November 11 at 15:01 Beijing time, unless stopped earlier.
+- Plan updated November 10, 2026, 18:10 Beijing time. Development window ends November 11 at 15:01 Beijing time, unless stopped earlier.
 - Existing Neon Salvage v0.15.1 and saves remain: [original game](https://chenhaichao1231.github.io/neon-salvage/). The hotel uses an independent save and requires no space-game progress or currency.
 
 ## Original Neon Salvage documentation
