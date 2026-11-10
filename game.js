@@ -1,5 +1,5 @@
 (()=>{'use strict';
-const VERSION='0.15.0', {clamp,distance,seeded,normalize,reward,safeSave,edgeIndicator,contractBonus,encodeBackup,decodeBackup,safeHistory}=Salvage;
+const VERSION='0.15.1', {clamp,distance,seeded,normalize,reward,safeSave,edgeIndicator,contractBonus,encodeBackup,decodeBackup,safeHistory}=Salvage;
 const canvas=document.querySelector('#game'),ctx=canvas.getContext('2d'),overlay=document.querySelector('#overlay'),hud=document.querySelector('#hud');
 let W=innerWidth,H=innerHeight,dpr=1,state='menu',last=performance.now(),clock=0,run=null,keys={},pointer=null,selected='scout',audio=null,sound=false,toastTimer=0;
 let reducedMotion=!!globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -209,8 +209,10 @@ function persistSignal(){try{localStorage.setItem('neon_salvage_signal',JSON.str
 function replaceSignalState(value){signalState=Signal.validate(value);return persistSignal();}
 function signalConfigMarkup(){if(!signalState)return '';const en=globalThis.neonEnglish;return `<h3>${signalText().title}</h3><p>${signalText().intro}</p><p>${signalState.engineeringUnlocked?(en?'Move one relay next run. The other two stay in place. No damage upgrade.':'下局可移动一台中继，另外两台保持原位，不增加伤害。'):(en?'Optional: use a relay and extract alive to unlock free placement. Ignoring all relays never blocks extraction.':'可选：使用一次中继后存活撤离，解锁免费布局。完全忽略中继也不影响撤离。')}</p><div class="row">${['center','west','east'].map(id=>`<button data-signal-layout="${id}" ${!signalState.engineeringUnlocked?'disabled':''} class="${signalState.placement===id?'primary':''}">${en?({center:'Central',west:'West',east:'East'}[id]):({center:'中央',west:'西侧',east:'东侧'}[id])}</button>`).join('')}</div>`;}
 function nearRelay(){return run?.signal?.relays.filter(r=>distance(r,run.p)<=Signal.RULES.feedRange).sort((a,b)=>distance(a,run.p)-distance(b,run.p))[0]||null;}
-function signalPanel(){if(!['playing','signal-panel'].includes(state)||!run?.signal)return;const relay=nearRelay();if(!relay)return;state='signal-panel';pointer=null;keys={};const en=globalThis.neonEnglish,t=signalText(),item=Cargo.held(run.cargo);const value=item&&!item.storyId&&!item.owner&&!item.thrown&&item.hp>0?Math.min(3,item.mass)*12*Math.min(1,item.hp/item.maxHp):0;const full=value*1.5,added=Math.min(60-relay.charge,full),waste=Math.max(0,full-added);const lock=Math.ceil(Math.max(0,relay.tuneReady-run.signal.time));
- overlay.innerHTML=`<section class="panel"><h2>${t.title}</h2><p>${t.gather}</p><p>${t.jam}</p><p>${t.cost}</p><p>${en?'Relay':'中继'} ${relay.id} · ${relay.mode==='gather'?(en?'Gather':'聚拢'):(en?'Jam':'屏蔽')} · ${Math.ceil(relay.charge)}s · ${en?'Switch lock':'切换锁定'} ${lock}s</p><p>${en?'Whole held wreck consumed. Adds':'整件消耗手持残骸，增加'} ${added.toFixed(1)}s · ${en?'Wasted above cap':'超额浪费'} ${waste.toFixed(1)}s</p><div class="row"><button id="signal-feed" ${value<=0||!item||distance(item,relay)>90||relay.charge>=60?'disabled':''}>${en?'Consume held wreck for power':'消耗手持残骸供能'}</button><button id="signal-gather" ${relay.mode==='gather'||relay.charge<=0||lock?'disabled':''}>${en?'Switch to Gather':'切换聚拢'}</button><button id="signal-jam" ${relay.mode==='jam'||relay.charge<=0||lock?'disabled':''}>${en?'Switch to Jam':'切换屏蔽'}</button><button id="signal-close">${en?'Continue flight':'继续航行'}</button></div><p>${en?'All three relays are independent. You may ignore them.':'三台中继互不依赖，你可以完全忽略它们。'}</p></section>`;
+function signalPreviewMarkup(s,en){const pursuit=en?{none:'No current target',held:'Already held: Jam cannot take it back',story:'Story cargo: Jam does not protect it',unavailable:'Current target is not free cargo',inside:'Current pursuit target is inside Jam coverage',outside:'Current pursuit target is outside Jam coverage'}:{none:'当前无追逐目标',held:'已经持货：屏蔽不能夺回',story:'剧情货物：不受屏蔽保护',unavailable:'当前目标不是自由货物',inside:'当前追逐目标在屏蔽范围内',outside:'当前追逐目标在屏蔽范围外'};return `<p class="muted" id="signal-preview">${en?'Now within 250m:':'当前250米内：'} ${s.freeCount} ${en?'free wrecks, remaining value':'件自由残骸，剩余货值'} ${s.remainingValue.toFixed(1)}<br>${en?'Gather would move':'聚拢可移动'} ${s.gatherCount} · ${en?'Raiders currently lureable':'当前可诱导敌人'} ${s.lureCount}<br>${pursuit[s.rivalTarget]}<br>${en?'Snapshot on opening, assuming this relay is powered. Not a promise of earnings or interception.':'打开面板时的快照，按此台供能后估算，不保证收益或拦截。'}</p>`;}
+function signalPanel(){if(!['playing','signal-panel'].includes(state)||!run?.signal)return;const relay=nearRelay();if(!relay)return;state='signal-panel';pointer=null;keys={};const en=globalThis.neonEnglish,t=signalText(),item=Cargo.held(run.cargo);const value=item&&!item.storyId&&!item.owner&&!item.thrown&&item.hp>0?Math.min(3,item.mass)*12*Math.min(1,item.hp/item.maxHp):0;const full=value*1.5,added=Math.min(60-relay.charge,full),waste=Math.max(0,full-added);const lock=Math.ceil(Math.max(0,relay.tuneReady-run.signal.time));const snapshot=Signal.preview(run.signal,run.cargo,run.p,run.enemies,run.rival,relay.id);
+ const unavailable=relay.charge>=60?(en?'Charge full. Use some power before feeding.':'储能已满，先消耗一些电量。'):value<=0?(en?'Tow an ordinary wreck here to power this relay.':'先拖一件普通残骸来供能。'):distance(item,relay)>90?(en?'Bring the held wreck within 90m of this relay.':'请把拖载残骸带进中继90米内。'):'';
+ overlay.innerHTML=`<section class="panel signal-panel" aria-labelledby="signal-title"><header class="signal-heading"><div><small>${en?'RELAY CONTROLS':'中继控制'} · ${relay.id}</small><h2 id="signal-title">${relay.mode==='gather'?(en?'Gather':'聚拢'):(en?'Jam':'屏蔽')} <span>${Math.ceil(relay.charge)} / 60s</span></h2></div><button id="signal-close">${en?'Continue flight':'继续航行'}</button></header><div class="signal-status">${relay.charge>0?(en?'Powered':'供能中'):(en?'Offline':'未供能')} · ${lock?(en?'Switch locked for ':'切换还需 ')+lock+'s':(en?'Channel switch ready':'可切换频道')}</div><section class="signal-cost" aria-label="${en?'Power cost':'供能成本'}"><strong>${en?'Consumes the whole held wreck':'消耗整件拖载残骸'}</strong><p>${en?'Cargo value':'当前货值'} ${value.toFixed(1)} · <b>+${added.toFixed(1)}s</b> · ${en?'Overflow wasted':'超额浪费'} ${waste.toFixed(1)}s</p>${unavailable?`<p class="signal-unavailable">${unavailable}</p>`:''}<button class="primary" id="signal-feed" ${unavailable?'disabled':''}>${en?'Consume wreck for power':'消耗残骸供能'}</button></section><section class="signal-coverage"><h3>${en?'Current coverage preview':'当前覆盖预览'}</h3>${signalPreviewMarkup(snapshot,en)}</section><p class="signal-risk">${en?'Gather also lures raiders. Jam cannot reclaim held cargo or clear enemies.':'聚拢也会引来敌人；屏蔽不能夺回已持货物，也不会清除敌人。'}</p><div class="signal-modes"><button id="signal-gather" ${relay.mode==='gather'||relay.charge<=0||lock?'disabled':''}>${en?'Switch to Gather':'切换聚拢'}</button><button id="signal-jam" ${relay.mode==='jam'||relay.charge<=0||lock?'disabled':''}>${en?'Switch to Jam':'切换屏蔽'}</button></div><details class="signal-explainer"><summary>${en?'How it works':'工作原理'}</summary><p>${t.gather}</p><p>${t.jam}</p><p>${t.cost}</p><p>${en?'All three relays are independent. You may ignore them.':'三台中继互不依赖，你可以完全忽略它们。'}</p></details></section>`;
  document.querySelector('#signal-feed').onclick=()=>{if(state!=='signal-panel')return;const e=Signal.feed(run.signal,run.cargo,run.p,relay.id);if(e){signalEvents([e]);signalPanel();}};
  for(const mode of ['gather','jam'])document.querySelector('#signal-'+mode).onclick=()=>{if(state!=='signal-panel')return;const e=Signal.tune(run.signal,run.p,relay.id,mode);if(e){signalEvents([e]);signalPanel();}};
  document.querySelector('#signal-close').onclick=()=>{if(state==='signal-panel'){state='playing';overlay.innerHTML='';keys={};updateHud();}};
@@ -219,6 +221,30 @@ function signalEvents(events){for(const e of events){if(e.textKey)toast(signalTe
 function updateSignalHud(){const b=document.querySelector('#signal-action');b.hidden=!run?.signal;b.disabled=state!=='playing'||!nearRelay();b.textContent=globalThis.neonEnglish?'Relay controls · H':'中继控制 · H';}
 function drawSignal(){
  if(!run.signal)return;const en=globalThis.neonEnglish;
+ // Read-only live eligibility mirrors Signal.update, not the hypothetical powered preview.
+ if(run.cargo&&!run.signal.finished){
+  const marks=[];
+  for(const item of run.cargo.items){
+   if(!(item.hp>0)||item.owner||item.thrown||item.storyId||item.id===run.cargo.heldId||distance(item,run.p)>500)continue;
+   let nearest=null,best=Signal.RULES.fieldRange,jammed=false;
+   for(const relay of run.signal.relays){
+    if(!(relay.charge>0))continue;const d=distance(item,relay);
+    if(relay.mode==='jam'&&d<=Signal.RULES.fieldRange)jammed=true;
+    if(relay.mode==='gather'&&d<best){best=d;nearest=relay;}
+   }
+   const gathered=!!nearest&&best>=nearest.radius+item.radius+8;
+   if(gathered||jammed)marks.push({item,gathered,jammed,range:distance(item,run.p)});
+  }
+  marks.sort((a,b)=>a.range-b.range);
+  ctx.save();ctx.lineWidth=1;ctx.globalAlpha=.7;
+  for(const {item,gathered,jammed} of marks.slice(0,12)){
+   // Leave the bottom quadrant open: cargo integrity bars sit below the hull.
+   if(gathered){ctx.strokeStyle='#ffd58a';ctx.beginPath();ctx.arc(item.x,item.y,item.radius+5,Math.PI*.75,Math.PI*2.25);ctx.stroke();}
+   if(jammed){ctx.strokeStyle='#a6c8ff';ctx.beginPath();ctx.arc(item.x,item.y,item.radius+9,Math.PI*.75,Math.PI*2.25);ctx.stroke();}
+  }
+  ctx.restore();
+ }
+
  for(const r of run.signal.relays){
   ctx.save();const powered=r.charge>0,color=powered?(r.mode==='jam'?'#a6c8ff':'#ffd58a'):'#536678';
   ctx.strokeStyle=color;ctx.lineWidth=2;

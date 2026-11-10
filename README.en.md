@@ -1,14 +1,18 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.15.0**.
+- Current version: **0.15.1**.
 - Next: expand the station investigation behind the misleading broadcast and add dynamic encounters. Refine practical engineering choices and relay tradeoffs, checking both languages, control feedback and old-save compatibility rather than treating higher old level caps as the main content.
 - Estimated update: **November 10, 2026, 19:30–20:00 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 17:28 Beijing time.
+- Plan last updated: November 10, 2026, 17:37 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
 An offline-first space-survival roguelite. No installation, registration, payment, or external assets required. [中文说明](README.md)
+
+## v0.15.1: Inspect coverage before spending cargo
+
+The relay panel previews free cargo count and remaining value, movable wrecks, lureable enemies, and whether the rival’s target is covered. This is a snapshot, not a promise of profit. Skip fuel when there is nothing worth concentrating or protecting. Thin gold rings indicate gathered cargo; blue rings indicate current jamming coverage, not bullet protection. Longer explanations sit under an expandable How it works section so choices and controls come first.
 
 ## v0.15.0: Misleading Broadcast, the same wreckage
 

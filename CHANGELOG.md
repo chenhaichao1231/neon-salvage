@@ -1,3 +1,11 @@
+## 0.15.1 — 2026-11-10
+
+- 中继供能前显示真实覆盖货物/货值、可移动与可诱导数量、竞争者目标状态；只读快照，不保证收益。
+- 场上细圈区分实际聚拢与屏蔽覆盖；面板主要取舍优先，长说明可展开，小屏滚动。
+- Relay previews show live coverage, value, eligible targets and rival pursuit before spending cargo; snapshots never guarantee profit.
+- In-world rings distinguish gathered cargo from jamming coverage. The panel prioritizes decisions, with expandable explanations and scrolling.
+- 保留友方不伤货物、既有存档及所有章节。 Friendly cargo safety, existing saves and chapters are retained.
+
 ## 0.15.0 — 2026-11-10
 
 - 新增误导广播：三台独立中继，以同一件普通残骸供能。H/触屏可选择聚拢自由货物并引来普通敌人，或屏蔽竞争者的自由货物选择。

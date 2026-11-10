@@ -16,3 +16,8 @@ Three additional original facility assets: recycling outpost, powered turret and
 新增三套原创透明素材：破损货运艇、伙伴转运站和信号监听台。512×512 RGBA PNG直接嵌入，保留此前九套素材。轮廓、透明度和联系表已检查；游戏场景与小屏可读性需单独验证。
 
 Three original transparent assets: a damaged freighter, partner transfer station, and listening array. Embedded 512×512 RGBA PNGs retain all nine previous assets. Source silhouettes, alpha and contact sheet were inspected; this does not replace in-game or mobile visual review.
+
+## v0.15 Signal relays / 信号中继
+新增原创工业中继：三级天线、双能源罐和开放登舱坡道，512×512透明PNG内嵌，原12项保留。运行时以110px绘制，颜色、范围和电量环由游戏实时绘制。已在在线桌面版观察中继与控制面板；手机辨识度仍未实测。
+
+One original industrial relay adds a three-level antenna, twin energy canisters and an open boarding ramp. The embedded 512×512 transparent PNG preserves the previous twelve assets and renders at 110px. Live rings show mode, range and charge. The relay and control panel were observed in the online desktop build; mobile readability remains unverified.

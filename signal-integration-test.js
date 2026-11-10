@@ -34,3 +34,25 @@ const text=api.currentBackup();assert.equal(JSON.parse(text).format,4);api.garag
 console.log('Signal integration passed: real feed/forces/AI, Jam acquisition and pursuit filtering, rival ownership, parallel modes, no friendly fire, real extraction unlock, next-run layout, and format4/legacy restore.');
 // Forty seconds of real shooter steering: range arrival releases lure, not 40s of camping.
 r=launch();const lure=r.signal.relays[0];lure.charge=60;r.p.x=900;r.p.y=900;r.p.hp=r.p.maxHp=10000;r.next=Infinity;const shooter={type:'shooter',x:lure.x+330,y:lure.y,hp:100,maxHp:100,radius:12,speed:45,shot:999,hit:0};r.enemies=[shooter];let releasedAt=null,immuneFrames=0;for(let i=0;i<400;i++){api.update(.1);const lock=r.signal.lureLocks.get(shooter);if(lock?.until>r.signal.time){immuneFrames++;if(releasedAt===null)releasedAt=r.time;}}assert.ok(releasedAt<2);assert.ok(immuneFrames>=75);assert.ok(lure.charge>19);assert.ok(shooter.y>lure.y+150);console.log('Shooter range regression passed: real 40s simulation releases lure promptly and resumes player pursuit.');
+// Preview is shown before spending, in both languages, and reflects the same live entities.
+r=launch();const previewRelay=r.signal.relays[0];r.p.x=previewRelay.x;r.p.y=previewRelay.y;const freeItem=C.add(r.cargo,previewRelay.x+120,previewRelay.y,3);freeItem.hp=45;const heldFuel=C.add(r.cargo,previewRelay.x,previewRelay.y,1);r.cargo.heldId=heldFuel.id;r.rival=R.create({x:500,y:500});r.rival.targetId=freeItem.id;const beforePreview=JSON.stringify(r.cargo);api.signalPanel();let markup=doc.querySelector('#overlay').innerHTML;assert.match(markup,/signal-preview/);assert.match(markup,/1 件自由残骸，剩余货值 18.0/);assert.match(markup,/当前追逐目标在屏蔽范围内/);assert.match(markup,/不保证收益或拦截/);assert.equal(JSON.stringify(r.cargo),beforePreview);assert.equal(previewRelay.charge,0);close();sandbox.neonEnglish=true;api.signalPanel();markup=doc.querySelector('#overlay').innerHTML;assert.match(markup,/1 free wrecks, remaining value 18.0/);assert.match(markup,/Not a promise of earnings or interception/);assert.equal(JSON.stringify(r.cargo),beforePreview);close();sandbox.neonEnglish=false;console.log('Relay preview UI passed: before-spend live snapshot, bilingual, ownership-preserving and no guaranteed returns.');
+// Relay panel hierarchy: spend/preview/actions stay visible; full rules begin collapsed.
+for(const en of [false,true]){
+  sandbox.neonEnglish=en;r=launch();const relay=r.signal.relays[0];r.p.x=relay.x;r.p.y=relay.y;
+  const cargo=C.add(r.cargo,relay.x,relay.y,2);r.cargo.heldId=cargo.id;
+  const before=JSON.stringify(r.cargo);api.signalPanel();const html=doc.querySelector('#overlay').innerHTML;
+  assert.match(html,/<section class="panel signal-panel"/);assert.match(html,/<details class="signal-explainer">/);
+  assert.ok(!/<details[^>]*\sopen(?:\s|>)/.test(html));
+  assert.equal((html.match(/id="signal-close"/g)||[]).length,1);
+  assert.ok(html.indexOf('id="signal-close"')<html.indexOf('signal-cost'));
+  assert.ok(html.indexOf('id="signal-feed"')<html.indexOf('signal-explainer'));
+  assert.ok(html.indexOf('id="signal-preview"')<html.indexOf('signal-explainer'));
+  assert.ok(html.indexOf('id="signal-jam"')<html.indexOf('signal-explainer'));
+  const visible=html.slice(0,html.indexOf('<details'));
+  assert.ok(visible.includes(en?'Consumes the whole held wreck':'消耗整件拖载残骸'));
+  assert.ok(visible.includes(en?'Gather also lures raiders':'聚拢也会引来敌人'));
+  assert.ok(visible.includes(en?'Jam cannot reclaim held cargo':'屏蔽不能夺回已持货物'));
+  assert.ok(html.includes(en?'How it works':'工作原理'));assert.equal(JSON.stringify(r.cargo),before);close();
+}
+sandbox.neonEnglish=false;
+console.log('Relay hierarchy passed: bilingual collapsed rules, visible irreversible cost and risks, preview before details, reachable close/action order, no state mutation.');
