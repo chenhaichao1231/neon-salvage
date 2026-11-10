@@ -1,3 +1,19 @@
+# Demolition Expert · Browser demo
+
+[Open the demo](https://chenhaichao1231.github.io/neon-salvage/demolition.html) · [Controls and limits](DEMOLITION.en.md) · [中文](README.md)
+
+**Candidate build; browser and release verification are pending.** Place three targeted cutting charges to bring the frame below the marked height and let every surviving piece settle. Keep the workshop untouched by both structural pieces and debris. Plan, detonate, inspect the failure and retry. Non-rotating pieces, breakable links and local fractures form a simplified model, not engineering-realistic demolition.
+
+The next progress update is estimated for November 10, 2026, 21:00–22:00 Beijing time (UTC+8), subject to verification. Improve this single level from feedback before promising more levels.
+
+Existing entries and saves remain: [The Seventh Night Hotel](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [Original space game](https://chenhaichao1231.github.io/neon-salvage/). Their documentation follows below.
+
+
+
+Development has switched to the selected demolition demo. Hotel plans below are historical; unpublished reading and case-two work is retained, not currently being released.
+
+---
+
 # The Seventh Night Hotel · 第七夜旅馆
 
 [Portrait hotel game](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [How to play](HOTEL.en.md) · [中文](README.md)

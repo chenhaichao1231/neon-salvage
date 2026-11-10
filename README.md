@@ -1,3 +1,19 @@
+# 拆楼专家 · 网页单关演示
+
+[拆楼演示入口](https://chenhaichao1231.github.io/neon-salvage/demolition.html) · [玩法与边界](DEMOLITION.md) · [English](README.en.md)
+
+**候选版本，实际浏览器与上线验证待完成。**用3个定点切断药包拆除框架楼：所有剩余材料需稳定降到目标线以下，右侧工坊不能被构件或碎片触碰。先布置、再引爆，查看失败原因并快速重试。模型使用不旋转构件、可断连接与局部碎裂，不是工程真实模拟。
+
+下一次进展预计北京时间2026年11月10日21:00–22:00，以验证结果为准。先根据反馈优化单关体验，不承诺新增多关。
+
+原有入口与存档保留：[第七夜旅馆](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [旧航线游戏](https://chenhaichao1231.github.io/neon-salvage/)。以下保留原有游戏说明。
+
+
+
+当前开发方向已按选择切换为拆楼 demo；以下旅馆旧计划仅作历史记录，尚未发布的分页及第二案暂存。
+
+---
+
 # 第七夜旅馆 · The Seventh Night Hotel
 
 [旅馆竖屏试玩入口](https://chenhaichao1231.github.io/neon-salvage/hotel.html) · [中文玩法说明](HOTEL.md) · [English](README.en.md)
