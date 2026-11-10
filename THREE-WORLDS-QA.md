@@ -55,3 +55,9 @@ Earlier pending/offline statements above are historical checkpoints, superseded 
 
 ## v0.5 release checks / 发布检查
 World seven levels and two variants, Cargo seven levels and lamp variant, Bodies eight levels and two level8 routes pass automated solutions and counterexamples. Top-edge puffer detour intentionally retained and tested; initial bookmark prompt corrected. Separate variant progress and all-page embedded-module parity pass. New live checks remain pending deployment; no all-device or human-fun guarantee.
+
+## v0.5 live acceptance / 在线验收 — 2026-11-10 22:31 Beijing
+
+Remote 4b22eed63cbe8f9f0b943a83c5024bb24e46dbe2, Pages run42834125145 Success. README first screen visually inspected: online-play link directly beneath title and pointing to the public gallery. Gallery visibly v0.5 with preserved completion records and old-game links.
+
+Actual browser actions cleared World level7 in five steps and Bodies level8 via crate-held door with drone untouched. Cargo level7 drag, size toggle, pause, resume, English switch and retry inspected; document height799 matched viewport799 without whole-page scrolling. New scene screenshots inspected. This does not claim all22 levels or both Bodies8 paths were browser-cleared, nor mobile compatibility or subjective enjoyment. Local release passed21 *.test.js files plus validator.

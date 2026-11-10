@@ -4,9 +4,9 @@
 
 无需下载，打开即可选择三款游戏。No download needed: open the link and choose a game.
 
-三款中英双语网页游戏的持续开发版本，已授权发布。新内容自动化检查通过，新增关卡实际浏览器验收随后记录。
+三款中英双语网页游戏的持续开发版本，已授权发布。新内容自动化检查通过；已实际浏览器通关书签第7关与身体第8关箱子路线，核验河豚第7关操作和暂停重试。
 
-Three evolving bilingual browser games. Publication is authorized and automated checks passed; live browser acceptance for new content will be recorded after deployment.
+Three evolving bilingual browser games. Automated checks passed. Live browser play cleared World level 7 and the crate route in Bodies level 8, and checked Cargo level-7 controls, pause and retry.
 
 ## 开始 / Start
 
@@ -32,13 +32,13 @@ Every level is freely selectable. Normal and variant completion are separate; op
 
 新增内容已通过自动化解法、反例和UI处理器测试；这不等同实际浏览器试玩，更不证明玩家会觉得有趣。新内容的真实浏览器布局与游玩尚待验证。线上v0.3的已完成检查见QA历史记录。
 
-New content has automated solution, counterexample and UI-handler checks. These are not actual browser playtests and do not prove human enjoyment. New-content browser layout and play remain unverified. See QA history for completed live v0.3 checks.
+New content has automated solution, counterexample and UI-handler checks. These are not actual browser playtests and do not prove human enjoyment. Desktop layouts and the interactions above were inspected. Not all 22 levels were cleared in a browser, and phones have not been tested on-device. See THREE-WORLDS-QA.md for the precise scope.
 
 ## 下一版 / Next iteration
 
-优先审查新能力是否形成真正不同的选择，检查目标说明、失败反馈与替代路线；不为凑关卡延长走路，不用刷资源或加数值替代新体验。本次上传已获授权，完成部署后进行在线实际操作核验。后续发布遵循用户授权。
+下一轮暂不加关：强化改写世界、货物性格与身体协作的可见因果及短场景反馈，让操作本身更有吸引力；不为凑关卡延长走路，不用刷资源或加数值替代新体验。本次上传已获授权，完成部署后进行在线实际操作核验。后续发布遵循用户授权。
 
-Next, review whether the new abilities create genuinely different choices, and inspect goals, failure feedback and alternative routes. Avoid longer walks merely to increase level counts, resource grinding or stat inflation. This upload is authorized; live browser acceptance follows deployment. Later releases follow the user’s publication authorization.
+Next, pause level expansion and strengthen visible reactions to world changes, parcel personalities and body cooperation, with brief scene feedback that makes interaction itself more engaging. Avoid longer walks merely to increase level counts, resource grinding or stat inflation. This upload is authorized; live browser acceptance follows deployment. Later releases follow the user’s publication authorization.
 
 预计下一次本地检查：北京时间2026年11月10日23:00–11月11日00:00。这是检查节点估计，不是上线承诺。24小时本轮迭代暂以请求接收时间起算至北京时间2026年11月11日21:46；用户停止指令优先。
 
