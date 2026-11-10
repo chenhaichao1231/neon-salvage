@@ -17,6 +17,10 @@
  * Claude refreshes one nonstacking mark; 3 later hits from OTHER unit ids trigger
  * 18 armor-ignoring bonus once. Same projectile cannot repeatedly hit its target.
  * Gemini impact slows enemies within .8 cells in same row, refresh not stack.
+ * Visual events shot/hit/kill/unit-hit/unit-lost/leak snapshot row,x,time.
+ * x is in grid cells: shot launch point, otherwise affected entity center
+ * (leak may be negative). unitType identifies the firing/hurt unit; enemyType
+ * identifies the hit/killed/leaking enemy or the unit-hit attacker.
  * These numbers are first-playtest hypotheses, not claims about brand quality.
  */
 (function(root){'use strict';
@@ -47,7 +51,7 @@ function retry(s){if(!['battle','lost'].includes(s.phase)||!s.snapshot)return fa
 function collect(s,id){const g=s.gpus.find(g=>g.id===id);if(!g||g.collected)return fail('gpu');if(s.phase!=='battle'||s.paused)return fail('phase');credit(s,g);return ok();}
 function credit(s,g){g.collected=true;s.compute+=g.value;s.stats.earned+=g.value;}
 function rng(s){s.seed=(Math.imul(s.seed,1664525)+1013904223)>>>0;return s.seed/4294967296;}
-function damage(s,e,shot,events){const d=units[shot.type];const amount=d.damage*(shot.damageScale===undefined?1:shot.damageScale)*(1-(enemies[e.type].armor||0));e.hp-=amount;events.push({type:'hit',source:shot.source,target:e.id,amount});if(e.mark&&e.mark.until>s.time&&e.mark.owner!==shot.source){e.mark.hits++;if(e.mark.hits>=3){e.hp-=18;events.push({type:'mark-trigger',target:e.id,amount:18});e.mark=null;}}
+function damage(s,e,shot,events){const d=units[shot.type];const amount=d.damage*(shot.damageScale===undefined?1:shot.damageScale)*(1-(enemies[e.type].armor||0));e.hp-=amount;events.push({type:'hit',source:shot.source,target:e.id,amount,row:e.row,x:e.x,time:s.time,unitType:shot.type,enemyType:e.type});if(e.mark&&e.mark.until>s.time&&e.mark.owner!==shot.source){e.mark.hits++;if(e.mark.hits>=3){e.hp-=18;events.push({type:'mark-trigger',target:e.id,amount:18});e.mark=null;}}
 if(shot.type==='claude'&&e.hp>0)e.mark={owner:shot.source,hits:0,until:s.time+4};
 if(shot.type==='gemini')s.enemies.filter(n=>n.hp>0&&n.row===e.row&&Math.abs(n.x-e.x)<=.8).forEach(n=>n.slowUntil=s.time+1.5);
 }
@@ -56,12 +60,12 @@ function tick(s,events){const dt=1/60;s.tick++;s.time=s.tick/60;const schedule=l
 while(s.nextSpawn<schedule.length&&schedule[s.nextSpawn].time<=s.time){const p=schedule[s.nextSpawn++],d=enemies[p.type];const e={id:'e'+s.nextId++,row:p.row,type:p.type,x:7.8,hp:d.hp,cooldown:0,slowUntil:0,mark:null};s.enemies.push(e);events.push({type:'spawn',id:e.id,row:e.row,enemyType:e.type});}
 while(s.gpuCount<s.gpuQuota&&s.nextGpu<=s.time){s.gpuCount++;const g={id:'g'+s.nextId++,x:.4+rng(s)*6.2,born:s.nextGpu,value:30,collected:false};s.gpus.push(g);s.nextGpu+=6;events.push({type:'gpu',id:g.id});}
 s.gpus.forEach(g=>{if(!g.collected&&s.time>=g.born+4){credit(s,g);events.push({type:'gpu-credit',id:g.id,value:g.value});}});
-for(const u of s.units){updateStatus(s,u,events);u.cooldown=Math.max(0,u.cooldown-dt);if(u.status!=='rice'&&u.cooldown<=0&&s.enemies.some(e=>e.hp>0&&e.row===u.row&&e.x>=u.x-.1)){u.fired++;s.shots.push({id:'s'+s.nextId++,source:u.id,type:u.type,damageScale:u.status==='weak'?.7:1,row:u.row,x:u.x+.15,left:u.type==='gpt'&&u.fired%4===0?2:1,hits:[]});u.cooldown=units[u.type].interval;events.push({type:'shot',source:u.id,piercing:u.type==='gpt'&&u.fired%4===0});}}
+for(const u of s.units){updateStatus(s,u,events);u.cooldown=Math.max(0,u.cooldown-dt);if(u.status!=='rice'&&u.cooldown<=0&&s.enemies.some(e=>e.hp>0&&e.row===u.row&&e.x>=u.x-.1)){u.fired++;s.shots.push({id:'s'+s.nextId++,source:u.id,type:u.type,damageScale:u.status==='weak'?.7:1,row:u.row,x:u.x+.15,left:u.type==='gpt'&&u.fired%4===0?2:1,hits:[]});u.cooldown=units[u.type].interval;events.push({type:'shot',source:u.id,piercing:u.type==='gpt'&&u.fired%4===0,row:u.row,x:u.x+.15,time:s.time,unitType:u.type});}}
 for(const sh of s.shots){const end=sh.x+units[sh.type].speed*dt;const targets=s.enemies.filter(e=>e.hp>0&&e.row===sh.row&&!sh.hits.includes(e.id)&&e.x>=sh.x-.22&&e.x<=end+.22).sort((a,b)=>a.x-b.x);for(const e of targets){damage(s,e,sh,events);sh.hits.push(e.id);if(--sh.left<=0)break;}sh.x=end;}
 s.shots=s.shots.filter(sh=>sh.left>0&&sh.x<8.5);
-for(const e of s.enemies){if(e.hp<=0)continue;if(e.mark&&e.mark.until<=s.time)e.mark=null;e.cooldown=Math.max(0,e.cooldown-dt);const block=s.units.filter(u=>u.hp>0&&u.row===e.row&&u.x<=e.x+.1&&e.x-u.x<=.44).sort((a,b)=>b.x-a.x)[0];if(block){if(e.cooldown<=0){block.hp-=enemies[e.type].damage;e.cooldown=enemies[e.type].interval;events.push({type:'unit-hit',source:e.id,target:block.id,amount:enemies[e.type].damage});}}else e.x-=enemies[e.type].speed*(e.slowUntil>s.time?.75:1)*dt;}
-s.units=s.units.filter(u=>{if(u.hp<=0)events.push({type:'unit-lost',id:u.id});return u.hp>0;});
-s.enemies=s.enemies.filter(e=>{if(e.hp<=0){s.stats.kills++;events.push({type:'kill',id:e.id});return false;}if(e.x<0){s.core--;s.stats.leaks++;events.push({type:'leak',id:e.id});return false;}return true;});
+for(const e of s.enemies){if(e.hp<=0)continue;if(e.mark&&e.mark.until<=s.time)e.mark=null;e.cooldown=Math.max(0,e.cooldown-dt);const block=s.units.filter(u=>u.hp>0&&u.row===e.row&&u.x<=e.x+.1&&e.x-u.x<=.44).sort((a,b)=>b.x-a.x)[0];if(block){if(e.cooldown<=0){block.hp-=enemies[e.type].damage;e.cooldown=enemies[e.type].interval;events.push({type:'unit-hit',source:e.id,target:block.id,amount:enemies[e.type].damage,row:block.row,x:block.x,time:s.time,unitType:block.type,enemyType:e.type});}}else e.x-=enemies[e.type].speed*(e.slowUntil>s.time?.75:1)*dt;}
+s.units=s.units.filter(u=>{if(u.hp<=0)events.push({type:'unit-lost',id:u.id,row:u.row,x:u.x,time:s.time,unitType:u.type});return u.hp>0;});
+s.enemies=s.enemies.filter(e=>{if(e.hp<=0){s.stats.kills++;events.push({type:'kill',id:e.id,row:e.row,x:e.x,time:s.time,enemyType:e.type});return false;}if(e.x<0){s.core--;s.stats.leaks++;events.push({type:'leak',id:e.id,row:e.row,x:e.x,time:s.time,enemyType:e.type});return false;}return true;});
 if(s.core<=0){s.phase='lost';events.push({type:'lost'});}else if(s.nextSpawn===schedule.length&&!s.enemies.length){s.phase='won';/* Pending GPU cannot be lost to an early victory. */s.gpus.forEach(g=>{if(!g.collected)credit(s,g);});const remainder=(s.gpuQuota-s.gpuCount)*30;s.compute+=remainder;s.stats.earned+=remainder;s.gpuCount=s.gpuQuota;events.push({type:'gpu-settle',value:remainder});events.push({type:'won'});}}
 function step(s,dt){const events=[];if(s.phase!=='battle'||s.paused||!Number.isFinite(dt)||dt<=0)return events;s.accumulator+=Math.min(dt,1);while(s.accumulator+1e-9>=1/60&&s.phase==='battle'){s.accumulator-=1/60;tick(s,events);}return events;}
 const api={create,deploy,refund,start,pause,retry,collect,step,preview:level=>copy(levels[level]?.spawns||[]),definitions:{units,enemies},levels,grid:{rows:5,cols:7},economy:{initial:180,gpuValue:30,gpuInterval:6,autoCollectDelay:4,quota:10,total:300},statusLabels:{normal:names('正常','Ready'),rice:names('吃饭中','Rice break'),weak:names('思路卡住','Brain fog'),riceWarning:names('准备开饭','Rice break soon'),weakWarning:names('即将卡住','Brain fog soon')}};

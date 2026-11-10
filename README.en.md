@@ -2,7 +2,7 @@
 
 **[Play the online demo](https://chenhaichao1231.github.io/neon-salvage/)**
 
-## Animation Demo 0.3
+## Animation Demo 0.4
 
 Defend five lanes from runaway data, collect GPU compute, and deploy AI characters. This first demo tests the interaction loop and two units, not final art or balance.
 
@@ -18,14 +18,14 @@ Old games are removed from the local current project; online source cleanup is s
 
 ## Animation changes
 
-DeepSeek now uses drawn idle/blink, wind-up/cast and bowl/chopstick/chewing frames tied to live shooting and rice-break state. GPU pickups arc from the four supply positions with matching clickable bounds. GPT and enemies still use their existing static poses and are not claimed as animated.
+DeepSeek now has a foot-aligned wind-up, push, release and distinct recovery instead of reversing the wind-up pose. Idle/blink and bowl/chopstick/chewing cycles remain. Real combat events drive hit, data-shatter and guard-damage feedback; pause freezes it and retry clears it. Damage and resource rules are unchanged. GPU pickups arc from the four supply positions with matching clickable bounds. GPT and enemies still use their existing static poses and are not claimed as animated.
 
 ## Next version and estimate
 
-Next: verify the online artwork, deployment alignment and rice state, improve GPU delivery and hit feedback, then return to stage 2/3 tactical balance. Further AI characters await the user's instruction.
+Next: inspect recovery, hit feedback and small-size readability, then experiment with stage-two spawn timing so a later GPT deployment still has combat to participate in. Compare alternatives before changing balance; do not force a prescribed loadout. Further AI characters await the user's instruction.
 
-Estimated next check/update: **November 11, 2026, 00:45–01:30 Beijing time**, not a guaranteed launch time. Concrete blockers will be reflected here. The agreed development window ends November 11 at 22:57 Beijing.
+Estimated next check/update: **November 11, 2026, 01:15–02:00 Beijing time**, not a guaranteed launch time. Concrete blockers will be reflected here. The agreed development window ends November 11 at 22:57 Beijing.
 
 ## Verification
 
-19 engine and 12 UI/real-engine integration test groups pass, including finite income, pause, language, deterministic retries and status feedback. Automated simulations establish rules and reachable wins, not human enjoyment. Version 0.1 was played through stage one in a real browser, including pause, language, GPU collection and retry. Version 0.2 has runtime Canvas render checks; its online visual acceptance follows deployment and is not claimed in advance.
+19 engine, 15 UI/engine integration and 7 event scenarios pass, plus finite-coordinate, failed-resource and pose-selection checks. Simulation establishes rules and reachable wins, not human enjoyment. Version 0.3 was played through stage one in a real browser with DS and 5/5 core, checking rice state, supply, language and frozen pause. Version 0.4 passes local checks; online animation acceptance follows deployment and is not claimed in advance.
