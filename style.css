@@ -4,3 +4,7 @@
 @media(prefers-reduced-motion:reduce){button{transition:none}button:hover{transform:none}.bars i{transition:none}}
 
 #save-json{display:block;width:100%;resize:vertical;min-height:140px;margin:10px 0 16px;background:#0b1525;color:#d9e7f5;border:1px solid #34465b;border-radius:8px;padding:12px;font:13px monospace}.file-label{font-size:13px;padding:10px;border:1px solid #34465b;border-radius:8px}.file-label input{max-width:230px;margin-left:8px}#save-preview{overflow-wrap:anywhere}
+
+.reduced-motion *, .reduced-motion *::before, .reduced-motion *::after { transition: none !important; animation: none !important; }
+
+.reduced-motion button:hover { transform: none; }

@@ -1,10 +1,10 @@
 # Neon Salvage
 
 ## Next update plan and estimate
-- Current version: **0.5.0**.
-- Next: improve distinct ship silhouettes, hit feedback and first-play guidance, while continuing regression and balance checks. Keep both UI languages and guides synchronized.
-- Estimated update: **November 10, 2026, 16:10–16:35 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
-- Plan last updated: November 10, 2026, 15:39 Beijing time.
+- Current version: **0.6.0**.
+- Next: improve upgrade choices and build information, check long-run performance and mobile-input boundaries, and continue regression and balance checks. Keep both UI languages and guides synchronized.
+- Estimated update: **November 10, 2026, 16:20–16:45 Beijing time (UTC+8)**. This is an estimate, not a guarantee. Test failures take priority and will prompt a plan update here.
+- Plan last updated: November 10, 2026, 15:47 Beijing time.
 - This development window ends November 11, 2026, 15:01 Beijing time, or earlier if the user asks to stop.
 
 
@@ -26,7 +26,7 @@ Use the **中文 / English** button on the main menu to change language. The pre
 - Spend alloy on permanent shipyard upgrades. Daily-seed runs disable these bonuses.
 - Progress is stored only in the current browser. Private browsing, clearing site data, or changing the page's origin may make saves unavailable.
 
-## Current version: 0.5.0
+## Current version: 0.6.0
 
 Three ships, nine upgrades, four enemy types including a guardian, extraction decisions, persistent upgrades, daily seeds, touch support, and optional synthesized audio.
 
@@ -56,3 +56,6 @@ At extraction, continue into Swarm or Hunter. Swarm has more fragile regular ene
 After collecting a cache, the next beacon waits 30 seconds, making three caches possible before first extraction.
 On Windows, double-click `launch.bat`. It only opens the adjacent `index.html` in the default browser, with no installation, downloads or settings changes. Extract the entire ZIP first. Other systems can open `index.html` directly. The script has received static safety review, not a Windows execution test.
 Daily seeds do not guarantee cross-device competitive parity: viewport, input and upgrade choices still affect outcomes.
+
+## Flight guide and feedback
+Open the flight guide from the main or pause menu without advancing game time. Three ships have distinct silhouettes. A shield ring indicates temporary invulnerability; a red border indicates recent damage, replacing rapid flicker. Reduced motion initially follows your system preference and can be toggled in the guide for this page session. It hides camera shake, decorative particles and menu background drift without changing combat rules.

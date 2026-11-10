@@ -1,6 +1,13 @@
 /* Presentation translation. Language changes are offered in the main menu only. */
 (()=>{'use strict';let en=false;try{en=localStorage.getItem('neon_lang')==='en';}catch{}if(location.hash==='#lang=en')en=true;if(location.hash==='#lang=zh')en=false;globalThis.neonEnglish=en;if(!en)return;document.documentElement.lang='en';document.title='Neon Salvage';document.querySelector('#game').setAttribute('aria-label','Neon Salvage game canvas');
 const phrases={
+'航行指南':'Flight guide','第一次出航':'Your first flight','移动与跃迁':'Move and dash','回收与成长':'Salvage and grow','撤离与风险':'Extract or risk more','返回暂停':'Back to pause',
+'WASD / 方向键移动，空格跃迁。手机拖动画面，点击跃迁按钮。飞船自动瞄准射击。':'Move with WASD / arrows and dash with Space. On mobile, drag to move and tap Dash. The ship aims and fires automatically.',
+'击破敌人后靠近绿色能量升级。金色信标需要在圆圈内停留 2 秒，提供修复与经验。':'Collect green energy from defeated enemies to upgrade. Stay inside a gold beacon for 2 seconds to gain repairs and XP.',
+'每 90 秒可撤离并获得双倍基础合金，或选择下一条航道。敌方射线提示即将到来的攻击，请及时避开。':'Every 90 seconds, extract for double base alloy or choose another route. Attack warning rays show where incoming shots will travel: move aside.',
+'受击后红色边框短暂提示，护盾圆环表示短暂无敌。飞船轮廓与颜色区分三种机型。':'A brief red border indicates damage; a shield ring indicates temporary invulnerability. Each ship has a distinct silhouette and color.',
+'减少动态：开':'Reduced motion: on','减少动态：关':'Reduced motion: off',
+
 '边缘空域':'Outer fringe','蜂群航道':'Swarm route','猎手航道':'Hunter route','下一程，如何冒险？':'Choose your next risk',
 '两条路线都修复 25% 船体。新出现的敌人受路线影响，已在场的敌人保留原属性。':'Both routes repair 25% hull. Route modifiers affect newly spawned enemies; existing enemies keep their original stats.',
 '敌人出现更频繁，但船体较弱。更适合散射、穿透与无人机。':'More frequent but fragile enemies. Favors spread shots, piercing and drones.',

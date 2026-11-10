@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 0.6.0 — 2026-11-10
+- 新增主菜单/暂停内航行指南、三种飞船轮廓、无闪烁护盾提示和受击边框。
+- Added main/pause flight guides, distinct ship silhouettes, non-flickering shield cues and damage borders.
+- 减少动态遵循系统初始偏好，指南内可切换，关闭装饰粒子、镜头震动与菜单漂移；不改变模拟随机数。
+- Reduced motion follows the initial system preference with an in-guide toggle, hiding particles, shake and menu drift without changing simulation RNG.
+- 帮助返回暂停、动态切换、实际受击及提示衰减回归通过；仍未完成浏览器视觉验证。
+- Guide-to-pause return, motion toggle, real damage and feedback decay checks pass; browser visual verification remains incomplete.
+
 ## 0.5.0 — 2026-11-10
 - 新增深入星域的蜂群/猎手路线选择；猎手普通敌人给予双倍经验与击破分，已生成敌人和守卫不追溯改变。
 - Added Swarm/Hunter route choices. New regular Hunter enemies grant double XP and kill score; existing enemies and guardians keep their stats.
