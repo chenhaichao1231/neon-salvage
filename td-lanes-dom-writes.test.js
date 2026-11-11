@@ -36,7 +36,7 @@ function unchanged(h,name){h.reset();const draws=h.draws;for(let i=0;i<120;i++)h
 let h=harness();unchanged(h,'empty preparation');
 h.nodes.grid.children[0].onclick();h.nodes.start.onclick();for(let i=0;i<62;i++)h.app.controller.tick(.1);h.app.render();assert.equal(h.nodes.tokens.children.length,1);h.nodes.pause.onclick();unchanged(h,'paused battle with selected guard and airborne GPU');
 h=harness(3);h.nodes.grid.children[12].onclick();h.nodes.start.onclick();for(let i=0;i<500&&!h.app.controller.state.enemies.some(e=>e.turnState==='waiting');i++)h.app.controller.tick(1/60);assert(h.app.controller.state.enemies.some(e=>e.turnState==='waiting'));h.app.render();h.nodes.pause.onclick();unchanged(h,'paused detour countdown');
-h=harness(2);h.app.controller.state.phase='won';h.app.render();assert.equal(h.nodes.start.textContent,'Try optional challenge');unchanged(h,'terminal optional-next label');
+h=harness(2);h.app.controller.state.phase='won';h.app.render();assert.equal(h.nodes.start.textContent,'Try mechanic drill');unchanged(h,'terminal optional-next label');
 function finishConvoy(h,win){if(win){h.nodes.grid.children[7].onclick();h.nodes.grid.children[14].onclick();}h.nodes.start.onclick();for(let i=0;i<300&&h.app.controller.state.phase==='battle';i++)h.app.controller.tick(1);assert.equal(h.app.controller.state.phase,win?'won':'lost');h.app.render();assert(h.app.controller.review);assert.equal(h.nodes['battle-review'].hidden,false);assert(h.nodes['review-content'].textContent.includes(win?'No leaks or guards lost':'Affected lanes (leaks/guards lost):'));}
 for(const win of [true,false]){h=harness(4);finishConvoy(h,win);const before=JSON.stringify(h.app.controller.state),facts=JSON.stringify(h.app.controller.review);h.nodes['battle-review'].open=true;unchanged(h,'completed convoy '+(win?'win':'loss')+' with open battle review');assert.equal(h.nodes['battle-review'].open,true);assert.equal(JSON.stringify(h.app.controller.state),before);assert.equal(JSON.stringify(h.app.controller.review),facts);}
 h=harness(0,UI,true);h.resize(739.123,401.789);unchanged(h,'normalizing styles at fractional geometry');
@@ -99,7 +99,7 @@ test('actual terminal shot settles across visible RAF frames, not hidden time or
  const before=JSON.stringify(s);assert.notEqual(R.gptFrame(u,s,h.seen.opts.visualTime,false,1.4,0).index,0);
  h.app.render();h.nodes.language.onclick();h.resize(740,400);assert.equal(h.seen.opts.terminalElapsed,0);assert.equal(JSON.stringify(s),before);
  h.doc.hidden=true;now+=60000;h.app.frame(now);now+=60000;h.app.frame(now);h.doc.hidden=false;now+=1000/60;h.app.frame(now);assert(h.seen.opts.terminalElapsed>0&&h.seen.opts.terminalElapsed<.02,'hidden elapsed time is not accrued');
- for(let i=0;i<40;i++){now+=1000/60;h.app.frame(now);}assert(h.seen.opts.terminalElapsed>.6);assert.equal(R.gptFrame(u,s,h.seen.opts.visualTime,false,1.4,h.seen.opts.terminalElapsed).index,0);assert.equal(JSON.stringify(s),before);
+ for(let i=0;i<60;i++){now+=1000/60;h.app.frame(now);}assert(h.seen.opts.terminalElapsed>.8);assert.equal(R.gptFrame(u,s,h.seen.opts.visualTime,false,1.4,h.seen.opts.terminalElapsed).sheet,'gptIdle');assert.equal(JSON.stringify(s),before);
  h.nodes.retry.onclick();assert.equal(h.app.controller.state.phase,'prepare');assert.equal(h.seen.opts.terminalElapsed,0);h.nodes.start.onclick();win();assert.equal(h.seen.opts.terminalElapsed,0,'new terminal result gets its own tail');
 });
 

@@ -1,39 +1,59 @@
 # Campus Defense · 校园防线
 
-**[Play online](https://chenhaichao1231.github.io/neon-salvage/)** · [中文](README.md)
+**Demo 0.12** · [Play online](https://chenhaichao1231.github.io/neon-salvage/) · [中文](README.md)
 
-## Demo 0.10.1
+A five-lane campus defense game. Collect GPU resources, deploy four AI guards, and stop data enemies entering from the right.
 
-Defend five campus lanes, collect GPU compute and deploy DeepSeek or GPT against incoming data monsters. Three introductory stages, a two-enemy detour exercise and a nine-enemy converging convoy are included.
+## Play
 
-- **DeepSeek:** 50 GPU, inexpensive single-target fire. Warned two-second rice breaks occasionally pause shooting.
-- **GPT:** 90 GPU, each shot can pierce two targets. Warned three-second weak-output windows deal 70% damage.
-- These are fictional game rules, not assessments of real AI products. Only DS/GPT are playable.
+1. Choose a guard, then an empty cell. Guards fire only to the right; inspect each lane's forecast first.
+2. Press Start wave when ready. New supplies can fund reinforcements during battle.
+3. A 30-GPU drop arrives every six battle seconds. Click to collect immediately, or receive it automatically four battle seconds later.
+4. While paused, deploy, collect existing drops or use emergency withdrawal. Deployment spends GPU immediately. Future supplies and simulation time remain frozen until Resume.
+5. Retry restores your pre-wave formation, GPU and the same seeded status schedule, so you can revise your plan.
 
-### What changed
+## Four basic guards
 
-- **Emergency withdrawal:** Once per battle, select a live guard while unpaused and recover half its price, 25/45 GPU. Preparation still permits unlimited full refunds. Fired shots and committed detours continue. Removing a routing guard too early can leave later chargers travelling straight.
-- **Low-health feedback:** Bars turn amber at half health; a static high-contrast exclamation mark appears at quarter health. Selected summaries and accessible cell labels identify Low HP. This describes current health, not guaranteed reaction time or an automatic withdrawal recommendation.
-- **Readable formations:** New placements select the guard and show its actual forward lane. Guards cannot shoot enemies behind themselves.
-- **Battle comparisons:** Results distinguish defeated and voluntarily withdrawn guards; refunds do not reduce gross deployment spending. The previous completed attempt can be compared within the same session, stage and seeded schedule. Clear times are compared only between wins.
-- **Existing motion and loading:** DeepSeek idle, status and recovery follow the battle clock. Actual final casts finish before resting. Fragments, armor and GPT retain event-driven motion. Stage 1 defers about 4.03 MiB of unused enemy-action art; this is not a measured speed claim.
+All four are available from the first stage. Their personalities are fictional game rules, not assessments of real AI products.
 
-### Controls and tactics
+- **DeepSeek · 50 GPU:** cheap single-target fire, 10 damage every 1.1s. Warned two-second rice breaks occasionally interrupt firing.
+- **GPT · 90 GPU:** 14 damage every 1.4s, piercing up to two distinct targets per shot. Warned three-second weak windows reduce damage to 70%.
+- **Claude · 120 GPU:** a single 30-damage armor-ignoring hit every 2s. A two-second warning precedes an automatic three-second offline review. No player questions, nationality checks or personal information are involved.
+- **Grok · 80 GPU:** 16 damage every 1.8s, hitting at most three nearby enemies within 0.8 cells in the same lane. Every fourth committed shot deals 4 damage instead; misses still count. The next-shot counter is separate from the quality of an already-fired projectile.
 
-Choose a guard, then an empty cell, and start when ready. Reinforce, withdraw once, pause or switch 1×/2× during battle. Retry restores pre-wave placement, GPU, status schedule and unused withdrawal allowance without carrying battle income.
+Cheap coverage, piercing, armor removal and tight-cluster damage have different strengths. Buying every guard type is not required for every stage.
 
-A 30-GPU drop arrives every six battle seconds. Click to collect early or receive it automatically after four seconds; it never expires. Each stage has a fixed 300-GPU supply, settled on victory. Withdrawal refunds are separate. Full-price same-cell replacement creates a new guard under the existing rules, costing 25/45 GPU net and the only withdrawal allowance rather than providing free healing.
+## Waves and resources
 
-In the convoy, three lane 2 chargers can be routed into lane 3 alongside six fragments. Within two cells ahead of a guard, they wait two seconds while vulnerable, then turn once. Placement, withdrawal timing and receiving-lane firepower matter. Any leak fails the optional challenge. Savings and clear time are battle comparisons, not permanent stat progression.
+- The three main stages contain **30, 50 and 54 enemies**, arranged in **3, 4 and 4 pushes**. Final arrivals occur at 55, 57.25 and 68 battle seconds. Lane forecasts and the grouped exact schedule remain available.
+- Two separate mechanic drills contain two enemies for a single detour and nine for a converging convoy. Any leak fails these drills. Once a turn has begun charging, withdrawing its guard does not cancel it.
+- Each stage starts with 180 GPU and grants 300 fixed supply GPU. Kills provide no extra income. Early victory credits remaining supply.
+- Preparation refunds are full. There is **one emergency withdrawal per battle**, returning 25 / 45 / 60 / 40 GPU for DS / GPT / Claude / Grok.
+- Withdrawal does not erase existing projectiles. Redeployment costs full price. Voluntary withdrawals are separate from defeated guards; refunds are not supply income and do not reduce gross deployment spending.
+- 1× / 2× changes simulation speed, not combat rules. Hiding the page pauses it; returning requires explicit Resume.
 
-Only reached stages and language are stored in this browser. Refresh starts empty preparation with 180 GPU, not a resumed battle or saved best formation. Stage switching is disabled during battle and nonempty preparation. No account or payment is required.
+## Presentation and progress
 
-### Verification and limitations
+Guards have idle, attack and status poses. Low health receives a color and text cue. The AMD supplier is named Lisa Su (苏姿丰 in Chinese). Failed artwork uses labeled fallback visuals while gameplay remains functional.
 
-All 20 local suites passed during release preparation: 18 current-game suites and two historical-engine/UI suites. Bounded real-engine comparisons demonstrate different outcomes from withdrawal timing, target and reinforcement placement, not human enjoyment or comprehensive balance.
+Language and reached-stage progress are saved in the current browser. Battles and comparison records do not sync across devices. Session-only battle facts track leaks, defeated guards and withdrawals, with comparisons restricted to the same stage and seeded schedule.
 
-Local Canvas frames at 1120×650 and 740×400 were inspected with loaded artwork and both fallback paths. These are not browser-layout, screen-reader, physical-phone, touch or performance acceptance. **Those device checks were not completed during this release preparation.**
+This is a generated-art 2D preview. Large images may make first load slow. Generated artwork does not establish character rights or commercial permission. Physical-phone, touch, screen-reader and performance acceptance are not complete.
 
-This is a 2D sprite prototype with limited animation, body details and movement. Full image assets exceed 20 MiB, so first load may be slow. Generated artwork does not establish character rights or commercial permission. Old source and historical tests remain and are not current-game acceptance.
+## Run locally and test
 
-With Node.js, run the relevant tests individually, for example `node td-lanes.test.js`, `node td-lanes-ui.test.js`, `node td-emergency-withdraw.test.js` and `node td-lanes-low-health.test.js`. Some drawing checks use `@napi-rs/canvas`. Do not treat unrelated historical-prototype tests as current-game verification.
+No backend is needed. Serve the repository root with a static server, for example:
+
+```sh
+python3 -m http.server 8000 --bind 127.0.0.1
+```
+
+Then open `http://127.0.0.1:8000/`.
+
+The `td-*.test.js` suites use Node.js; some drawing checks require `@napi-rs/canvas`.
+
+```sh
+for test in td-*.test.js; do node "$test" || exit 1; done
+```
+
+The 28 relevant pre-release suites passed for Demo 0.12. Automated checks and fixed-policy simulations are not complete device acceptance, exhaustive balance proof or evidence of human enjoyment. Historical prototype files are not the current game entry point.

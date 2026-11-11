@@ -5,7 +5,7 @@ function convoy(time=null,reinforce=false,withdrawReceiver=false){const s=E.crea
  while(s.phase==='battle'&&s.time<100){if(time!==null&&s.time+1e-8>=time){assert(E.emergencyWithdraw(s,id).ok);if(reinforce)assert(E.deploy(s,2,1,'deepseek').ok);time=null;}tracker.observe(E.step(s,1/60),s);}
  return {s,facts:tracker.result};}
 for(const type of ['deepseek','gpt']){
- const s=E.create();E.deploy(s,0,0,type);const id=s.units[0].id,prep=JSON.stringify(s);assert.equal(E.emergencyWithdraw(s,id).reason,'phase');E.start(s);E.pause(s,true);const paused=JSON.stringify(s);assert.equal(E.emergencyWithdraw(s,id).reason,'paused');assert.equal(JSON.stringify(s),paused);E.pause(s,false);
+ const s=E.create();E.deploy(s,0,0,type);const id=s.units[0].id,prep=JSON.stringify(s);assert.equal(E.emergencyWithdraw(s,id).reason,'phase');E.start(s);E.pause(s,true);const paused=JSON.stringify(s);assert.deepEqual(E.step(s,1),[]);assert.equal(JSON.stringify(s),paused);
  assert.equal(E.emergencyWithdraw(s,'missing').reason,'unit');assert.equal(s.stats.emergencyCount,0);const amount=E.definitions.units[type].cost/2;assert.deepEqual(E.emergencyWithdraw(s,id),{ok:true,amount});assert.equal(s.compute,180-amount);assert.equal(s.stats.earned,0);assert.equal(s.stats.unitsLost,0);assert.equal(s.stats.emergencyCount,1);assert.equal(s.stats.emergencyRefunds,amount);
  const after=JSON.stringify(s);for(let i=0;i<10;i++)assert(!E.emergencyWithdraw(s,id).ok);assert.equal(JSON.stringify(s),after);E.deploy(s,0,0,type);assert.equal(E.emergencyWithdraw(s,s.units[0].id).reason,'emergency-used');assert(E.retry(s).ok);assert.equal(JSON.stringify(s),prep);assert(E.refund(s,id).ok);assert.equal(s.compute,180);E.deploy(s,0,0,type);E.start(s);assert(E.emergencyWithdraw(s,s.units[0].id).ok);
 }

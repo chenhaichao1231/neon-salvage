@@ -6,11 +6,11 @@ const doc={hidden:false,documentElement:{},getElementById:id=>nodes[id],createEl
 const R=require('./td-lanes-renderer'),D=E.definitions;
 function recorded(){const calls=[],stack=[];const ctx={fillStyle:'original',save(){stack.push(this.fillStyle);},restore(){this.fillStyle=stack.pop();},fillRect(...v){calls.push([this.fillStyle,...v]);}};return {ctx,calls};}
 test('inclusive thresholds, live supported types only, standalone parity and pure drawing',()=>{
- for(const type of ['deepseek','gpt','claude','gemini','missing'])for(const hp of [-1,0,NaN,Infinity,1,22.5,22.5001,30,30.0001,45,60,61,120]){
- const u={type,hp},low=['deepseek','gpt'].includes(type)&&hp>0&&hp<=D.units[type].hp*.25;
+ for(const type of ['deepseek','gpt','claude','grok','gemini','missing'])for(const hp of [-1,0,NaN,Infinity,1,22.5,22.5001,30,30.0001,45,60,61,120]){
+ const u={type,hp},low=E.roster.includes(type)&&hp>0&&hp<=D.units[type].hp*.25;
  assert.equal(UI.isLowHealth(u,D),low);assert.equal(R.isLowHealth(u,D),low);
  const a=recorded(),b=recorded(),before=JSON.stringify(u);UI.drawLowHealth(a.ctx,u,D,500,293);R.drawLowHealth(b.ctx,u,D,500,293);assert.deepEqual(a.calls,b.calls);assert.equal(JSON.stringify(u),before);assert.equal(a.ctx.fillStyle,'original');if(low)assert.deepEqual(a.calls[3],['#18223d',451,316,20,20],'badge stays left of guard, away from the right-side melee blocker');
- assert.equal(a.calls.length,low?7:(['deepseek','gpt'].includes(type)&&hp>0&&hp<=D.units[type].hp*.5?2:0));
+ assert.equal(a.calls.length,low?7:(E.roster.includes(type)&&hp>0&&hp<=D.units[type].hp*.5?2:0));
  }
  assert.equal(UI.healthLabel({type:'gpt',hp:30},D,'en'),'Low HP');assert.equal(UI.healthLabel({type:'gpt',hp:30},D,'zh'),'低生命');
 });

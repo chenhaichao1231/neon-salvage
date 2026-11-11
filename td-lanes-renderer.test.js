@@ -9,11 +9,11 @@ assert.equal(R.dsFrame(ds,state,0,false).index,0);
 assert.equal(R.dsFrame(ds,state,2.9,false).index,1);
 assert.equal(R.dsFrame(ds,state,3.2,false).index,2);
 assert.equal(R.dsFrame(ds,state,3.2,true).index,0);
-ds.status='rice';for(const [remaining,index] of [[2,3],[1.75,4],[1.5,5]]){ds.statusRemaining=remaining;assert.equal(R.dsFrame(ds,state,0,false).index,index);}
-ds.status='normal';ds.fired=1;state.enemies=[{hp:10,row:0,x:5}];ds.cooldown=1.05;assert.equal(R.dsFrame(ds,state,0,false).index,2);ds.cooldown=.85;assert.equal(R.dsFrame(ds,state,0,false).index,4);
+ds.status='rice';for(const [remaining,index] of [[2,3],[1.75,4],[1.3,5]]){ds.statusRemaining=remaining;assert.equal(R.dsFrame(ds,state,0,false).index,index);}
+ds.status='normal';ds.fired=1;state.enemies=[{hp:10,row:0,x:5}];ds.cooldown=1.05;assert.equal(R.dsFrame(ds,state,0,false).index,2);ds.cooldown=.6;assert.equal(R.dsFrame(ds,state,0,false).index,4);
 console.log('DS idle blink/turn, attack and three rice poses follow visible combat states');
 
-state.enemies=[];ds.cooldown=1.05;assert.equal(R.dsFrame(ds,state,0,false).index,2,'last kill does not truncate cast');ds.cooldown=.85;assert.equal(R.dsFrame(ds,state,0,false).index,4,'last kill keeps recovery');ds.cooldown=.1;assert.equal(R.dsFrame(ds,state,0,false).sheet,'dsIdle','no windup without target');
+state.enemies=[];ds.cooldown=1.05;assert.equal(R.dsFrame(ds,state,0,false).index,2,'last kill does not truncate cast');ds.cooldown=.6;assert.equal(R.dsFrame(ds,state,0,false).index,4,'last kill keeps recovery');ds.cooldown=.1;assert.equal(R.dsFrame(ds,state,0,false).sheet,'dsIdle','no windup without target');
 
 for(const reduced of [false,true])for(const type of ['shot','hit','kill','unit-hit','unit-lost','leak']){const fx=[{type,row:2,x:3,born:1,life:.7,variant:2}];const before=JSON.stringify(fx);R.drawEffects(ctx,fx,1.3,reduced);assert.equal(JSON.stringify(fx),before);}
 console.log('Cosmetic hit/death/shield feedback uses finite coordinates without mutating events');
@@ -24,26 +24,26 @@ const gs={enemies:[{hp:20,row:0,x:4}],paused:false};
 assert.equal(E.definitions.units.gpt.interval,1.4,'GPT animation interval agrees with engine');
 assert.equal(R.gptFrame(gpt,gs,0,false).index,0,'unfired unit is not falsely releasing');
 gpt.fired=1;
-for(const [cooldown,index] of [[1.4,2],[1.35,2],[1.25,3],[1.05,4],[.9,5],[.7,0],[.2,1]]){
+for(const [cooldown,index] of [[1.4,2],[1.25,2],[1.1,3],[.9,4],[.7,5],[.55,0],[.2,1]]){
  gpt.cooldown=cooldown;assert.equal(R.gptFrame(gpt,gs,0,false).index,index,'GPT frame at cooldown '+cooldown);
 }
 // No target must suppress anticipation, but cannot truncate an already emitted shot.
 for(const enemies of [[],[{hp:0,row:0,x:4}],[{hp:10,row:1,x:4}],[{hp:10,row:0,x:-1}]]){
  gs.enemies=enemies;gpt.cooldown=.2;assert.equal(R.gptFrame(gpt,gs,0,false).index,0);
- gpt.cooldown=1.25;assert.equal(R.gptFrame(gpt,gs,0,false).index,3);
- gpt.cooldown=1.05;assert.equal(R.gptFrame(gpt,gs,0,false).index,4);
+ gpt.cooldown=1.1;assert.equal(R.gptFrame(gpt,gs,0,false).index,3);
+ gpt.cooldown=.9;assert.equal(R.gptFrame(gpt,gs,0,false).index,4);
 }
 gs.enemies=[{hp:20,row:0,x:4}];gs.paused=true;gpt.cooldown=1.05;
 const freeze=JSON.stringify({gpt,gs});assert.deepEqual(R.gptFrame(gpt,gs,0,false),R.gptFrame(gpt,gs,999,false),'paused cooldown keeps same pose despite wall-clock change');assert.equal(JSON.stringify({gpt,gs}),freeze);
 for(const [cooldown,index] of [[1.4,3],[1.25,3],[1.05,0],[.2,0]]){gpt.cooldown=cooldown;assert.equal(R.gptFrame(gpt,gs,0,true).index,index,'reduced motion uses one release pose, not six-frame cycle');}
-gpt.status='weak';gpt.statusRemaining=2;gpt.cooldown=.7;assert.equal(R.gptFrame(gpt,gs,0,false).index,0,'weak resting retains same model scale');gpt.cooldown=1.25;assert.equal(R.gptFrame(gpt,gs,0,false).index,3,'weak does not suppress real shots');
+gpt.status='weak';gpt.statusRemaining=2;gpt.cooldown=.55;assert.equal(R.gptFrame(gpt,gs,0,false).index,0,'weak resting retains same model scale');gpt.cooldown=1.1;assert.equal(R.gptFrame(gpt,gs,0,false).index,3,'weak does not suppress real shots');
 // Assert actual source rectangles, constant destination scale and explicit weak label.
 R.assets.gptAttack={width:1536,height:1024,complete:true};const frameCalls=[],weakText=[];
 const frameCtx=new Proxy({drawImage:(...a)=>frameCalls.push({args:a,alpha:frameCtx.globalAlpha}),fillText:t=>weakText.push(t)},{get:(o,k)=>o[k]||(()=>{}),set:(o,k,v)=>(o[k]=v,true)});
 const renderState=E.create();renderState.units=[gpt];renderState.enemies=[];
-function renderGpt(time=0,reducedMotion=false){frameCalls.length=0;weakText.length=0;const before=JSON.stringify(renderState);R.draw(frameCtx,{state:renderState,definitions:E.definitions,layout:{}},{width:1120,height:650,lang:'en',reducedMotion,visualTime:time});assert.equal(JSON.stringify(renderState),before);return frameCalls.filter(c=>c.args[0]===R.assets.gptAttack);}
+function renderGpt(time=0,reducedMotion=false){frameCalls.length=0;weakText.length=0;const before=JSON.stringify(renderState);R.draw(frameCtx,{state:renderState,definitions:E.definitions,layout:{}},{width:1120,height:650,lang:'en',reducedMotion,visualTime:time});assert.equal(JSON.stringify(renderState),before);return frameCalls.filter(c=>c.args[0]===R.assets.gptAttack||c.args[0]===R.assets.gptIdle);}
 let rendered=renderGpt();assert.equal(rendered.length,1);assert.deepEqual(rendered[0].args.slice(1,5),[0,512,512,512]);assert.deepEqual(rendered[0].args.slice(7),[96,96]);assert.equal(rendered[0].alpha,.7);assert(weakText.includes('Brain fog 2s'));
-gpt.cooldown=.7;rendered=renderGpt();assert.equal(rendered.length,1);assert.equal(rendered[0].alpha,.7);assert(weakText.includes('Brain fog 2s'));assert(!frameCalls.some(c=>c.args[0]===R.assets.ai),'weak idle avoids swapping to a differently proportioned legacy crop');
+gpt.cooldown=.55;rendered=renderGpt();assert.equal(rendered.length,1);assert.equal(rendered[0].alpha,.7);assert(weakText.includes('Brain fog 2s'));assert(!frameCalls.some(c=>c.args[0]===R.assets.ai),'weak idle avoids swapping to a differently proportioned legacy crop');
 gpt.status='normal';renderState.paused=true;gpt.cooldown=1.05;const frozenCrop=renderGpt(0)[0].args.slice(1);assert.deepEqual(renderGpt(999)[0].args.slice(1),frozenCrop,'paused actual draw remains on same cropped frame');
 // Follow a real first shot and a later cooldown; the renderer never invents shot timing.
 const combat=E.create();E.deploy(combat,0,0,'gpt');E.start(combat);combat.nextSpawn=999;combat.enemies=[{id:'target',type:'armor',hp:9999,row:0,x:5,cooldown:0,slowUntil:0,mark:null}];const observed=new Set();
