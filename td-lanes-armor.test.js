@@ -1,0 +1,15 @@
+const assert=require('node:assert/strict');const {armorFrame:f,drawArmor}=require('./td-lanes-renderer.js');
+const enemy={id:'a',row:0,x:2,cooldown:1};const state={time:10,units:[{hp:10,row:0,x:1.6}]};
+let n=0;const check=(name,fn)=>{fn();console.log('PASS',name);n++;};
+const ev=(type,time,extra={})=>({type,time,amount:2,source:'a',target:'a',...extra});
+check('static travel and no false walk',()=>assert.equal(f(enemy,{...state,units:[]}).index,0));
+check('contact uses real attacker event',()=>assert.equal(f(enemy,state,[ev('unit-hit',10)]).index,4));
+check('contact expires without reverse windup as recovery',()=>assert.equal(f(enemy,{...state,time:10.15},[ev('unit-hit',10)]).index,0));
+check('hit selects guard',()=>assert.equal(f(enemy,state,[ev('hit',10)]).index,5));
+check('hit wins over contact',()=>assert.equal(f(enemy,state,[ev('hit',10),ev('unit-hit',10)]).index,5));
+check('expired, future, zero and other enemy events ignored',()=>{for(const e of [ev('hit',9),ev('hit',11),ev('hit',10,{amount:0}),ev('hit',10,{target:'b'}),ev('unit-hit',10,{source:'b'})])assert.equal(f(enemy,state,[e]).index,0);});
+check('windup requires live blocker and actual cooldown',()=>{assert.equal(f({...enemy,cooldown:.1},state).index,3);assert.equal(f({...enemy,cooldown:.1},{...state,units:[]}).index,0);assert.equal(f({...enemy,cooldown:0},state).index,0);});
+check('pause stable and input immutable',()=>{const s=JSON.stringify({enemy,state});const a=f(enemy,state,[ev('hit',10)]);for(let i=0;i<50;i++)assert.deepEqual(f(enemy,state,[ev('hit',10)]),a);assert.equal(JSON.stringify({enemy,state}),s);});
+check('reduced motion static and retry has no retained event state',()=>{assert.equal(f(enemy,state,[ev('hit',10)],true).index,0);assert.equal(f(enemy,{...state,time:0},[]).index,0);});
+check('same crop size and baseline in every frame; no bob/rotation',()=>{const out=[];const ctx={drawImage(...args){out.push(args.slice(1));}};for(const index of [0,3,4,5])drawArmor(ctx,{}, {index},100,100);for(const a of out){assert.equal(a[2],416);assert.equal(a[3],416);assert.deepEqual(a.slice(4),out[0].slice(4));}});
+console.log(`${n} checks passed`);

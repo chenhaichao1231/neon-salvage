@@ -79,3 +79,20 @@ const detourBefore=JSON.stringify(detourState);R.drawDetours(detourCtx,detourSta
 detourState.phase='running';detourState.enemies=[{row:1,x:6,toRow:2,turnState:'waiting',turnRemaining:1.25}];detourText.length=0;R.drawDetours(detourCtx,detourState,[],'zh');assert(detourText.includes('1.3s · → 第3行'));detourState.enemies[0].turnState='done';detourText.length=0;R.drawDetours(detourCtx,detourState,[],'en');assert.equal(detourText.length,0,'completed turn cannot falsely promise a second turn');
 console.log('Detour telegraphs show two-cell range, fixed lane, live countdown and no second turn');
 detourState.enemies=[];detourState.phase='lost';detourState.core=4;detourState.failureReason='challenge-leak';detourText.length=0;R.draw(detourCtx,{state:detourState,definitions:E.definitions,layout:{},preview:E.preview(3)},{width:1120,height:650,lang:'en',reducedMotion:true});assert(detourText.includes('CHALLENGE INCOMPLETE'));assert(!detourText.includes('CORE LOST'));
+
+// Convoys share one route forecast and a single next-turn label, never stacked text.
+const convoyState=E.create(4);E.deploy(convoyState,1,3,'deepseek');detourText.length=0;ranges.length=0;
+const convoyBefore=JSON.stringify(convoyState);R.drawDetours(detourCtx,convoyState,E.preview(4),'en');
+assert.equal(JSON.stringify(convoyState),convoyBefore);assert.equal(ranges.length,1);assert.equal(detourText.length,1);
+convoyState.phase='battle';convoyState.enemies=[{row:1,x:6,toRow:2,turnState:'waiting',turnRemaining:1.8},{row:1,x:5.8,toRow:2,turnState:'waiting',turnRemaining:.6},{row:1,x:6.2,toRow:2,turnState:'approach',turnRemaining:0}];
+detourText.length=0;const groupBefore=JSON.stringify(convoyState);R.drawDetours(detourCtx,convoyState,[],'en');
+assert.deepEqual(detourText,['×3 · Next 0.6s · → lane 3']);assert.equal(JSON.stringify(convoyState),groupBefore);
+convoyState.enemies[1].turnState='done';detourText.length=0;R.drawDetours(detourCtx,convoyState,[],'zh');assert.deepEqual(detourText,['×2 · 下一只 1.8s · → 第3行']);
+console.log('Convoy arrows deduplicate shared routes, count pending turns and show earliest real countdown');
+
+const focusState=E.create();E.deploy(focusState,3,4,'deepseek');const focusId=focusState.units[0].id;
+assert.deepEqual(R.forwardLane(focusState,focusId),{row:3,start:4.4,end:7.8});assert.equal(R.forwardLane(focusState,'missing'),null);
+const focusBefore=JSON.stringify(focusState),focusRects=[],focusLines=[];
+const focusCtx=new Proxy({fillRect:(...v)=>focusRects.push(v),lineTo:(...v)=>focusLines.push(v)},{get:(o,k)=>o[k]||(()=>{}),set:(o,k,v)=>(o[k]=v,true)});
+R.drawForwardLane(focusCtx,focusState,focusId);assert.equal(JSON.stringify(focusState),focusBefore);assert.deepEqual(focusRects,[[668,421,408,72]]);assert(focusLines.some(v=>v[0]===1064&&v[1]===483));
+focusState.units[0].hp=0;assert.equal(R.forwardLane(focusState,focusId),null);console.log('Selected guard highlights its true forward lane and clears for missing/lost selection');

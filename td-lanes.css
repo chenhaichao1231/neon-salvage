@@ -13,3 +13,9 @@
 .drop{width:88px;height:67px;padding:0;border:0;background:transparent;box-shadow:none;display:flex;flex-direction:column;align-items:center;justify-content:center}.drop:hover:enabled{background:#d8ffad22}.drop:before{content:none}.drop img{width:78px;height:46px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 0 5px #b8ff7c)}.drop span{font-size:12px;color:#efffc3;background:#173c29e8;border:1px solid #b3ed86;border-radius:7px;padding:2px 6px;line-height:16px;pointer-events:none}.drop:focus-visible{outline-offset:2px}
 
 .stage-picker{display:flex;align-items:center;gap:6px;font-size:14px}.stage-picker select{min-height:44px;max-width:165px;background:#17243d;color:#eef4ff;border:1px solid #61738f;border-radius:8px;padding:6px}#storage-note{display:block;font-size:12px;color:#bfcbdf;line-height:1.4}
+
+/* Optional terminal-only facts; no live battle dashboard. */
+#battle-review {flex-basis:100%;max-height:150px;overflow:auto;border:1px solid #52638b;border-radius:10px;padding:8px 12px;font-size:.85rem;}
+#battle-review[hidden]{display:none;}
+#battle-review summary {cursor:pointer;}
+#review-content {white-space:pre-line;line-height:1.6;margin:8px 0 0;overflow-wrap:anywhere;}

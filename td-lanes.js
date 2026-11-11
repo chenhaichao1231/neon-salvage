@@ -1,6 +1,6 @@
 /* TDLanes: pure CommonJS/browser engine. Units are grid cells and seconds.
  * create(level=0,{seed=1,unlocked=['deepseek','gpt']}) -> state.
- * deploy(s,row,col,type), refund(s,id), start(s), pause(s,bool), collect(s,id),
+ * deploy(s,row,col,type), refund(s,id), emergencyWithdraw(s,id), start(s), pause(s,bool), collect(s,id),
  * retry(s) mutate and return {ok,reason?}. step(s,seconds) returns events.
  * 5 rows x 7 columns; row/col zero-based. GPU: 30 every 6 battle seconds,
  * collectible immediately, automatically credited after 4 seconds, never expires.
@@ -10,7 +10,7 @@
  * null or {status,startsIn,duration}. A late deployment skips insufficient notice.
  * Status-warning events give 2 seconds notice; rice pauses fire for 2s, weak
  * scales shots fired within its 3s window to .7, without changing targeting.
- * Pause freezes ALL simulation. Battle deployment allowed; refunds prepare only.
+ * Pause freezes ALL simulation. Battle deployment allowed; full refunds prepare only; one half-cost emergency withdrawal per battle.
  * retry battle/lost restores exact pre-start snapshot, including seed/resources.
  * preview(level) gives EVERY spawn with absolute time and row, not random hints.
  * Shots travel; Every GPT shot can hit up to 2 distinct targets.
@@ -43,12 +43,24 @@ const enemies={
 const levels=[{name:names('接通防线','First connection'),brief:names('敌人从右来，角色只向右攻击。选角色→点左侧空格→开始，保住左侧核心。','Enemies approach from the right; guards fire right. Choose a guard, place it in a left cell, then start. Defend the core.'),spawns:[]},{name:names('拥挤的数据流','Crowded stream'),brief:names('后段第1、3行各来6只碎片，其他行各1只。便宜铺场或重点穿透都能守住；试试更省或更快的布阵。','Later, lanes 1 and 3 each get six fragments; other lanes get one. Cheap coverage or focused piercing can both hold. Try a cheaper or faster layout.'),spawns:[]},{name:names('突破尝试','Breach attempt'),brief:names('冲锋怪速度更快。关注各行预告，及时补位；角色打不到已经走到其左边的敌人。','Chargers move faster. Watch each lane and reinforce in time; guards cannot hit enemies that have already passed to their left.'),spawns:[]}];
 for(let r=0;r<5;r++){levels[0].spawns.push({row:r,type:'data',time:4+r*4},{row:r,type:'data',time:29+r*2});levels[1].spawns.push({row:r,type:'armor',time:5+r*3});for(let i=0;i<((r===0||r===2)?6:1);i++)levels[1].spawns.push({row:r,type:'swarm',time:38+r+i*.2});levels[2].spawns.push({row:r,type:'armor',time:3+r*2},{row:r,type:'charge',time:17+r*2},{row:r,type:'charge',time:31+r});}
 levels.push({name:names('可选挑战 · 一次绕行','Optional · One detour'),optional:true,objective:{kind:'zero-leaks',maxLeaks:0},brief:names('接近本行守卫两格时停2秒，再转向箭头邻行；停顿仍可击中，只转一次。','Within two cells of a guard ahead, pause 2s then turn to the marked lane once. Still vulnerable while waiting.'),spawns:[{row:1,type:'charge',time:4,toRow:2},{row:2,type:'swarm',time:6}]});
+// Optional follow-up: route a convoy without changing any combat/economy rules.
+levels.push({name:names('可选挑战 · 合流车队','Optional · Converging convoy'),optional:true,objective:{kind:'zero-leaks',maxLeaks:0},brief:names('第2行三只冲锋可绕到第3行；第3行六只碎片。后排分担或前排引流，比较省钱与穿透。','Three chargers in lane 2 can turn into lane 3, where six fragments arrive. Compare rear defense with forward routing and piercing.'),spawns:[...Array.from({length:3},(_,i)=>({row:1,type:'charge',time:4+i*.6,toRow:2})),...Array.from({length:6},(_,i)=>({row:2,type:'swarm',time:6+i*.2}))]});
 levels.forEach(l=>l.spawns.sort((a,b)=>a.time-b.time||a.row-b.row));
 const copy=x=>JSON.parse(JSON.stringify(x)),fail=reason=>({ok:false,reason}),ok=()=>({ok:true});
 function makeSchedule(seed){let out={};for(let r=0;r<5;r++)for(let c=0;c<7;c++)for(const type of ['deepseek','gpt']){seed=(Math.imul(seed,1664525)+1013904223)>>>0;let first=20+seed%11;seed=(Math.imul(seed,1664525)+1013904223)>>>0;out[r+':'+c+':'+type]={first,period:20+seed%11};}return out;}
-function create(level=0,options={}){if(!levels[level])throw Error('level');return {version:1,level,phase:'prepare',paused:false,seed:options.seed>>>0||1,time:0,tick:0,accumulator:0,compute:180,core:5,unlocked:[...new Set(options.unlocked||['deepseek','gpt'])].filter(x=>units[x]),units:[],enemies:[],shots:[],gpus:[],nextSpawn:0,nextGpu:6,gpuCount:0,gpuQuota:10,statusSchedule:makeSchedule(options.seed>>>0||1),nextId:1,snapshot:null,stats:{earned:0,kills:0,leaks:0,unitsLost:0}};}
+function create(level=0,options={}){if(!levels[level])throw Error('level');return {version:1,level,phase:'prepare',paused:false,seed:options.seed>>>0||1,time:0,tick:0,accumulator:0,compute:180,core:5,unlocked:[...new Set(options.unlocked||['deepseek','gpt'])].filter(x=>units[x]),units:[],enemies:[],shots:[],gpus:[],nextSpawn:0,nextGpu:6,gpuCount:0,gpuQuota:10,statusSchedule:makeSchedule(options.seed>>>0||1),nextId:1,snapshot:null,stats:{earned:0,kills:0,leaks:0,unitsLost:0,emergencyCount:0,emergencyRefunds:0,emergencyWithdrawal:null}};}
 function deploy(s,row,col,type){if(!['prepare','battle'].includes(s.phase))return fail('phase');if(!Number.isInteger(row)||!Number.isInteger(col)||row<0||row>=5||col<0||col>=7)return fail('cell');if(!units[type]||!s.unlocked.includes(type))return fail('locked');if(s.units.some(u=>u.row===row&&u.col===col))return fail('occupied');const d=units[type];if(s.compute<d.cost)return fail('compute');s.compute-=d.cost;s.units.push({id:'u'+s.nextId++,row,col,x:col+.5,type,hp:d.hp,cooldown:0,fired:0,status:'normal',statusRemaining:0,warning:null,eligibleAfter:s.time+2,lastWarning:null});return ok();}
 function refund(s,id){if(s.phase!=='prepare')return fail('phase');let i=s.units.findIndex(u=>u.id===id);if(i<0)return fail('unit');s.compute+=units[s.units[i].type].cost;s.units.splice(i,1);return ok();}
+// Separate from preparation refunds: never counts as an enemy-caused loss or supply.
+function emergencyWithdraw(s,id){
+ if(s.phase!=='battle')return fail('phase');if(s.paused)return fail('paused');
+ if((s.stats.emergencyCount||0)>=1)return fail('emergency-used');
+ const i=s.units.findIndex(u=>u.id===id&&u.hp>0&&['deepseek','gpt'].includes(u.type));if(i<0)return fail('unit');
+ const u=s.units[i],amount=units[u.type].cost/2;s.units.splice(i,1);s.compute+=amount;
+ s.stats.emergencyCount=(s.stats.emergencyCount||0)+1;s.stats.emergencyRefunds=(s.stats.emergencyRefunds||0)+amount;
+ s.stats.emergencyWithdrawal={unitType:u.type,row:u.row,col:u.col,time:s.time,amount};
+ return {ok:true,amount};
+}
 function start(s){if(s.phase!=='prepare')return fail('phase');s.snapshot=copy({...s,snapshot:null});s.phase='battle';return ok();}
 function pause(s,value){if(s.phase!=='battle')return fail('phase');s.paused=!!value;return ok();}
 function retry(s){if(!['battle','lost','won'].includes(s.phase)||!s.snapshot)return fail('phase');const old=copy(s.snapshot);Object.keys(s).forEach(k=>delete s[k]);Object.assign(s,old);return ok();}
@@ -75,6 +87,6 @@ s.units=s.units.filter(u=>{if(u.hp<=0){s.stats.unitsLost++;events.push({type:'un
 s.enemies=s.enemies.filter(e=>{if(e.hp<=0){s.stats.kills++;events.push({type:'kill',id:e.id,row:e.row,x:e.x,time:s.time,enemyType:e.type});return false;}if(e.x<0){s.core--;s.stats.leaks++;events.push({type:'leak',id:e.id,row:e.row,x:e.x,time:s.time,enemyType:e.type});return false;}return true;});
 if(levels[s.level].objective?.kind==='zero-leaks'&&s.stats.leaks>0){s.phase='lost';s.failureReason='challenge-leak';events.push({type:'lost',reason:'challenge-leak'});}else if(s.core<=0){s.phase='lost';events.push({type:'lost'});}else if(s.nextSpawn===schedule.length&&!s.enemies.length){s.phase='won';/* Pending GPU cannot be lost to an early victory. */s.gpus.forEach(g=>{if(!g.collected)credit(s,g);});const remainder=(s.gpuQuota-s.gpuCount)*30;s.compute+=remainder;s.stats.earned+=remainder;s.gpuCount=s.gpuQuota;events.push({type:'gpu-settle',value:remainder});events.push({type:'won'});}}
 function step(s,dt){const events=[];if(s.phase!=='battle'||s.paused||!Number.isFinite(dt)||dt<=0)return events;s.accumulator+=Math.min(dt,1);while(s.accumulator+1e-9>=1/60&&s.phase==='battle'){s.accumulator-=1/60;tick(s,events);}return events;}
-const api={create,deploy,refund,start,pause,retry,collect,step,preview:level=>copy(levels[level]?.spawns||[]),definitions:{units,enemies},levels,grid:{rows:5,cols:7},economy:{initial:180,gpuValue:30,gpuInterval:6,autoCollectDelay:4,quota:10,total:300},statusLabels:{normal:names('正常','Ready'),rice:names('吃饭中','Rice break'),weak:names('思路卡住','Brain fog'),riceWarning:names('准备开饭','Rice break soon'),weakWarning:names('即将卡住','Brain fog soon')}};
+const api={create,deploy,refund,emergencyWithdraw,start,pause,retry,collect,step,preview:level=>copy(levels[level]?.spawns||[]),definitions:{units,enemies},levels,grid:{rows:5,cols:7},economy:{initial:180,gpuValue:30,gpuInterval:6,autoCollectDelay:4,quota:10,total:300},statusLabels:{normal:names('正常','Ready'),rice:names('吃饭中','Rice break'),weak:names('思路卡住','Brain fog'),riceWarning:names('准备开饭','Rice break soon'),weakWarning:names('即将卡住','Brain fog soon')}};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;root.TDLanes=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
