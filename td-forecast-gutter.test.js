@@ -12,7 +12,6 @@ const baselineSource=currentSource.replace(placement,"setStyle(rowNodes[row].sty
 const Base=Function('require','module',baselineSource+';return module.exports;')(require,{exports:{}});
 const originalHashes={
  "td-lanes.js": "537c9d404a94be925e5b0c8632fca48a76cd74ba52269d8d142cd7bd5ceb1a5f",
- "td-lanes-renderer.js": "1b729c877aa38f83b8ca40d701d9ade5a3ad8b892252a21397d139f9b203b1a2",
  "td-lanes.css": "4b63261fffadc7e60a50d74e7dcd9fcefae44e709b32be587179ac5e4a1753a9",
  "td-ai-sprites.png": "2106aababd8691ec7acd4ed9972a470d367d6ffc2579c2081fd3e5d0a33232be",
  "td-armor-actions.png": "46ab4d0e8cf90089d9bab126da3dcc6e7ceb5bc1edca76de27542327c27c7c38",
@@ -57,12 +56,14 @@ check('prepare, active, paused, detour countdown, retry and terminal flows prese
 });
 check('all bilingual production label lines fit at observed wide-arena geometry',()=>{
  const {createCanvas,GlobalFonts}=require('@napi-rs/canvas');GlobalFonts.registerFromPath('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc','forecast-test');const ctx=createCanvas(1,1).getContext('2d');ctx.font='12px forecast-test';let maxLine=0,maxRows=0;
- for(const lang of ['en','zh'])for(let level=0;level<E.levels.length;level++){const texts=[];for(let row=0;row<5;row++)texts.push(UI.lanePlan(E.preview(level),row,lang));for(const e of E.preview(level))texts.push((e.type==='charge'?(lang==='zh'?'冲锋':'Charge'):E.definitions.enemies[e.type].name[lang])+(Number.isInteger(e.toRow)?' → '+(e.toRow+1)+'*':'')+'\n99s');texts.push(lang==='zh'?'蓄力 ×3\n下一只 2.0s → 3':'Wait ×3\nNext 2.0s → 3');texts.push(lang==='zh'?'蓄力 2.0s → 3':'Wait 2.0s → 3');
+ for(const lang of ['en','zh'])for(let level=0;level<E.levels.length;level++){const texts=[];for(let row=0;row<5;row++)texts.push(UI.lanePlan(E.preview(level),row,lang));for(const e of E.preview(level))texts.push(UI.upcomingLabel(E,e,e.time-99,lang));texts.push(lang==='zh'?'蓄力 ×3\n下一只 2.0s → 3':'Wait ×3\nNext 2.0s → 3');texts.push(lang==='zh'?'蓄力 2.0s → 3':'Wait 2.0s → 3');
  for(const text of texts){const lines=text.split('\n');maxRows=Math.max(maxRows,lines.length);for(const line of lines){const w=ctx.measureText(line).width;maxLine=Math.max(maxLine,w);assert(w<=96,'existing 108px label content: '+line);}}}
  assert(maxRows*15+6<=82*417/650);console.log('Label text-fit evidence: '+maxLine.toFixed(2)+'px maximum line, '+maxRows+' lines, native font only.');
 });
 check('renderer payload is identical at wide-gutter dimensions',()=>{const capture=adapter=>{const h=harness(2,adapter);h.resize(1140,418);h.nodes.grid.children[0].onclick();h.nodes.start.onclick();h.nodes.pause.onclick();return clone(h.seen);};assert.deepEqual(capture(UI),capture(Base));});
-check('engine, renderer and every original PNG byte unchanged from frozen0.12',()=>{
+// Renderer-only hash retired for the intentional enemy identity presentation change.
+// Geometry/DOM checks above and every engine/CSS/original PNG hash remain enforced.
+check('engine, CSS and every original PNG byte unchanged from frozen0.12',()=>{
  for(const[file,expected]of Object.entries(originalHashes))assert.equal(hash(file),expected,file);
 });
 console.log('PASS '+checks+' focused groups; exact geometry/DOM only, no browser acceptance.');delete global.TDLanesRenderer;

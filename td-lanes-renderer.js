@@ -204,6 +204,75 @@ ctx.fillStyle='#18223d';ctx.fillRect(x-49,y+23,20,20);
 ctx.fillStyle='#fff4ce';ctx.fillRect(x-47,y+25,16,16);
 ctx.fillStyle='#18223d';ctx.fillRect(x-40,y+27,3,7);ctx.fillRect(x-40,y+36,3,3);
 ctx.restore();}
+// A count belongs to an overlapping same-lane run, never to one enemy's health.
+// Connected gaps (rather than distance from the first enemy) keep one visible pack
+// together, capped at 0.9 cells total span so a chain cannot swallow a lane.
+// These are crowd inventories, NOT Grok hit groups (at most 3 within 0.8 cells).
+function enemyPacks(enemies){
+ const packs=[];
+ for(let row=0;row<5;row++){
+  const ordered=enemies.filter(e=>e.hp>0&&e.row===row).sort((a,b)=>a.x-b.x||String(a.id).localeCompare(String(b.id)));
+  for(let i=0;i<ordered.length;){let j=i+1;while(j<ordered.length&&ordered[j].x-ordered[j-1].x<=.45+1e-9&&ordered[j].x-ordered[i].x<=.9+1e-9)j++;
+   const members=ordered.slice(i,j),counts={};for(const e of members)counts[e.type]=(counts[e.type]||0)+1;
+   packs.push({row,members,counts,minX:members[0].x,maxX:members.at(-1).x,routed:members.every(e=>Number.isInteger(e.toRow)&&e.turnState!=='done'&&e.toRow===members[0].toRow)});i=j;
+  }
+ }
+ return packs;
+}
+function enemyTypeGlyph(ctx,type,x,y){
+ const colors={data:'#e6dcff',swarm:'#ffb9e1',armor:'#a9dfff',charge:'#ffd392'};
+ ctx.save();ctx.translate(x,y);ctx.strokeStyle=colors[type]||'#ffffff';ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=2.2;ctx.lineJoin='round';ctx.lineCap='round';ctx.beginPath();
+ if(type==='armor'){ctx.moveTo(-7,-8);ctx.lineTo(7,-8);ctx.lineTo(7,1);ctx.quadraticCurveTo(6,6,0,9);ctx.quadraticCurveTo(-6,6,-7,1);ctx.closePath();ctx.stroke();ctx.beginPath();ctx.moveTo(0,-4);ctx.lineTo(0,4);ctx.stroke();}
+ else if(type==='charge'){for(const dx of [-4,4]){ctx.moveTo(dx+3,-7);ctx.lineTo(dx-3,0);ctx.lineTo(dx+3,7);}ctx.stroke();}
+ else if(type==='swarm'){ctx.moveTo(0,3);ctx.lineTo(-9,-7);ctx.lineTo(-8,2);ctx.lineTo(-4,0);ctx.lineTo(0,5);ctx.lineTo(4,0);ctx.lineTo(8,2);ctx.lineTo(9,-7);ctx.closePath();ctx.fill();}
+ else{ctx.moveTo(0,-8);ctx.lineTo(7,0);ctx.lineTo(0,8);ctx.lineTo(-7,0);ctx.closePath();ctx.stroke();}
+ ctx.restore();
+}
+function packCueLayout(s,lang,options={}){
+ const boxes=[],cues=[],overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
+ // Fixed envelopes include fallback names, all authored poses and bob/breath.
+ // Art loading and pose changes cannot flip placement. Keep individual health,
+ // guard status and live turn labels unobscured.
+ for(const e of s.enemies.filter(e=>e.hp>0)){const r=e.type==='armor'?39:e.type==='swarm'?25:33;boxes.push({x:140+e.x*120-r-3,y:211+e.row*82-(e.type==='swarm'?51:e.type==='armor'?70:61),w:r*2+6,h:(e.type==='swarm'?51:e.type==='armor'?70:61)+40});}
+ for(const u of s.units.filter(u=>u.hp>0)){const x=140+u.x*120,y=211+u.row*82;boxes.push({x:x-51,y:y-70,w:102,h:110});if(guardStatus(u,lang))boxes.push({x:x-(u.type==='grok'?82:66),y:y-76,w:u.type==='grok'?164:132,h:21});}
+ const routes=new Map();for(const e of s.enemies){if(!Number.isInteger(e.toRow)||e.turnState==='done')continue;const key=e.row+':'+e.toRow;if(!routes.has(key)||e.x<routes.get(key).x)routes.set(key,e);}
+ for(const e of routes.values()){const x=140+e.x*120;boxes.push({x:Math.min(890,Math.max(224,x-60))-85,y:162+e.row*82,w:170,h:25});const ax=Math.min(915,x-42);boxes.push({x:ax-9,y:Math.min(211+e.row*82,211+e.toRow*82)+15,w:18,h:Math.abs(e.toRow-e.row)*82-30});}
+ // The unchanged narrow-layout DOM forecast occupies part of the world.
+ const scale=Math.min((options.width||1120)/1120,(options.height||650)/650);
+ if(((options.width||1120)-1120*scale)/2<124)for(let row=0;row<5;row++)if((options.preview||[]).slice(s.nextSpawn).some(p=>p.row===row)||s.enemies.some(e=>e.row===row&&e.turnState==='waiting'))boxes.push({x:985,y:211+row*82-18/scale,w:108/scale,h:36/scale});
+ for(const pack of enemyPacks(s.enemies)){
+  if(pack.members.length<2||pack.routed)continue;
+  const types=['armor','charge','swarm','data',...Object.keys(pack.counts).filter(t=>!['armor','charge','swarm','data'].includes(t))].filter(t=>pack.counts[t]);
+  const slots=types.map(type=>({type,count:pack.counts[type],w:48+Math.max(0,String(pack.counts[type]).length-1)*9})),w=slots.reduce((n,a)=>n+a.w,0)+4,h=28,y=211+pack.row*82;
+  const left=Math.min(...pack.members.map(e=>140+e.x*120-(e.type==='armor'?39:e.type==='swarm'?25:33))),right=Math.max(...pack.members.map(e=>140+e.x*120+(e.type==='armor'?39:e.type==='swarm'?25:33)));
+  // Stay within the same lane and beside the art. Never displace a character.
+  const candidates=[];for(const dy of [-10,13]){candidates.push({x:left-w-8,y:y+dy-h/2,w,h,side:'left'});candidates.push({x:right+8,y:y+dy-h/2,w,h,side:'right'});}
+  candidates.push({x:Math.max(142,Math.min(1116-w,(left+right-w)/2)),y:y-60,w,h,side:'above'});
+  const rect=candidates.find(r=>r.x>=142&&r.x+r.w<=1116&&boxes.every(b=>!overlap(r,b)));
+  // Dense/blocked layouts retain the truthful total instead of covering health,
+  // guards or turns with an unreadable composition label. It is not a type label.
+  if(!rect){
+   const totalX=Math.max(142,Math.min(1078,140+pack.minX*120-19)),totals=[{x:totalX,y:y-61,w:38,h:21},{x:totalX,y:y-82+18/scale+1,w:38,h:21},{x:left-46,y:y-20.5,w:38,h:21},{x:right+8,y:y-20.5,w:38,h:21},{x:totalX,y:y-72,w:38,h:21}];
+   const total=totals.find(r=>r.x>=142&&r.x+r.w<=1116&&boxes.every(b=>!overlap(r,b)));
+   // If even a total has no clear slot, omit the extra badge rather than hide
+   // a guard, individual health, another lane's forecast, or a live turn cue.
+   if(total){boxes.push(total);cues.push({...total,pack,slots:null,fallback:true});}continue;
+  }
+  boxes.push(rect);cues.push({...rect,pack,slots,fallback:false});
+ }
+ return cues;
+}
+function drawPackCues(ctx,s,lang,pill,options={}){
+ for(const cue of packCueLayout(s,lang,options)){
+  if(cue.fallback){pill('×'+cue.pack.members.length,cue.x+cue.w/2,cue.y+15,38,'#ffdcf4');continue;}
+  const {x,y,w,h,slots,pack}=cue;ctx.save();ctx.fillStyle='#142340f2';ctx.strokeStyle='#c5d5eb80';ctx.lineWidth=1.3;ctx.beginPath();ctx.roundRect(x,y,w,h,6);ctx.fill();ctx.stroke();
+  // Short horizontal leader associates the count with its adjacent pack, not a cell.
+  ctx.beginPath();if(cue.side==='above'){ctx.moveTo(x+w/2,y+h);ctx.lineTo(x+w/2,y+h+6);}else{const edge=cue.side==='left'?x+w:x,tip=edge+(cue.side==='left'?6:-6);ctx.moveTo(edge,y+h/2);ctx.lineTo(tip,y+h/2);}ctx.stroke();
+  let sx=x+2;for(const slot of slots){enemyTypeGlyph(ctx,slot.type,sx+12,y+h/2);ctx.font='600 16px system-ui';ctx.textAlign='left';ctx.fillStyle='#f5f2ff';ctx.fillText('×'+slot.count,sx+24,y+19);sx+=slot.w;}
+  ctx.restore();
+ }
+}
+
 function draw(ctx,{state:s,definitions:D,layout:L,preview=[],selectedUnit=null},o){requestEnemyArt(preview,s.enemies);requestGuardArt(s.units);const scale=Math.min(o.width/1120,o.height/650);ctx.save();ctx.fillStyle='#18223d';ctx.fillRect(0,0,o.width,o.height);ctx.translate((o.width-1120*scale)/2,(o.height-650*scale)/2);ctx.scale(scale,scale);
 const text=(v,x,y,size=14,color='#fff')=>{ctx.font='600 '+size+'px system-ui';ctx.textAlign='center';ctx.fillStyle=color;ctx.fillText(v,x,y);};
 const pill=(v,x,y,w=110,color='#d9ebff')=>{ctx.fillStyle='#142340e8';ctx.beginPath();ctx.roundRect(x-w/2,y-15,w,21,7);ctx.fill();text(v,x,y,12,color);};
@@ -226,8 +295,7 @@ if(u.status==='review'){pill('Ⅱ',x+37,y-23,24,'#ffd397');}
 const status=guardStatus(u,o.lang);if(status)pill(status,x,y-61,u.type==='grok'?164:132,u.warning?'#ffe0a0':u.type==='grok'&&(u.fired||0)%4===3?'#ffd397':'#fff');}
 for(const e of s.enemies){const x=140+e.x*120,y=211+e.row*82,idx={data:0,swarm:1,armor:2,charge:3}[e.type]??0,size=e.type==='armor'?78:e.type==='swarm'?49:65,bob=o.reducedMotion||s.paused?0:Math.sin(s.time*5+e.row+e.x)*2;ctx.fillStyle='#24143b55';ctx.beginPath();ctx.ellipse(x,y+27,size*.35,7,0,0,7);ctx.fill();if(e.type==='armor'&&ready(assets.armorActions)){const f=armorFrame(e,s,o.effects||[],o.reducedMotion,D.enemies.armor.interval);drawArmor(ctx,assets.armorActions,f,x,y+27,size);}else if(e.type==='swarm'&&ready(assets.fragmentActions)){const f=fragmentFrame(e,s,o.effects||[],o.reducedMotion),im=assets.fragmentActions,w=im.width/f.cols,h=im.height/f.rows;ctx.drawImage(im,(f.index%f.cols)*w,Math.floor(f.index/f.cols)*h,w,h,x-size/2,y-size+30,size,size);}else if(ready(assets.enemies)){const im=assets.enemies,w=im.width/2,h=im.height/2;ctx.drawImage(im,(idx%2)*w,Math.floor(idx/2)*h,w,h,x-size/2,y-size+30+bob,size,size);}else fallbackEnemy(e,x,y+bob,size);
 ctx.fillStyle='#20192d';ctx.fillRect(x-22,y+34,44,4);ctx.fillStyle='#f0a0ce';ctx.fillRect(x-22,y+34,44*Math.max(0,e.hp/D.enemies[e.type].hp),4);}
-// Count genuinely close independent enemies so dense groups are not mistaken for one.
-for(let row=0;row<5;row++){const ordered=s.enemies.filter(e=>e.row===row&&e.hp>0).sort((a,b)=>a.x-b.x);for(let i=0;i<ordered.length;){let j=i+1;while(j<ordered.length&&ordered[j].x-ordered[i].x<=.45)j++;if(j-i>1&&!ordered.slice(i,j).every(e=>Number.isInteger(e.toRow)&&e.turnState!=='done'&&e.toRow===ordered[i].toRow))pill('×'+(j-i),140+ordered[i].x*120,211+row*82-46,38,'#ffdcf4');i=j;}}
+drawPackCues(ctx,s,o.lang,pill,{width:o.width,height:o.height,preview});
 drawDetours(ctx,s,preview,o.lang);
 drawEffects(ctx,o.effects,o.visualTime||0,o.reducedMotion);
 for(const sh of s.shots){const x=140+sh.x*120,y=211+sh.row*82,c=sh.type==='grok'&&sh.quality==='weak'?'#b69b79':guardColors[sh.type]||'#8ceeff';ctx.save();ctx.shadowBlur=15;ctx.shadowColor=c;ctx.strokeStyle=c;ctx.lineWidth=sh.type==='claude'?8:sh.type==='gpt'?6:4;ctx.beginPath();ctx.moveTo(x-(sh.type==='gpt'?34:17),y);ctx.lineTo(x,y);ctx.stroke();if(sh.type==='gpt'){ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x-30,y-5);ctx.lineTo(x-5,y-5);ctx.moveTo(x-30,y+5);ctx.lineTo(x-5,y+5);ctx.stroke();}if(sh.type==='grok'){ctx.strokeRect(x-6,y-6,12,12);if(sh.quality==='weak'){text('4',x,y-10,11,c);}}ctx.fillStyle='#fff';ctx.beginPath();for(let i=0;i<8;i++){const r=i%2?3:8,ang=i*Math.PI/4;const px=x+Math.cos(ang)*r,py=y+Math.sin(ang)*r;i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.closePath();ctx.fill();ctx.restore();}
@@ -235,5 +303,5 @@ pill((o.lang==='zh'?'核心 ':'CORE ')+s.core+'/5',66,605,110,'#b3f9ff');text(o.
 if(s.phase==='won'||s.phase==='lost'){ctx.fillStyle='#0e1a32ed';ctx.beginPath();ctx.roundRect(375,285,370,78,18);ctx.fill();ctx.strokeStyle='#c7ddff';ctx.stroke();text(s.phase==='won'?(o.lang==='zh'?'防线守住了！':'LINE HELD!'):(s.failureReason==='challenge-leak'?(o.lang==='zh'?'挑战未完成：有敌人漏过':'CHALLENGE INCOMPLETE'):(o.lang==='zh'?'核心失守':'CORE LOST')),560,335,26);}
 const failed=Object.keys(files).filter(k=>assetState(k)==='failed');if(failed.length){const labels={campus:['背景','background'],ai:['守卫','guards'],suppliers:['供给者','suppliers'],enemies:['敌人','enemies'],dsActions:['DS动作','DS actions'],dsIdle:['DS待机','DS idle'],dsAttack:['DS攻击','DS attack'],gptAttack:['GPT攻击','GPT attack'],gptIdle:['GPT待机','GPT idle'],claudeActions:['Claude动作','Claude actions'],grokActions:['Grok动作','Grok actions'],fragmentActions:['碎片振翅','Fragment wings'],armorActions:['重甲动作','Armor actions']};pill((o.lang==='zh'?'资源加载失败：':'Art failed: ')+failed.map(k=>labels[k][o.lang==='zh'?0:1]).join(' / ')+(o.lang==='zh'?' · 已使用备用显示，可继续游玩':' · backup display active; play continues'),560,644,1040,'#ffe0a0');}
 ctx.restore();}
-const api={guardStatus,specialistFrame,requestGuardArt,isLowHealth,drawLowHealth,draw,forwardLane,drawForwardLane,drawDetours,drawEffects,dsFrame,gptFrame,riceIndex,idleIndex,characterBreath,drawCharacter,availableCharacterFrame,fragmentFrame,armorFrame,drawArmor,assets,files,assetStates,assetState};root.TDLanesRenderer=api;if(typeof module==='object'&&module.exports)module.exports=api;
+const api={enemyPacks,enemyTypeGlyph,packCueLayout,drawPackCues,guardStatus,specialistFrame,requestGuardArt,isLowHealth,drawLowHealth,draw,forwardLane,drawForwardLane,drawDetours,drawEffects,dsFrame,gptFrame,riceIndex,idleIndex,characterBreath,drawCharacter,availableCharacterFrame,fragmentFrame,armorFrame,drawArmor,assets,files,assetStates,assetState};root.TDLanesRenderer=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

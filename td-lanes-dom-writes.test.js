@@ -44,8 +44,8 @@ h.nodes.grid.children[0].onclick();h.nodes.start.onclick();for(let i=0;i<62;i++)
 if(measure){delete global.TDLanesRenderer;process.exit(0);}
 let groups=0;function test(name,fn){fn();console.log('PASS',++groups,name);}
 test('actual RAF time advances integer forecasts without rewriting static controls',()=>{
- const h=harness();h.nodes.start.onclick();h.app.frame(0);const row=h.nodes['row-preview'].children[0];assert(row.textContent.endsWith('4s'));h.reset();for(let i=1;i<=11;i++)h.app.frame(i*100);
- assert(h.app.controller.state.time>1);assert(row.textContent.endsWith('3s'));assert(!h.writes.some(w=>w.label==='title'||w.label==='language'||w.kind==='style'));
+ const h=harness();h.nodes.start.onclick();h.app.frame(0);const row=h.nodes['row-preview'].children[0];assert(row.textContent.startsWith('Next in 4s\n'));h.reset();for(let i=1;i<=11;i++)h.app.frame(i*100);
+ assert(h.app.controller.state.time>1);assert(row.textContent.startsWith('Next in 3s\n'));assert(!h.writes.some(w=>w.label==='title'||w.label==='language'||w.kind==='style'));
  assert(h.writes.some(w=>w.kind==='text'));assert(h.seen.opts.visualTime>1);
 });
 test('real warning/status boundaries update selected summary and ARIA, including recovery',()=>{

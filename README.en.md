@@ -1,6 +1,6 @@
 # Campus Defense · 校园防线
 
-**Demo 0.12.1** · [Play online](https://chenhaichao1231.github.io/neon-salvage/) · [中文](README.md)
+**Demo 0.12.2** · [Play online](https://chenhaichao1231.github.io/neon-salvage/) · [中文](README.md)
 
 A five-lane campus defense game. Collect GPU resources, deploy four AI guards, and stop data enemies entering from the right.
 
@@ -21,7 +21,7 @@ All four are available from the first stage. Their personalities are fictional g
 - **Claude · 120 GPU:** a single 30-damage armor-ignoring hit every 2s. A two-second warning precedes an automatic three-second offline review. No player questions, nationality checks or personal information are involved.
 - **Grok · 80 GPU:** 16 damage every 1.8s, hitting at most three nearby enemies within 0.8 cells in the same lane. Every fourth committed shot deals 4 damage instead; misses still count. The next-shot counter is separate from the quality of an already-fired projectile.
 
-Cheap coverage, piercing, armor removal and tight-cluster damage have different strengths. Buying every guard type is not required for every stage.
+Cheap coverage, piercing, armor bypass and tight-cluster damage have different strengths. Buying every guard type is not required for every stage.
 
 ## Waves and resources
 
@@ -35,6 +35,10 @@ Cheap coverage, piercing, armor removal and tight-cluster damage have different 
 ## Presentation and progress
 
 When the right letterbox gutter can fit the forecasts, lane labels move into it; narrower layouts keep their original placement.
+
+Upcoming labels now show “Next in 5s” above the enemy type, separating future arrivals from enemies already present. Nearby packs show type-shaped counts when space permits, with a key in the existing game notes. Tight layouts use a total-only count, or omit the extra count if even that cannot fit safely. Ingress, especially on narrow layouts, can still overlap; enemies and health bars have not moved. Pack counts do not mean shared HP or targets per shot.
+
+Optional battle facts now count Grok shots that actually hit at least two distinct targets. A third target does not add another count; weak shots qualify when they hit two targets. This is a hit observation, not a damage or effectiveness ranking. The four guards, five stages, stats, waves, economy, animation and exact retry rules are unchanged.
 
 Guards have idle, attack and status poses. Low health receives a color and text cue. The AMD supplier is named Lisa Su (苏姿丰 in Chinese). Failed artwork uses labeled fallback visuals while gameplay remains functional.
 
@@ -58,4 +62,4 @@ The `td-*.test.js` suites use Node.js; some drawing checks require `@napi-rs/can
 for test in td-*.test.js; do node "$test" || exit 1; done
 ```
 
-The 29 relevant pre-release suites passed for Demo 0.12.1. Automated checks and fixed-policy simulations are not complete device acceptance, exhaustive balance proof or evidence of human enjoyment. Historical prototype files are not the current game entry point.
+The 31 relevant pre-release suites passed for Demo 0.12.2. Automated checks and fixed-policy simulations are not complete device acceptance, exhaustive balance proof or evidence of human enjoyment. Historical prototype files are not the current game entry point.

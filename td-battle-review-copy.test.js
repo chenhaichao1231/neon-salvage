@@ -1,6 +1,6 @@
 'use strict';
 const assert=require('node:assert/strict'),R=require('./td-battle-review');
-const base={leaks:[0,0,0,0,0],losses:[0,0,0,0,0],firstLeak:null,turns:0,secondHits:0,outcome:'won',spent:100,time:25};
+const base={leaks:[0,0,0,0,0],losses:[0,0,0,0,0],firstLeak:null,turns:0,secondHits:0,grokMultiShots:0,outcome:'won',spent:100,time:25};
 for(const lang of ['en','zh']){
  const result={...base,previous:{...base}};
  const text=R.lines(result,lang).join('\n');
