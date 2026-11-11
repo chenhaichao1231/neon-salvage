@@ -1,0 +1,462 @@
+{
+  "grid": {
+    "columns": 3,
+    "rows": 3,
+    "cell_width": 418,
+    "cell_height": 418,
+    "order": "row-major"
+  },
+  "frame_contract": {
+    "0": "idle",
+    "1": "idle_variant",
+    "2": "windup",
+    "3": "release_right",
+    "4": "follow_through",
+    "5": "recovery",
+    "6": "negative_status_a",
+    "7": "negative_status_b",
+    "8": "settled_idle"
+  },
+  "assets": {
+    "claude": {
+      "file": "td-claude-actions.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "sha256": "d9cdc3f8674b580a374d3c55d822c39b96197964ec5693556ee44da4cea4a6aa",
+      "fixed_frame_anchor_px": [
+        209,
+        405
+      ],
+      "alpha": {
+        "zero_pixel_count": 921947,
+        "solid_pixel_count": 2655,
+        "dominant_interior_range": [
+          252,
+          253
+        ],
+        "max_outer_border_alpha": 4
+      },
+      "frames": [
+        {
+          "index": 0,
+          "name": "idle",
+          "source_rect": [
+            0,
+            0,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            68,
+            7,
+            330,
+            406
+          ],
+          "visible_bottom_y": 405,
+          "lower_boot_horizontal_extent": [
+            155,
+            271
+          ],
+          "cell_border_max_alpha": 4
+        },
+        {
+          "index": 1,
+          "name": "idle_variant",
+          "source_rect": [
+            418,
+            0,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            76,
+            7,
+            336,
+            406
+          ],
+          "visible_bottom_y": 405,
+          "lower_boot_horizontal_extent": [
+            154,
+            271
+          ],
+          "cell_border_max_alpha": 4
+        },
+        {
+          "index": 2,
+          "name": "windup",
+          "source_rect": [
+            836,
+            0,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            32,
+            7,
+            355,
+            406
+          ],
+          "visible_bottom_y": 405,
+          "lower_boot_horizontal_extent": [
+            129,
+            290
+          ],
+          "cell_border_max_alpha": 3
+        },
+        {
+          "index": 3,
+          "name": "release_right",
+          "source_rect": [
+            0,
+            418,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            30,
+            7,
+            402,
+            406
+          ],
+          "visible_bottom_y": 405,
+          "lower_boot_horizontal_extent": [
+            103,
+            263
+          ],
+          "cell_border_max_alpha": 1
+        },
+        {
+          "index": 4,
+          "name": "follow_through",
+          "source_rect": [
+            418,
+            418,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            39,
+            8,
+            373,
+            405
+          ],
+          "visible_bottom_y": 404,
+          "lower_boot_horizontal_extent": [
+            105,
+            272
+          ],
+          "cell_border_max_alpha": 1
+        },
+        {
+          "index": 5,
+          "name": "recovery",
+          "source_rect": [
+            836,
+            418,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            63,
+            7,
+            332,
+            406
+          ],
+          "visible_bottom_y": 405,
+          "lower_boot_horizontal_extent": [
+            154,
+            275
+          ],
+          "cell_border_max_alpha": 1
+        },
+        {
+          "index": 6,
+          "name": "negative_status_a",
+          "source_rect": [
+            0,
+            836,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            70,
+            7,
+            336,
+            406
+          ],
+          "visible_bottom_y": 405,
+          "lower_boot_horizontal_extent": [
+            155,
+            272
+          ],
+          "cell_border_max_alpha": 1
+        },
+        {
+          "index": 7,
+          "name": "negative_status_b",
+          "source_rect": [
+            418,
+            836,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            72,
+            5,
+            343,
+            406
+          ],
+          "visible_bottom_y": 405,
+          "lower_boot_horizontal_extent": [
+            155,
+            271
+          ],
+          "cell_border_max_alpha": 1
+        },
+        {
+          "index": 8,
+          "name": "settled_idle",
+          "source_rect": [
+            836,
+            836,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            68,
+            8,
+            330,
+            406
+          ],
+          "visible_bottom_y": 405,
+          "lower_boot_horizontal_extent": [
+            155,
+            272
+          ],
+          "cell_border_max_alpha": 1
+        }
+      ]
+    },
+    "grok": {
+      "file": "td-grok-actions.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "sha256": "2196e43575eb552cfd366651c8b362d67e18597738fc27a78833d89466483633",
+      "fixed_frame_anchor_px": [
+        209,
+        391
+      ],
+      "alpha": {
+        "zero_pixel_count": 971631,
+        "solid_pixel_count": 2170,
+        "dominant_interior_range": [
+          252,
+          253
+        ],
+        "max_outer_border_alpha": 1
+      },
+      "frames": [
+        {
+          "index": 0,
+          "name": "idle",
+          "source_rect": [
+            0,
+            0,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            67,
+            15,
+            302,
+            391
+          ],
+          "visible_bottom_y": 390,
+          "lower_boot_horizontal_extent": [
+            146,
+            292
+          ],
+          "cell_border_max_alpha": 1
+        },
+        {
+          "index": 1,
+          "name": "idle_variant",
+          "source_rect": [
+            418,
+            0,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            76,
+            22,
+            309,
+            391
+          ],
+          "visible_bottom_y": 390,
+          "lower_boot_horizontal_extent": [
+            149,
+            293
+          ],
+          "cell_border_max_alpha": 0
+        },
+        {
+          "index": 2,
+          "name": "windup",
+          "source_rect": [
+            836,
+            0,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            51,
+            24,
+            342,
+            391
+          ],
+          "visible_bottom_y": 390,
+          "lower_boot_horizontal_extent": [
+            125,
+            320
+          ],
+          "cell_border_max_alpha": 0
+        },
+        {
+          "index": 3,
+          "name": "release_right",
+          "source_rect": [
+            0,
+            418,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            15,
+            32,
+            413,
+            391
+          ],
+          "visible_bottom_y": 390,
+          "lower_boot_horizontal_extent": [
+            105,
+            335
+          ],
+          "cell_border_max_alpha": 2
+        },
+        {
+          "index": 4,
+          "name": "follow_through",
+          "source_rect": [
+            418,
+            418,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            28,
+            33,
+            366,
+            391
+          ],
+          "visible_bottom_y": 390,
+          "lower_boot_horizontal_extent": [
+            104,
+            320
+          ],
+          "cell_border_max_alpha": 1
+        },
+        {
+          "index": 5,
+          "name": "recovery",
+          "source_rect": [
+            836,
+            418,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            56,
+            19,
+            320,
+            391
+          ],
+          "visible_bottom_y": 390,
+          "lower_boot_horizontal_extent": [
+            147,
+            293
+          ],
+          "cell_border_max_alpha": 0
+        },
+        {
+          "index": 6,
+          "name": "negative_status_a",
+          "source_rect": [
+            0,
+            836,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            46,
+            20,
+            341,
+            392
+          ],
+          "visible_bottom_y": 391,
+          "lower_boot_horizontal_extent": [
+            146,
+            291
+          ],
+          "cell_border_max_alpha": 1
+        },
+        {
+          "index": 7,
+          "name": "negative_status_b",
+          "source_rect": [
+            418,
+            836,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            14,
+            33,
+            403,
+            392
+          ],
+          "visible_bottom_y": 391,
+          "lower_boot_horizontal_extent": [
+            91,
+            283
+          ],
+          "cell_border_max_alpha": 1
+        },
+        {
+          "index": 8,
+          "name": "settled_idle",
+          "source_rect": [
+            836,
+            836,
+            418,
+            418
+          ],
+          "alpha128_bbox_exclusive": [
+            65,
+            15,
+            304,
+            392
+          ],
+          "visible_bottom_y": 391,
+          "lower_boot_horizontal_extent": [
+            147,
+            293
+          ],
+          "cell_border_max_alpha": 0
+        }
+      ]
+    }
+  }
+}
