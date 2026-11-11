@@ -61,6 +61,34 @@ test('layout and draw remain pure during normal/reduced and paused/active modes'
 });
 
 const UI=require('./td-lanes-ui');
+const armorLabels={en:'Armored data (35% damage reduction; Claude bypasses armor)',zh:'装甲（减伤35%，Claude无视）'};
+test('only the armor legend explains resistance and the explicit Claude exception',()=>{
+ for(const lang of ['en','zh'])assert.deepEqual(UI.enemyCountLegend(lang),{
+  intro:lang==='zh'?'在场敌群计数：':'Live pack counts: ',
+  types:[['armor',armorLabels[lang]],['charge',lang==='zh'?'冲锋':'Charge'],['swarm',lang==='zh'?'碎片':'Fragment'],['data',lang==='zh'?'数据':'Data']],
+  note:lang==='zh'?'。只有 ×N 时表示总数；不代表共享血量或单发命中数。':'. Plain ×N is total only. Counts are not shared HP or targets per shot.'
+ });
+});
+test('legend percentage matches actual legal armor hits and Claude bypasses it',()=>{
+ // Public actions only: the existing second main opens with armor in lane 1.
+ // Read the displayed percentage, so a rule change cannot leave stale copy green.
+ const reductions=['en','zh'].map(lang=>Number(UI.enemyCountLegend(lang).types[0][1].match(/(\d+)%/)[1])/100);
+ assert.deepEqual(reductions,[E.definitions.enemies.armor.armor,E.definitions.enemies.armor.armor]);
+ assert.deepEqual(E.levels[1].spawns[0],{row:0,type:'armor',time:4});
+ for(const type of E.roster){
+  const s=E.create(1,{seed:1});assert(E.deploy(s,0,0,type).ok);assert(E.start(s).ok);let hit,priorHP,shot;
+  for(let i=0;i<600&&s.phase==='battle'&&!hit;i++){
+   const hp=new Map(s.enemies.map(e=>[e.id,e.hp])),events=E.step(s,1/60);
+   for(const event of events)if(event.type==='shot'&&event.unitType===type&&!shot)shot={...s.shots.find(sh=>sh.id===event.shotId)};
+   hit=events.find(event=>event.type==='hit'&&event.enemyType==='armor');if(hit)priorHP=hp.get(hit.target);
+  }
+  assert(hit,type+' must produce a real armor hit');assert.equal(hit.unitType,type);assert.equal(hit.shotId,shot.id);assert.equal(shot.damageScale,1);
+  assert.equal(s.units[0].status,'normal');assert.equal(hit.source,s.units[0].id);
+  const nominal=E.definitions.units[type].damage,remaining=s.enemies.find(e=>e.id===hit.target);
+  for(const reduction of reductions)assert(Math.abs(hit.amount-nominal*(type==='claude'?1:1-reduction))<1e-9,type+' actual damage must agree with the legend');
+  assert(Math.abs(priorHP-remaining.hp-hit.amount)<1e-9,'the real enemy loses the reported HP');
+ }
+});
 test('upcoming prefix is exactly two lines, localized and distinct from current enemies',()=>{
  const p={type:'armor',row:2,time:10};assert.equal(UI.upcomingLabel(E,p,5,'en'),'Next in 5s\nArmored data');assert.equal(UI.upcomingLabel(E,p,5,'zh'),'下一批 5s\n装甲数据');
  const route={...p,type:'charge',toRow:3};assert.equal(UI.upcomingLabel(E,route,9.2,'en'),'Next in 1s\nCharge → 4*');assert.equal(UI.upcomingLabel(E,route,15,'zh'),'下一批 0s\n冲锋 → 4*');assert.equal(UI.upcomingLabel(E,null,0,'en'),'');
@@ -75,6 +103,36 @@ test('existing notes reuse the exact four vector glyphs and explain total-only /
  const parent=element('div');UI.appendEnemyCountLegend(doc,parent,'en');for(const icon of parent.children[0].children.filter(e=>e.tag==='canvas')){const cascade=Object.fromEntries(globalCanvas.split(';').filter(Boolean).map(d=>d.split(':')));Object.assign(cascade,icon.style);assert.deepEqual([cascade.position,cascade.inset,cascade.display,cascade.width,cascade.height,cascade.verticalAlign,cascade.pointerEvents],['static','auto','inline-block','20px','20px','middle','none']);assert.equal(icon.width,20);assert.equal(icon.height,20);}
  global.TDLanesRenderer={draw(){}};const fallback=element('div');UI.appendEnemyCountLegend(doc,fallback,'en');assert.equal(fallback.children[0].children.filter(e=>e.tag==='canvas').length,0);assert.match(fallback.children[0].children.map(e=>e.textContent).join(''),/Armored data.*Charge.*Fragment.*Data/);
  global.TDLanesRenderer=saved;
+});
+test('expanded bilingual notes retain their summary, focus, open state and existing icon/text structure',()=>{
+ const fs=require('node:fs'),html=fs.readFileSync(__dirname+'/index.html','utf8');
+ assert.match(html,/<details id="forecast"><summary id="forecast-title"><\/summary>/,'native details starts closed with its original summary');
+ const source=fs.readFileSync(__dirname+'/td-placement-preview.test.js','utf8').split("test('pure preview")[0];
+ const harness=Function('require','__dirname',source+'\nreturn nativeHarness;')(require,__dirname);
+ for(const lang of ['en','zh'])for(const renderer of [true,false]){
+  const h=harness({level:1,lang,renderer}),notes=h.nodes.forecast,summary=h.nodes['forecast-title'],before=JSON.stringify(h.state);
+  const check=locale=>{
+   const legends=h.nodes['forecast-content'].children.filter(n=>n.className==='enemy-count-legend');assert.equal(legends.length,1);
+   const children=legends[0].children,info=UI.enemyCountLegend(locale),labels=children.filter(n=>n.tag==='span').map(n=>n.textContent);
+   assert.deepEqual(labels,[info.intro,armorLabels[locale],' · ',info.types[1][1],' · ',info.types[2][1],' · ',info.types[3][1],info.note]);
+   const icons=children.filter(n=>n.tag==='canvas');assert.equal(icons.length,renderer?4:0);
+   if(renderer){assert.equal(children[1].tag,'canvas');assert.equal(children[2].textContent,armorLabels[locale]);for(const icon of icons)assert.equal(icon.getAttribute('aria-hidden'),'true');}
+   assert.equal(h.nodes['forecast-title'],summary);assert.equal(h.nodes.forecast,notes);
+   assert.equal(summary.textContent,locale==='zh'?'来袭时间表与玩法说明':'Schedule and game notes');
+   assert.equal(JSON.stringify(h.state),before);
+  };
+  assert.equal(Boolean(notes.open),false);check(lang);h.frame(0);assert.equal(Boolean(notes.open),false);
+  // The DOM double does not implement browser default activation. Check that the
+  // real key handler does not intercept it, then model only native details.open.
+  const nativeToggle=key=>{summary.focus();let prevented=false;h.events.keydown({key,target:summary,preventDefault(){prevented=true;}});assert.equal(prevented,false);assert.equal(summary.onkeydown,undefined);notes.open=!notes.open;h.frame(0);assert.equal(h.doc.activeElement,summary);};
+  nativeToggle('Enter');assert.equal(notes.open,true);notes.scrollTop=73;check(lang);
+  for(const locale of [lang==='en'?'zh':'en',lang]){
+   h.nodes.language.focus();h.nodes.language.onclick();check(locale);assert.equal(h.doc.activeElement,h.nodes.language);
+   assert.equal(notes.open,true);assert.equal(notes.scrollTop,73);summary.focus();h.frame(0);assert.equal(h.doc.activeElement,summary);
+  }
+  h.reset();for(let i=0;i<120;i++)h.frame(i*16);assert.equal(h.writes.length,0);assert.equal(h.storageWrites.length,0);assert.equal(notes.open,true);assert.equal(h.doc.activeElement,summary);
+  nativeToggle(' ');assert.equal(notes.open,false);h.nodes.language.onclick();check(lang==='en'?'zh':'en');assert.equal(notes.open,false);assert.equal(h.doc.activeElement,summary);
+ }
 });
 test('mounted prep totals and live detour waits remain unchanged; paused upcoming text stays frozen',()=>{
  const fs=require('node:fs'),source=fs.readFileSync(__dirname+'/td-lanes-dom-writes.test.js','utf8').split('function count(h)')[0],saved=global.TDLanesRenderer,harness=Function('require','__dirname',source+'\nreturn harness;')(require,__dirname);

@@ -3,7 +3,7 @@
 const PREFIX='campus-defense-last-finished-v1:',MAX_RECORD=32768,MAX_CONTEXT=24000;
 // Any change to engine semantics must change this fence. The source-hash test enforces it.
 // Cosmetic engine edits may conservatively invalidate references; UI-only edits do not.
-const COMBAT_REVISION='td-lanes-sha256:537c9d404a94be925e5b0c8632fca48a76cd74ba52269d8d142cd7bd5ceb1a5f;content-sha256:ba043f107226ce7338c46236a8883b3d46d275337ca0585e909ca6ff9d60cc0a';
+const COMBAT_REVISION='td-lanes-sha256:537c9d404a94be925e5b0c8632fca48a76cd74ba52269d8d142cd7bd5ceb1a5f;content-sha256:b12954dbdaf64ced12681ffb67ce957665194eb7df3de88eba490b203879e3d9';
 const clone=x=>JSON.parse(JSON.stringify(x));
 const canonical=x=>JSON.stringify(x,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])):v);
 const keys=(v,want)=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).sort().join(',')===want;

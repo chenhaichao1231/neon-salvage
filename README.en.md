@@ -1,72 +1,81 @@
 # Campus Defense · 校园防线
 
-**Demo 0.14** · [Play online](https://chenhaichao1231.github.io/neon-salvage/) · [中文](README.md)
+**Demo 0.15 · Source release** · [Play online](https://chenhaichao1231.github.io/neon-salvage/) · [中文](README.md)
 
-A five-lane campus defense game. Collect GPU resources, deploy four AI guards, and stop data enemies entering from the right.
+A five-lane campus defense game. Collect GPU resources, deploy four AI guards, and stop data enemies entering from the right. This documentation describes the Demo 0.15 release source; the online deployment status requires separate verification.
 
 ## Play
 
 1. Choose a guard, then an empty cell. Guards fire only to the right; inspect each lane's forecast first.
-2. Press Start wave when ready. New supplies can fund reinforcements during battle.
-3. A 30-GPU drop arrives every six battle seconds. Click to collect immediately, or receive it automatically four battle seconds later.
-4. While paused, deploy, collect existing drops or use emergency withdrawal. Deployment spends GPU immediately. Future supplies and simulation time remain frozen until Resume.
-5. Retry restores your pre-wave formation, GPU and the same seeded status schedule, so you can revise your plan.
+2. Hover or keyboard-focus an affordable empty cell to preview its rightward attack geometry. The preview predicts no hits and spends nothing; activating deployment still charges the price.
+3. Press Start wave when ready. A 30-GPU drop arrives every six battle seconds. Click to collect immediately, or receive it automatically four battle seconds later.
+4. While paused, deploy, collect existing drops or use emergency withdrawal. Deployment spends GPU immediately; future supplies and simulation time stay frozen until Resume.
+5. Retry restores the exact pre-wave formation, GPU and seeded status schedule, so you can revise your plan.
 
 ## Four basic guards
 
-All four are available from the first stage. Their personalities are fictional game rules, not assessments of real AI products.
+All four are available from the first stage, with no additional guard models. Their personalities are fictional game rules, not assessments of real AI products.
 
 - **DeepSeek · 50 GPU:** cheap single-target fire, 10 damage every 1.1s. Warned two-second rice breaks occasionally interrupt firing.
 - **GPT · 90 GPU:** 14 damage every 1.4s, piercing up to two distinct targets per shot. Warned three-second weak windows reduce damage to 70%.
-- **Claude · 120 GPU:** a single 30-damage armor-ignoring hit every 2s. A two-second warning precedes an automatic three-second offline review. No player questions, nationality checks or personal information are involved.
-- **Grok · 80 GPU:** 16 damage every 1.8s, hitting at most three nearby enemies within 0.8 cells in the same lane. Every fourth committed shot deals 4 damage instead; misses still count. The next-shot counter is separate from the quality of an already-fired projectile.
+- **Claude · 120 GPU:** one 30-damage armor-ignoring hit every 2s. A two-second warning precedes an automatic three-second offline review. No player questions, nationality checks or personal information are involved.
+- **Grok · 80 GPU:** 16 damage every 1.8s, hitting at most three nearby enemies within 0.8 cells in the same lane. Every fourth committed shot deals 4 damage instead; misses still count. The next-shot counter is separate from an already-fired projectile's quality.
 
-Cheap coverage, piercing, armor bypass and tight-cluster damage have different strengths. Buying every guard type is not required for every stage.
+Cheap coverage, piercing, armor bypass and tight-cluster damage have different strengths. Buying all four is not required, and expensive guards do not guarantee success.
 
-## Waves and resources
+## Seven main stages and two drills
 
-- The four main stages contain **30, 50, 54 and 43 enemies**, arranged in **3, 4, 4 and 4 pushes**. Final arrivals occur at 55, 57.25, 68 and 61 battle seconds. Lane forecasts and the grouped exact schedule remain available.
-- **Main 4 · Shifting pressure:** fragments gather in lane 3, then fragments and chargers arrive in lane 5 and finally lane 1. Its 43 enemies arrive in four pushes starting at 4, 22, 36 and 53 seconds. This is ordinary five-core survival, with no zero-leak requirement or lane-turning routes. Plan later purchases for the next pressure point; cheap reinforcement and mixed specialties both have viable plans.
-- Two optional mechanic drills contain two enemies for a single detour and nine for a converging convoy. Any leak fails these drills. Once a turn has begun charging, withdrawing its guard does not cancel it.
-- Each stage starts with 180 GPU and grants 300 fixed supply GPU. Kills provide no extra income. Early victory credits remaining supply.
-- Preparation refunds are full. There is **one emergency withdrawal per battle**, returning 25 / 45 / 60 / 40 GPU for DS / GPT / Claude / Grok.
-- Withdrawal does not erase existing projectiles. Redeployment costs full price. Voluntary withdrawals are separate from defeated guards; refunds are not supply income and do not reduce gross deployment spending.
-- 1× / 2× changes simulation speed, not combat rules. Hiding the page pauses it; returning requires explicit Resume.
+- The first four mains contain **30, 50, 54 and 43 enemies**, arranged in **3, 4, 4 and 4 pushes**. Final arrivals occur at **55, 57.25, 68 and 61 battle seconds**. Main 4, Shifting pressure, moves reinforcement pressure through lanes 3, 5 and 1.
+- **Main 5 · Overlapping fronts:** 53 enemies in four pushes starting at **4, 14, 32 and 52 seconds**, with the final arrival at **58s**. Lane 2 armor overlaps lane 4 crowds, then both outer lanes face pressure; the middle lane finishes early. Familiar formations can still recover with later reinforcement; no particular opening is mandatory.
+- **Main 6 · Interleaved pursuit:** 53 enemies in four pushes starting at **4, 16, 36 and 48 seconds**, with the final arrival at **58s**. Armor mixes with faster pursuers in lanes 1, 3 and 5, naturally changing target order. Lanes 2 and 4 still receive later blobs. Surviving enemies must be cleared after the last arrival.
+- **Main 7 · Rotating siege:** 54 enemies in three pushes starting at **4, 20 and 36 seconds**, with the final arrival at **48s**. Armor and dense fragments rotate roles across lanes 2, 3 and 4; lanes 1 and 5 stay empty. Reserve supply for the next role change. Cheap reinforcement and selective specialties are both viable; no four-guard formation is required.
+- All mains use ordinary five-core survival, without a zero-leak requirement. The new stages introduce no shield or shared-HP mechanic.
+- Two optional mechanic drills contain **two enemies for One detour** and **nine for Converging convoy**. Any leak fails a drill. Once a turn has begun charging, withdrawing its guard does not cancel it. Drill completion is not required for the main path.
+
+## Resources and controls
+
+During preparation or battle, with a deployment cell focused, unmodified Arrow keys move to the adjacent cell without wrapping or spending GPU, including while paused. Tab / Shift+Tab keep their usual order; Enter / Space activates the focused cell. Occupied or unaffordable cells remain reachable.
+
+Each stage starts with 180 GPU and grants 300 fixed supply GPU. Kills give no extra income; early victory credits remaining supply. Preparation refunds are full. There is **one emergency withdrawal per battle**, returning 25 / 45 / 60 / 40 GPU for DS / GPT / Claude / Grok.
+
+Withdrawal leaves existing projectiles intact, and redeployment costs full price. Voluntary withdrawals are separate from defeated guards; refunds are not supply income and do not reduce gross spending. 1× / 2× changes simulation speed only. Hiding the page pauses it; returning requires explicit Resume.
 
 ## Presentation and progress
 
-When the right letterbox gutter can fit the forecasts, lane labels move into it; narrower layouts keep their original placement.
+While a main is still in battle after its final scheduled arrival, the wave HUD shows how many enemies remain on the board. Kills and leaks both reduce this count; paused copy marks the freeze.
 
-Upcoming labels now show “Next in 5s” above the enemy type, separating future arrivals from enemies already present. Nearby packs show type-shaped counts when space permits, with a key in the existing game notes. Tight layouts use a total-only count, or omit the extra count if even that cannot fit safely. Ingress, especially on narrow layouts, can still overlap; enemies and health bars have not moved. Pack counts do not mean shared HP or targets per shot.
+In the schedule, exact regular runs of at least three arrivals show inclusive first–last times, count and interval (or “simultaneous”). Different events interrupt a run; irregular runs stay individual.
 
-Optional battle facts now count Grok shots that actually hit at least two distinct targets. A third target does not add another count; weak shots qualify when they hit two targets. This is a hit observation, not a damage or effectiveness ranking. Demo 0.14 adds local last-result references and lists the four main stages before the two optional drills. All six encounters, four guards, combat mechanics and stats, economy, seeded plans, animation, artwork and exact retry behavior are unchanged.
+Ordinary Grok **next 1/4–3/4** overhead captions appear only when selected. The **next 4/4** warning remains visible without selection. Selected details and accessible cell labels retain the full information. Other guards' real states and warnings, low-health cues and actual projectiles are unchanged, as are animation and artwork.
 
-Guards have idle, attack and status poses. Low health receives a color and text cue. The AMD supplier is named Lisa Su (苏姿丰 in Chinese). Failed artwork uses labeled fallback visuals while gameplay remains functional.
+Upcoming forecasts are separate from enemies already present. Nearby packs show type-shaped counts when space permits, falling back to a total or no extra count in tight layouts. Counts do not mean shared HP or targets per shot. Ingress and dense states can still overlap. Individual fragment HP bars may overlap into a band, and a displayed pack count is not the whole lane total. Failed artwork uses labeled fallback visuals.
 
-Language and available-stage progress are saved in the current browser when storage works. Winning main 3 immediately saves access to main 4, and Next goes directly there; the two drills remain optional. Legacy saves that already reached either drill can also enter main 4 without clearing a drill. An old main-3-only bookmark does not prove a past victory and does not unlock main 4 by itself. Refresh starts the remembered stage with an empty formation and 180 GPU; Retry instead restores the exact pre-wave setup. The stage selector lists main stages first, keeping the same access rules.
+Battle facts identify the current attempt's **first escaped enemy type, lane and time**, and count Grok shots that actually hit at least two distinct targets. These are observations, not damage rankings. First-leak type and per-shot details are not included in compact saved history.
 
-The browser keeps **one compact last finished result per stage**, whether won or lost, when storage works. It is the last result, not a personal best, ranking or reward. Open the existing Schedule & last result notes during preparation to recall outcome, core, leaks, defeated guards, gross GPU spending, battle time and withdrawal/refund totals. Failed time is time until defeat, not clear time. Spending is before withdrawal refunds; saved summaries do not retain old withdrawal locations/times or shot histories.
+The selector lists seven mains before the two drills. An actual win on the preceding main in the current build unlocks its new successor. Using the existing stage IDs, the main path is **0→1→2→5→6→7→8→0**, and drills remain **3→4→5**. IDs and bookmark format are unchanged. Legacy drill bookmarks grant access only as far as Main 4. Old Main 4/5/6 visits or historical results do not prove the win needed to unlock newly added mains retroactively.
 
-Preparation can show a valid same-stage result from different plans or rules, with an explicit warning before the numbers and no performance comparison. Battle hides this history. Terminal deltas use only a compatible reference visible before this attempt, with the same initial seed, status schedule, exact spawns, roster, mechanics, economy, grid and objective. Clear-time deltas require two wins. Current shot facts are observations, not performance scores. Next-stage entry and a fresh reload may use different seeded plans; historical recall still works, while comparison remains restricted.
+Language and available-stage progress stay in the current browser when storage works. Refresh starts the remembered stage with an empty formation and 180 GPU; Retry restores the exact pre-wave setup. Each stage also keeps one compact last finished result, whether won or lost. It is not a personal best or reward and does not restore a battle.
 
-Results stay in this browser, without cross-device sync or restoration of a battle, formation or resources. The stage/language bookmark is separate. If result storage cannot be read or written, new results for that stage remain session-only. Unrecognized, corrupt or oversized stored records are left unchanged rather than repaired or overwritten. Concurrent valid writes use the last successful write; there is no guaranteed global ordering across tabs.
+Preparation can show a valid old result with a warning and no deltas when conditions differ. Content-source revisions also conservatively make old valid results historical-only; loading does not delete or rewrite them. Battle hides history. Terminal comparisons use only a compatible reference shown before this attempt, and clear-time deltas require two wins. Next-stage entry and a fresh reload may use different seeded plans.
 
-This is a generated-art 2D preview. Large images may make first load slow. Generated artwork does not establish character rights or commercial permission. Physical-phone, touch, screen-reader and performance acceptance are not complete. Browser geometry checks for the new notes content, including desktop open-footer scrolling and mobile document flow, remain pending.
+Results do not sync across devices. Storage failure leaves new results session-only; unrecognized, corrupt or oversized old records remain untouched. Concurrent valid writes use the last successful write.
 
 ## Run locally and test
 
-No backend is needed. Serve the repository root with a static server, for example:
+The browser game needs no backend; a static server can serve the repository root. Playing it does not require Node.js, `@napi-rs/canvas` or the native font files listed below.
 
-```sh
-python3 -m http.server 8000 --bind 127.0.0.1
-```
+Tests were verified with **Node.js 24.22.1**, **`@napi-rs/canvas` 0.1.100** and its matching-version platform native binary package. These are verified environment versions, not minimum compatibility requirements. Native-canvas checks also use these hard-coded font paths:
 
-Then open `http://127.0.0.1:8000/`.
+- `/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc`: Noto Sans CJK collection 2.004.
+- `/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf`: DejaVu Sans Book 2.37.
+- `/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf`: Noto Sans Regular 2.004.
 
-The `td-*.test.js` suites use Node.js; some drawing checks require `@napi-rs/canvas`.
+These test dependencies and font assets are not bundled with the game. On other systems, provide the font files at the same paths or adapt the test configuration before running the suites; the unchanged tests should not be assumed to work cross-platform.
 
 ```sh
 for test in td-*.test.js; do node "$test" || exit 1; done
 ```
 
-All 35 td-*.test.js suites passed for Demo 0.14, including a fresh Git-free export. Automated checks and fixed-policy simulations are not complete device acceptance, exhaustive balance proof or evidence of human enjoyment. Historical prototype files are not the current game entry point.
+All **47 test suites** pass on the final Demo 0.15 release source and a fresh Git-free copy of the complete runtime and test files. Simulations, DOM/storage doubles and native-canvas checks are not browser acceptance. This release source has not passed browser (including native keyboard defaults), physical-phone, touch, screen-reader, performance or human-enjoyment acceptance. Main 6 cleanup approaches 110.6s in some tested simulations; pacing still needs actual playtesting.
+
+This is a generated-art 2D preview with large first-load images. Generated artwork does not establish character rights or commercial permission. Historical prototypes are not the current game entry point.

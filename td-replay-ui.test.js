@@ -5,10 +5,10 @@ function memory(stage=4){const data=new Map([['campus-defense-stage-v1',JSON.str
 function harness(storage){const nodes={},events={};class Node{constructor(){this.children=[];this.style={};this.attributes={};this.hidden=false;this.disabled=false;this.textContent='';this.handlers={};this.open=false;this.scrollTop=0;}getAttribute(k){return this.attributes[k]??null;}setAttribute(k,v){this.attributes[k]=v;}appendChild(n){n.parent=this;this.children.push(n);return n;}append(...ns){ns.forEach(n=>this.appendChild(n));}replaceChildren(...ns){this.children=[];this.append(...ns);}remove(){this.parent.children=this.parent.children.filter(n=>n!==this);}addEventListener(k,f){this.handlers[k]=f;}getBoundingClientRect(){return{left:0,top:0,width:1120,height:650};}}
 for(const [,id]of html.matchAll(/id="([^"]+)"/g))nodes[id]=new Node();const ctx=new Proxy({},{get:(o,k)=>o[k]||(()=>{}),set:(o,k,v)=>(o[k]=v,true)});nodes.scene.getContext=()=>ctx;const doc={hidden:false,documentElement:{},getElementById:id=>nodes[id],createElement:()=>new Node(),addEventListener:(k,v)=>events[k]=v},win={localStorage:storage,devicePixelRatio:1,requestAnimationFrame(){},addEventListener:(k,v)=>events[k]=v,matchMedia:()=>({matches:false,addEventListener(){}})};
 // Evaluate actual HTML script order as browser globals, without a CommonJS fallback.
-const box={window:win};for(const [,name]of html.matchAll(/<script src="([^?]+)\?[^\"]*"><\/script>/g))vm.runInNewContext(fs.readFileSync(__dirname+'/'+name,'utf8'),box,{filename:name});assert.equal(box.TDLanes.levels.length,6);assert(box.TDReplayStore);const app=box.TDLanesUI.mount(box.TDLanes,doc,win);return{app,nodes,doc,box};}
+const box={window:win};for(const [,name]of html.matchAll(/<script src="([^?]+)\?[^\"]*"><\/script>/g))vm.runInNewContext(fs.readFileSync(__dirname+'/'+name,'utf8'),box,{filename:name});assert.equal(box.TDLanes.levels.length,9);assert(box.TDReplayStore);const app=box.TDLanesUI.mount(box.TDLanes,doc,win);return{app,nodes,doc,box};}
 function finish(c){while(c.state.phase==='battle')c.tick(1/60);assert(['won','lost'].includes(c.state.phase));}
 const store=memory(),h=harness(store),c=h.app.controller,n=h.nodes;
-assert.deepEqual(n['stage-select'].children.map(option=>option.value),['0','1','2','5','3','4']);assert(n['battle-review'].hidden);assert(n['previous-stage-result'].hidden);assert.equal(n['forecast-title'].textContent,'Schedule and game notes');
+assert.deepEqual(n['stage-select'].children.map(option=>option.value),['0','1','2','5','6','7','8','3','4']);assert(n['battle-review'].hidden);assert(n['previous-stage-result'].hidden);assert.equal(n['forecast-title'].textContent,'Schedule and game notes');
 assert.match(html,/<details id="forecast"><summary id="forecast-title"><\/summary><p id="previous-stage-result" hidden><\/p>/);assert(!/previous-stage-result[^>]*(?:role=|aria-live=|tabindex=)/.test(html));assert.equal(html.match(/id="previous-stage-result"/g).length,1);
 const selection=html.match(/<section class="selection">([\s\S]*?)<\/section>/)[1];assert(!selection.includes('previous-stage-result'));assert.equal((html.match(/<details /g)||[]).length,2);
 c.cell(1,0);c.cell(2,0);c.start();finish(c);h.app.render();assert.equal(c.review.outcome,'won');assert.equal(store.writes.filter(k=>k!=='campus-defense-stage-v1').length,1);assert(!n['battle-review'].hidden);assert(n['previous-stage-result'].hidden);
@@ -19,7 +19,7 @@ const other=harness(store).app.controller;other.start();finish(other);assert.equ
 const endWrites=store.writes.length;for(let i=0;i<120;i++){c.tick(1/60);h.app.render();}assert.equal(store.writes.length,endWrites);
 c.language();h.app.render();assert.match(n['review-content'].textContent,/本局/);c.retry();h.app.render();assert.equal(n['forecast-title'].textContent,'时间表与上次结果');assert.match(n['previous-stage-result'].textContent,/上次保存结果：守住/);assert(n['battle-review'].hidden);
 const reloaded=harness(store);assert.equal(reloaded.app.controller.state.units.length,0);assert.equal(reloaded.app.controller.state.compute,180);assert.equal(reloaded.app.controller.state.phase,'prepare');assert(!reloaded.nodes['previous-stage-result'].hidden);
-console.log('PASS actual six-stage browser script order, disclosure-only references, provenance, no history in battle, cached visible baseline, immutable focus/open/scroll, no repeated DOM/storage writes, no spawn rebuild, reload without state restoration');
+console.log('PASS actual eight-stage script order with DOM doubles, disclosure-only references, provenance, no history in battle, cached visible baseline, immutable focus/open/scroll, no repeated DOM/storage writes, no spawn rebuild, reload without state restoration');
 // Controller production path rejects incompatible reference despite the legacy tracker's prior.
 {
  const st=memory(),a=harness(st),ctl=a.app.controller;ctl.cell(1,0);ctl.cell(2,0);ctl.start();finish(ctl);ctl.retry();ctl.state.seed=2;ctl.state.statusSchedule=a.box.TDLanes.create(4,{seed:2}).statusSchedule;ctl.start();finish(ctl);assert.equal(ctl.review.previous,null);
@@ -46,3 +46,18 @@ console.log('PASS production controller strong-context authority, post-Start unk
  x.retry();fresh.app.render();assert(x.reference.previous);assert.equal(x.reference.incompatible,false);assert(!n['previous-stage-result'].textContent.includes('计划或规则与本次不同'));
 }
 console.log('PASS real main campaign Next/reload/selector historical recall, exact retry comparison, mismatch-before-metrics copy, no terminal historical metrics, unchanged RNG/events and lifecycle-only reference cloning/formatting');
+// Current rich facts name the actual first enemy, without inventing persisted event history.
+{
+ const st=memory(2),h=harness(st),c=h.app.controller,n=h.nodes,events=[];
+ n.start.onclick();while(c.state.phase==='battle')events.push(...c.tick(1));h.app.render();
+ const first=events.find(e=>e.type==='leak'),before=JSON.stringify(c.state);
+ assert.equal(first.enemyType,'charge');assert.equal(c.review.firstLeak.enemyType,first.enemyType);
+ assert(!n['battle-review'].hidden);assert.match(n['review-content'].textContent,/First leak: lane 4, Charging data, 46\.6s/);
+ n.language.onclick();assert.match(n['review-content'].textContent,/首次漏敌：第4行，冲锋数据，46\.6s/);assert.equal(JSON.stringify(c.state),before);
+ const compact=JSON.parse(st.data.get(h.box.TDReplayStore.PREFIX+2)).facts;assert(!Object.hasOwn(compact,'firstLeak'));
+ n.retry.onclick();h.app.render();assert.equal(c.review,null);assert(n['battle-review'].hidden);assert(!n['previous-stage-result'].hidden);
+ assert(!/首次漏敌|冲锋数据/.test(n['previous-stage-result'].textContent));
+ n.start.onclick();c.tick(1);h.app.render();assert(n['battle-review'].hidden);assert.equal(n['review-content'].textContent,'');assert(n['previous-stage-result'].hidden);
+ const reload=harness(st);assert.equal(reload.app.controller.review,null);assert(reload.nodes['battle-review'].hidden);assert(!/首次漏敌|冲锋数据|First leak|Charging data/.test(reload.nodes['previous-stage-result'].textContent));
+}
+console.log('PASS native production script order renders bilingual current leak identity only; retry, active battle and reload keep references compact');

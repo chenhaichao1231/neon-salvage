@@ -5,17 +5,18 @@ const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
 assert.equal(hash(fs.readFileSync(__dirname+'/td-lanes.js')),'537c9d404a94be925e5b0c8632fca48a76cd74ba52269d8d142cd7bd5ceb1a5f');
 const E=require('./td-lanes-content'),UI=require('./td-lanes-ui');
 assert.equal(JSON.stringify({levels:E.levels.slice(0,5),definitions:E.definitions,roster:E.roster,economy:E.economy}),original);
-assert.equal(E.levels.length,6);assert.equal(hash(JSON.stringify(E.preview(5))),'d8607991d87ced1915e9b59d9202375469e46d9b0ae97da725ce747512509585');
+assert.equal(E.levels.length,9);assert.equal(hash(JSON.stringify(E.preview(5))),'d8607991d87ced1915e9b59d9202375469e46d9b0ae97da725ce747512509585');
 assert.equal(E.levels[5].optional,undefined);assert.equal(E.levels[5].objective,undefined);assert(E.preview(5).every(p=>!('toRow' in p)));
 assert.deepEqual(E.levels[5].phaseStarts,[4,22,36,53]);assert.deepEqual(UI.phaseGroups(E.levels[5]).map(g=>g.spawns.length),[11,8,12,12]);assert.equal(E.preview(5).at(-1).time,61);
 assert.deepEqual(E.roster,['deepseek','gpt','claude','grok']);
 const html=fs.readFileSync(__dirname+'/index.html','utf8');assert(html.indexOf('src="td-lanes.js')<html.indexOf('src="td-lanes-content.js'));assert(html.indexOf('src="td-lanes-content.js')<html.indexOf('src="td-lanes-ui.js'));
 function storage(last=0,highest=last,lang='en'){const data=new Map([[UI.bookmarkKey,JSON.stringify({version:1,lastStage:last,highestStage:highest,lang})]]);let writes=0;return{getItem:(k=UI.bookmarkKey)=>data.get(k)??null,setItem:(k,v)=>{if(k===UI.bookmarkKey)writes++;data.set(k,v);},get writes(){return writes;}};}
-for(let i=0;i<6;i++){const st=storage(i),c=UI.controller(E,st);assert.equal(st.writes,0);assert.equal(c.state.level,i);assert.equal(c.state.compute,180);assert.deepEqual(c.state.units,[]);assert.equal(c.available(5),i>=3);}
-for(const raw of ['{','null','[]','{}',JSON.stringify({version:1,lastStage:5,highestStage:2,lang:'en'}),JSON.stringify({version:1,lastStage:6,highestStage:6,lang:'en'})]){let writes=0;const c=UI.controller(E,{getItem:()=>raw,setItem:()=>writes++});assert.equal(c.state.level,0);assert.equal(writes,0);assert(!c.available(5));}
+for(let i=0;i<9;i++){const st=storage(i),c=UI.controller(E,st);assert.equal(st.writes,0);assert.equal(c.state.level,i);assert.equal(c.state.compute,180);assert.deepEqual(c.state.units,[]);assert.equal(c.available(5),i>=3);assert.equal(c.available(6),i>=6);assert.equal(c.available(7),i>=7);}
+for(const raw of ['{','null','[]','{}',JSON.stringify({version:1,lastStage:5,highestStage:2,lang:'en'}),JSON.stringify({version:1,lastStage:9,highestStage:9,lang:'en'})]){let writes=0;const c=UI.controller(E,{getItem:()=>raw,setItem:()=>writes++});assert.equal(c.state.level,0);assert.equal(writes,0);assert(!c.available(5));}
+const historicalSeven={...E,levels:E.levels.slice(0,7)};assert.equal(UI.validBookmark({version:1,lastStage:7,highestStage:7,lang:'en'},historicalSeven),false);assert.equal(UI.validBookmark({version:1,lastStage:6,highestStage:6,lang:'en'},historicalSeven),true);const oldInvalid=storage(7),oldController=UI.controller(historicalSeven,oldInvalid);assert.equal(oldController.state.level,0);assert.equal(oldController.storageNotice,'unavailable');assert.equal(oldInvalid.writes,0);
 for(const last of [3,4])for(const lost of [false,true]){const st=storage(last),c=UI.controller(E,st);if(lost){c.start();while(c.state.phase==='battle')c.tick(1);}assert(c.available(5));assert(c.stage(5).ok);assert.equal(c.state.compute,180);assert.equal(c.highestStage,5);assert.equal(st.writes,1);assert.equal(UI.controller(E,st).state.level,5);assert(c.available(3)&&c.available(4));}
 let c=UI.controller(E,storage(2));assert(!c.stage(5).ok);c.start();assert(!c.stage(5).ok);c.pause();assert(!c.stage(5).ok);c.retry();assert(!c.available(5));
-for(const level of [0,1,2,3,4,5])assert.equal(UI.nextStage(E,level),[1,2,5,4,5,0][level]);
+for(const level of [0,1,2,3,4,5,6,7,8])assert.equal(UI.nextStage(E,level),[1,2,5,4,5,6,7,8,0][level]);
 const D=(time,row,type='deepseek',col=0)=>({time,row,type,col});
 const policies={ds400:[D(0,0),D(0,1),D(0,2),D(10,3),D(22,4),D(28,2,'deepseek',1),D(40,4,'deepseek',1),D(52,0,'deepseek',1)],relocated440:[D(0,0),D(0,3),D(0,2,'grok'),D(16,1),D(34,4,'gpt'),D(58,0,'claude',1)],rotating440:[D(0,0),D(0,1),D(0,2,'grok'),D(16,4),D(28,3),D(40,4,'grok',1),D(58,0,'grok',1)]};
 policies.wrong440=policies.rotating440.map((a,i)=>({...a,row:i===5?2:i===6?3:a.row}));
@@ -29,5 +30,5 @@ let attempts=0;const failing={getItem:k=>k===UI.bookmarkKey?JSON.stringify({vers
 // Retry exactly restores the initial snapshot and regenerates the same review, warnings and events.
 c=UI.controller(E,storage(5));const first=play(c,'ds400'),result=JSON.stringify(c.review),snapshot=c.state.snapshot;assert(c.retry().ok);assert.deepEqual(c.state,snapshot);assert.equal(c.review,null);
 // Replay uses the same initial three guards already restored by retry.
-const plan=policies.ds400;policies.ds400=plan.filter(a=>a.time);const second=play(c,'ds400');policies.ds400=plan;assert.deepEqual(second,first);assert.deepEqual({...c.review,previous:null,previousProvenance:null},JSON.parse(result));assert.deepEqual(c.review.previous,require('./td-replay-store').summary(JSON.parse(result)));assert(c.start().ok);assert.equal(c.state.level,0);assert.equal(c.state.compute,180);
-console.log('PASS frozen engine/five stages, exact candidate C, navigation/bookmarks and '+runs+' legal production policy runs; exact retry/review');
+const plan=policies.ds400;policies.ds400=plan.filter(a=>a.time);const second=play(c,'ds400');policies.ds400=plan;assert.deepEqual(second,first);assert.deepEqual({...c.review,previous:null,previousProvenance:null},JSON.parse(result));assert.deepEqual(c.review.previous,require('./td-replay-store').summary(JSON.parse(result)));assert(c.available(6));assert.equal(c.nextStage,6);assert(c.start().ok);assert.equal(c.state.level,6);assert.equal(c.state.compute,180);
+console.log('PASS frozen engine/original five stages, exact Shifting pressure, nine-stage navigation/bookmarks and '+runs+' legal production policy runs; exact retry/review');

@@ -30,6 +30,12 @@ function guardStatus(u,lang){
  if(u.type==='grok'){const next=(u.fired||0)%4+1;return(zh?'下一发 ':'Next ')+next+'/4 · '+(next===4?(zh?'烂输出 4':'Weak output 4'):(zh?'溅射 16':'Splash 16'));}
  return '';
 }
+// Keep the standalone/no-UI path equivalent without changing the full status helper.
+function guardCaption(u,lang,selectedUnit=null){
+ if(root.TDLanesUI?.canvasUnitStatus)return root.TDLanesUI.canvasUnitStatus(u,lang,selectedUnit);
+ if(u.type==='grok'&&(!u.status||u.status==='normal')&&!u.warning&&(u.fired||0)%4!==3&&u.id!==selectedUnit)return '';
+ return guardStatus(u,lang);
+}
 function ready(im){return !!im&&im.width>0&&im.height>0&&im.complete!==false;}
 function assetState(key){const im=assets[key];if(!im)return 'not-requested';if(ready(im))return 'ready';if(assetStates[key]==='failed'||im?.complete===true)return 'failed';return 'loading';}
 // All character sheets use the same grounded 96px viewport, never per-pose bounds.
@@ -183,7 +189,11 @@ function forwardLane(s,selectedId){
  return u?{row:u.row,start:Math.max(0,u.x-.1),end:7.8}:null;
 }
 function drawForwardLane(ctx,s,selectedId){
- const lane=forwardLane(s,selectedId);if(!lane)return;
+ drawLaneGeometry(ctx,forwardLane(s,selectedId));
+}
+// Pure drawing shared by selected and prospective coverage. No synthetic engine guard.
+function drawLaneGeometry(ctx,lane){
+ if(!lane)return;
  const x=140+lane.start*120,end=140+lane.end*120,y=170+lane.row*82;
  ctx.save();ctx.fillStyle='#b9edff21';ctx.fillRect(x,y+5,end-x,72);
  // A narrow dark keyline keeps the unchanged pale guide legible on bright campus tiles.
@@ -234,6 +244,8 @@ function packCueLayout(s,lang,options={}){
  // Art loading and pose changes cannot flip placement. Keep individual health,
  // guard status and live turn labels unobscured.
  for(const e of s.enemies.filter(e=>e.hp>0)){const r=e.type==='armor'?39:e.type==='swarm'?25:33;boxes.push({x:140+e.x*120-r-3,y:211+e.row*82-(e.type==='swarm'?51:e.type==='armor'?70:61),w:r*2+6,h:(e.type==='swarm'?51:e.type==='armor'?70:61)+40});}
+ // Keep full status envelopes reserved even when an ordinary caption is hidden.
+ // Selection/counter changes must not move pack badges into guard art or warnings.
  for(const u of s.units.filter(u=>u.hp>0)){const x=140+u.x*120,y=211+u.row*82;boxes.push({x:x-51,y:y-70,w:102,h:110});if(guardStatus(u,lang))boxes.push({x:x-(u.type==='grok'?82:66),y:y-76,w:u.type==='grok'?164:132,h:21});}
  const routes=new Map();for(const e of s.enemies){if(!Number.isInteger(e.toRow)||e.turnState==='done')continue;const key=e.row+':'+e.toRow;if(!routes.has(key)||e.x<routes.get(key).x)routes.set(key,e);}
  for(const e of routes.values()){const x=140+e.x*120;boxes.push({x:Math.min(890,Math.max(224,x-60))-85,y:162+e.row*82,w:170,h:25});const ax=Math.min(915,x-42);boxes.push({x:ax-9,y:Math.min(211+e.row*82,211+e.toRow*82)+15,w:18,h:Math.abs(e.toRow-e.row)*82-30});}
@@ -273,7 +285,7 @@ function drawPackCues(ctx,s,lang,pill,options={}){
  }
 }
 
-function draw(ctx,{state:s,definitions:D,layout:L,preview=[],selectedUnit=null},o){requestEnemyArt(preview,s.enemies);requestGuardArt(s.units);const scale=Math.min(o.width/1120,o.height/650);ctx.save();ctx.fillStyle='#18223d';ctx.fillRect(0,0,o.width,o.height);ctx.translate((o.width-1120*scale)/2,(o.height-650*scale)/2);ctx.scale(scale,scale);
+function draw(ctx,{state:s,definitions:D,layout:L,preview=[],selectedUnit=null,placementLane=null},o){requestEnemyArt(preview,s.enemies);requestGuardArt(s.units);const scale=Math.min(o.width/1120,o.height/650);ctx.save();ctx.fillStyle='#18223d';ctx.fillRect(0,0,o.width,o.height);ctx.translate((o.width-1120*scale)/2,(o.height-650*scale)/2);ctx.scale(scale,scale);
 const text=(v,x,y,size=14,color='#fff')=>{ctx.font='600 '+size+'px system-ui';ctx.textAlign='center';ctx.fillStyle=color;ctx.fillText(v,x,y);};
 const pill=(v,x,y,w=110,color='#d9ebff')=>{ctx.fillStyle='#142340e8';ctx.beginPath();ctx.roundRect(x-w/2,y-15,w,21,7);ctx.fill();text(v,x,y,12,color);};
 const fallbackUnit=(u,x,y)=>{const c=guardColors[u.type]||'#bfc9da';ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y-29,16,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.moveTo(x,y-12);ctx.lineTo(x-24,y+25);ctx.quadraticCurveTo(x,y+38,x+24,y+25);ctx.closePath();ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(x-13,y);ctx.lineTo(x-29,y+10);ctx.moveTo(x+13,y);ctx.lineTo(x+31,y-5);ctx.stroke();ctx.fillStyle='#223954';ctx.beginPath();ctx.arc(x-5,y-30,2,0,7);ctx.arc(x+5,y-30,2,0,7);ctx.fill();text(guardNames[u.type]||u.type,x,y-49,12,c);};
@@ -282,7 +294,7 @@ const a=assets.campus;if(ready(a)){// Align all five illustrated lanes with the 
 ctx.drawImage(a,0,0,a.width,a.height*.24,0,0,1120,170);ctx.drawImage(a,0,a.height*.24,a.width,a.height*.535,0,170,1120,410);ctx.drawImage(a,0,a.height*.775,a.width,a.height*.225,0,580,1120,70);
 }else{ctx.fillStyle='#31476e';ctx.fillRect(0,0,1120,650);text(assetState('campus')==='failed'?(o.lang==='zh'?'校园背景加载失败，使用备用场地':'Campus background failed; backup field active'):(o.lang==='zh'?'正在加载校园美术…':'Loading campus art…'),560,80,18);}
 ctx.strokeStyle='#d5edff29';ctx.lineWidth=1;for(let row=0;row<5;row++)for(let col=0;col<7;col++)ctx.strokeRect(140+col*120,170+row*82,120,82);
-drawForwardLane(ctx,s,selectedUnit);
+if(placementLane)drawLaneGeometry(ctx,placementLane);else drawForwardLane(ctx,s,selectedUnit);
 const supplierNames=['Jensen','Liang','Tibo',o.lang==='zh'?'苏姿丰':'Lisa Su'];
 if(ready(assets.suppliers)){const im=assets.suppliers;for(let i=0;i<4;i++){const x=275+i*190;ctx.drawImage(im,i*im.width/4,0,im.width/4,im.height,x-43,8,86,116);pill(supplierNames[i],x,133,80);}}else{for(let i=0;i<4;i++){const x=275+i*190;ctx.fillStyle='#d3c8df';ctx.beginPath();ctx.arc(x,45,15,0,7);ctx.fill();ctx.beginPath();ctx.ellipse(x,83,27,22,0,0,7);ctx.fill();pill(supplierNames[i],x,133,80);}}
 if(!o.supplyOverlay)pill(o.lang==='zh'?'补给 '+s.gpuCount+'/'+s.gpuQuota+' · 显卡每6秒投放':'SUPPLY '+s.gpuCount+'/'+s.gpuQuota+' · GPU every 6s',560,159,330);
@@ -292,7 +304,7 @@ const selectedFrame=u.type==='deepseek'?dsFrame(u,s,o.visualTime??s.time,o.reduc
 ctx.fillStyle='#142340';ctx.fillRect(x-26,y+34,52,4);ctx.fillStyle='#9df2d0';ctx.fillRect(x-26,y+34,52*Math.max(0,u.hp/D.units[u.type].hp),4);
 drawLowHealth(ctx,u,D,x,y);
 if(u.status==='review'){pill('Ⅱ',x+37,y-23,24,'#ffd397');}
-const status=guardStatus(u,o.lang);if(status)pill(status,x,y-61,u.type==='grok'?164:132,u.warning?'#ffe0a0':u.type==='grok'&&(u.fired||0)%4===3?'#ffd397':'#fff');}
+const status=guardCaption(u,o.lang,selectedUnit);if(status)pill(status,x,y-61,u.type==='grok'?164:132,u.warning?'#ffe0a0':u.type==='grok'&&(u.fired||0)%4===3?'#ffd397':'#fff');}
 for(const e of s.enemies){const x=140+e.x*120,y=211+e.row*82,idx={data:0,swarm:1,armor:2,charge:3}[e.type]??0,size=e.type==='armor'?78:e.type==='swarm'?49:65,bob=o.reducedMotion||s.paused?0:Math.sin(s.time*5+e.row+e.x)*2;ctx.fillStyle='#24143b55';ctx.beginPath();ctx.ellipse(x,y+27,size*.35,7,0,0,7);ctx.fill();if(e.type==='armor'&&ready(assets.armorActions)){const f=armorFrame(e,s,o.effects||[],o.reducedMotion,D.enemies.armor.interval);drawArmor(ctx,assets.armorActions,f,x,y+27,size);}else if(e.type==='swarm'&&ready(assets.fragmentActions)){const f=fragmentFrame(e,s,o.effects||[],o.reducedMotion),im=assets.fragmentActions,w=im.width/f.cols,h=im.height/f.rows;ctx.drawImage(im,(f.index%f.cols)*w,Math.floor(f.index/f.cols)*h,w,h,x-size/2,y-size+30,size,size);}else if(ready(assets.enemies)){const im=assets.enemies,w=im.width/2,h=im.height/2;ctx.drawImage(im,(idx%2)*w,Math.floor(idx/2)*h,w,h,x-size/2,y-size+30+bob,size,size);}else fallbackEnemy(e,x,y+bob,size);
 ctx.fillStyle='#20192d';ctx.fillRect(x-22,y+34,44,4);ctx.fillStyle='#f0a0ce';ctx.fillRect(x-22,y+34,44*Math.max(0,e.hp/D.enemies[e.type].hp),4);}
 drawPackCues(ctx,s,o.lang,pill,{width:o.width,height:o.height,preview});
@@ -303,5 +315,5 @@ pill((o.lang==='zh'?'核心 ':'CORE ')+s.core+'/5',66,605,110,'#b3f9ff');text(o.
 if(s.phase==='won'||s.phase==='lost'){ctx.fillStyle='#0e1a32ed';ctx.beginPath();ctx.roundRect(375,285,370,78,18);ctx.fill();ctx.strokeStyle='#c7ddff';ctx.stroke();text(s.phase==='won'?(o.lang==='zh'?'防线守住了！':'LINE HELD!'):(s.failureReason==='challenge-leak'?(o.lang==='zh'?'挑战未完成：有敌人漏过':'CHALLENGE INCOMPLETE'):(o.lang==='zh'?'核心失守':'CORE LOST')),560,335,26);}
 const failed=Object.keys(files).filter(k=>assetState(k)==='failed');if(failed.length){const labels={campus:['背景','background'],ai:['守卫','guards'],suppliers:['供给者','suppliers'],enemies:['敌人','enemies'],dsActions:['DS动作','DS actions'],dsIdle:['DS待机','DS idle'],dsAttack:['DS攻击','DS attack'],gptAttack:['GPT攻击','GPT attack'],gptIdle:['GPT待机','GPT idle'],claudeActions:['Claude动作','Claude actions'],grokActions:['Grok动作','Grok actions'],fragmentActions:['碎片振翅','Fragment wings'],armorActions:['重甲动作','Armor actions']};pill((o.lang==='zh'?'资源加载失败：':'Art failed: ')+failed.map(k=>labels[k][o.lang==='zh'?0:1]).join(' / ')+(o.lang==='zh'?' · 已使用备用显示，可继续游玩':' · backup display active; play continues'),560,644,1040,'#ffe0a0');}
 ctx.restore();}
-const api={enemyPacks,enemyTypeGlyph,packCueLayout,drawPackCues,guardStatus,specialistFrame,requestGuardArt,isLowHealth,drawLowHealth,draw,forwardLane,drawForwardLane,drawDetours,drawEffects,dsFrame,gptFrame,riceIndex,idleIndex,characterBreath,drawCharacter,availableCharacterFrame,fragmentFrame,armorFrame,drawArmor,assets,files,assetStates,assetState};root.TDLanesRenderer=api;if(typeof module==='object'&&module.exports)module.exports=api;
+const api={enemyPacks,enemyTypeGlyph,packCueLayout,drawPackCues,guardStatus,guardCaption,specialistFrame,requestGuardArt,isLowHealth,drawLowHealth,draw,forwardLane,drawForwardLane,drawLaneGeometry,drawDetours,drawEffects,dsFrame,gptFrame,riceIndex,idleIndex,characterBreath,drawCharacter,availableCharacterFrame,fragmentFrame,armorFrame,drawArmor,assets,files,assetStates,assetState};root.TDLanesRenderer=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

@@ -1,6 +1,9 @@
 /* Read-only battle observations and reference copy. Never mutates engine state. */
 (function(root){'use strict';
 const clone=x=>JSON.parse(JSON.stringify(x));
+// Match the four engine identities without requiring the engine to load this helper.
+const enemyNames={data:{zh:'数据团',en:'Data blob'},swarm:{zh:'碎片群',en:'Fragment'},armor:{zh:'装甲数据',en:'Armored data'},charge:{zh:'冲锋数据',en:'Charging data'}};
+const knownEnemy=type=>typeof type==='string'&&Object.prototype.hasOwnProperty.call(enemyNames,type);
 function signature(s,schedule){return JSON.stringify({level:s.level,seed:s.seed,status:Object.entries(s.statusSchedule).sort(([a],[b])=>a.localeCompare(b)),schedule});}
 function tracker(){let active=null,last=null,result=null;
 return {
@@ -11,7 +14,7 @@ return {
  if(active.seen.has(key))continue;active.seen.add(key);
  if(e.type==='hit'){if(!['gpt','grok'].includes(e.unitType)||!e.shotId||!e.target)continue;let targets=active.shots.get(e.shotId);if(!targets){targets=new Set();active.shots.set(e.shotId,targets);}targets.add(e.target);if(targets.size===2){if(e.unitType==='gpt')active.secondHits++;else active.grokMultiShots++;}}
  else if(e.type==='detour-turn')active.turns++;
- else if(Number.isInteger(e.row)&&e.row>=0&&e.row<5){if(e.type==='unit-lost')active.losses[e.row]++;else{active.leaks[e.row]++;if(!active.firstLeak||e.time<active.firstLeak.time)active.firstLeak={row:e.row,time:e.time};}}
+ else if(Number.isInteger(e.row)&&e.row>=0&&e.row<5){if(e.type==='unit-lost')active.losses[e.row]++;else{active.leaks[e.row]++;if(!active.firstLeak||e.time<active.firstLeak.time){const type=e.enemyType;active.firstLeak={row:e.row,time:e.time,...(knownEnemy(type)?{enemyType:type}:{})};}}}
  }
  if(!['won','lost'].includes(s.phase))return;
  const {seen,shots,...facts}=active;const current={...facts,outcome:s.phase,time:s.time,core:s.core,withdrawal:s.stats.emergencyWithdrawal?clone(s.stats.emergencyWithdrawal):null,withdrawals:s.stats.emergencyCount||0,refunded:s.stats.emergencyRefunds||0,spent:180+s.stats.earned+(s.stats.emergencyRefunds||0)-s.compute};
@@ -40,7 +43,8 @@ function referenceLines(reference,lang){if(!reference)return[];const zh=lang==='
 function lines(r,lang){if(!r)return[];const zh=lang==='zh',sum=a=>a.reduce((x,y)=>x+y,0),signed=n=>(n>0?'+':'')+n;
  const affected=r.leaks.map((n,i)=>({row:i+1,leaks:n,losses:r.losses[i]})).filter(x=>x.leaks||x.losses);
  const withdrawn=r.withdrawals||0;const facts=affected.length?(zh?'受损行（漏敌/守卫损失）：':'Affected lanes (leaks/guards lost): ')+affected.map(x=>x.row+': '+x.leaks+'/'+x.losses).join(' · '):(withdrawn?(zh?'无漏敌，无守卫被击败':'No leaks or guards defeated'):(zh?'无漏敌，无守卫损失':'No leaks or guards lost'));
- const first=r.firstLeak?(zh?'首次漏敌：第'+(r.firstLeak.row+1)+'行，':'First leak: lane '+(r.firstLeak.row+1)+', ')+r.firstLeak.time.toFixed(1)+'s':'';
+ const firstType=knownEnemy(r.firstLeak?.enemyType)?enemyNames[r.firstLeak.enemyType][zh?'zh':'en']:'';
+ const first=r.firstLeak?(zh?'首次漏敌：第'+(r.firstLeak.row+1)+'行，':'First leak: lane '+(r.firstLeak.row+1)+', ')+(firstType?firstType+(zh?'，':', '):'')+r.firstLeak.time.toFixed(1)+'s':'';
  const out=[facts+(withdrawn?(zh?' · 主动撤离 ':' · Voluntary withdrawals ')+withdrawn+(zh?' · 退回 ':' · Refunded ')+(r.refunded||0)+' GPU':''),(first?first+' · ':'')+(zh?'实际转行 ':'Actual turns ')+r.turns+' · '+(zh?'GPT 第二目标命中 ':'GPT second-target hits ')+r.secondHits+' · '+(zh?'Grok 命中至少2个目标的发数 ':'Grok shots hitting 2+ targets ')+r.grokMultiShots];
  const describe=w=>w.time.toFixed(1)+'s · '+({deepseek:'DS',gpt:'GPT',claude:'Claude',grok:'Grok'}[w.unitType]||w.unitType)+(zh?' 第'+(w.row+1)+'行第'+(w.col+1)+'格撤离，退回':' lane '+(w.row+1)+' cell '+(w.col+1)+' withdrawn, ')+w.amount+(zh?' GPU':' GPU returned');
  if(r.withdrawal)out.push(describe(r.withdrawal));
