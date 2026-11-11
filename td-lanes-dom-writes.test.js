@@ -4,7 +4,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs');
 const measure=process.argv.includes('--measure');
 const UI=require(measure?process.argv[process.argv.indexOf('--measure')+1]:'./td-lanes-ui');
-const E=require('./td-lanes');
+const E=require('./td-lanes-content');
 // Deliberately lossy CSSOM-like serialization; not a browser emulator.
 const serializeStyle=value=>String(value).replace(/-?\d+(?:\.\d+)?/g,n=>String(Number(Number(n).toFixed(3)))).replace(/,\s*/g,', ');
 function harness(level=0,adapter=UI,normalize=false){
@@ -36,7 +36,7 @@ function unchanged(h,name){h.reset();const draws=h.draws;for(let i=0;i<120;i++)h
 let h=harness();unchanged(h,'empty preparation');
 h.nodes.grid.children[0].onclick();h.nodes.start.onclick();for(let i=0;i<62;i++)h.app.controller.tick(.1);h.app.render();assert.equal(h.nodes.tokens.children.length,1);h.nodes.pause.onclick();unchanged(h,'paused battle with selected guard and airborne GPU');
 h=harness(3);h.nodes.grid.children[12].onclick();h.nodes.start.onclick();for(let i=0;i<500&&!h.app.controller.state.enemies.some(e=>e.turnState==='waiting');i++)h.app.controller.tick(1/60);assert(h.app.controller.state.enemies.some(e=>e.turnState==='waiting'));h.app.render();h.nodes.pause.onclick();unchanged(h,'paused detour countdown');
-h=harness(2);h.app.controller.state.phase='won';h.app.render();assert.equal(h.nodes.start.textContent,'Try mechanic drill');unchanged(h,'terminal optional-next label');
+h=harness(2);h.app.controller.state.phase='won';h.app.render();assert.equal(h.nodes.start.textContent,'Next main · Shifting pressure');unchanged(h,'terminal optional-next label');
 function finishConvoy(h,win){if(win){h.nodes.grid.children[7].onclick();h.nodes.grid.children[14].onclick();}h.nodes.start.onclick();for(let i=0;i<300&&h.app.controller.state.phase==='battle';i++)h.app.controller.tick(1);assert.equal(h.app.controller.state.phase,win?'won':'lost');h.app.render();assert(h.app.controller.review);assert.equal(h.nodes['battle-review'].hidden,false);assert(h.nodes['review-content'].textContent.includes(win?'No leaks or guards lost':'Affected lanes (leaks/guards lost):'));}
 for(const win of [true,false]){h=harness(4);finishConvoy(h,win);const before=JSON.stringify(h.app.controller.state),facts=JSON.stringify(h.app.controller.review);h.nodes['battle-review'].open=true;unchanged(h,'completed convoy '+(win?'win':'loss')+' with open battle review');assert.equal(h.nodes['battle-review'].open,true);assert.equal(JSON.stringify(h.app.controller.state),before);assert.equal(JSON.stringify(h.app.controller.review),facts);}
 h=harness(0,UI,true);h.resize(739.123,401.789);unchanged(h,'normalizing styles at fractional geometry');

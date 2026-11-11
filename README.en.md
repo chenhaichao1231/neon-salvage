@@ -1,6 +1,6 @@
 # Campus Defense · 校园防线
 
-**Demo 0.12.2** · [Play online](https://chenhaichao1231.github.io/neon-salvage/) · [中文](README.md)
+**Demo 0.13** · [Play online](https://chenhaichao1231.github.io/neon-salvage/) · [中文](README.md)
 
 A five-lane campus defense game. Collect GPU resources, deploy four AI guards, and stop data enemies entering from the right.
 
@@ -25,8 +25,9 @@ Cheap coverage, piercing, armor bypass and tight-cluster damage have different s
 
 ## Waves and resources
 
-- The three main stages contain **30, 50 and 54 enemies**, arranged in **3, 4 and 4 pushes**. Final arrivals occur at 55, 57.25 and 68 battle seconds. Lane forecasts and the grouped exact schedule remain available.
-- Two separate mechanic drills contain two enemies for a single detour and nine for a converging convoy. Any leak fails these drills. Once a turn has begun charging, withdrawing its guard does not cancel it.
+- The four main stages contain **30, 50, 54 and 43 enemies**, arranged in **3, 4, 4 and 4 pushes**. Final arrivals occur at 55, 57.25, 68 and 61 battle seconds. Lane forecasts and the grouped exact schedule remain available.
+- **Main 4 · Shifting pressure:** fragments gather in lane 3, then fragments and chargers arrive in lane 5 and finally lane 1. Its 43 enemies arrive in four pushes starting at 4, 22, 36 and 53 seconds. This is ordinary five-core survival, with no zero-leak requirement or lane-turning routes. Plan later purchases for the next pressure point; cheap reinforcement and mixed specialties both have viable plans.
+- Two optional mechanic drills contain two enemies for a single detour and nine for a converging convoy. Any leak fails these drills. Once a turn has begun charging, withdrawing its guard does not cancel it.
 - Each stage starts with 180 GPU and grants 300 fixed supply GPU. Kills provide no extra income. Early victory credits remaining supply.
 - Preparation refunds are full. There is **one emergency withdrawal per battle**, returning 25 / 45 / 60 / 40 GPU for DS / GPT / Claude / Grok.
 - Withdrawal does not erase existing projectiles. Redeployment costs full price. Voluntary withdrawals are separate from defeated guards; refunds are not supply income and do not reduce gross deployment spending.
@@ -38,11 +39,11 @@ When the right letterbox gutter can fit the forecasts, lane labels move into it;
 
 Upcoming labels now show “Next in 5s” above the enemy type, separating future arrivals from enemies already present. Nearby packs show type-shaped counts when space permits, with a key in the existing game notes. Tight layouts use a total-only count, or omit the extra count if even that cannot fit safely. Ingress, especially on narrow layouts, can still overlap; enemies and health bars have not moved. Pack counts do not mean shared HP or targets per shot.
 
-Optional battle facts now count Grok shots that actually hit at least two distinct targets. A third target does not add another count; weak shots qualify when they hit two targets. This is a hit observation, not a damage or effectiveness ranking. The four guards, five stages, stats, waves, economy, animation and exact retry rules are unchanged.
+Optional battle facts now count Grok shots that actually hit at least two distinct targets. A third target does not add another count; weak shots qualify when they hit two targets. This is a hit observation, not a damage or effectiveness ranking. Demo 0.13 adds Shifting pressure while preserving all five previous encounters, the four guards, combat stats, economy, animation and exact retry rules.
 
 Guards have idle, attack and status poses. Low health receives a color and text cue. The AMD supplier is named Lisa Su (苏姿丰 in Chinese). Failed artwork uses labeled fallback visuals while gameplay remains functional.
 
-Language and reached-stage progress are saved in the current browser. Battles and comparison records do not sync across devices. Session-only battle facts track leaks, defeated guards and withdrawals, with comparisons restricted to the same stage and seeded schedule.
+Language and available-stage progress are saved in the current browser when storage works. Winning main 3 immediately saves access to main 4, and Next goes directly there; the two drills remain optional. Legacy saves that already reached either drill can also enter main 4 without clearing a drill. An old main-3-only bookmark does not prove a past victory and does not unlock main 4 by itself. Refresh starts the remembered stage with an empty formation and 180 GPU; Retry instead restores the exact pre-wave setup. Battles and comparison records do not sync across devices. Session-only battle facts track leaks, defeated guards and withdrawals, with comparisons restricted to the same stage and seeded schedule.
 
 This is a generated-art 2D preview. Large images may make first load slow. Generated artwork does not establish character rights or commercial permission. Physical-phone, touch, screen-reader and performance acceptance are not complete.
 
@@ -62,4 +63,4 @@ The `td-*.test.js` suites use Node.js; some drawing checks require `@napi-rs/can
 for test in td-*.test.js; do node "$test" || exit 1; done
 ```
 
-The 31 relevant pre-release suites passed for Demo 0.12.2. Automated checks and fixed-policy simulations are not complete device acceptance, exhaustive balance proof or evidence of human enjoyment. Historical prototype files are not the current game entry point.
+The 32 relevant pre-release suites passed for Demo 0.13. Automated checks and fixed-policy simulations are not complete device acceptance, exhaustive balance proof or evidence of human enjoyment. Historical prototype files are not the current game entry point.
