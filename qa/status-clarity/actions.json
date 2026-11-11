@@ -1,0 +1,328 @@
+{
+  "source": "Frozen Main5 mixedFronts seed1 delay0 legal study ledger; a2aeae8442d06a8291e91df18f0e40bb34c118f5",
+  "seed": 1,
+  "actions": [
+    {
+      "time": 0,
+      "kind": "deploy",
+      "args": [
+        3,
+        0,
+        "grok"
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 180,
+      "after": 100
+    },
+    {
+      "time": 0,
+      "kind": "deploy",
+      "args": [
+        1,
+        0,
+        "deepseek"
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 100,
+      "after": 50
+    },
+    {
+      "time": 0,
+      "kind": "deploy",
+      "args": [
+        2,
+        0,
+        "deepseek"
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 50,
+      "after": 0
+    },
+    {
+      "time": 0,
+      "kind": "start",
+      "args": [],
+      "result": {
+        "ok": true
+      },
+      "before": 0,
+      "after": 0
+    },
+    {
+      "time": 16,
+      "kind": "pause",
+      "args": [
+        true
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 60,
+      "after": 60
+    },
+    {
+      "time": 16,
+      "kind": "deploy",
+      "args": [
+        0,
+        0,
+        "deepseek"
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 60,
+      "after": 10
+    },
+    {
+      "time": 16,
+      "kind": "pause",
+      "args": [
+        false
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 10,
+      "after": 10
+    },
+    {
+      "time": 28,
+      "kind": "pause",
+      "args": [
+        true
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 70,
+      "after": 70
+    },
+    {
+      "time": 28,
+      "kind": "deploy",
+      "args": [
+        4,
+        0,
+        "deepseek"
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 70,
+      "after": 20
+    },
+    {
+      "time": 28,
+      "kind": "pause",
+      "args": [
+        false
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 20,
+      "after": 20
+    },
+    {
+      "time": 40,
+      "kind": "pause",
+      "args": [
+        true
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 80,
+      "after": 80
+    },
+    {
+      "time": 40,
+      "kind": "deploy",
+      "args": [
+        3,
+        1,
+        "deepseek"
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 80,
+      "after": 30
+    },
+    {
+      "time": 40,
+      "kind": "pause",
+      "args": [
+        false
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 30,
+      "after": 30
+    },
+    {
+      "time": 52,
+      "kind": "pause",
+      "args": [
+        true
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 90,
+      "after": 90
+    },
+    {
+      "time": 52,
+      "kind": "deploy",
+      "args": [
+        4,
+        1,
+        "grok"
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 90,
+      "after": 10
+    },
+    {
+      "time": 52,
+      "kind": "pause",
+      "args": [
+        false
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 10,
+      "after": 10
+    },
+    {
+      "time": 58,
+      "kind": "pause",
+      "args": [
+        true
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 40,
+      "after": 40
+    },
+    {
+      "time": 58,
+      "kind": "emergencyWithdraw",
+      "args": [
+        "u3"
+      ],
+      "result": {
+        "ok": true,
+        "amount": 25
+      },
+      "before": 40,
+      "after": 65
+    },
+    {
+      "time": 58,
+      "kind": "pause",
+      "args": [
+        false
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 65,
+      "after": 65
+    },
+    {
+      "time": 58,
+      "kind": "pause",
+      "args": [
+        true
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 65,
+      "after": 65
+    },
+    {
+      "time": 58,
+      "kind": "deploy",
+      "args": [
+        1,
+        1,
+        "deepseek"
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 65,
+      "after": 15
+    },
+    {
+      "time": 58,
+      "kind": "pause",
+      "args": [
+        false
+      ],
+      "result": {
+        "ok": true
+      },
+      "before": 15,
+      "after": 15
+    }
+  ],
+  "outcome": {
+    "version": "v1",
+    "level": 6,
+    "policy": "mixedFronts",
+    "seed": 1,
+    "delay": 0,
+    "withdraw": true,
+    "phase": "won",
+    "time": 87.66666666666667,
+    "core": 5,
+    "kills": 53,
+    "leaks": 0,
+    "unitsLost": 0,
+    "gross": 460,
+    "refund": 25,
+    "balance": 45,
+    "earned": 300,
+    "guardDamage": 18,
+    "damagedLanes": [
+      2
+    ],
+    "lostLanes": [],
+    "leakEvents": [],
+    "withdrawal": {
+      "unitType": "deepseek",
+      "row": 2,
+      "col": 0,
+      "time": 58,
+      "amount": 25
+    },
+    "unfulfilled": [],
+    "deferrals": [
+      {
+        "time": 64,
+        "kind": "scheduled-satisfied-by-recovery",
+        "row": 1,
+        "col": 1,
+        "type": "deepseek",
+        "reason": "support lingering armor",
+        "compute": 45
+      }
+    ]
+  }
+}
