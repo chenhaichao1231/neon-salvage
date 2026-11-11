@@ -1,0 +1,678 @@
+[
+  [
+    {
+      "row": 0,
+      "type": "data",
+      "time": 4
+    },
+    {
+      "row": 0,
+      "type": "data",
+      "time": 6
+    },
+    {
+      "row": 1,
+      "type": "data",
+      "time": 7
+    },
+    {
+      "row": 1,
+      "type": "data",
+      "time": 9
+    },
+    {
+      "row": 2,
+      "type": "data",
+      "time": 10
+    },
+    {
+      "row": 2,
+      "type": "data",
+      "time": 12
+    },
+    {
+      "row": 3,
+      "type": "data",
+      "time": 13
+    },
+    {
+      "row": 3,
+      "type": "data",
+      "time": 15
+    },
+    {
+      "row": 4,
+      "type": "data",
+      "time": 16
+    },
+    {
+      "row": 4,
+      "type": "data",
+      "time": 18
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 26
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 26.5
+    },
+    {
+      "row": 1,
+      "type": "swarm",
+      "time": 28
+    },
+    {
+      "row": 1,
+      "type": "swarm",
+      "time": 28.5
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 30
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 30.5
+    },
+    {
+      "row": 3,
+      "type": "swarm",
+      "time": 32
+    },
+    {
+      "row": 3,
+      "type": "swarm",
+      "time": 32.5
+    },
+    {
+      "row": 4,
+      "type": "swarm",
+      "time": 34
+    },
+    {
+      "row": 4,
+      "type": "swarm",
+      "time": 34.5
+    },
+    {
+      "row": 0,
+      "type": "data",
+      "time": 44
+    },
+    {
+      "row": 1,
+      "type": "data",
+      "time": 46
+    },
+    {
+      "row": 0,
+      "type": "data",
+      "time": 47
+    },
+    {
+      "row": 2,
+      "type": "data",
+      "time": 48
+    },
+    {
+      "row": 1,
+      "type": "data",
+      "time": 49
+    },
+    {
+      "row": 3,
+      "type": "data",
+      "time": 50
+    },
+    {
+      "row": 2,
+      "type": "data",
+      "time": 51
+    },
+    {
+      "row": 4,
+      "type": "data",
+      "time": 52
+    },
+    {
+      "row": 3,
+      "type": "data",
+      "time": 53
+    },
+    {
+      "row": 4,
+      "type": "data",
+      "time": 55
+    }
+  ],
+  [
+    {
+      "row": 0,
+      "type": "armor",
+      "time": 4
+    },
+    {
+      "row": 1,
+      "type": "armor",
+      "time": 7
+    },
+    {
+      "row": 2,
+      "type": "armor",
+      "time": 10
+    },
+    {
+      "row": 3,
+      "type": "armor",
+      "time": 13
+    },
+    {
+      "row": 4,
+      "type": "armor",
+      "time": 16
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 23
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 23.3
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 23.6
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 23.9
+    },
+    {
+      "row": 1,
+      "type": "swarm",
+      "time": 24
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 24.2
+    },
+    {
+      "row": 1,
+      "type": "swarm",
+      "time": 24.3
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 24.5
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 25
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 25.3
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 25.6
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 25.9
+    },
+    {
+      "row": 3,
+      "type": "swarm",
+      "time": 26
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 26.2
+    },
+    {
+      "row": 3,
+      "type": "swarm",
+      "time": 26.3
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 26.5
+    },
+    {
+      "row": 4,
+      "type": "swarm",
+      "time": 27
+    },
+    {
+      "row": 4,
+      "type": "swarm",
+      "time": 27.3
+    },
+    {
+      "row": 0,
+      "type": "armor",
+      "time": 37
+    },
+    {
+      "row": 1,
+      "type": "armor",
+      "time": 39
+    },
+    {
+      "row": 2,
+      "type": "armor",
+      "time": 41
+    },
+    {
+      "row": 3,
+      "type": "armor",
+      "time": 43
+    },
+    {
+      "row": 4,
+      "type": "armor",
+      "time": 45
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 53
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 53.25
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 53.5
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 53.75
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 54
+    },
+    {
+      "row": 1,
+      "type": "swarm",
+      "time": 54
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 54.25
+    },
+    {
+      "row": 1,
+      "type": "swarm",
+      "time": 54.25
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 54.5
+    },
+    {
+      "row": 0,
+      "type": "swarm",
+      "time": 54.75
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 55
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 55.25
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 55.5
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 55.75
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 56
+    },
+    {
+      "row": 3,
+      "type": "swarm",
+      "time": 56
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 56.25
+    },
+    {
+      "row": 3,
+      "type": "swarm",
+      "time": 56.25
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 56.5
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 56.75
+    },
+    {
+      "row": 4,
+      "type": "swarm",
+      "time": 57
+    },
+    {
+      "row": 4,
+      "type": "swarm",
+      "time": 57.25
+    }
+  ],
+  [
+    {
+      "row": 0,
+      "type": "data",
+      "time": 4
+    },
+    {
+      "row": 1,
+      "type": "data",
+      "time": 7
+    },
+    {
+      "row": 1,
+      "type": "data",
+      "time": 10
+    },
+    {
+      "row": 2,
+      "type": "data",
+      "time": 10
+    },
+    {
+      "row": 3,
+      "type": "data",
+      "time": 13
+    },
+    {
+      "row": 4,
+      "type": "data",
+      "time": 16
+    },
+    {
+      "row": 0,
+      "type": "armor",
+      "time": 17
+    },
+    {
+      "row": 4,
+      "type": "data",
+      "time": 19
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 22
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 22.25
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 22.5
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 22.75
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 23
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 23.25
+    },
+    {
+      "row": 3,
+      "type": "charge",
+      "time": 25
+    },
+    {
+      "row": 1,
+      "type": "swarm",
+      "time": 28
+    },
+    {
+      "row": 1,
+      "type": "swarm",
+      "time": 28.3
+    },
+    {
+      "row": 3,
+      "type": "charge",
+      "time": 28.5
+    },
+    {
+      "row": 1,
+      "type": "swarm",
+      "time": 28.6
+    },
+    {
+      "row": 1,
+      "type": "swarm",
+      "time": 28.9
+    },
+    {
+      "row": 0,
+      "type": "armor",
+      "time": 32
+    },
+    {
+      "row": 4,
+      "type": "swarm",
+      "time": 32
+    },
+    {
+      "row": 4,
+      "type": "swarm",
+      "time": 32.3
+    },
+    {
+      "row": 4,
+      "type": "swarm",
+      "time": 32.6
+    },
+    {
+      "row": 4,
+      "type": "swarm",
+      "time": 32.9
+    },
+    {
+      "row": 2,
+      "type": "armor",
+      "time": 37
+    },
+    {
+      "row": 3,
+      "type": "armor",
+      "time": 40
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 45
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 45.25
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 45.5
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 45.75
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 46
+    },
+    {
+      "row": 3,
+      "type": "charge",
+      "time": 46
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 46.25
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 46.5
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 46.75
+    },
+    {
+      "row": 0,
+      "type": "armor",
+      "time": 47
+    },
+    {
+      "row": 0,
+      "type": "charge",
+      "time": 47
+    },
+    {
+      "row": 1,
+      "type": "charge",
+      "time": 48
+    },
+    {
+      "row": 3,
+      "type": "charge",
+      "time": 49.5
+    },
+    {
+      "row": 1,
+      "type": "charge",
+      "time": 52
+    },
+    {
+      "row": 4,
+      "type": "charge",
+      "time": 52
+    },
+    {
+      "row": 4,
+      "type": "charge",
+      "time": 56
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 61
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 61.25
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 61.5
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 61.75
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 62
+    },
+    {
+      "row": 3,
+      "type": "charge",
+      "time": 62
+    },
+    {
+      "row": 2,
+      "type": "swarm",
+      "time": 62.25
+    },
+    {
+      "row": 1,
+      "type": "data",
+      "time": 63
+    },
+    {
+      "row": 3,
+      "type": "charge",
+      "time": 65.5
+    },
+    {
+      "row": 4,
+      "type": "data",
+      "time": 66
+    },
+    {
+      "row": 0,
+      "type": "armor",
+      "time": 68
+    }
+  ]
+]
