@@ -1,6 +1,6 @@
 # Campus Defense · 校园防线
 
-**Demo 0.12** · [Play online](https://chenhaichao1231.github.io/neon-salvage/) · [中文](README.md)
+**Demo 0.12.1** · [Play online](https://chenhaichao1231.github.io/neon-salvage/) · [中文](README.md)
 
 A five-lane campus defense game. Collect GPU resources, deploy four AI guards, and stop data enemies entering from the right.
 
@@ -34,6 +34,8 @@ Cheap coverage, piercing, armor removal and tight-cluster damage have different 
 
 ## Presentation and progress
 
+When the right letterbox gutter can fit the forecasts, lane labels move into it; narrower layouts keep their original placement.
+
 Guards have idle, attack and status poses. Low health receives a color and text cue. The AMD supplier is named Lisa Su (苏姿丰 in Chinese). Failed artwork uses labeled fallback visuals while gameplay remains functional.
 
 Language and reached-stage progress are saved in the current browser. Battles and comparison records do not sync across devices. Session-only battle facts track leaks, defeated guards and withdrawals, with comparisons restricted to the same stage and seeded schedule.
@@ -56,4 +58,4 @@ The `td-*.test.js` suites use Node.js; some drawing checks require `@napi-rs/can
 for test in td-*.test.js; do node "$test" || exit 1; done
 ```
 
-The 28 relevant pre-release suites passed for Demo 0.12. Automated checks and fixed-policy simulations are not complete device acceptance, exhaustive balance proof or evidence of human enjoyment. Historical prototype files are not the current game entry point.
+The 29 relevant pre-release suites passed for Demo 0.12.1. Automated checks and fixed-policy simulations are not complete device acceptance, exhaustive balance proof or evidence of human enjoyment. Historical prototype files are not the current game entry point.
